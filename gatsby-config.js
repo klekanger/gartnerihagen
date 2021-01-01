@@ -1,22 +1,21 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: "Boligsameiet Gartnerihagen",
   },
+
   plugins: [
     {
       resolve: "gatsby-source-contentful",
       options: {
-        accessToken: "Il92s-wGXDuG0LhKnJ5_TWgp6Nb6xkZKndawXEGHrMc",
-        spaceId: "",
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: "auon1l14rc7e",
       },
     },
     "gatsby-plugin-emotion",
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "",
-      },
-    },
     "gatsby-plugin-sharp",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
