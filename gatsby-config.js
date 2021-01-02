@@ -5,6 +5,10 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Boligsameiet Gartnerihagen",
+    description: "Askims hyggeligste nabolag.",
+    siteUrl: "https://www.gartnerihagen-askim.no/",
+    siteLanguage: "nb-no",
+    banner: "images/gartnerihagen._solnedgang.jpg",
   },
 
   plugins: [
