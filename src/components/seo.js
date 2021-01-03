@@ -5,7 +5,7 @@ import { useLocation } from "@reach/router";
 import { useStaticQuery, graphql } from "gatsby";
 
 const SEO = ({ title, description }) => {
-  const { pathname } = useLocation();
+  /* const { pathname } = useLocation(); */
   const { site } = useStaticQuery(query);
   const {
     defaultDescription,

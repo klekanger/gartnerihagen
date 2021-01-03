@@ -1,0 +1,17 @@
+.menuOpen {
+  animation: fader 0.1s ease-in;
+}
+
+.menuClose {
+  animation: fader 0.1s ease-in;
+}
+
+@keyframes fader {
+  from {
+    transform: scale(0.5);
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}

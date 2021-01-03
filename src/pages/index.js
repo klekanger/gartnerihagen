@@ -1,12 +1,14 @@
 import * as React from "react";
-import Layout from "../components/layout";
+
+import Layout from "../components/layouts/layout";
 import SEO from "../components/seo";
+import Hero from "../components/sections/hero";
 
 const IndexPage = () => {
   return (
     <Layout>
       <SEO />
-      <h1>Boligsameiet Gartnerihagen</h1>
+      <Hero />
     </Layout>
   );
 };
