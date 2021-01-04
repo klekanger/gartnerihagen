@@ -1,8 +1,7 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Img from "gatsby-image";
 
 import {
@@ -80,7 +79,7 @@ const Hero = () => {
           lineHeight={1.5}
           textAlign={["center", "center", "left", "left"]}
         >
-          <Text>BRØDTEKST KOMMER HER</Text>
+          <Text>{renderRichText(pageText)}</Text>
         </Heading>
         <Link to="/">
           <Button borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
