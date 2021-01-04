@@ -1,6 +1,10 @@
 import React from "react";
-import { Link } from "gatsby";
-import PropTypes from "prop-types";
+import { Link, graphql, useStaticQuery } from "gatsby";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Img from "gatsby-image";
+
 import {
   Box,
   Button,
@@ -11,7 +15,38 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }) => {
+const Hero = () => {
+  const {
+    data: {
+      nodes: [{ id, pageTitle, pageText, pageImage }],
+    },
+  } = useStaticQuery(
+    graphql`
+      query {
+        data: allContentfulSide {
+          nodes {
+            id
+            pageTitle
+            pageText {
+              raw
+            }
+            pageImage {
+              description
+              title
+              fluid(maxWidth: 980, sizes: "") {
+                srcWebp
+                srcSet
+              }
+            }
+          }
+        }
+      }
+    `
+  );
+
+  const imageDesc = pageImage.description;
+  const imageSrc = pageImage.fluid.srcWebp;
+
   return (
     <Flex
       align="center"
@@ -21,7 +56,6 @@ const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }) => {
       minH="70vh"
       px={8}
       mb={16}
-      {...rest}
     >
       <Stack
         spacing={4}
@@ -35,7 +69,7 @@ const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }) => {
           color="primary.800"
           textAlign={["center", "center", "left", "left"]}
         >
-          {title}
+          {pageTitle}
         </Heading>
         <Heading
           as="h2"
@@ -46,45 +80,25 @@ const Hero = ({ title, subtitle, image, ctaLink, ctaText, ...rest }) => {
           lineHeight={1.5}
           textAlign={["center", "center", "left", "left"]}
         >
-          {subtitle}
+          <Text>BRØDTEKST KOMMER HER</Text>
         </Heading>
-        <Link to={ctaLink}>
+        <Link to="/">
           <Button borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
-            {ctaText}
+            <div>BUTTON</div>
           </Button>
         </Link>
-        <Text
-          fontSize="xs"
-          mt={2}
-          textAlign="center"
-          color="primary.800"
-          opacity="0.6"
-        >
-          No credit card required.
-        </Text>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-        <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+        <Image
+          src={imageSrc}
+          size="100%"
+          rounded="1rem"
+          shadow="2xl"
+          alt={imageDesc}
+        />
       </Box>
     </Flex>
   );
 };
 
 export default Hero;
-
-Hero.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  image: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string,
-};
-
-Hero.defaultProps = {
-  title: "React landing page with Chakra UI",
-  subtitle:
-    "This is the subheader section where you describe the basic benefits of your product",
-  image: "https://source.unsplash.com/collection/404339/800x600",
-  ctaText: "Create your account now",
-  ctaLink: "/signup",
-};

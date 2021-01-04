@@ -28,7 +28,7 @@ const Header = (props) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
+      mb={4}
       p={8}
       {...props}
     >
