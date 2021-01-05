@@ -1,8 +1,7 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import Img from "gatsby-image";
+import renderRichTextOptions from "../../utils/renderRichTextOptions";
 
 import {
   Box,
@@ -17,24 +16,33 @@ import {
 const Hero = () => {
   const {
     data: {
-      nodes: [{ id, pageTitle, pageText, pageImage }],
+      nodes: [{ pageTitle, pageText, pageImage }],
     },
   } = useStaticQuery(
     graphql`
       query {
         data: allContentfulSide {
           nodes {
-            id
+            contentful_id
             pageTitle
             pageText {
               raw
+              references {
+                ... on ContentfulAsset {
+                  contentful_id
+                  fluid(maxWidth: 1000) {
+                    ...GatsbyContentfulFluid_withWebp
+                  }
+                }
+              }
             }
             pageImage {
+              contentful_id
               description
               title
-              fluid(maxWidth: 980, sizes: "") {
+              fluid(maxWidth: 1000) {
+                src
                 srcWebp
-                srcSet
               }
             }
           }
@@ -52,7 +60,7 @@ const Hero = () => {
       justify={{ base: "center", md: "space-around", xl: "space-between" }}
       direction={{ base: "column-reverse", md: "row" }}
       wrap="no-wrap"
-      minH="70vh"
+      minH="40vh"
       px={8}
       mb={16}
     >
@@ -79,14 +87,18 @@ const Hero = () => {
           lineHeight={1.5}
           textAlign={["center", "center", "left", "left"]}
         >
-          <Text>{renderRichText(pageText)}</Text>
+          <Text fontSize="md">
+            {renderRichText(pageText, renderRichTextOptions)}
+          </Text>
         </Heading>
+
         <Link to="/">
           <Button borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
-            <div>BUTTON</div>
+            <div>Les mer</div>
           </Button>
         </Link>
       </Stack>
+
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         <Image
           src={imageSrc}
