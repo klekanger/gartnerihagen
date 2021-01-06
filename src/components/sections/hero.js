@@ -61,7 +61,7 @@ const Hero = () => {
       direction={{ base: "column-reverse", md: "row" }}
       wrap="no-wrap"
       minH="40vh"
-      mb={16}
+      mb={8}
       maxWidth="85vw"
       p={4}
     >

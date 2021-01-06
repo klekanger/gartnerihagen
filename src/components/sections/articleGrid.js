@@ -56,7 +56,7 @@ const ArticleGrid = () => {
     <Grid
       templateColumns={{
         sm: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
+        md: "repeat(1, 1fr)",
         lg: "repeat(2, 1fr)",
         xl: "repeat(2, 1fr)",
       }}
@@ -71,6 +71,7 @@ const ArticleGrid = () => {
           <Heading
             as="h1"
             size="xl"
+            mb={4}
             fontWeight="bold"
             color="primary.800"
             textAlign="left"
