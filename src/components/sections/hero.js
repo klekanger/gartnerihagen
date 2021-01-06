@@ -61,12 +61,14 @@ const Hero = () => {
       direction={{ base: "column-reverse", md: "row" }}
       wrap="no-wrap"
       minH="40vh"
-      px={8}
       mb={16}
+      maxWidth="85vw"
+      p={4}
     >
       <Stack
         spacing={4}
-        w={{ base: "80%", md: "40%" }}
+        mr="20px"
+        w={{ base: "100%", md: "50%" }}
         align={["center", "center", "flex-start", "flex-start"]}
       >
         <Heading
@@ -77,17 +79,8 @@ const Hero = () => {
           textAlign={["center", "center", "left", "left"]}
         >
           {pageTitle}
-        </Heading>
-        <Heading
-          as="h2"
-          size="md"
-          color="primary.800"
-          opacity="0.8"
-          fontWeight="normal"
-          lineHeight={1.5}
-          textAlign={["center", "center", "left", "left"]}
-        >
-          <Text fontSize="md">
+
+          <Text fontSize="md" fontWeight="400" my={4}>
             {renderRichText(pageText, renderRichTextOptions)}
           </Text>
         </Heading>
@@ -99,7 +92,7 @@ const Hero = () => {
         </Link>
       </Stack>
 
-      <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
+      <Box w={{ base: "100%", sm: "100%", md: "70%" }} mb={{ base: 12, md: 0 }}>
         <Image
           src={imageSrc}
           size="100%"

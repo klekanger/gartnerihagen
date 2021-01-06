@@ -29,7 +29,7 @@ const Header = (props) => {
       wrap="wrap"
       w="100%"
       mb={4}
-      p={8}
+      p={3}
       {...props}
     >
       <Flex align="center">

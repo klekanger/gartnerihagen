@@ -60,28 +60,24 @@ const ArticleGrid = () => {
         lg: "repeat(2, 1fr)",
         xl: "repeat(2, 1fr)",
       }}
-      p="20px"
+      py={8}
       gap={6}
       mb={16}
+      maxWidth="85vw"
+      minHeight="45vh"
     >
       {postNodes.map((post) => (
-        <Box
-          w="auto"
-          h="auto"
-          bg="blue.500"
-          p="16px"
-          minWidth={["90vw", "90vw", "45vw", "45vw"]}
-        >
+        <Box maxWidth="100%" p={4} rounded="1rem" shadow="2xl">
           <Heading
             as="h1"
             size="xl"
             fontWeight="bold"
             color="primary.800"
-            textAlign={["center", "center", "left", "left"]}
+            textAlign="left"
           >
             {post.title}
           </Heading>
-          <Text fontSize="md">
+          <Text fontSize="md" textAlign="left">
             {renderRichText(post.bodyText, renderRichTextOptions)}
           </Text>
         </Box>

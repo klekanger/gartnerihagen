@@ -1,11 +1,11 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import "./layout.css";
 import Header from "../sections/header";
 import Footer from "../sections/footer";
 
 const Layout = (props) => (
-  <Flex
+  <Box
     direction="column"
     align="center"
     maxW={{ xl: "1200px" }}
@@ -15,7 +15,7 @@ const Layout = (props) => (
     <Header />
     {props.children}
     <Footer />
-  </Flex>
+  </Box>
 );
 
 export default Layout;
