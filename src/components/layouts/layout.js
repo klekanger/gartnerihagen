@@ -5,14 +5,9 @@ import Header from "../sections/header";
 import Footer from "../sections/footer";
 
 const Layout = (props) => (
-  <Box
-    direction="column"
-    align="center"
-    maxW={{ xl: "1200px" }}
-    m="0 auto"
-    {...props}
-  >
+  <Box direction="column" align="center" m="0 auto" {...props}>
     <Header />
+    <Box pb={20} />
     {props.children}
     <Footer />
   </Box>

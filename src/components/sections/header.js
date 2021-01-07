@@ -29,11 +29,16 @@ const Header = (props) => {
       wrap="wrap"
       w="100%"
       mb={4}
-      p={3}
+      py={3}
+      px={10}
       {...props}
+      bgColor="gray.200"
+      position="fixed"
+      zIndex="2"
+      shadow="md"
     >
       <Flex align="center">
-        <div>LOGO</div>
+        <Link to="/">Boligsameiet Gartnerihagen</Link>
       </Flex>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -59,7 +64,12 @@ const Header = (props) => {
           <MenuItems to="/styret" isLast>
             Styret
           </MenuItems>
-          <Button size="md" rounded="md" ml="20px">
+          <Button
+            size="md"
+            rounded="md"
+            ml={{ base: "0px", md: "20px", lg: "30px" }}
+            mt={{ base: "20px", sm: "0px" }}
+          >
             Logg inn
           </Button>
         </Flex>

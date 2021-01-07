@@ -86,7 +86,14 @@ const Hero = () => {
         </Heading>
 
         <Link to="/">
-          <Button borderRadius="8px" py="4" px="4" lineHeight="1" size="md">
+          <Button
+            borderRadius="8px"
+            py="4"
+            px="4"
+            lineHeight="1"
+            size="md"
+            shadow="lg"
+          >
             <div>Les mer</div>
           </Button>
         </Link>
@@ -96,8 +103,8 @@ const Hero = () => {
         <Image
           src={imageSrc}
           size="100%"
-          rounded="1rem"
-          shadow="2xl"
+          rounded="0.5rem"
+          shadow="lg"
           alt={imageDesc}
         />
       </Box>

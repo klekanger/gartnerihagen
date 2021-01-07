@@ -67,7 +67,7 @@ const ArticleGrid = () => {
       minHeight="45vh"
     >
       {postNodes.map((post) => (
-        <Box maxWidth="100%" p={4} rounded="1rem" shadow="2xl">
+        <Box maxWidth="100%" p={4} rounded="0.5rem" shadow="lg">
           <Heading
             as="h1"
             size="xl"
