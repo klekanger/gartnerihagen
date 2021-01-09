@@ -99,7 +99,7 @@ const Hero = () => {
         </Link>
       </Stack>
 
-      <Box w={{ base: "100%", sm: "100%", md: "70%" }} mb={{ base: 12, md: 0 }}>
+      <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         <Image
           src={imageSrc}
           size="100%"
