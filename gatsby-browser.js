@@ -1,8 +1,3 @@
-/* import React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./theme/theme";
+import { wrapPageElement as wrap } from "./src/chakra-wrapper";
 
-export const wrapRootElement = ({ element }) => {
-  return <ChakraProvider theme={theme}>{element}</ChakraProvider>;
-};
- */
+export const wrapPageElement = wrap;

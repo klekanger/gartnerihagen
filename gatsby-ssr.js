@@ -1,2 +1,3 @@
-/* export { wrapRootElement } from "./gatsby-browser";
- */
+import { wrapPageElement as wrap } from "./src/chakra-wrapper";
+
+export const wrapPageElement = wrap;
