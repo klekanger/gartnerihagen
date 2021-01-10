@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
-import renderRichTextOptions from "../../utils/renderRichTextOptions";
+import GatsbyImage from "gatsby-image";
 
 import {
   Box,
@@ -14,45 +13,38 @@ import {
 } from "@chakra-ui/react";
 
 const Hero = () => {
-  const {
-    data: {
-      nodes: [{ pageTitle, pageText, pageImage }],
-    },
-  } = useStaticQuery(
+  const data = useStaticQuery(
     graphql`
       query {
-        data: allContentfulSide {
-          nodes {
+        contentfulForsidetekst {
+          contentful_id
+          pageTitle
+          excerpt {
+            excerpt
+          }
+          contentful_id
+          pageImage {
+            fluid(maxWidth: 1000) {
+              ...GatsbyContentfulFluid_withWebp
+            }
+            title
+            imageDesc: description
+          }
+          buttonLink {
             contentful_id
             pageTitle
-            pageText {
-              raw
-              references {
-                ... on ContentfulAsset {
-                  contentful_id
-                  fluid(maxWidth: 1000) {
-                    ...GatsbyContentfulFluid_withWebp
-                  }
-                }
-              }
-            }
-            pageImage {
-              contentful_id
-              description
-              title
-              fluid(maxWidth: 1000) {
-                src
-                srcWebp
-              }
-            }
           }
         }
       }
     `
   );
 
-  const imageDesc = pageImage.description;
-  const imageSrc = pageImage.fluid.srcWebp;
+  const {
+    pageTitle,
+    excerpt: { excerpt },
+    pageImage,
+    pageImage: { imageDesc },
+  } = data.contentfulForsidetekst;
 
   return (
     <Flex
@@ -81,7 +73,7 @@ const Hero = () => {
           {pageTitle}
 
           <Text fontSize="md" fontWeight="400" my={4}>
-            {renderRichText(pageText, renderRichTextOptions)}
+            {excerpt}
           </Text>
         </Heading>
 
@@ -99,9 +91,10 @@ const Hero = () => {
         </Link>
       </Stack>
 
-      <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
+      <Box w={{ base: "100%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         <Image
-          src={imageSrc}
+          as={GatsbyImage}
+          fluid={pageImage.fluid}
           size="100%"
           rounded="0.5rem"
           shadow="lg"
