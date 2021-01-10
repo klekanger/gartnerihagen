@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "gatsby";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Link as GatsbyLink } from "gatsby";
+import { Box, Flex, Text, Button, Link, useTheme } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
+import ThemeToggle from "../toggle-theme.js";
 
 const MenuItems = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
@@ -12,7 +13,9 @@ const MenuItems = (props) => {
       display="block"
       {...rest}
     >
-      <Link to={to}>{children}</Link>
+      <Link as={GatsbyLink} to={to} _hover={{ textDecor: "none" }}>
+        {children}
+      </Link>
     </Text>
   );
 };
@@ -20,6 +23,9 @@ const MenuItems = (props) => {
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const toggleMenu = () => setShow(!show);
+
+  const theme = useTheme();
+  console.log(theme.colors);
 
   return (
     <Flex
@@ -38,7 +44,9 @@ const Header = (props) => {
       shadow="md"
     >
       <Flex align="center">
-        <Link to="/">Boligsameiet Gartnerihagen</Link>
+        <Link as={GatsbyLink} to="/" _hover={{ textDecor: "none" }}>
+          Boligsameiet Gartnerihagen
+        </Link>
       </Flex>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -72,6 +80,7 @@ const Header = (props) => {
           >
             Logg inn
           </Button>
+          <ThemeToggle />
         </Flex>
       </Box>
     </Flex>
