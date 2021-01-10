@@ -55,7 +55,7 @@ const Hero = () => {
       minH="40vh"
       mb={8}
       maxWidth="85vw"
-      p={4}
+      p={0}
     >
       <Stack
         spacing={4}
@@ -65,14 +65,18 @@ const Hero = () => {
       >
         <Heading
           as="h1"
-          size="xl"
+          size="4xl"
           fontWeight="bold"
           color="primary.800"
           textAlign={["center", "center", "left", "left"]}
         >
           {pageTitle}
 
-          <Text fontSize="md" fontWeight="400" my={4}>
+          <Text
+            fontSize={{ base: "2xl", sm: "md", md: "lg" }}
+            fontWeight="400"
+            my={4}
+          >
             {excerpt}
           </Text>
         </Heading>
@@ -83,10 +87,11 @@ const Hero = () => {
             py="4"
             px="4"
             lineHeight="1"
-            size="md"
+            size="xl"
             shadow="lg"
+            fontSize="xl"
           >
-            <div>Les mer</div>
+            Les mer
           </Button>
         </Link>
       </Stack>
@@ -99,6 +104,7 @@ const Hero = () => {
           rounded="0.5rem"
           shadow="lg"
           alt={imageDesc}
+          ml={2}
         />
       </Box>
     </Flex>

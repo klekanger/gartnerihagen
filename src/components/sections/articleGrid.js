@@ -52,7 +52,7 @@ const ArticleGrid = () => {
         xl: "repeat(2, 1fr)",
       }}
       py={8}
-      gap={10}
+      gap={8}
       mb={16}
       maxWidth="85vw"
       minHeight="45vh"
