@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
-import renderRichTextOptions from "../../utils/renderRichTextOptions";
+import GatsbyImage from "gatsby-image";
 
 import {
   Box,
@@ -20,26 +19,18 @@ const ArticleGrid = () => {
       posts: allContentfulBlogPost {
         nodes {
           contentful_id
+          createdAt
+          updatedAt
+          title
+          excerpt {
+            excerpt
+          }
           author {
             firstName
             lastName
           }
-          createdAt
-          updatedAt
-          title
-          bodyText {
-            raw
-            references {
-              ... on ContentfulAsset {
-                contentful_id
-                fluid(maxWidth: 2560) {
-                  srcWebp
-                }
-              }
-            }
-          }
           featuredImage {
-            fluid {
+            fluid(maxWidth: 1000) {
               src
             }
             description
@@ -61,13 +52,29 @@ const ArticleGrid = () => {
         xl: "repeat(2, 1fr)",
       }}
       py={8}
-      gap={6}
+      gap={10}
       mb={16}
       maxWidth="85vw"
       minHeight="45vh"
     >
       {postNodes.map((post) => (
-        <Box maxWidth="100%" p={4} rounded="0.5rem" shadow="lg">
+        <Box key={post.contentful_id}>
+          <Image
+            as={GatsbyImage}
+            fluid={post.featuredImage.fluid}
+            rounded="0.5rem"
+            shadow="lg"
+            maxHeight="50vh"
+            minHeight={{
+              base: "40vh",
+              sm: "40vh",
+              md: "40vh",
+              lg: "30vh",
+              xl: "40vh",
+            }}
+            mb={5}
+            alt={post.featuredImage.description}
+          />
           <Heading
             as="h1"
             size="xl"
@@ -79,7 +86,7 @@ const ArticleGrid = () => {
             {post.title}
           </Heading>
           <Text fontSize="md" textAlign="left">
-            {renderRichText(post.bodyText, renderRichTextOptions)}
+            {post.excerpt.excerpt}
           </Text>
         </Box>
       ))}
