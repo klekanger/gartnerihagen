@@ -17,6 +17,7 @@
   "license": "0BSD",
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^1.0.1",
+    "@chakra-ui/icons": "^1.0.2",
     "@chakra-ui/react": "^1.1.2",
     "@contentful/rich-text-react-renderer": "^14.1.2",
     "@contentful/rich-text-types": "^14.1.2",
