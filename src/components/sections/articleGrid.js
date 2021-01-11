@@ -31,7 +31,7 @@ const ArticleGrid = () => {
           }
           featuredImage {
             fluid(maxWidth: 1000) {
-              src
+              ...GatsbyContentfulFluid_withWebp
             }
             description
             title

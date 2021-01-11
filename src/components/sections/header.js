@@ -25,7 +25,6 @@ const Header = (props) => {
   const toggleMenu = () => setShow(!show);
 
   const theme = useTheme();
-  console.log(theme.colors);
 
   return (
     <Flex
