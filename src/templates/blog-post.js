@@ -7,6 +7,8 @@ import {
   RenderText,
 } from "@contentful/rich-text-react-renderer";
 
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+
 import {
   Box,
   Button,
@@ -34,11 +36,18 @@ export const query = graphql`
       bodyText {
         raw
         references {
-          fluid {
-            ...GatsbyContentfulFluid_withWebp
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            title
+            description
+            fluid {
+              ...GatsbyContentfulFluid_withWebp
+            }
           }
         }
       }
+
       featuredImage {
         fluid {
           ...GatsbyContentfulFluid_withWebp
@@ -59,8 +68,6 @@ const BlogPostTemplate = ({ data, errors }) => {
     featuredImage,
   } = data.contentfulBlogPost;
 
-  const textToParse = JSON.parse(bodyText.raw);
-
   return (
     <Layout>
       <SEO />
@@ -80,9 +87,10 @@ const BlogPostTemplate = ({ data, errors }) => {
         />
 
         <Text my={10} mx={10}>
-          TEXT
-          {documentToReactComponents(textToParse, renderRichTextOptions)}
+          TEXT!
+          {renderRichText(bodyText, renderRichTextOptions)}
         </Text>
+
         <Text>Publisert: {createdAt}</Text>
       </Box>
     </Layout>

@@ -1,4 +1,5 @@
 import React from "react";
+import GatsbyImage from "gatsby-image";
 import {
   Heading,
   Text,
@@ -6,11 +7,9 @@ import {
   ListItem,
   ListIcon,
   Image,
+  Box,
 } from "@chakra-ui/react";
 import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
-
-import GatsbyImage from "gatsby-image";
-import { useContentfulImage } from "../utils/useContentfulImage";
 
 const Bold = ({ children }) => <span className="bold">{children}</span>;
 
@@ -65,21 +64,27 @@ const renderRichTextOptions = {
       </List>
     ),
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
-    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-      console.log("BILDE ", node);
-      return <div>BILDE</div>;
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const { fluid, description, title } = node.data.target;
+
+      return (
+        <Box>
+          <Image
+            as={GatsbyImage}
+            fluid={fluid}
+            size="100%"
+            rounded="0.5rem"
+            shadow="lg"
+            alt={description}
+            ml={2}
+          />
+          <Text as="p" textAlign="left" ml={2} p={2}>
+            {description}
+          </Text>
+        </Box>
+      );
     },
   },
 };
 
 export default renderRichTextOptions;
-
-// TO DO
-//
-// 1. Make custom hook to connect the nodeId to the fluid image in the rich text
-// 2. Render image with Gatsby Image in renderRichTextOptions
-// https://github.com/contentful/rich-text/issues/70
-
-// FIX Image rendering in Rich Text. https://github.com/contentful/rich-text/issues/70
-
-// Render bullet points and numbering in lists
