@@ -89,7 +89,7 @@ const BlogPostTemplate = ({ data, errors }) => {
           ml={2}
         />
 
-        <Text my={10} mx={10}>
+        <Text as="div" my={10} mx={10}>
           {renderRichText(bodyText, renderRichTextOptions)}
         </Text>
 
