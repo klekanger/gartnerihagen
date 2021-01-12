@@ -1,6 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
 import GatsbyImage from "gatsby-image";
+import { format, parseISO } from "date-fns";
+import norwegian from "date-fns/locale/nb";
 
 import {
   documentToReactComponents,
@@ -68,6 +70,20 @@ const BlogPostTemplate = ({ data, errors }) => {
     featuredImage,
   } = data.contentfulBlogPost;
 
+  // Format article dates
+  const createdAtFormated = format(parseISO(createdAt), "dd. LLLL yyyy", {
+    locale: norwegian,
+  });
+  const updatedAtFormated = format(parseISO(updatedAt), "dd. LLLL yyyy", {
+    locale: norwegian,
+  });
+
+  // Show publish date on article. Update date only if updated.
+  const publishDate =
+    createdAt !== updatedAt
+      ? `Publisert: ${createdAtFormated} (oppdatert: ${updatedAtFormated})`
+      : `Publisert: ${createdAtFormated}`;
+
   return (
     <Layout>
       <SEO />
@@ -87,11 +103,12 @@ const BlogPostTemplate = ({ data, errors }) => {
         />
 
         <Text my={10} mx={10}>
-          TEXT!
           {renderRichText(bodyText, renderRichTextOptions)}
         </Text>
 
-        <Text>Publisert: {createdAt}</Text>
+        <Text fontSize="sm" fontStyle="italic">
+          {publishDate}
+        </Text>
       </Box>
     </Layout>
   );

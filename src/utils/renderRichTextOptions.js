@@ -21,7 +21,9 @@ const renderRichTextOptions = {
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
-      <Text textAlign="left">{children}</Text>
+      <Text textAlign="left" my={4}>
+        {children}
+      </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
       <Heading as="h1" textAlign="left">
@@ -78,8 +80,8 @@ const renderRichTextOptions = {
             alt={description}
             ml={2}
           />
-          <Text as="p" textAlign="left" ml={2} p={2}>
-            {description}
+          <Text as="p" textAlign="left" ml={2} p={2} fontSize="sm">
+            {title}: {description}
           </Text>
         </Box>
       );

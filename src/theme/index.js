@@ -1,3 +1,5 @@
+// Theming for Chakra UI
+
 import { extendTheme } from "@chakra-ui/react";
 
 // Global style overrides
