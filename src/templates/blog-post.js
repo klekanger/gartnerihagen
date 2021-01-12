@@ -4,22 +4,9 @@ import GatsbyImage from "gatsby-image";
 import { format, parseISO } from "date-fns";
 import norwegian from "date-fns/locale/nb";
 
-import {
-  documentToReactComponents,
-  RenderText,
-} from "@contentful/rich-text-react-renderer";
-
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Heading, Text, Image } from "@chakra-ui/react";
 
 import SEO from "../components/seo";
 import Layout from "../components/layouts/layout";

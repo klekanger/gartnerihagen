@@ -1,17 +1,7 @@
 import React from "react";
 import GatsbyImage from "gatsby-image";
-import {
-  Heading,
-  Text,
-  List,
-  ListItem,
-  ListIcon,
-  Image,
-  Box,
-} from "@chakra-ui/react";
-import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
-
-const Bold = ({ children }) => <span className="bold">{children}</span>;
+import { Heading, Text, List, ListItem, Image, Box } from "@chakra-ui/react";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 
 const renderRichTextOptions = {
   renderMark: {
