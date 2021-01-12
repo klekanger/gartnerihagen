@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link as GatsbyLink } from "gatsby";
-import { Box, Flex, Text, Button, Link, useTheme } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
 import ThemeToggle from "../toggle-theme.js";
 
@@ -23,8 +23,6 @@ const MenuItems = (props) => {
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const toggleMenu = () => setShow(!show);
-
-  const theme = useTheme();
 
   return (
     <Flex

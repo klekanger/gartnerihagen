@@ -1,17 +1,8 @@
 import React from "react";
-import { Link, graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Heading,
-  Stack,
-  Text,
-  Grid,
-} from "@chakra-ui/react";
+import { Box, Image, Heading, Text, Grid } from "@chakra-ui/react";
 
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
