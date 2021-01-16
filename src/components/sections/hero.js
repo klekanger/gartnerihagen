@@ -65,7 +65,7 @@ const Hero = () => {
       >
         <Heading
           as="h1"
-          size="4xl"
+          size="2xl"
           fontWeight="bold"
           color="primary.800"
           textAlign={["center", "center", "left", "left"]}
