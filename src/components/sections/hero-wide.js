@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
+import { motion, isValidMotionProp } from "framer-motion";
 
 import {
   Box,
@@ -11,7 +12,19 @@ import {
   Stack,
   Text,
   Container,
+  ScaleFade,
+  forwardRef,
 } from "@chakra-ui/react";
+
+const MotionBox = motion.custom(
+  forwardRef((props, ref) => {
+    const chakraProps = Object.fromEntries(
+      // do not pass framer props to DOM element
+      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
+    );
+    return <Box ref={ref} {...chakraProps} />;
+  })
+);
 
 const HeroWide = () => {
   const data = useStaticQuery(
@@ -48,19 +61,31 @@ const HeroWide = () => {
   } = data.contentfulForsidetekst;
 
   return (
-    <Box w="100%" m="0" p="0">
-      <Image
-        as={GatsbyImage}
-        fluid={pageImage.fluid}
-        alt={imageDesc}
-        height="100vh"
-      />
+    <Box w="100%" mx="0" mt={-20} mb={20} p="0" shadow="lg">
+      <Box as="div" overflow="hidden">
+        <MotionBox
+          initial={{ scale: 1.0 }}
+          animate={{ scale: 1.5 }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          <Image
+            as={GatsbyImage}
+            fluid={pageImage.fluid}
+            alt={imageDesc}
+            height="100vh"
+          />
+        </MotionBox>
+      </Box>
 
       <Heading
         as="h1"
         bgGradient="linear(to-br, gray.900, gray.700)"
         rounded="md"
-        size="2xl"
+        size="4xl"
         fontWeight="bold"
         color="white"
         opacity="70%"
@@ -69,7 +94,7 @@ const HeroWide = () => {
         top={280}
         left={16}
         width="60vw"
-        padding={4}
+        padding={8}
       >
         {pageTitle}
         <Text
