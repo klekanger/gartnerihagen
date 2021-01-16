@@ -35,11 +35,12 @@ const Header = (props) => {
       py={3}
       px={10}
       {...props}
-      bgColor="gray.200"
-      opacity="50%"
+      bgColor="gray.700"
+      opacity="90%"
       position="fixed"
       zIndex="2"
       shadow="md"
+      color="gray.300"
     >
       <Flex align="center">
         <Link as={GatsbyLink} to="/" _hover={{ textDecor: "none" }}>
@@ -73,6 +74,7 @@ const Header = (props) => {
           <Button
             size="md"
             rounded="md"
+            color="gray.700"
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
           >
