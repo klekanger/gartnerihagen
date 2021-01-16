@@ -75,7 +75,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     <Layout>
       <SEO />
       <Box width="90vw" m={10}>
-        <Heading as="h1" m={5} size="3xl">
+        <Heading as="h1" m={5}>
           {title}
         </Heading>
 
