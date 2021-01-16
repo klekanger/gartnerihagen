@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
-import ThemeToggle from "../toggle-theme.js";
+/* import ThemeToggle from "../toggle-theme.js"; */
 
 const MenuItems = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
@@ -36,6 +36,7 @@ const Header = (props) => {
       px={10}
       {...props}
       bgColor="gray.200"
+      opacity="50%"
       position="fixed"
       zIndex="2"
       shadow="md"
@@ -77,7 +78,7 @@ const Header = (props) => {
           >
             Logg inn
           </Button>
-          <ThemeToggle />
+          {/*  <ThemeToggle /> */}
         </Flex>
       </Box>
     </Flex>
