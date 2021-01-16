@@ -43,9 +43,9 @@ const ArticleGrid = () => {
         xl: "repeat(2, 1fr)",
       }}
       py={8}
-      gap={8}
+      gap={10}
       mb={16}
-      maxWidth="85vw"
+      maxWidth="95vw"
       minHeight="45vh"
     >
       {postNodes.map((post) => (
