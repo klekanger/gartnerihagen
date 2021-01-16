@@ -16,32 +16,32 @@ const renderRichTextOptions = {
       </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
-      <Heading as="h1" textAlign="left">
+      <Heading as="h1" textAlign="left" size="4xl">
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_2]: (node, children) => (
-      <Heading as="h2" textAlign="left">
+      <Heading as="h2" textAlign="left" size="3xl">
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_3]: (node, children) => (
-      <Heading as="h3" textAlign="left">
+      <Heading as="h3" textAlign="left" size="2xl">
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_4]: (node, children) => (
-      <Heading as="h4" textAlign="left">
+      <Heading as="h4" textAlign="left" size="xl">
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_5]: (node, children) => (
-      <Heading as="h5" textAlign="left">
+      <Heading as="h5" textAlign="left" size="lg">
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_6]: (node, children) => (
-      <Heading as="h6" textAlign="left">
+      <Heading as="h6" textAlign="left" size="md">
         {children}
       </Heading>
     ),
