@@ -8,7 +8,7 @@ module.exports = {
     description: "Askims hyggeligste nabolag.",
     siteUrl: "https://www.gartnerihagen-askim.no/",
     siteLanguage: "nb-no",
-    banner: "images/gartnerihagen._solnedgang.jpg",
+    banner: "/images/gartnerihagen_solnedgang.jpg",
   },
 
   plugins: [

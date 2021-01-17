@@ -18,6 +18,9 @@ export const query = graphql`
       pageTitle
       createdAt
       updatedAt
+      excerpt {
+        excerpt
+      }
       pageText {
         raw
         references {
@@ -35,6 +38,7 @@ export const query = graphql`
       pageImage {
         fluid {
           ...GatsbyContentfulFluid_withWebp
+          src
         }
         title
         description
@@ -50,6 +54,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     updatedAt,
     pageText,
     pageImage,
+    excerpt,
   } = data.contentfulSide;
 
   // Format article dates
@@ -80,7 +85,11 @@ const BlogPostTemplate = ({ data, errors }) => {
 
   return (
     <Layout>
-      <SEO />
+      <SEO
+        title={pageTitle || null}
+        image={pageImage?.fluid?.src || null}
+        description={excerpt?.excerpt || null}
+      />
       <Box width="90vw" m={10}>
         <Heading as="h1" size="4xl" m={5}>
           {pageTitle}

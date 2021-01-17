@@ -22,6 +22,9 @@ export const query = graphql`
         firstName
         lastName
       }
+      excerpt {
+        excerpt
+      }
       bodyText {
         raw
         references {
@@ -40,6 +43,7 @@ export const query = graphql`
       featuredImage {
         fluid {
           ...GatsbyContentfulFluid_withWebp
+          src
         }
         title
         description
@@ -54,6 +58,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     createdAt,
     updatedAt,
     bodyText,
+    excerpt,
     featuredImage,
   } = data.contentfulBlogPost;
 
@@ -85,7 +90,11 @@ const BlogPostTemplate = ({ data, errors }) => {
 
   return (
     <Layout>
-      <SEO />
+      <SEO
+        title={title || null}
+        image={featuredImage?.fluid?.src || null}
+        description={excerpt?.excerpt || null}
+      />
       <Box width="90vw" m={10}>
         <Heading as="h1" m={5}>
           {title}

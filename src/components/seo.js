@@ -1,23 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-/* import { useLocation } from "@reach/router"; */
 import { useStaticQuery, graphql } from "gatsby";
+import { useLocation } from "@reach/router";
 
-const SEO = ({ title, description }) => {
-  /* const { pathname } = useLocation(); */
+const SEO = ({ title, description, image }) => {
+  const { pathname } = useLocation();
   const { site } = useStaticQuery(query);
+
   const {
     defaultDescription,
     defaultTitle,
     siteLanguage,
-    banner,
+    defaultImage,
     siteUrl,
   } = site.siteMetadata;
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
+    image: `${siteUrl}${image || defaultImage}`,
+    url: `${siteUrl}${pathname}`,
   };
 
   return (
@@ -27,11 +30,15 @@ const SEO = ({ title, description }) => {
       meta={[
         {
           name: "description",
-          conten: seo.description,
+          content: seo.description,
+        },
+        {
+          name: "og:url",
+          content: seo.url,
         },
         {
           name: "image",
-          content: `${siteUrl}${banner}`,
+          content: seo.image,
         },
         {
           property: "og:title",
@@ -47,7 +54,7 @@ const SEO = ({ title, description }) => {
         },
         {
           property: "og:image",
-          content: `${siteUrl}${banner}`,
+          content: seo.image,
         },
       ]}
     ></Helmet>
@@ -63,7 +70,7 @@ const query = graphql`
         defaultDescription: description
         defaultTitle: title
         siteLanguage
-        banner
+        defaultImage: banner
         siteUrl
       }
     }
@@ -73,9 +80,11 @@ const query = graphql`
 SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
+  image: PropTypes.string,
 };
 
 SEO.defaultProps = {
   title: null,
   description: null,
+  image: null,
 };
