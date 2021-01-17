@@ -2,17 +2,7 @@ import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { MotionBox } from "../../utils/MotionBox";
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Heading,
-  Stack,
-  Text,
-  Container,
-  ScaleFade,
-} from "@chakra-ui/react";
+import { Box, Button, Image, Heading, Text } from "@chakra-ui/react";
 
 const HeroWide = () => {
   const data = useStaticQuery(
