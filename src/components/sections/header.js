@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
-/* import ThemeToggle from "../toggle-theme.js"; */
+import { IoFlowerOutline } from "react-icons/io5";
 
 const MenuItems = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
@@ -42,11 +42,9 @@ const Header = (props) => {
       shadow="md"
       color="gray.300"
     >
-      <Flex align="center">
-        <Link as={GatsbyLink} to="/" _hover={{ textDecor: "none" }}>
-          Boligsameiet Gartnerihagen
-        </Link>
-      </Flex>
+      <Link as={GatsbyLink} to="/" _hover={{ textDecor: "none" }} fontSize={20}>
+        <IoFlowerOutline /> Boligsameiet Gartnerihagen
+      </Link>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
         {show ? (
@@ -55,7 +53,6 @@ const Header = (props) => {
           <AiOutlineMenu className="menuOpen" size="2em" />
         )}
       </Box>
-
       <Box
         display={{ base: show ? "block" : "none", md: "block" }}
         flexBasis={{ base: "100%", md: "auto" }}
@@ -66,7 +63,7 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItems to="/informasjon">Informasjon</MenuItems>
+          <MenuItems to="/om-boligsameiet-gartnerihagen">Informasjon</MenuItems>
           <MenuItems to="/blogg">Blogg</MenuItems>
           <MenuItems to="/styret" isLast>
             Styret
@@ -80,7 +77,6 @@ const Header = (props) => {
           >
             Logg inn
           </Button>
-          {/*  <ThemeToggle /> */}
         </Flex>
       </Box>
     </Flex>
