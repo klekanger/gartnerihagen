@@ -2,7 +2,7 @@ import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { MotionBox } from "../../utils/MotionBox";
-import { Box, Button, Image, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Heading, Text, Container } from "@chakra-ui/react";
 
 const HeroWide = () => {
   const data = useStaticQuery(
@@ -59,45 +59,50 @@ const HeroWide = () => {
         </MotionBox>
       </Box>
 
-      <Heading
-        as="h1"
-        bgGradient="linear(to-br, gray.900, gray.700)"
+      <Box
+        bgColor="rgba(0,46,85,0.7)"
         rounded="md"
-        size="4xl"
-        fontWeight="bold"
-        color="white"
-        opacity="70%"
+        shadow="lg"
+        w="60vw"
+        h="40vh"
         position="absolute"
-        textAlign={["center", "center", "left", "left"]}
-        top={280}
+        top={250}
         left={16}
-        width="60vw"
-        padding={8}
       >
-        {pageTitle}
-        <Text
-          fontSize={{ base: "2xl", sm: "md", md: "lg" }}
-          fontWeight="400"
-          my={4}
+        <Heading
+          as="h1"
+          size="4xl"
+          fontWeight="bold"
+          color="gray.100"
+          position="absolute"
+          textAlign={["center", "center", "left", "left"]}
+          padding={8}
         >
-          {excerpt}
-        </Text>
-        <Link to="/om-boligsameiet-gartnerihagen">
-          <Button
-            borderRadius="8px"
-            py="4"
-            px="4"
-            lineHeight="1"
-            size="xl"
-            shadow="lg"
-            fontSize="xl"
-            bgColor="white"
-            color="black"
+          {pageTitle}
+          <Text
+            fontSize={{ base: "2xl", sm: "md", md: "lg" }}
+            fontWeight="400"
+            my={4}
           >
-            Les mer
-          </Button>
-        </Link>
-      </Heading>
+            {excerpt}
+          </Text>
+          <Link to="/om-boligsameiet-gartnerihagen">
+            <Button
+              variant="standard"
+              borderRadius="8px"
+              mt={4}
+              py={4}
+              px={4}
+              lineHeight="1"
+              size="xl"
+              shadow="lg"
+              fontSize="xl"
+            >
+              Les mer
+            </Button>
+          </Link>
+        </Heading>
+      </Box>
     </Box>
   );
 };

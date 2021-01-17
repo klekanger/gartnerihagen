@@ -35,7 +35,7 @@ const Header = (props) => {
       py={3}
       px={10}
       {...props}
-      bgColor="gray.700"
+      bgColor="#002E55"
       opacity="90%"
       position="fixed"
       zIndex="2"
@@ -69,9 +69,9 @@ const Header = (props) => {
             Styret
           </MenuItems>
           <Button
+            variant="menu-button"
             size="md"
             rounded="md"
-            color="gray.700"
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
           >

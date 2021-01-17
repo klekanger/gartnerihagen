@@ -84,7 +84,7 @@ const ArticleGrid = () => {
             size="xl"
             mb={4}
             fontWeight="bold"
-            color="primary.800"
+            color="gray.700"
             textAlign="left"
           >
             <Link
@@ -95,13 +95,14 @@ const ArticleGrid = () => {
               {post.title}
             </Link>
           </Heading>
-          <Text fontSize="md" textAlign="left">
+          <Text fontSize="md" textAlign="left" color="gray.700">
             {post.excerpt.excerpt}
           </Text>
           <Text textAlign="left" py={3} _hover={{ color: "blue.700" }}>
             <Link
               as={GatsbyLink}
               to={`/blog/${post.slug}`}
+              color="gray.700"
               _hover={{ textDecor: "none" }}
             >
               Les mer <ChevronRightIcon />

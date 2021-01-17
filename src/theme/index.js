@@ -20,10 +20,8 @@ const overrides = {
   styles,
   borders,
   typography,
-
   components: {
     Button,
-    // Other components go here
   },
 };
 

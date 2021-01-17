@@ -67,11 +67,10 @@ const Hero = () => {
           as="h1"
           size="2xl"
           fontWeight="bold"
-          color="primary.800"
+          color="red.500"
           textAlign={["center", "center", "left", "left"]}
         >
           {pageTitle}
-
           <Text
             fontSize={{ base: "2xl", sm: "md", md: "lg" }}
             fontWeight="400"
