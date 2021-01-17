@@ -1,8 +1,7 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
-import { motion, isValidMotionProp } from "framer-motion";
-
+import { MotionBox } from "../../utils/MotionBox";
 import {
   Box,
   Button,
@@ -13,18 +12,7 @@ import {
   Text,
   Container,
   ScaleFade,
-  forwardRef,
 } from "@chakra-ui/react";
-
-const MotionBox = motion.custom(
-  forwardRef((props, ref) => {
-    const chakraProps = Object.fromEntries(
-      // do not pass framer props to DOM element
-      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
-    );
-    return <Box ref={ref} {...chakraProps} />;
-  })
-);
 
 const HeroWide = () => {
   const data = useStaticQuery(
