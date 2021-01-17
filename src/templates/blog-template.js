@@ -96,7 +96,7 @@ const BlogPostTemplate = ({ data, errors }) => {
         description={excerpt?.excerpt || null}
       />
       <Box width="90vw" m={10}>
-        <Heading as="h1" m={5}>
+        <Heading as="h1" m={5} size="4xl">
           {title}
         </Heading>
         {topImage}

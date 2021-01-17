@@ -11,6 +11,7 @@ import typography from "./foundations/typography";
 
 // Component style overrides
 import Button from "./components/button";
+import Heading from "./components/heading";
 
 const overrides = {
   config: {
@@ -22,6 +23,7 @@ const overrides = {
   typography,
   components: {
     Button,
+    Heading,
   },
 };
 

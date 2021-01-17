@@ -4,7 +4,7 @@ const button = {
   },
   variants: {
     danger: {
-      bg: "var(--danger)",
+      bg: "red.600",
       boxShadow: "0 0 2px 2px #efdfde",
     },
     standard: {
