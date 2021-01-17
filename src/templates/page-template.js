@@ -13,16 +13,12 @@ import Layout from "../components/layouts/layout";
 import renderRichTextOptions from "../utils/renderRichTextOptions";
 
 export const query = graphql`
-  query BlogPostQuery($id: String!) {
-    contentfulBlogPost(contentful_id: { eq: $id }) {
-      title
+  query PageQuery($id: String!) {
+    contentfulSide(contentful_id: { eq: $id }) {
+      pageTitle
       createdAt
       updatedAt
-      author {
-        firstName
-        lastName
-      }
-      bodyText {
+      pageText {
         raw
         references {
           ... on ContentfulAsset {
@@ -36,8 +32,7 @@ export const query = graphql`
           }
         }
       }
-
-      featuredImage {
+      pageImage {
         fluid {
           ...GatsbyContentfulFluid_withWebp
         }
@@ -50,12 +45,12 @@ export const query = graphql`
 
 const BlogPostTemplate = ({ data, errors }) => {
   const {
-    title,
+    pageTitle,
     createdAt,
     updatedAt,
-    bodyText,
-    featuredImage,
-  } = data.contentfulBlogPost;
+    pageText,
+    pageImage,
+  } = data.contentfulSide;
 
   // Format article dates
   const createdAtFormated = format(parseISO(createdAt), "dd. LLLL yyyy", {
@@ -71,28 +66,29 @@ const BlogPostTemplate = ({ data, errors }) => {
       ? `Publisert: ${createdAtFormated} (oppdatert: ${updatedAtFormated})`
       : `Publisert: ${createdAtFormated}`;
 
+  const topImage = pageImage?.fluid ? (
+    <Image
+      as={GatsbyImage}
+      fluid={pageImage.fluid}
+      size="100%"
+      rounded="0.5rem"
+      shadow="lg"
+      alt={pageImage.description}
+      ml={2}
+    />
+  ) : null;
+
   return (
     <Layout>
       <SEO />
       <Box width="90vw" m={10}>
         <Heading as="h1" m={5}>
-          {title}
+          {pageTitle}
         </Heading>
-
-        <Image
-          as={GatsbyImage}
-          fluid={featuredImage.fluid}
-          size="100%"
-          rounded="0.5rem"
-          shadow="lg"
-          alt={featuredImage.description}
-          ml={2}
-        />
-
+        {topImage}
         <Text as="div" my={10} mx={10}>
-          {renderRichText(bodyText, renderRichTextOptions)}
+          {renderRichText(pageText, renderRichTextOptions)}
         </Text>
-
         <Text fontSize="sm" fontStyle="italic">
           {publishDate}
         </Text>
