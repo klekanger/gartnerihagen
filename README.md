@@ -14,7 +14,7 @@ Nye nettsider for Gartnerihagen Boligsameie.
 - React.js / Gatsby
   - [https://www.gatsbyjs.com/](https://www.gatsbyjs.com/)
 - CSS
-  - Styles components / Emotion
+  - Styled components / Emotion
     - [https://www.gatsbyjs.com/docs/how-to/styling/emotion/](https://www.gatsbyjs.com/docs/how-to/styling/emotion/)
 - Chakra UI for brukergrensesnitt
   - [https://chakra-ui.com/](https://chakra-ui.com/)
