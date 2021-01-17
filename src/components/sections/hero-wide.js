@@ -92,7 +92,7 @@ const HeroWide = () => {
         >
           {excerpt}
         </Text>
-        <Link to="/">
+        <Link to="/om-boligsameiet-gartnerihagen">
           <Button
             borderRadius="8px"
             py="4"
