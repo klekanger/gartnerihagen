@@ -1,8 +1,8 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
 import GatsbyImage from "gatsby-image";
-
-import { Box, Image, Heading, Text, Grid } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { Box, Image, Heading, Text, Grid, Link } from "@chakra-ui/react";
 
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
@@ -13,6 +13,7 @@ const ArticleGrid = () => {
           createdAt
           updatedAt
           title
+          slug
           excerpt {
             excerpt
           }
@@ -55,13 +56,11 @@ const ArticleGrid = () => {
             fluid={post.featuredImage.fluid}
             rounded="0.5rem"
             shadow="lg"
-            maxHeight="50vh"
-            minHeight={{
-              base: "40vh",
+            height={{
               sm: "40vh",
               md: "40vh",
-              lg: "30vh",
-              xl: "40vh",
+              lg: "40vh",
+              xl: "50vh",
             }}
             mb={5}
             alt={post.featuredImage.description}
@@ -74,10 +73,25 @@ const ArticleGrid = () => {
             color="primary.800"
             textAlign="left"
           >
-            {post.title}
+            <Link
+              as={GatsbyLink}
+              to={`/blog/${post.slug}`}
+              _hover={{ textDecor: "none", color: "blue.700" }}
+            >
+              {post.title}
+            </Link>
           </Heading>
           <Text fontSize="md" textAlign="left">
             {post.excerpt.excerpt}
+          </Text>
+          <Text textAlign="left" py={3} _hover={{ color: "blue.700" }}>
+            <Link
+              as={GatsbyLink}
+              to={`/blog/${post.slug}`}
+              _hover={{ textDecor: "none" }}
+            >
+              Les mer <ChevronRightIcon />
+            </Link>
           </Text>
         </Box>
       ))}
