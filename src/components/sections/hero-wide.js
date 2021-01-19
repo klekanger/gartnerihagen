@@ -39,7 +39,7 @@ const HeroWide = () => {
   } = data.contentfulForsidetekst;
 
   const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [dimensions, setDimensions] = useState({ width: 400, height: 400 });
 
   useLayoutEffect(() => {
     // Get the height of the header and intro text
