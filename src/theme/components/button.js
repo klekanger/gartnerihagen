@@ -1,4 +1,4 @@
-const button = {
+const Button = {
   baseStyle: {
     fontWeight: "bold",
   },
@@ -22,4 +22,4 @@ const button = {
   },
 };
 
-export default button;
+export default Button;

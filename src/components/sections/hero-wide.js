@@ -64,15 +64,15 @@ const HeroWide = () => {
         rounded="md"
         shadow="lg"
         w="60vw"
-        h="40vh"
+        h="50vh"
         position="absolute"
-        top={250}
+        top={200}
         left={16}
       >
         <Heading
           as="h1"
-          size="4xl"
-          fontWeight="bold"
+          size="3xl"
+          fontWeight="semibold"
           color="gray.50"
           position="absolute"
           textAlign={["center", "center", "left", "left"]}
@@ -81,7 +81,8 @@ const HeroWide = () => {
           {pageTitle}
           <Text
             fontSize={{ base: "2xl", sm: "md", md: "lg" }}
-            fontWeight="400"
+            fontWeight="normal"
+            lineHeight="normal"
             my={4}
           >
             {excerpt}

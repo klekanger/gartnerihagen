@@ -6,8 +6,6 @@ import { extendTheme } from "@chakra-ui/react";
 import styles from "./styles";
 
 // Foundational style overrides
-import borders from "./foundations/borders";
-import typography from "./foundations/typography";
 
 // Component style overrides
 import Button from "./components/button";
@@ -18,9 +16,15 @@ const overrides = {
     useSystemColorMode: false,
     initialColorMode: "light",
   },
+
+  /*   fonts: {
+    heading: "Open Sans",
+    body: "Raleway",
+    mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
+  },
+ */
   styles,
-  borders,
-  typography,
+
   components: {
     Button,
     Heading,
