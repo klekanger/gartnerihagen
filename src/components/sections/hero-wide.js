@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { MotionBox } from "../../utils/MotionBox";
-import { Box, Button, Image, Heading, Text, Container } from "@chakra-ui/react";
+import { Box, Button, Image, Heading, Text } from "@chakra-ui/react";
 
 const HeroWide = () => {
   const data = useStaticQuery(
@@ -38,6 +38,20 @@ const HeroWide = () => {
     pageImage: { imageDesc },
   } = data.contentfulForsidetekst;
 
+  const targetRef = useRef();
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    // Get the height of the header and intro text
+    // This is used for setting the correct height of the transparent background behind the text
+
+    if (targetRef.current) {
+      setDimensions({
+        height: targetRef.current.offsetHeight,
+      });
+    }
+  }, []);
+
   return (
     <Box w="100%" mx="0" mt={-20} mb={20} p="0" shadow="lg">
       <Box as="div" overflow="hidden">
@@ -64,7 +78,7 @@ const HeroWide = () => {
         rounded="md"
         shadow="lg"
         w="60vw"
-        h="50vh"
+        h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
         top={200}
         left={16}
@@ -77,6 +91,7 @@ const HeroWide = () => {
           position="absolute"
           textAlign={["center", "center", "left", "left"]}
           padding={8}
+          ref={targetRef} // Ref for all the text + button in the intro text
         >
           {pageTitle}
           <Text
