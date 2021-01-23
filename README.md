@@ -14,13 +14,13 @@ Nye nettsider for Gartnerihagen Boligsameie.
 - React.js / Gatsby
   - [https://www.gatsbyjs.com/](https://www.gatsbyjs.com/)
 - CSS
-  - Styled components / Emotion
+  - Chakra UI themes / Emotion
+    - [https://chakra-ui.com/docs/theming/customize-theme](https://chakra-ui.com/docs/theming/customize-theme)
     - [https://www.gatsbyjs.com/docs/how-to/styling/emotion/](https://www.gatsbyjs.com/docs/how-to/styling/emotion/)
 - Chakra UI for brukergrensesnitt
   - [https://chakra-ui.com/](https://chakra-ui.com/)
 - Animasjoner med Framer Motion
   - [https://www.framer.com/api/motion/](https://www.framer.com/api/motion/)
   - [https://chakra-ui.com/guides/integrations/with-framer](https://chakra-ui.com/guides/integrations/with-framer)
-- useAuth og Netlify Identity Service for autentisering
-  - [https://useauth.dev/](https://useauth.dev/)
+- Netlify Identity Service for autentisering
   - [https://docs.netlify.com/visitor-access/identity/](https://docs.netlify.com/visitor-access/identity/)
