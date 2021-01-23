@@ -3,3 +3,4 @@ node_modules/
 public
 .env*
 TODO.md
+src/components/authenticated-components/todo.txt
