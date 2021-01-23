@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
 import { IoFlowerOutline } from "react-icons/io5";
 
+function initNetlifyIdentity() {
+  const script = document.createElement("script");
+
+  script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+  script.async = true;
+
+  document.body.appendChild(script);
+}
+
+function openNetlifyModal() {
+  const netlifyIdentity = window.netlifyIdentity;
+
+  if (netlifyIdentity) netlifyIdentity.open();
+  else console.log("NetlifyIdentity not defined");
+}
+
+// Render one menu item
 const MenuItems = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
   return (
@@ -20,9 +37,15 @@ const MenuItems = (props) => {
   );
 };
 
+// Main header component
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const toggleMenu = () => setShow(!show);
+
+  useEffect(() => {
+    console.log("Calling Netlify Identity");
+    initNetlifyIdentity();
+  });
 
   return (
     <Flex
@@ -74,6 +97,7 @@ const Header = (props) => {
             rounded="md"
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
+            onClick={openNetlifyModal}
           >
             Logg inn
           </Button>
