@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
 import { IoFlowerOutline } from "react-icons/io5";
 
-function initNetlifyIdentity() {
-  const script = document.createElement("script");
-
-  script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
-  script.async = true;
-
-  document.body.appendChild(script);
-}
-
-function openNetlifyModal() {
-  const netlifyIdentity = window.netlifyIdentity;
-
-  if (netlifyIdentity) netlifyIdentity.open();
-  else console.log("NetlifyIdentity not defined");
-}
+import { IdentityContext } from "../../identity-context";
 
 // Render one menu item
 const MenuItems = (props) => {
@@ -41,11 +27,11 @@ const MenuItems = (props) => {
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const toggleMenu = () => setShow(!show);
+  const { user, netlifyIdentity } = useContext(IdentityContext);
 
-  useEffect(() => {
-    console.log("Calling Netlify Identity");
-    initNetlifyIdentity();
-  });
+  const loginButtonText = user
+    ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, ".")
+    : "Logg inn";
 
   return (
     <Flex
@@ -97,9 +83,9 @@ const Header = (props) => {
             rounded="md"
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
-            onClick={openNetlifyModal}
+            onClick={() => netlifyIdentity.open()}
           >
-            Logg inn
+            {loginButtonText}
           </Button>
         </Flex>
       </Box>
