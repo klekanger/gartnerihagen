@@ -6,7 +6,7 @@ import Footer from "../sections/footer";
 
 const Layout = (props) => (
   <Box direction="column" align="center" m="0 auto" {...props}>
-    <Header />
+    <Header {...props} />
     <Box pb={20} />
     {props.children}
     <Footer />
