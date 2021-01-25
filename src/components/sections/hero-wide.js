@@ -16,7 +16,7 @@ const HeroWide = () => {
           }
           contentful_id
           pageImage {
-            fluid(maxWidth: 1000) {
+            fluid(maxWidth: 3000) {
               ...GatsbyContentfulFluid_withWebp
             }
             title
