@@ -22,7 +22,6 @@ const Private = () => {
   return (
     <Router>
       <PrivateRoute path="/private" component={PrivateMain} />
-      <PrivateRoute path="/private/" component={PrivateMain} />
     </Router>
   );
 };
