@@ -7,13 +7,13 @@ const IdentityProvider = (props) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    console.log("useEffect -> netlifyIdentity.init ");
     netlifyIdentity.setLocale("nb-no");
     netlifyIdentity.init({});
   }, []);
 
   netlifyIdentity.on("login", (user) => {
     setUser(user);
+    netlifyIdentity.close();
   });
 
   netlifyIdentity.on("logout", () => setUser());
