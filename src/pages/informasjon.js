@@ -9,7 +9,7 @@ import PrivateRoute from "../components/private-components/privateRoute";
 import PrivateMain from "../components/private-components/privateMain";
 import PrivateNotLoggedIn from "../components/private-components/privateNotLoggedIn";
 
-const Private = () => {
+const Informasjon = () => {
   const { user, netlifyIdentity } = useContext(IdentityContext);
 
   if (!user) {
@@ -21,7 +21,7 @@ const Private = () => {
 
   return (
     <Router>
-      <PrivateRoute path="/private" component={PrivateMain} />
+      <PrivateRoute path="/informasjon" component={PrivateMain} />
     </Router>
   );
 };
@@ -30,4 +30,4 @@ function PublicRoute(props) {
   return <div>{props.children}</div>;
 }
 
-export default Private;
+export default Informasjon;
