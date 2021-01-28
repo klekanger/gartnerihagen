@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, Link } from "@chakra-ui/react";
+import { Flex, Text, Link, Box } from "@chakra-ui/react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,9 +20,17 @@ export default function Footer() {
         fontSize="sm"
         direction={["column", "column", "row", "row"]}
       >
-        <Text mb={[4, 4, 0, 0]}>
-          &copy; {currentYear} Boligsameiet Gartnerihagen{" "}
-        </Text>
+        <Box>
+          <Text mb={[4, 4, 0, 0]}>
+            &copy; {currentYear} Boligsameiet Gartnerihagen{" "}
+          </Text>
+          <Text
+            mb={[4, 4, 0, 0]}
+            textAlign={["center", "center", "left", "left"]}
+          >
+            Personvernerklæring
+          </Text>
+        </Box>
         <Text mb={[4, 4, 0, 0]}>
           Epost:{" "}
           <Link
