@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Layout from "../layouts/layout";
-import { Box, Heading, Text } from "@chakra-ui/react";
-import { IdentityContext } from "../../identity-context";
+import { Box, Heading } from "@chakra-ui/react";
+
 import ArticleGrid from "../../components/sections/articleGrid";
 import PrivateInfoList from "./privateInfoList";
 
 export default function PrivateMain() {
-  const { user, netlifyIdentity } = useContext(IdentityContext);
-
-  const userName = user?.user_metadata?.full_name;
-
   return (
     <Layout>
       <Box>

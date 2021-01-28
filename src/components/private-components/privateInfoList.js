@@ -1,8 +1,8 @@
 import React from "react";
-import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Image, Heading, Text, Link } from "@chakra-ui/react";
+
+import { Box, Image, Heading, Text } from "@chakra-ui/react";
 
 const PrivateInfoList = () => {
   const data = useStaticQuery(graphql`

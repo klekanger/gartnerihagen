@@ -17,17 +17,11 @@ const Informasjon = () => {
     return <PrivateNotLoggedIn />;
   }
 
-  const userName = user?.user_metadata?.full_name || "";
-
   return (
     <Router>
       <PrivateRoute path="/informasjon" component={PrivateMain} />
     </Router>
   );
 };
-
-function PublicRoute(props) {
-  return <div>{props.children}</div>;
-}
 
 export default Informasjon;

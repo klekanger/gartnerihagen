@@ -58,7 +58,7 @@ const Header = (props) => {
         _hover={{ textDecor: "none" }}
         fontSize="2xl"
       >
-        <IoFlowerOutline style={{ color: "#A2B25C", "margin-top": "-5px" }} />{" "}
+        <IoFlowerOutline style={{ color: "#A2B25C", marginTop: "-5px" }} />{" "}
         Boligsameiet Gartnerihagen
       </Link>
 
@@ -85,6 +85,7 @@ const Header = (props) => {
           <MenuItems to="/styret" isLast>
             Styret
           </MenuItems>
+
           <Button
             variant="menu-button"
             size="md"
