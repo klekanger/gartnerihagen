@@ -13,6 +13,7 @@ const MenuItems = (props) => {
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
+      fontSize="md"
       display="block"
       {...rest}
     >
@@ -51,8 +52,14 @@ const Header = (props) => {
       shadow="md"
       color="gray.300"
     >
-      <Link as={GatsbyLink} to="/" _hover={{ textDecor: "none" }} fontSize={20}>
-        <IoFlowerOutline /> Boligsameiet Gartnerihagen
+      <Link
+        as={GatsbyLink}
+        to="/"
+        _hover={{ textDecor: "none" }}
+        fontSize="2xl"
+      >
+        <IoFlowerOutline style={{ color: "#A2B25C", "margin-top": "-5px" }} />{" "}
+        Boligsameiet Gartnerihagen
       </Link>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -72,14 +79,17 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItems to="/om-boligsameiet-gartnerihagen">Informasjon</MenuItems>
+          <MenuItems to="/informasjon">For beboere</MenuItems>
           <MenuItems to="/blogg">Blogg</MenuItems>
+          <MenuItems to="/om-boligsameiet-gartnerihagen">Om oss</MenuItems>
           <MenuItems to="/styret" isLast>
             Styret
           </MenuItems>
           <Button
             variant="menu-button"
             size="md"
+            fontSize="sm"
+            fontWeight={600}
             rounded="md"
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
