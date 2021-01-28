@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
     query {
-      posts: allContentfulBlogPost {
+      posts: allContentfulBlogPost(filter: { privatePost: { eq: false } }) {
         nodes {
           contentful_id
           createdAt
@@ -23,7 +23,7 @@ const ArticleGrid = () => {
             lastName
           }
           featuredImage {
-            fluid(maxWidth: 1000) {
+            fluid(maxWidth: 2000) {
               ...GatsbyContentfulFluid_withWebp
             }
             description
