@@ -7,12 +7,11 @@ function PrivateRoute(props) {
   const { component: Component, location, ...rest } = props;
 
   useEffect(() => {
-    if (!user && location.pathname !== `/app/login`) {
-      // If the user is not logged in, redirect to the login page.
-      console.log("You are not logged in!");
-      navigate(`/app/login`);
+    if (!user) {
+      navigate(`/`);
     }
   }, [user, location]);
+
   return user ? <Component {...rest} /> : null;
 }
 
