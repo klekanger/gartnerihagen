@@ -1,7 +1,8 @@
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { MotionBox } from "../../utils/MotionBox";
+import debounce from "../../utils/debounce";
 import { Box, Button, Image, Heading, Text } from "@chakra-ui/react";
 
 const HeroWide = () => {
@@ -41,19 +42,27 @@ const HeroWide = () => {
   const targetRef = useRef();
   const [dimensions, setDimensions] = useState({ width: 400, height: 400 });
 
-  useLayoutEffect(() => {
-    // Get the height of the header and intro text
-    // This is used for setting the correct height of the transparent background behind the text
-
+  // Get the height of the header and intro text
+  // This is used for setting the correct height of the transparent background behind the text
+  const handleResize = () => {
     if (targetRef.current) {
       setDimensions({
         height: targetRef.current.offsetHeight,
       });
     }
+  };
+
+  useEffect(() => {
+    handleResize();
+    // Using debounce utility function for better performance
+    window.addEventListener("resize", debounce(handleResize, 100));
+    return () => {
+      window.removeEventListener("resize", debounce(handleResize, 100));
+    };
   }, []);
 
   return (
-    <Box w="100%" mx="0" mt={-20} mb={20} p="0" shadow="lg">
+    <Box w="95vw" mx="0" my={10} p="0" shadow="lg">
       <Box as="div" overflow="hidden">
         <MotionBox
           initial={{ scale: 1.0 }}
@@ -64,24 +73,18 @@ const HeroWide = () => {
             repeatType: "reverse",
           }}
         >
-          <Image
-            as={GatsbyImage}
-            fluid={pageImage.fluid}
-            alt={imageDesc}
-            height="100vh"
-          />
+          <Image as={GatsbyImage} fluid={pageImage.fluid} alt={imageDesc} />
         </MotionBox>
       </Box>
 
       <Box
         bgColor="rgba(0,46,85,0.7)"
-        rounded="md"
-        shadow="lg"
         w="60vw"
         h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
         top={200}
         left={16}
+        rounded="md"
       >
         <Heading
           as="h1"
