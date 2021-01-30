@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
@@ -26,9 +26,24 @@ const MenuItems = (props) => {
 
 // Main header component
 const Header = (props) => {
-  const [show, setShow] = useState(false);
-  const toggleMenu = () => setShow(!show);
+  const [showMenuItems, setShowMenuItems] = useState(false);
+  const [hideMenu, setHideMenu] = useState(false);
+  const toggleMenu = () => setShowMenuItems(!showMenuItems);
   const { user, netlifyIdentity } = useContext(IdentityContext);
+
+  // Hide menu if scrolled more than 15 % of the screen height
+  const handleScroll = () => {
+    const yPos = window.scrollY || 0;
+    const scrHeight = window.innerHeight || 900;
+    yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const loginButtonText = user
     ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, ".")
@@ -42,6 +57,7 @@ const Header = (props) => {
       wrap="wrap"
       w="100%"
       mb={4}
+      mt={hideMenu ? "-100" : "0"}
       py={3}
       px={10}
       {...props}
@@ -51,6 +67,7 @@ const Header = (props) => {
       zIndex="2"
       shadow="md"
       color="gray.300"
+      transition="margin-top 0.5s"
     >
       <Link
         as={GatsbyLink}
@@ -63,14 +80,14 @@ const Header = (props) => {
       </Link>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
-        {show ? (
+        {showMenuItems ? (
           <AiOutlineUp className="menuClose" size="2em" />
         ) : (
           <AiOutlineMenu className="menuOpen" size="2em" />
         )}
       </Box>
       <Box
-        display={{ base: show ? "block" : "none", md: "block" }}
+        display={{ base: showMenuItems ? "block" : "none", md: "block" }}
         flexBasis={{ base: "100%", md: "auto" }}
       >
         <Flex
