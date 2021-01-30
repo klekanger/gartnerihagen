@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
-import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Link, Container } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
 import { IoFlowerOutline } from "react-icons/io5";
+import Tulip from "../../images/tulip.svg";
 
 import { IdentityContext } from "../../identity-context";
 
@@ -59,7 +60,7 @@ const Header = (props) => {
       mb={4}
       mt={hideMenu ? "-100" : "0"}
       py={3}
-      px={10}
+      px={[4, 4, 10, 10]}
       {...props}
       bgColor="#002E55"
       opacity={showMenuItems ? "100%" : "90%"}
@@ -73,10 +74,9 @@ const Header = (props) => {
         as={GatsbyLink}
         to="/"
         _hover={{ textDecor: "none" }}
-        fontSize={["sm", "2xl", "2xl", "2xl"]}
+        fontSize={["xl", "2xl", "2xl", "2xl"]}
       >
-        <IoFlowerOutline style={{ color: "#A2B25C", marginTop: "-5px" }} />{" "}
-        Boligsameiet Gartnerihagen
+        <Tulip height="1.8rem" width="1.8rem" /> Boligsameiet Gartnerihagen
       </Link>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>

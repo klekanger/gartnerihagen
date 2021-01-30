@@ -79,18 +79,18 @@ const HeroWide = () => {
             as={GatsbyImage}
             fluid={pageImage.fluid}
             alt={imageDesc}
-            h="50vh"
+            h={["50vh", "70vh", "80vh", "80vh"]}
           />
         </MotionBox>
       </Box>
 
       <Box
         bgColor="rgba(0,46,85,0.7)"
-        w={["90vw", "80vw", "80vw", "60vw"]}
+        w={["90vw", "90vw", "80vw", "60vw"]}
         h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
-        top={[120, 120, 100, 200]}
-        left={[4, 10, 16, 16]}
+        top={[120, 200, 200, 200]}
+        left={[4, 4, 16, 16]}
       >
         <Heading
           as="h1"
@@ -98,7 +98,7 @@ const HeroWide = () => {
           fontSize={["4xl", "4xl", "6xl", "6xl"]}
           color="gray.50"
           position="absolute"
-          textAlign={["center", "center", "left", "left"]}
+          textAlign={["center", "left", "left", "left"]}
           padding={[2, 4, 8, 8]}
           ref={targetRef} // Ref for all the text + button in the intro text
         >
