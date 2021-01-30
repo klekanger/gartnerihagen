@@ -75,6 +75,7 @@ const ArticleGrid = () => {
                 _hover={{
                   animate: "x: 100",
                 }}
+                shadow="lg"
               />
             </motion.div>
           </Link>
@@ -94,10 +95,19 @@ const ArticleGrid = () => {
               {post.title}
             </Link>
           </Heading>
-          <Text fontSize="md" textAlign="left" color="gray.700">
+          <Text
+            fontSize={{ base: "xs", sm: "sm", md: "lg" }}
+            textAlign="left"
+            color="gray.700"
+          >
             {post.excerpt.excerpt}
           </Text>
-          <Text textAlign="left" py={3} _hover={{ color: "blue.700" }}>
+          <Text
+            textAlign="left"
+            py={3}
+            fontSize={{ base: "xs", sm: "sm", md: "lg" }}
+            _hover={{ color: "blue.700" }}
+          >
             <Link
               as={GatsbyLink}
               to={`/blog/${post.slug}`}

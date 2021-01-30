@@ -40,7 +40,7 @@ const HeroWide = () => {
   } = data.contentfulForsidetekst;
 
   const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 400, height: 400 });
+  const [dimensions, setDimensions] = useState({ width: 400, height: 300 });
 
   // Get the height of the header and intro text
   // This is used for setting the correct height of the transparent background behind the text
@@ -89,7 +89,7 @@ const HeroWide = () => {
         w={["90vw", "90vw", "80vw", "60vw"]}
         h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
-        top={[120, 200, 200, 200]}
+        top={[200, 200, 200, 200]}
         left={[4, 4, 16, 16]}
       >
         <Heading
