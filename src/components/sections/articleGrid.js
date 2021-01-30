@@ -44,9 +44,10 @@ const ArticleGrid = () => {
         lg: "repeat(2, 1fr)",
         xl: "repeat(2, 1fr)",
       }}
-      py={8}
+      pt={0}
       gap={10}
       mb={16}
+      mt={0}
       maxWidth="95vw"
       minHeight="45vh"
     >
@@ -55,7 +56,7 @@ const ArticleGrid = () => {
           <Link as={GatsbyLink} to={`/blog/${post.slug}`}>
             <motion.div
               whileHover={{
-                scale: 1.03,
+                scale: 1.02,
                 transition: { duration: 0.1 },
               }}
               whileTap={{ scale: 1.0 }}
@@ -63,8 +64,6 @@ const ArticleGrid = () => {
               <Image
                 as={GatsbyImage}
                 fluid={post.featuredImage.fluid}
-                rounded="0.5rem"
-                shadow="lg"
                 height={{
                   sm: "40vh",
                   md: "40vh",
