@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
