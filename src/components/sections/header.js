@@ -62,7 +62,7 @@ const Header = (props) => {
       px={10}
       {...props}
       bgColor="#002E55"
-      opacity="90%"
+      opacity={showMenuItems ? "100%" : "90%"}
       position="fixed"
       zIndex="2"
       shadow="md"
@@ -73,7 +73,7 @@ const Header = (props) => {
         as={GatsbyLink}
         to="/"
         _hover={{ textDecor: "none" }}
-        fontSize="2xl"
+        fontSize={["sm", "2xl", "2xl", "2xl"]}
       >
         <IoFlowerOutline style={{ color: "#A2B25C", marginTop: "-5px" }} />{" "}
         Boligsameiet Gartnerihagen
@@ -87,7 +87,10 @@ const Header = (props) => {
         )}
       </Box>
       <Box
-        display={{ base: showMenuItems ? "block" : "none", md: "block" }}
+        display={{
+          base: showMenuItems ? "block" : "none",
+          md: "block",
+        }}
         flexBasis={{ base: "100%", md: "auto" }}
       >
         <Flex

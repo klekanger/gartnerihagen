@@ -48,6 +48,7 @@ const HeroWide = () => {
     if (targetRef.current) {
       setDimensions({
         height: targetRef.current.offsetHeight,
+        width: targetRef.current.offsetWidth,
       });
     }
   };
@@ -55,6 +56,7 @@ const HeroWide = () => {
   useEffect(() => {
     handleResize();
     // Using debounce utility function for better performance
+    // Exammple: 2nd parameter = 100. Will run the function every 100 ms.
     window.addEventListener("resize", debounce(handleResize, 100));
     return () => {
       window.removeEventListener("resize", debounce(handleResize, 100));
@@ -62,7 +64,7 @@ const HeroWide = () => {
   }, []);
 
   return (
-    <Box w="95vw" mx="0" my={10} p="0" shadow="lg">
+    <Box w="95vw" mx="0" mt={[0, 8, 8, 8]} mb={12} shadow="lg">
       <Box as="div" overflow="hidden">
         <MotionBox
           initial={{ scale: 1.0 }}
@@ -73,35 +75,40 @@ const HeroWide = () => {
             repeatType: "reverse",
           }}
         >
-          <Image as={GatsbyImage} fluid={pageImage.fluid} alt={imageDesc} />
+          <Image
+            as={GatsbyImage}
+            fluid={pageImage.fluid}
+            alt={imageDesc}
+            h="50vh"
+          />
         </MotionBox>
       </Box>
 
       <Box
         bgColor="rgba(0,46,85,0.7)"
-        w="60vw"
+        w={["90vw", "80vw", "80vw", "60vw"]}
         h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
-        top={200}
-        left={16}
-        rounded="md"
+        top={[120, 120, 100, 200]}
+        left={[4, 10, 16, 16]}
       >
         <Heading
           as="h1"
-          size="3xl"
           fontWeight="semibold"
+          fontSize={["4xl", "4xl", "6xl", "6xl"]}
           color="gray.50"
           position="absolute"
           textAlign={["center", "center", "left", "left"]}
-          padding={8}
+          padding={[2, 4, 8, 8]}
           ref={targetRef} // Ref for all the text + button in the intro text
         >
           {pageTitle}
           <Text
-            fontSize={{ base: "2xl", sm: "md", md: "lg" }}
+            fontSize={{ base: "xs", sm: "sm", md: "lg" }}
             fontWeight="normal"
             lineHeight="normal"
-            my={4}
+            mt={3}
+            mb={5}
           >
             {excerpt}
           </Text>
@@ -109,13 +116,13 @@ const HeroWide = () => {
             <Button
               variant="standard"
               borderRadius="8px"
-              mt={4}
-              py={4}
-              px={4}
+              mb={4}
+              px={[2, 5, 5, 5]}
+              py={[2, 7, 7, 7]}
+              fontSize={[12, 20, 20, 20]}
               lineHeight="1"
-              size="xl"
               shadow="lg"
-              fontSize="xl"
+              _hover={{ bgColor: "gray.100" }}
             >
               Les mer
             </Button>
