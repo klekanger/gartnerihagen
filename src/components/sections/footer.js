@@ -13,10 +13,12 @@ export default function Footer() {
         justify="space-between"
         wrap="wrap"
         w="100%"
-        mb={4}
-        py={3}
+        mb={0}
+        py={10}
         px={10}
-        color="gray.700"
+        bgColor="#002E55"
+        color="gray.300"
+        opacity="90%"
         fontSize="sm"
         direction={["column", "column", "row", "row"]}
       >
