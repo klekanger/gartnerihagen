@@ -85,7 +85,8 @@ const HeroWide = () => {
       </Box>
 
       <Box
-        bgColor="rgba(0,46,85,0.7)"
+        /* bgColor="rgba(0,46,85,0.7)" */
+        bgColor="brand1Transparent"
         w={["90vw", "90vw", "80vw", "60vw"]}
         h={dimensions.height} // Set height of transparent background drop to height of text/heading container
         position="absolute"
@@ -96,7 +97,8 @@ const HeroWide = () => {
           as="h1"
           fontWeight="semibold"
           fontSize={["4xl", "4xl", "6xl", "6xl"]}
-          color="gray.50"
+          /* color="gray.50" */
+          color="mainHeader"
           position="absolute"
           textAlign={["center", "left", "left", "left"]}
           padding={[2, 4, 8, 8]}

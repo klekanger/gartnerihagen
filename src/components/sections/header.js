@@ -13,7 +13,7 @@ const MenuItems = (props) => {
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
-      fontSize="md"
+      fontSize={["lg", "lg", "lg", "2xl"]}
       display="block"
       {...rest}
     >
@@ -61,7 +61,7 @@ const Header = (props) => {
       py={3}
       px={[4, 4, 10, 10]}
       {...props}
-      bgColor="#002E55"
+      bgColor="brand1"
       opacity={showMenuItems ? "100%" : "90%"}
       position="fixed"
       zIndex="2"
@@ -73,7 +73,7 @@ const Header = (props) => {
         as={GatsbyLink}
         to="/"
         _hover={{ textDecor: "none" }}
-        fontSize={["xl", "2xl", "2xl", "2xl"]}
+        fontSize={["xl", "xl", "xl", "2xl"]}
       >
         <Tulip height="1.8rem" width="1.8rem" /> Boligsameiet Gartnerihagen
       </Link>
