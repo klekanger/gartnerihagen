@@ -5,6 +5,9 @@ import { extendTheme } from "@chakra-ui/react";
 // Global style overrides
 import styles from "./styles";
 
+// Custom colors
+import colors from "./colors";
+
 // Foundational style overrides
 
 // Component style overrides
@@ -16,15 +19,15 @@ const overrides = {
     useSystemColorMode: false,
     initialColorMode: "light",
   },
-
-  /*   fonts: {
-    heading: "Open Sans",
-    body: "Raleway",
-    mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
+  breakpoints: {
+    sm: "30em",
+    md: "52em",
+    lg: "62em",
+    xl: "80em",
+    "2xl": "96em",
   },
- */
   styles,
-
+  colors,
   components: {
     Button,
     Heading,
