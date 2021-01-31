@@ -20,32 +20,32 @@ const renderRichTextOptions = {
       </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
-      <Heading as="h1" textAlign="left" size="4xl">
+      <Heading as="h1" textAlign="left" size="4xl" pt={3}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_2]: (node, children) => (
-      <Heading as="h2" textAlign="left" size="3xl">
+      <Heading as="h2" textAlign="left" size="3xl" pt={3}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_3]: (node, children) => (
-      <Heading as="h3" textAlign="left" size="2xl">
+      <Heading as="h3" textAlign="left" size="2xl" pt={3}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_4]: (node, children) => (
-      <Heading as="h4" textAlign="left" size="xl">
+      <Heading as="h4" textAlign="left" size="xl" pt={3}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_5]: (node, children) => (
-      <Heading as="h5" textAlign="left" size="lg">
+      <Heading as="h5" textAlign="left" size="lg" pt={3}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_6]: (node, children) => (
-      <Heading as="h6" textAlign="left" size="md">
+      <Heading as="h6" textAlign="left" size="md" pt={3}>
         {children}
       </Heading>
     ),
@@ -69,13 +69,19 @@ const renderRichTextOptions = {
             as={GatsbyImage}
             fluid={fluid}
             size="100%"
-            rounded="0.5rem"
             shadow="lg"
             alt={description}
-            ml={2}
           />
-          <Text as="p" textAlign="left" ml={2} p={2} fontSize="sm">
-            {title}: {description}
+          <Text
+            as="p"
+            textAlign="left"
+            ml={2}
+            p={2}
+            fontSize={["xs", "sm", "sm", "md"]}
+          >
+            <em>
+              {title}: {description}
+            </em>
           </Text>
         </Box>
       );

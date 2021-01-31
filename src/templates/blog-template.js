@@ -80,10 +80,8 @@ const BlogPostTemplate = ({ data, errors }) => {
     <Image
       as={GatsbyImage}
       fluid={featuredImage.fluid}
-      size="100%"
       shadow="lg"
       alt={featuredImage.description}
-      ml={2}
     />
   ) : null;
 
@@ -94,16 +92,26 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={featuredImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box width="90vw" m={10}>
-        <Heading as="h1" m={5} size="4xl">
+      <Box w="95vw" ml="0" pr={["0", "0", "5vw", "30vw"]}>
+        <Heading
+          as="h1"
+          fontSize={["4xl", "4xl", "6xl", "6xl"]}
+          textAlign={["center", "left", "left", "left"]}
+          pb={2}
+        >
           {title}
         </Heading>
         {topImage}
-        <Text as="div" my={10} mx={10}>
+        <Text as="div" my={[5, 10, 10, 10]}>
           {renderRichText(bodyText, renderRichTextOptions)}
         </Text>
 
-        <Text fontSize="sm" fontStyle="italic">
+        <Text
+          fontSize={["xs", "sm", "sm", "sm"]}
+          fontStyle="italic"
+          pb={4}
+          textAlign="left"
+        >
           {publishDate}
         </Text>
       </Box>
