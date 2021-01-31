@@ -10,7 +10,7 @@ import { Box, Heading, Text, Image } from "@chakra-ui/react";
 
 import SEO from "../components/seo";
 import Layout from "../components/layouts/layout";
-import renderRichTextOptions from "../utils/renderRichTextOptions";
+import renderRichTextOptions from "../theme/renderRichTextOptions";
 
 export const query = graphql`
   query BlogPostQuery($id: String!) {
@@ -81,7 +81,6 @@ const BlogPostTemplate = ({ data, errors }) => {
       as={GatsbyImage}
       fluid={featuredImage.fluid}
       size="100%"
-      rounded="0.5rem"
       shadow="lg"
       alt={featuredImage.description}
       ml={2}

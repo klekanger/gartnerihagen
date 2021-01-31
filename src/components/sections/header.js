@@ -2,10 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Box, Flex, Text, Button, Link, Container } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
-import { IoFlowerOutline } from "react-icons/io5";
 import Tulip from "../../images/tulip.svg";
 
-import { IdentityContext } from "../../identity-context";
+import { IdentityContext } from "../../context/identity-context";
 
 // Render one menu item
 const MenuItems = (props) => {

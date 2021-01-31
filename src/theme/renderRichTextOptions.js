@@ -11,7 +11,11 @@ const renderRichTextOptions = {
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => (
-      <Text textAlign="left" my={4}>
+      <Text
+        textAlign="left"
+        my={4}
+        fontSize={{ base: "xs", sm: "sm", md: "lg" }}
+      >
         {children}
       </Text>
     ),

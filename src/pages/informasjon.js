@@ -2,7 +2,7 @@
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
 
 import React, { useContext } from "react";
-import { IdentityContext } from "../identity-context";
+import { IdentityContext } from "../context/identity-context";
 
 import { Router } from "@reach/router";
 import PrivateRoute from "../components/private-components/privateRoute";
