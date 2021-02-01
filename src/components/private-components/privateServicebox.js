@@ -42,6 +42,7 @@ export default function PrivateServiceBox() {
         direction={["column", "column", "row", "row"]}
         justify="space-between"
         pb={0}
+        my={["2", "2", "4", "4"]}
       >
         <MyBox>
           <Text textAlign="center">Vedtekter</Text>
@@ -57,7 +58,7 @@ export default function PrivateServiceBox() {
       <Stack
         direction={["column", "column", "row", "row"]}
         justify="space-between"
-        pt={2}
+        pt={0}
       >
         <MyBox>
           <Text textAlign="center">Oversikt over beboere</Text>
