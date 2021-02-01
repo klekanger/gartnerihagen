@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, Text, Link, Box } from "@chakra-ui/react";
+import { Link as GatsbyLink } from "gatsby";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,7 +17,7 @@ export default function Footer() {
         mb={0}
         py={10}
         px={10}
-        bgColor="#002E55"
+        bgColor="dark"
         color="gray.300"
         opacity="90%"
         fontSize="sm"
@@ -26,11 +27,18 @@ export default function Footer() {
           <Text mb={[4, 4, 0, 0]}>
             &copy; {currentYear} Boligsameiet Gartnerihagen{" "}
           </Text>
+
           <Text
             mb={[4, 4, 0, 0]}
             textAlign={["center", "center", "left", "left"]}
           >
-            Personvernerklæring
+            <Link
+              as={GatsbyLink}
+              to="/cookies-og-personvern-gdpr"
+              _hover={{ textDecor: "none" }}
+            >
+              Personvernerklæring
+            </Link>
           </Text>
         </Box>
         <Text mb={[4, 4, 0, 0]}>
