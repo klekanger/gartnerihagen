@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { MotionBox } from "../../utils/MotionBox";
-import debounce from "../../utils/debounce";
+
 import { Box, Button, Image, Heading, Text } from "@chakra-ui/react";
 
 const HeroWide = () => {
@@ -39,30 +39,6 @@ const HeroWide = () => {
     pageImage: { imageDesc },
   } = data.contentfulForsidetekst;
 
-  const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 400, height: 300 });
-
-  // Get the height of the header and intro text
-  // This is used for setting the correct height of the transparent background behind the text
-  const handleResize = () => {
-    if (targetRef.current) {
-      setDimensions({
-        height: targetRef.current.offsetHeight,
-        width: targetRef.current.offsetWidth,
-      });
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-    // Using debounce utility function for better performance
-    // Exammple: 2nd parameter = 100. Will run the function every 100 ms.
-    window.addEventListener("resize", debounce(handleResize, 100));
-    return () => {
-      window.removeEventListener("resize", debounce(handleResize, 100));
-    };
-  }, []);
-
   return (
     <Box w="95vw" mx="0" mt={[0, 8, 8, 8]} mb={12} shadow="lg">
       <Box as="div" overflow="hidden">
@@ -85,24 +61,22 @@ const HeroWide = () => {
       </Box>
 
       <Box
-        /* bgColor="rgba(0,46,85,0.7)" */
-        bgColor="brand1Transparent"
-        w={["90vw", "90vw", "80vw", "60vw"]}
-        h={dimensions.height} // Set height of transparent background drop to height of text/heading container
+        bgColor="darkTransparent"
+        w={["90vw", "90vw", "80vw", "60vw"]} // Set height of transparent background drop to height of text/heading container
         position="absolute"
         top={[180, 180, 200, 200]}
         left={[4, 4, 16, 16]}
+        overflow="auto"
       >
         <Heading
           as="h1"
           fontWeight="semibold"
           fontSize={["4xl", "4xl", "6xl", "6xl"]}
           /* color="gray.50" */
-          color="mainHeader"
-          position="absolute"
+          color="light"
+          /* position="absolute" */
           textAlign={["center", "left", "left", "left"]}
           padding={[2, 4, 8, 8]}
-          ref={targetRef} // Ref for all the text + button in the intro text
         >
           {pageTitle}
           <Text
@@ -124,7 +98,9 @@ const HeroWide = () => {
               fontSize={[12, 20, 20, 20]}
               lineHeight="1"
               shadow="lg"
-              _hover={{ bgColor: "gray.100" }}
+              bgColor="primaryButton"
+              color="dark"
+              _hover={{ bgColor: "secondaryButton" }}
             >
               Les mer
             </Button>
