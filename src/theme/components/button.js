@@ -13,8 +13,8 @@ const Button = {
       boxShadow: "0 0 2px 2px #efdfde",
     },
     "menu-button": {
-      bg: "blue.700",
-      color: "gray.300",
+      bg: "primaryButton",
+      color: "dark",
     },
     solid: (props) => ({
       bg: props.colorMode === "dark" ? "yellow.300" : "gray.500",

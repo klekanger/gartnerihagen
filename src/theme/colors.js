@@ -1,11 +1,15 @@
 // Custom color palette
-// #79AC69 (light green)
-// #005600 (dark green)
-// #F6EDD9 (beige)
-// #0056B2 (blue)
+// Global CSS color settings for background and text are defined in styles.js
 
 export default {
-  mainHeader: "#eaebed",
-  brand1: "#13254C",
-  brand1Transparent: "rgba(19, 37, 76,0.7)",
+  dark: "#13254C",
+  darkTransparent: "rgba(19, 37, 76,0.7)",
+  primary: "#628CF6",
+  secondary: "#F1F1E6",
+  light: "#F6F8FF",
+  accent: "#007D57",
+  primaryButton: "#F1F1E6",
+  secondaryButton: "#D0D0B8",
+  tertiaryButton: "#5A6CA7",
+  danger: "red.500",
 };
