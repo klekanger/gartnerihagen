@@ -61,7 +61,7 @@ const Header = (props) => {
       py={3}
       px={[4, 4, 10, 10]}
       {...props}
-      bgColor="brand1"
+      bgColor="dark"
       opacity={showMenuItems ? "100%" : "90%"}
       position="fixed"
       zIndex="2"
@@ -75,7 +75,10 @@ const Header = (props) => {
         _hover={{ textDecor: "none" }}
         fontSize={["xl", "xl", "xl", "2xl"]}
       >
-        <Tulip height="1.8rem" width="1.8rem" /> Boligsameiet Gartnerihagen
+        <Tulip height="1.8rem" width="1.8rem" />
+        <Text as="span" ml={3}>
+          Boligsameiet Gartnerihagen
+        </Text>
       </Link>
 
       <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
@@ -114,6 +117,7 @@ const Header = (props) => {
             ml={{ base: "0px", md: "20px", lg: "30px" }}
             mt={{ base: "20px", sm: "0px" }}
             onClick={() => netlifyIdentity.open()}
+            _hover={{ bgColor: "secondaryButton" }}
           >
             {loginButtonText}
           </Button>
