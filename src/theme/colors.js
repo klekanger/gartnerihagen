@@ -11,5 +11,5 @@ export default {
   primaryButton: "#F1F1E6",
   secondaryButton: "#D0D0B8",
   tertiaryButton: "#5A6CA7",
-  danger: "red.500",
+  danger: "#ff3333",
 };

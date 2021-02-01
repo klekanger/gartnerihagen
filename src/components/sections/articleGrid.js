@@ -3,7 +3,6 @@ import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
 import GatsbyImage from "gatsby-image";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, Image, Heading, Text, Grid, Link } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
@@ -54,30 +53,26 @@ const ArticleGrid = () => {
       {postNodes.map((post) => (
         <Box key={post.contentful_id}>
           <Link as={GatsbyLink} to={`/blog/${post.slug}`}>
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.1 },
+            <Image
+              as={GatsbyImage}
+              fluid={post.featuredImage.fluid}
+              height={{
+                sm: "40vh",
+                md: "40vh",
+                lg: "40vh",
+                xl: "50vh",
               }}
-              whileTap={{ scale: 1.0 }}
-            >
-              <Image
-                as={GatsbyImage}
-                fluid={post.featuredImage.fluid}
-                height={{
-                  sm: "40vh",
-                  md: "40vh",
-                  lg: "40vh",
-                  xl: "50vh",
-                }}
-                mb={5}
-                alt={post.featuredImage.description}
-                _hover={{
-                  animate: "x: 100",
-                }}
-                shadow="lg"
-              />
-            </motion.div>
+              mb={5}
+              alt={post.featuredImage.description}
+              _hover={{
+                transform: "scale(1.01)",
+                transitionDuration: "0.1s",
+              }}
+              _active={{
+                transform: "scale(1.00)",
+              }}
+              shadow="lg"
+            />
           </Link>
           <Heading
             as="h1"

@@ -35,19 +35,18 @@ const PrivateInfoList = () => {
   const postNodes = data.posts.nodes || [];
 
   return (
-    <Box my={16} textAlign="left" py={8} mb={8} width="95vw">
+    <Box textAlign="left" pt={4} mb={8}>
       <Heading as="h1">Her kommer privat informasjon fra styret.</Heading>
       <Text as="p" mb={30}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at
         massa hendrerit, ultrices justo quis, vestibulum erat.
       </Text>
-      <Box mt={20}>
+      <Box>
         {postNodes.map((post) => (
           <Box>
             <Image
               as={GatsbyImage}
               fluid={post.featuredImage.fluid}
-              rounded="0.5rem"
               shadow="lg"
               mb={5}
               alt={post.featuredImage.description}
