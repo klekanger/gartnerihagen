@@ -2,9 +2,8 @@
 // Providing the user with useful links to documents etc.
 
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import { Box, Stack, Text } from "@chakra-ui/react";
-
-import { motion } from "framer-motion";
 
 const MyBox = ({ children }) => {
   return (
@@ -36,6 +35,52 @@ const MyBox = ({ children }) => {
 };
 
 export default function PrivateServiceBox() {
+  const data = useStaticQuery(graphql`
+    query MyQuery {
+      menuItems: contentfulServiceMenu(serviceMenuTitle: { eq: "infomeny" }) {
+        id
+        menu1
+        menu1File {
+          file {
+            url
+          }
+        }
+        menu2
+        menu2File {
+          file {
+            url
+          }
+        }
+        menu3
+        menu3File {
+          file {
+            url
+          }
+        }
+        menu4
+        menu4File {
+          file {
+            url
+          }
+        }
+        menu5
+        menu5Files {
+          file {
+            url
+          }
+        }
+        menu6
+        menu6Files {
+          file {
+            url
+          }
+        }
+      }
+    }
+  `);
+
+  const { menuItems } = data;
+
   return (
     <Box my={0} textAlign="left" py={0}>
       <Stack
@@ -45,14 +90,14 @@ export default function PrivateServiceBox() {
         my={["2", "2", "4", "4"]}
       >
         <MyBox>
-          <Text textAlign="center">Vedtekter</Text>
+          <Text textAlign="center">{menuItems.menu1}</Text>
         </MyBox>
 
         <MyBox>
-          <Text textAlign="center">Retningslinjer</Text>
+          <Text textAlign="center">{menuItems.menu2}</Text>
         </MyBox>
         <MyBox>
-          <Text textAlign="center">Klippeliste</Text>
+          <Text textAlign="center">{menuItems.menu3}</Text>
         </MyBox>
       </Stack>
       <Stack
@@ -61,13 +106,13 @@ export default function PrivateServiceBox() {
         pt={0}
       >
         <MyBox>
-          <Text textAlign="center">Oversikt over beboere</Text>
+          <Text textAlign="center">{menuItems.menu4}</Text>
         </MyBox>
         <MyBox>
-          <Text textAlign="center">Referater fra årsmøter</Text>
+          <Text textAlign="center">{menuItems.menu5}</Text>
         </MyBox>
         <MyBox>
-          <Text textAlign="center">Diverse dokumenter</Text>
+          <Text textAlign="center">{menuItems.menu6}</Text>
         </MyBox>
       </Stack>
     </Box>
