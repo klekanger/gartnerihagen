@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link as GatsbyLink } from "gatsby";
-import { Box, Flex, Text, Button, Link, Container } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineUp } from "react-icons/ai";
 import Tulip from "../../images/tulip.svg";
 
