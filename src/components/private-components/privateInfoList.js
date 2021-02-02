@@ -35,7 +35,7 @@ const PrivateInfoList = () => {
   const postNodes = data.posts.nodes || [];
 
   return (
-    <Box textAlign="left" pt={4} mb={8}>
+    <Box textAlign="left" pt={4} mb={8} mt={6}>
       <Heading as="h1">Her kommer privat informasjon fra styret.</Heading>
       <Text as="p" mb={30}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at
@@ -43,7 +43,7 @@ const PrivateInfoList = () => {
       </Text>
       <Box>
         {postNodes.map((post) => (
-          <Box>
+          <Box key={post.contentful_id}>
             <Image
               as={GatsbyImage}
               fluid={post.featuredImage.fluid}
