@@ -15,7 +15,7 @@ export default function PrivateMain() {
           as="h1"
           size="2xl"
           pt={8}
-          pb={2}
+          pb={8}
           textAlign="left"
           maxWidth="95vw"
         >
