@@ -24,11 +24,12 @@ export default function Footer() {
         direction={["column", "column", "row", "row"]}
       >
         <Box>
-          <Text mb={[4, 4, 0, 0]}>
+          <Text variant="light" mb={[4, 4, 0, 0]}>
             &copy; {currentYear} Boligsameiet Gartnerihagen{" "}
           </Text>
 
           <Text
+            variant="light"
             mb={[4, 4, 0, 0]}
             textAlign={["center", "center", "left", "left"]}
           >
@@ -41,22 +42,22 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
-        <Text mb={[4, 4, 0, 0]}>
+        <Text variant="light" mb={[4, 4, 0, 0]}>
           Epost:{" "}
           <Link
             href="mailto:gartnerihagen@gmail.com"
-            _hover={{ textDecor: "none", color: "blue.500" }}
+            _hover={{ textDecor: "none", color: "light" }}
           >
             gartnerihagen@gmail.com
           </Link>{" "}
           <br />
           Telefon: +47 - 4021 0140{" "}
         </Text>
-        <Text mb={[4, 4, 0, 0]}>
+        <Text variant="light" mb={[4, 4, 0, 0]}>
           Webdesign:{" "}
           <Link
             href="https://www.lekanger.no"
-            _hover={{ textDecor: "none", color: "blue.500" }}
+            _hover={{ textDecor: "none", color: "light" }}
           >
             Kurt Lekanger
           </Link>

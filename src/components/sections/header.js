@@ -11,6 +11,7 @@ const MenuItems = (props) => {
   const { children, isLast, to = "/", ...rest } = props;
   return (
     <Text
+      variant="light"
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       fontSize={["lg", "lg", "lg", "2xl"]}
@@ -66,7 +67,6 @@ const Header = (props) => {
       position="fixed"
       zIndex="2"
       shadow="md"
-      color="gray.300"
       transition="margin-top 0.5s"
     >
       <Link
@@ -76,7 +76,7 @@ const Header = (props) => {
         fontSize={["xl", "xl", "xl", "2xl"]}
       >
         <Tulip height="1.8rem" width="1.8rem" />
-        <Text as="span" ml={3}>
+        <Text variant="light" as="span" ml={3}>
           Boligsameiet Gartnerihagen
         </Text>
       </Link>

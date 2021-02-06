@@ -101,12 +101,12 @@ const ArticleGrid = () => {
             textAlign="left"
             py={3}
             fontSize={{ base: "xs", sm: "sm", md: "lg" }}
-            _hover={{ color: "blue.700" }}
+            _hover={{ color: "primary" }}
           >
             <Link
               as={GatsbyLink}
               to={`/blog/${post.slug}`}
-              color="gray.700"
+              color="black"
               _hover={{ textDecor: "none" }}
             >
               Les mer <ChevronRightIcon />

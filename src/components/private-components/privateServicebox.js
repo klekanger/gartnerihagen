@@ -18,13 +18,12 @@ const MenuButton = (props) => {
       w={["95vw", "95vw", "30%", "30%"]}
       h={["4rem", "6rem"]}
       p={3}
-      bg="accent"
+      bg="tertiaryButton"
       rounded="md"
       shadow="lg"
       d="flex"
       alignItems="center"
       justifyContent="center"
-      textColor="gray.200"
       fontSize={["md", "2xl", "2xl", "2xl"]}
       fontWeight="600"
       href={props.linkTo || null}
@@ -94,7 +93,7 @@ export default function PrivateServiceBox() {
   const { menuItems } = data;
 
   return (
-    <Box my={0} textAlign="left" py={0}>
+    <Box my={8} textAlign="left" pb={8}>
       <Stack
         direction={["column", "column", "row", "row"]}
         justify="space-between"
@@ -102,14 +101,20 @@ export default function PrivateServiceBox() {
         my={["2", "2", "4", "4"]}
       >
         <MenuButton linkTo={menuItems.menu1File.file.url}>
-          <Text textAlign="center">{menuItems.menu1}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu1}
+          </Text>
         </MenuButton>
 
         <MenuButton linkTo={menuItems.menu2File.file.url}>
-          <Text textAlign="center">{menuItems.menu2}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu2}
+          </Text>
         </MenuButton>
         <MenuButton linkTo={menuItems.menu3File.file.url}>
-          <Text textAlign="center">{menuItems.menu3}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu3}
+          </Text>
         </MenuButton>
       </Stack>
       <Stack
@@ -118,13 +123,19 @@ export default function PrivateServiceBox() {
         pt={0}
       >
         <MenuButton linkTo={menuItems.menu4File.file.url}>
-          <Text textAlign="center">{menuItems.menu4}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu4}
+          </Text>
         </MenuButton>
         <MenuButton>
-          <Text textAlign="center">{menuItems.menu5}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu5}
+          </Text>
         </MenuButton>
         <MenuButton>
-          <Text textAlign="center">{menuItems.menu6}</Text>
+          <Text variant="light" textAlign="center">
+            {menuItems.menu6}
+          </Text>
         </MenuButton>
       </Stack>
     </Box>

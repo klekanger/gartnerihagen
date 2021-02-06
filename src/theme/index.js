@@ -13,6 +13,7 @@ import colors from "./colors";
 // Component style overrides
 import Button from "./components/button";
 import Heading from "./components/heading";
+import Text from "./components/text";
 
 const overrides = {
   config: {
@@ -31,6 +32,7 @@ const overrides = {
   components: {
     Button,
     Heading,
+    Text,
   },
 };
 
