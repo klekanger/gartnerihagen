@@ -72,9 +72,7 @@ const HeroWide = () => {
           as="h1"
           fontWeight="semibold"
           fontSize={["4xl", "4xl", "6xl", "6xl"]}
-          /* color="gray.50" */
-          color="light"
-          /* position="absolute" */
+          color="white"
           textAlign={["center", "left", "left", "left"]}
           padding={[2, 4, 8, 8]}
         >

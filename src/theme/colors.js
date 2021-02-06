@@ -3,7 +3,7 @@
 
 export default {
   black: "gray.700",
-  white: "gray.50",
+  white: "#F6F7FD",
   dark: "#13254C",
   darkTransparent: "rgba(19, 37, 76,0.7)",
   primary: "#628CF6",

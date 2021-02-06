@@ -4,7 +4,7 @@ const Text = {
   },
   variants: {
     light: {
-      color: "gray.50",
+      color: "#F6F7FD",
     },
   },
 };

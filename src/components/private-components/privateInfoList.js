@@ -63,12 +63,7 @@ const PrivateInfoList = () => {
             key={post.contentful_id}
             direction={["column-reverse", "column-reverse", "row", "row"]}
           >
-            <Box
-              ml={0}
-              mb={[4, 4, 0, 0]}
-              pr={8}
-              w={["100%", "100%", "50%", "50%"]}
-            >
+            <Box ml={0} mb={[4, 4, 0, 0]} w={["100%", "100%", "50%", "50%"]}>
               <Heading as="h1" size="xl" mb={4} my={[]} textAlign="left">
                 {post.title}
               </Heading>
