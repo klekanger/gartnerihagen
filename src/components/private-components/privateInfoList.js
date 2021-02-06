@@ -46,14 +46,16 @@ const PrivateInfoList = () => {
   const postNodes = data.posts.nodes || [];
 
   return (
-    <Box textAlign="left" pt={4} mb={8} mt={6}>
-      <Heading as="h1" size="2xl">
-        Informasjon fra styret
-      </Heading>
-      <Text as="p" mb={["3rem", "3rem", "6rem", "6rem"]}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at
-        massa hendrerit, ultrices justo quis, vestibulum erat.
-      </Text>
+    <Box textAlign="left" mb={8}>
+      <Box bg="light2" px={4} pt={4} pb={8} mb={[8, 8, 16, 16]}>
+        <Heading as="h1" size="2xl">
+          Informasjon fra styret
+        </Heading>
+        <Text as="p">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          at massa hendrerit, ultrices justo quis, vestibulum erat.
+        </Text>
+      </Box>
 
       <Box>
         {postNodes.map((post) => (
@@ -61,7 +63,12 @@ const PrivateInfoList = () => {
             key={post.contentful_id}
             direction={["column-reverse", "column-reverse", "row", "row"]}
           >
-            <Box ml={0} mb={[4, 4, 0, 0]} pr={8} w="90%">
+            <Box
+              ml={0}
+              mb={[4, 4, 0, 0]}
+              pr={8}
+              w={["100%", "100%", "50%", "50%"]}
+            >
               <Heading as="h1" size="xl" mb={4} my={[]} textAlign="left">
                 {post.title}
               </Heading>
@@ -90,8 +97,9 @@ const PrivateInfoList = () => {
               fluid={post.featuredImage.fluid}
               shadow="lg"
               mb={[2, 2, 8, 8]}
-              w="100%"
-              maxH={["50vh", "50vh", "40vh", "40vh"]}
+              ml={[0, 0, 39, 39]}
+              w={["100%", "100%", "50%", "50%"]}
+              maxH="50vh"
               alt={post.featuredImage.description}
             />
           </Flex>

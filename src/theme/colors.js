@@ -9,6 +9,7 @@ export default {
   primary: "#628CF6",
   secondary: "#457bac",
   light: "#cfe9ff",
+  light2: "#d9edff",
   accent: "#007D57",
   primaryButton: "#cfe9ff",
   secondaryButton: "#ffffff",

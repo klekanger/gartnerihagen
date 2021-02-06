@@ -14,8 +14,8 @@ export default function PrivateMain() {
         <Heading
           as="h1"
           size="2xl"
-          pt={8}
-          pb={8}
+          pt={[0, 0, 8, 8]}
+          pb={[0, 0, 4, 4]}
           textAlign="left"
           maxWidth="95vw"
         >

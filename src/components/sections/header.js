@@ -81,7 +81,11 @@ const Header = (props) => {
         </Text>
       </Link>
 
-      <Box display={{ base: "block", md: "none" }} onClick={toggleMenu}>
+      <Box
+        display={{ base: "block", md: "none" }}
+        color="light"
+        onClick={toggleMenu}
+      >
         {showMenuItems ? (
           <AiOutlineUp className="menuClose" size="2em" />
         ) : (

@@ -93,7 +93,7 @@ export default function PrivateServiceBox() {
   const { menuItems } = data;
 
   return (
-    <Box my={8} textAlign="left" pb={8}>
+    <Box my={[0, 0, 8, 8]} textAlign="left" pb={8}>
       <Stack
         direction={["column", "column", "row", "row"]}
         justify="space-between"
