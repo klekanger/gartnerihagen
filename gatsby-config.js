@@ -22,7 +22,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/informasjon/*`] },
+      options: { prefixes: [`/informasjon/*`, `/min-side/*`] },
     },
     {
       resolve: "@chakra-ui/gatsby-plugin",
