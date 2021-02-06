@@ -56,12 +56,6 @@ const ArticleGrid = () => {
             <Image
               as={GatsbyImage}
               fluid={post.featuredImage.fluid}
-              height={{
-                sm: "40vh",
-                md: "40vh",
-                lg: "40vh",
-                xl: "50vh",
-              }}
               mb={5}
               alt={post.featuredImage.description}
               _hover={{
