@@ -6,6 +6,9 @@ const Text = {
     light: {
       color: "#F6F7FD",
     },
+    dark: {
+      color: "#090A24",
+    },
   },
 };
 

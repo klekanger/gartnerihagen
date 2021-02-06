@@ -101,18 +101,18 @@ export default function PrivateServiceBox() {
         my={["2", "2", "4", "4"]}
       >
         <MenuButton linkTo={menuItems.menu1File.file.url}>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu1}
           </Text>
         </MenuButton>
 
         <MenuButton linkTo={menuItems.menu2File.file.url}>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu2}
           </Text>
         </MenuButton>
         <MenuButton linkTo={menuItems.menu3File.file.url}>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu3}
           </Text>
         </MenuButton>
@@ -123,17 +123,17 @@ export default function PrivateServiceBox() {
         pt={0}
       >
         <MenuButton linkTo={menuItems.menu4File.file.url}>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu4}
           </Text>
         </MenuButton>
         <MenuButton>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu5}
           </Text>
         </MenuButton>
         <MenuButton>
-          <Text variant="light" textAlign="center">
+          <Text variant="dark" textAlign="center">
             {menuItems.menu6}
           </Text>
         </MenuButton>

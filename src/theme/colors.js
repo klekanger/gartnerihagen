@@ -2,7 +2,7 @@
 // Global CSS color settings for background and text are defined in styles.js
 
 export default {
-  black: "gray.700",
+  black: "#090A24",
   white: "#F6F7FD",
   dark: "#13254C",
   darkTransparent: "rgba(19, 37, 76,0.7)",
