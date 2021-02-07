@@ -84,7 +84,7 @@ SEO.propTypes = {
 };
 
 SEO.defaultProps = {
-  title: null,
-  description: null,
+  title: "Boligsameiet Gartnerihagen",
+  description: "Askims hyggeligste nabolag",
   image: null,
 };

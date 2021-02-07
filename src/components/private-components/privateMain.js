@@ -4,10 +4,12 @@ import { Box, Heading } from "@chakra-ui/react";
 import PrivateServiceBox from "./privateServicebox";
 import ArticleGrid from "../../components/sections/articleGrid";
 import PrivateInfoList from "./privateInfoList";
+import SEO from "../seo";
 
 export default function PrivateMain() {
   return (
     <Layout>
+      <SEO />
       <Box w="95vw" ml="0" pr={["0", "0", "5vw", "30vw"]}>
         <PrivateServiceBox />
         <PrivateInfoList />

@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: "Boligsameiet Gartnerihagen",
     description: "Askims hyggeligste nabolag.",
-    siteUrl: "https://www.gartnerihagen-askim.no/",
+    siteUrl: "https://www.gartnerihagen-askim.no",
     siteLanguage: "nb-no",
     banner: "/images/gartnerihagen_solnedgang.jpg",
   },
