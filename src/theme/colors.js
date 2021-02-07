@@ -13,6 +13,6 @@ export default {
   accent: '#007D57',
   primaryButton: '#cfe9ff',
   secondaryButton: '#ffffff',
-  tertiaryButton: '#91a8b3',
+  tertiaryButton: '#BECBD7',
   danger: '#ff3333',
 };

@@ -4,9 +4,10 @@ const Button = {
     danger: {
       bg: 'red.600',
       boxShadow: '0 0 2px 2px #efdfde',
+      textColor: '#eee',
     },
     standard: {
-      bg: '#98A7B2',
+      bg: '#BECBD7',
       color: '#090A24',
       shadow: 'md',
     },
