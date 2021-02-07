@@ -3,17 +3,7 @@ import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import GatsbyImage from 'gatsby-image';
 
-import {
-  Stack,
-  Hstack,
-  Flex,
-  Container,
-  Box,
-  Image,
-  Link,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
+import { Flex, Box, Image, Link, Heading, Text } from '@chakra-ui/react';
 
 const InfoList = () => {
   const data = useStaticQuery(graphql`
