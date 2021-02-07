@@ -1,10 +1,57 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Layout from '../layouts/layout';
-import { Box, Heading, Text, Button, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  Stack,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+} from '@chakra-ui/react';
 import { IdentityContext } from '../../context/identity-context';
 
-export default function MinSide(props) {
+export default function MinSide() {
   const { user, netlifyIdentity } = useContext(IdentityContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = useRef();
+
+  // Define alert dialog. Are you sure you want to log out?
+  const logOutAlert = (
+    <AlertDialog
+      isOpen={isOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent bg='white'>
+          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            Logg ut
+          </AlertDialogHeader>
+          <AlertDialogBody>Er du sikker på at du vil logge ut?</AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+              Avbryt
+            </Button>
+            <Button
+              variant='danger'
+              textColor='white'
+              onClick={netlifyIdentity.logout}
+              ml={3}
+            >
+              Logg ut
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
+  );
 
   return (
     <Layout>
@@ -38,6 +85,7 @@ export default function MinSide(props) {
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
             variant='standard'
+            onClick={() => setIsOpen(true)}
           >
             Logg ut
           </Button>
@@ -56,12 +104,8 @@ export default function MinSide(props) {
             Slett konto
           </Button>
         </Stack>
+        {logOutAlert}
       </Box>
     </Layout>
   );
 }
-
-// TODO
-// Vise info for innlogget bruker
-// Vise skjema for endring av opplysninger
-// Mulighet for å endre passord
