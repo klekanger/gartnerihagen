@@ -1,6 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
-import { Box, Flex, Text, Button, Link } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Text,
+  Button,
+  Link,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import Tulip from '../../images/tulip.svg';
 
@@ -49,6 +59,51 @@ const Header = (props) => {
   const loginButtonText = user
     ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.')
     : 'Logg inn';
+
+  const loginButton = !user ? (
+    <Button
+      variant='menu-button'
+      size='md'
+      fontSize='sm'
+      fontWeight={600}
+      rounded='md'
+      ml={{ base: '0px', md: '20px', lg: '30px' }}
+      mt={{ base: '20px', sm: '0px' }}
+      onClick={() => netlifyIdentity.open()}
+      _hover={{ bgColor: 'secondaryButton' }}
+    >
+      {loginButtonText}
+    </Button>
+  ) : (
+    <Menu>
+      <MenuButton
+        as={Button}
+        bg='primaryButton'
+        ml={{ base: '0px', md: '20px', lg: '30px' }}
+        mt={{ base: '20px', sm: '0px' }}
+        _hover={{ bgColor: 'secondaryButton' }}
+      >
+        {loginButtonText}
+      </MenuButton>
+      <MenuList bg='primaryButton' color='dark'>
+        <MenuItem
+          onClick={() => netlifyIdentity.logout()}
+          _hover={{ textDecor: 'none', textColor: 'accent' }}
+        >
+          Logg ut
+        </MenuItem>
+        <MenuItem>
+          <Link
+            as={GatsbyLink}
+            to='/min-side'
+            _hover={{ textDecor: 'none', textColor: 'accent' }}
+          >
+            Min side
+          </Link>
+        </MenuItem>
+      </MenuList>
+    </Menu>
+  );
 
   return (
     <Flex
@@ -112,19 +167,7 @@ const Header = (props) => {
             Styret
           </MenuItems>
 
-          <Button
-            variant='menu-button'
-            size='md'
-            fontSize='sm'
-            fontWeight={600}
-            rounded='md'
-            ml={{ base: '0px', md: '20px', lg: '30px' }}
-            mt={{ base: '20px', sm: '0px' }}
-            onClick={() => netlifyIdentity.open()}
-            _hover={{ bgColor: 'secondaryButton' }}
-          >
-            {loginButtonText}
-          </Button>
+          {loginButton}
         </Flex>
       </Box>
     </Flex>
