@@ -6,10 +6,6 @@ import { IdentityContext } from '../../context/identity-context';
 export default function MinSide(props) {
   const { user, netlifyIdentity } = useContext(IdentityContext);
 
-  console.log(props);
-  console.log('user: ', user);
-  console.log('netlifyIdentity: ', netlifyIdentity);
-
   return (
     <Layout>
       <Box
