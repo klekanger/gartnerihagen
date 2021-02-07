@@ -43,7 +43,7 @@ const MenuButton = (props) => {
   );
 };
 
-export default function PrivateServiceBox() {
+export default function ServiceBox() {
   // Get text and links for menu items from Contentful
   // In Contentful, the field serviceMenuTitle should equal "infomeny"
   const data = useStaticQuery(graphql`

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { navigate } from "gatsby";
-import { IdentityContext } from "../../context/identity-context";
+import { IdentityContext } from "../context/identity-context";
 
 function PrivateRoute(props) {
   const { user } = useContext(IdentityContext);

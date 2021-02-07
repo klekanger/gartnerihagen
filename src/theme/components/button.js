@@ -1,16 +1,14 @@
 const Button = {
-  baseStyle: {
-    fontWeight: "bold",
-  },
+  baseStyle: {},
   variants: {
     danger: {
       bg: "red.600",
       boxShadow: "0 0 2px 2px #efdfde",
     },
     standard: {
-      bg: "gray.300",
-      color: "gray.900",
-      boxShadow: "0 0 2px 2px #efdfde",
+      bg: "#98A7B2",
+      color: "#090A24",
+      shadow: "md",
     },
     "menu-button": {
       bg: "primaryButton",

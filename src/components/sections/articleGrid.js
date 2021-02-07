@@ -85,6 +85,7 @@ const ArticleGrid = () => {
             </Link>
           </Heading>
           <Text
+            noOfLines={3}
             fontSize={{ base: "xs", sm: "sm", md: "lg" }}
             textAlign="left"
             color="gray.700"

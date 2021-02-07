@@ -5,16 +5,16 @@ import React, { useContext } from "react";
 import { IdentityContext } from "../context/identity-context";
 
 import { Router } from "@reach/router";
-import PrivateRoute from "../components/private-components/privateRoute";
-import MinSide from "../components/private-components/privateMinSide";
-import PrivateNotLoggedIn from "../components/private-components/privateNotLoggedIn";
+import PrivateRoute from "../utils/privateRoute";
+import MinSide from "../components/private-components/minSide";
+import NotLoggedIn from "../components/private-components/notLoggedIn";
 
 const Informasjon = () => {
   const { user, netlifyIdentity } = useContext(IdentityContext);
 
   if (!user) {
     netlifyIdentity.open();
-    return <PrivateNotLoggedIn />;
+    return <NotLoggedIn />;
   }
 
   return (

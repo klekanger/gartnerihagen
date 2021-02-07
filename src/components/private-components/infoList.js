@@ -15,7 +15,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const PrivateInfoList = () => {
+const InfoList = () => {
   const data = useStaticQuery(graphql`
     query {
       posts: allContentfulBlogPost(filter: { privatePost: { eq: true } }) {
@@ -67,7 +67,7 @@ const PrivateInfoList = () => {
               <Heading as="h1" size="xl" mb={4} my={[]} textAlign="left">
                 {post.title}
               </Heading>
-              <Text fontSize="md" textAlign="left">
+              <Text fontSize="md" textAlign="left" noOfLines={6}>
                 {post.excerpt.excerpt}
               </Text>
               <Text
@@ -103,54 +103,4 @@ const PrivateInfoList = () => {
   );
 };
 
-export default PrivateInfoList;
-
-/*
-import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import GatsbyImage from "gatsby-image";
-
-import { Box, Image, Heading, Text } from "@chakra-ui/react";
-
-
-
-  return (
-    <Box textAlign="left" pt={4} mb={8} mt={6}>
-      <Heading as="h1">Her kommer privat informasjon fra styret.</Heading>
-      <Text as="p" mb={30}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at
-        massa hendrerit, ultrices justo quis, vestibulum erat.
-      </Text>
-      <Box>
-        {postNodes.map((post) => (
-          <Box key={post.contentful_id}>
-            <Image
-              as={GatsbyImage}
-              fluid={post.featuredImage.fluid}
-              shadow="lg"
-              mb={5}
-              alt={post.featuredImage.description}
-            />
-
-            <Heading
-              as="h1"
-              size="xl"
-              mb={4}
-              fontWeight="bold"
-              color="gray.700"
-              textAlign="left"
-            >
-              {post.title}
-            </Heading>
-            <Text fontSize="md" textAlign="left" color="gray.700">
-              {post.excerpt.excerpt}
-            </Text>
-          </Box>
-        ))}
-      </Box>
-    </Box>
-  );
-};
-
-export default PrivateInfoList;
-*/
+export default InfoList;

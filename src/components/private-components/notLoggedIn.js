@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../layouts/layout";
 import { Box, Heading, Text } from "@chakra-ui/react";
 
-export default function PrivateNotLoggedIn() {
+export default function NotLoggedIn() {
   return (
     <Layout>
       <Box>
