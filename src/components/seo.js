@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
-import { useLocation } from "@reach/router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
+import { useLocation } from '@reach/router';
 
 const SEO = ({ title, description, image }) => {
   const { pathname } = useLocation();
@@ -29,31 +29,31 @@ const SEO = ({ title, description, image }) => {
       title={seo.title}
       meta={[
         {
-          name: "description",
+          name: 'description',
           content: seo.description,
         },
         {
-          name: "og:url",
+          name: 'og:url',
           content: seo.url,
         },
         {
-          name: "image",
+          name: 'image',
           content: seo.image,
         },
         {
-          property: "og:title",
+          property: 'og:title',
           content: seo.title,
         },
         {
-          property: "og:description",
+          property: 'og:description',
           content: seo.description,
         },
         {
-          property: "og:type",
-          content: "website",
+          property: 'og:type',
+          content: 'website',
         },
         {
-          property: "og:image",
+          property: 'og:image',
           content: seo.image,
         },
       ]}
@@ -84,7 +84,7 @@ SEO.propTypes = {
 };
 
 SEO.defaultProps = {
-  title: "Boligsameiet Gartnerihagen",
-  description: "Askims hyggeligste nabolag",
+  title: 'Boligsameiet Gartnerihagen',
+  description: 'Askims hyggeligste nabolag',
   image: null,
 };

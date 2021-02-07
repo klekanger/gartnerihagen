@@ -1,8 +1,8 @@
-import React from "react";
-import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
-import GatsbyImage from "gatsby-image";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Image, Heading, Text, Grid, Link } from "@chakra-ui/react";
+import React from 'react';
+import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
+import GatsbyImage from 'gatsby-image';
+import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
 
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
@@ -38,17 +38,17 @@ const ArticleGrid = () => {
   return (
     <Grid
       templateColumns={{
-        sm: "repeat(1, 1fr)",
-        md: "repeat(1, 1fr)",
-        lg: "repeat(2, 1fr)",
-        xl: "repeat(2, 1fr)",
+        sm: 'repeat(1, 1fr)',
+        md: 'repeat(1, 1fr)',
+        lg: 'repeat(2, 1fr)',
+        xl: 'repeat(2, 1fr)',
       }}
       pt={0}
       gap={10}
       mb={16}
       mt={0}
-      maxWidth="95vw"
-      minHeight="45vh"
+      maxWidth='95vw'
+      minHeight='45vh'
     >
       {postNodes.map((post) => (
         <Box key={post.contentful_id}>
@@ -59,50 +59,50 @@ const ArticleGrid = () => {
               mb={5}
               alt={post.featuredImage.description}
               _hover={{
-                transform: "scale(1.01)",
-                transitionDuration: "0.1s",
+                transform: 'scale(1.01)',
+                transitionDuration: '0.1s',
               }}
               _active={{
-                transform: "scale(1.00)",
+                transform: 'scale(1.00)',
               }}
-              shadow="lg"
+              shadow='lg'
             />
           </Link>
           <Heading
-            as="h1"
-            size="xl"
+            as='h1'
+            size='xl'
             mb={4}
-            fontWeight="bold"
-            color="gray.700"
-            textAlign="left"
+            fontWeight='bold'
+            color='gray.700'
+            textAlign='left'
           >
             <Link
               as={GatsbyLink}
               to={`/blog/${post.slug}`}
-              _hover={{ textDecor: "none", color: "blue.700" }}
+              _hover={{ textDecor: 'none', color: 'blue.700' }}
             >
               {post.title}
             </Link>
           </Heading>
           <Text
             noOfLines={3}
-            fontSize={{ base: "xs", sm: "sm", md: "lg" }}
-            textAlign="left"
-            color="gray.700"
+            fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+            textAlign='left'
+            color='gray.700'
           >
             {post.excerpt.excerpt}
           </Text>
           <Text
-            textAlign="left"
+            textAlign='left'
             py={3}
-            fontSize={{ base: "xs", sm: "sm", md: "lg" }}
-            _hover={{ color: "primary" }}
+            fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+            _hover={{ color: 'primary' }}
           >
             <Link
               as={GatsbyLink}
               to={`/blog/${post.slug}`}
-              color="black"
-              _hover={{ textDecor: "none" }}
+              color='black'
+              _hover={{ textDecor: 'none' }}
             >
               Les mer <ChevronRightIcon />
             </Link>

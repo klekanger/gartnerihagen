@@ -1,22 +1,22 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
 module.exports = {
   siteMetadata: {
-    title: "Boligsameiet Gartnerihagen",
-    description: "Askims hyggeligste nabolag.",
-    siteUrl: "https://www.gartnerihagen-askim.no",
-    siteLanguage: "nb-no",
-    banner: "/images/gartnerihagen_solnedgang.jpg",
+    title: 'Boligsameiet Gartnerihagen',
+    description: 'Askims hyggeligste nabolag.',
+    siteUrl: 'https://www.gartnerihagen-askim.no',
+    siteLanguage: 'nb-no',
+    banner: '/images/gartnerihagen_solnedgang.jpg',
   },
 
   plugins: [
     {
-      resolve: "gatsby-source-contentful",
+      resolve: 'gatsby-source-contentful',
       options: {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        spaceId: "auon1l14rc7e",
+        spaceId: 'auon1l14rc7e',
         downloadLocal: true,
       },
     },
@@ -25,7 +25,7 @@ module.exports = {
       options: { prefixes: [`/informasjon/*`, `/min-side/*`] },
     },
     {
-      resolve: "@chakra-ui/gatsby-plugin",
+      resolve: '@chakra-ui/gatsby-plugin',
       options: {
         /**
          * @property {boolean} [isResettingCSS=true]
@@ -39,18 +39,18 @@ module.exports = {
         isUsingColorMode: true,
       },
     },
-    "gatsby-plugin-emotion",
-    "gatsby-plugin-sharp",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
+    'gatsby-transformer-sharp',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "images",
-        path: "./src/images/",
+        name: 'images',
+        path: './src/images/',
       },
-      __key: "images",
+      __key: 'images',
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -65,7 +65,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
           include: /images/, // See below to configure properly

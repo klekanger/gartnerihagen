@@ -1,16 +1,16 @@
-import React from "react";
-import { graphql } from "gatsby";
-import GatsbyImage from "gatsby-image";
-import { format, parseISO } from "date-fns";
-import norwegian from "date-fns/locale/nb";
+import React from 'react';
+import { graphql } from 'gatsby';
+import GatsbyImage from 'gatsby-image';
+import { format, parseISO } from 'date-fns';
+import norwegian from 'date-fns/locale/nb';
 
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
-import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, Image } from '@chakra-ui/react';
 
-import SEO from "../components/seo";
-import Layout from "../components/layouts/layout";
-import renderRichTextOptions from "../theme/renderRichTextOptions";
+import SEO from '../components/seo';
+import Layout from '../components/layouts/layout';
+import renderRichTextOptions from '../theme/renderRichTextOptions';
 
 export const query = graphql`
   query BlogPostQuery($id: String!) {
@@ -63,10 +63,10 @@ const BlogPostTemplate = ({ data, errors }) => {
   } = data.contentfulBlogPost;
 
   // Format article dates
-  const createdAtFormated = format(parseISO(createdAt), "dd. LLLL yyyy", {
+  const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
     locale: norwegian,
   });
-  const updatedAtFormated = format(parseISO(updatedAt), "dd. LLLL yyyy", {
+  const updatedAtFormated = format(parseISO(updatedAt), 'dd. LLLL yyyy', {
     locale: norwegian,
   });
 
@@ -80,7 +80,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     <Image
       as={GatsbyImage}
       fluid={featuredImage.fluid}
-      shadow="lg"
+      shadow='lg'
       alt={featuredImage.description}
     />
   ) : null;
@@ -92,25 +92,25 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={featuredImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box w="95vw" ml="0" pr={["0", "0", "5vw", "30vw"]}>
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']}>
         <Heading
-          as="h1"
-          fontSize={["4xl", "4xl", "6xl", "6xl"]}
-          textAlign={["center", "left", "left", "left"]}
+          as='h1'
+          fontSize={['4xl', '4xl', '6xl', '6xl']}
+          textAlign={['center', 'left', 'left', 'left']}
           pb={2}
         >
           {title}
         </Heading>
         {topImage}
-        <Text as="div" my={[5, 10, 10, 10]}>
+        <Text as='div' my={[5, 10, 10, 10]}>
           {renderRichText(bodyText, renderRichTextOptions)}
         </Text>
 
         <Text
-          fontSize={["xs", "sm", "sm", "sm"]}
-          fontStyle="italic"
+          fontSize={['xs', 'sm', 'sm', 'sm']}
+          fontStyle='italic'
           pb={4}
-          textAlign="left"
+          textAlign='left'
         >
           {publishDate}
         </Text>

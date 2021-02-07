@@ -1,8 +1,8 @@
 // Enable Framer Motion animations
 
-import React from "react";
-import { motion, isValidMotionProp } from "framer-motion";
-import { Box, forwardRef } from "@chakra-ui/react";
+import React from 'react';
+import { motion, isValidMotionProp } from 'framer-motion';
+import { Box, forwardRef } from '@chakra-ui/react';
 
 export const MotionBox = motion.custom(
   forwardRef((props, ref) => {

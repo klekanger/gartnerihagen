@@ -1,7 +1,7 @@
-import React from "react";
-import { graphql, useStaticQuery, Link as GatsbyLink } from "gatsby";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import GatsbyImage from "gatsby-image";
+import React from 'react';
+import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
+import { ChevronRightIcon } from '@chakra-ui/icons';
+import GatsbyImage from 'gatsby-image';
 
 import {
   Stack,
@@ -13,7 +13,7 @@ import {
   Link,
   Heading,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 const InfoList = () => {
   const data = useStaticQuery(graphql`
@@ -46,12 +46,12 @@ const InfoList = () => {
   const postNodes = data.posts.nodes || [];
 
   return (
-    <Box textAlign="left" mb={8}>
-      <Box bg="light2" px={4} pt={4} pb={8} mb={[8, 8, 16, 16]}>
-        <Heading as="h1" size="2xl">
+    <Box textAlign='left' mb={8}>
+      <Box bg='light2' px={4} pt={4} pb={8} mb={[8, 8, 16, 16]}>
+        <Heading as='h1' size='2xl'>
           Informasjon fra styret
         </Heading>
-        <Text as="p">
+        <Text as='p'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           at massa hendrerit, ultrices justo quis, vestibulum erat.
         </Text>
@@ -61,27 +61,27 @@ const InfoList = () => {
         {postNodes.map((post) => (
           <Flex
             key={post.contentful_id}
-            direction={["column-reverse", "column-reverse", "row", "row"]}
+            direction={['column-reverse', 'column-reverse', 'row', 'row']}
           >
-            <Box ml={0} mb={[4, 4, 0, 0]} w={["100%", "100%", "50%", "50%"]}>
-              <Heading as="h1" size="xl" mb={4} my={[]} textAlign="left">
+            <Box ml={0} mb={[4, 4, 0, 0]} w={['100%', '100%', '50%', '50%']}>
+              <Heading as='h1' size='xl' mb={4} my={[]} textAlign='left'>
                 {post.title}
               </Heading>
-              <Text fontSize="md" textAlign="left" noOfLines={6}>
+              <Text fontSize='md' textAlign='left' noOfLines={6}>
                 {post.excerpt.excerpt}
               </Text>
               <Text
-                textAlign="left"
+                textAlign='left'
                 pt={3}
                 pb={[6, 6, 3, 3]}
-                fontSize={{ base: "xs", sm: "sm", md: "lg" }}
-                _hover={{ color: "primary" }}
+                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                _hover={{ color: 'primary' }}
               >
                 <Link
                   as={GatsbyLink}
-                  to="#"
-                  color="black"
-                  _hover={{ textDecor: "none" }}
+                  to='#'
+                  color='black'
+                  _hover={{ textDecor: 'none' }}
                 >
                   Les mer <ChevronRightIcon />
                 </Link>
@@ -90,10 +90,10 @@ const InfoList = () => {
             <Image
               as={GatsbyImage}
               fluid={post.featuredImage.fluid}
-              shadow="lg"
+              shadow='lg'
               mb={[2, 2, 8, 8]}
               ml={[0, 0, 39, 39]}
-              w={["100%", "100%", "50%", "50%"]}
+              w={['100%', '100%', '50%', '50%']}
               alt={post.featuredImage.description}
             />
           </Flex>

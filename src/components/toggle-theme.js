@@ -1,9 +1,9 @@
 // Button for switching between dark and light mode
 // Using Chakra UIs useColorMode hook
 
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import React from 'react';
 
 export default function ThemeToggle() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -12,8 +12,8 @@ export default function ThemeToggle() {
   return (
     <IconButton
       icon={<ToggleIcon />}
-      variant="ghost"
-      aria-label="Toggle Theme"
+      variant='ghost'
+      aria-label='Toggle Theme'
       ml={4}
       onClick={toggleMode}
     />
