@@ -141,3 +141,10 @@ export default function ServiceBox() {
     </Box>
   );
 }
+
+// TODO
+// Make pages for these two links:
+// "Referater fra årsmøter"
+// "Diverse dokumenter"
+//
+// Should link to pages with all content in that category

@@ -94,3 +94,6 @@ const InfoList = () => {
 };
 
 export default InfoList;
+
+// TODO
+// Make links to articles (logged in only) clickable
