@@ -37,7 +37,6 @@ const IndexPage = () => {
   }, []);
 
   const ShowConsent = () => {
-    console.log('ShowConsent');
     return (
       <Drawer
         placement='bottom'
