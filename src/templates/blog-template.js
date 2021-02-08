@@ -107,7 +107,7 @@ const BlogPostTemplate = ({ data, errors }) => {
         </Text>
 
         <Text
-          fontSize={['xs', 'sm', 'sm', 'sm']}
+          fontSize={['sm', 'sm', 'sm', 'sm']}
           fontStyle='italic'
           pb={4}
           textAlign='left'

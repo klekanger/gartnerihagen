@@ -80,7 +80,7 @@ const HeroWide = () => {
           {pageTitle}
           <Text
             variant='light'
-            fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+            fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
             fontWeight='normal'
             lineHeight='normal'
             mt={3}

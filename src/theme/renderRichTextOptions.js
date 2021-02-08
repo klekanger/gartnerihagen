@@ -14,7 +14,7 @@ const renderRichTextOptions = {
       <Text
         textAlign='left'
         my={4}
-        fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+        fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
       >
         {children}
       </Text>
@@ -77,7 +77,7 @@ const renderRichTextOptions = {
             textAlign='left'
             ml={2}
             p={2}
-            fontSize={['xs', 'sm', 'sm', 'md']}
+            fontSize={['sm', 'sm', 'sm', 'md']}
           >
             <em>
               {title}: {description}

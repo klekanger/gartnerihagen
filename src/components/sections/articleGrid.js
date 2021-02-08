@@ -86,7 +86,7 @@ const ArticleGrid = () => {
           </Heading>
           <Text
             noOfLines={3}
-            fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+            fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
             textAlign='left'
             color='gray.700'
           >
@@ -95,7 +95,7 @@ const ArticleGrid = () => {
           <Text
             textAlign='left'
             py={3}
-            fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+            fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
             _hover={{ color: 'primary' }}
           >
             <Link
