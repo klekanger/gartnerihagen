@@ -64,7 +64,7 @@ const HeroWide = () => {
         bgColor='darkTransparent'
         w={['90vw', '90vw', '80vw', '60vw']} // Set height of transparent background drop to height of text/heading container
         position='absolute'
-        top={[180, 180, 200, 200]}
+        top={[150, 150, 180, 180]}
         left={[4, 4, 16, 16]}
         overflow='auto'
       >
