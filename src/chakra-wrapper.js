@@ -11,7 +11,6 @@ import theme from './theme/';
 export const wrapPageElement = ({ element }) => {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      {/* <Fonts /> */}
       {element}
     </ChakraProvider>
   );
