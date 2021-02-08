@@ -45,7 +45,7 @@ const IndexPage = () => {
         onClose={onClose}
       >
         <DrawerOverlay>
-          <DrawerContent textColor='light'>
+          <DrawerContent textColor='light' bg='gray.700'>
             <DrawerHeader borderBottomWidth='1px'>
               Denne nettsiden brukes cookies
             </DrawerHeader>
