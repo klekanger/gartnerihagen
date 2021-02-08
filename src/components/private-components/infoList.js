@@ -41,7 +41,7 @@ const InfoList = () => {
         <Heading as='h1' size='2xl'>
           Informasjon fra styret
         </Heading>
-        <Text as='p'>
+        <Text as='p' fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           at massa hendrerit, ultrices justo quis, vestibulum erat.
         </Text>
@@ -57,7 +57,11 @@ const InfoList = () => {
               <Heading as='h1' size='xl' mb={4} my={[]} textAlign='left'>
                 {post.title}
               </Heading>
-              <Text fontSize='md' textAlign='left' noOfLines={6}>
+              <Text
+                fontSize={{ base: 'xs', sm: 'sm', md: 'lg' }}
+                textAlign='left'
+                noOfLines={6}
+              >
                 {post.excerpt.excerpt}
               </Text>
               <Text
