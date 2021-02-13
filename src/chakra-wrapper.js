@@ -3,15 +3,14 @@
 
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import Layout from './components/layouts/layout';
 
 import theme from './theme/';
-
-// Define colors for our theme.Extends Chakra UI default theme
 
 export const wrapPageElement = ({ element }) => {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      {element}
+      <Layout>{element}</Layout>
     </ChakraProvider>
   );
 };

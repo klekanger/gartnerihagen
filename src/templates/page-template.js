@@ -3,13 +3,9 @@ import { graphql } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
-
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-
 import { Box, Heading, Text, Image } from '@chakra-ui/react';
-
 import SEO from '../components/seo';
-import Layout from '../components/layouts/layout';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
 export const query = graphql`
@@ -81,7 +77,7 @@ const BlogPostTemplate = ({ data, errors }) => {
   ) : null;
 
   return (
-    <Layout>
+    <>
       <SEO
         title={pageTitle || null}
         image={pageImage?.fluid?.src || null}
@@ -109,7 +105,7 @@ const BlogPostTemplate = ({ data, errors }) => {
           {publishDate}
         </Text>
       </Box>
-    </Layout>
+    </>
   );
 };
 
