@@ -36,7 +36,7 @@ module.exports = {
          * @property {boolean} [isUsingColorMode=true]
          * if false, this plugin will not use <ColorModeProvider />
          */
-        isUsingColorMode: true,
+        isUsingColorMode: false,
       },
     },
     'gatsby-plugin-emotion',
