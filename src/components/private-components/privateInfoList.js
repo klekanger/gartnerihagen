@@ -2,10 +2,10 @@ import React from 'react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import GatsbyImage from 'gatsby-image';
-
 import { Flex, Box, Image, Link, Heading, Text } from '@chakra-ui/react';
+import PrivateInfo from './privateInfo';
 
-const InfoList = () => {
+const PrivateInfoList = () => {
   const data = useStaticQuery(graphql`
     query {
       posts: allContentfulBlogPost(filter: { privatePost: { eq: true } }) {
@@ -97,7 +97,7 @@ const InfoList = () => {
   );
 };
 
-export default InfoList;
+export default PrivateInfoList;
 
 // TODO
 // Make links to articles (logged in only) clickable

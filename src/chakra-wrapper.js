@@ -15,3 +15,6 @@ export const wrapPageElement = ({ element }) => {
     </ChakraProvider>
   );
 };
+
+// TODO
+// Move Layout component from pages to this wrapper component
