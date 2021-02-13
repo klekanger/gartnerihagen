@@ -3,7 +3,6 @@ import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import GatsbyImage from 'gatsby-image';
 import { Flex, Box, Image, Link, Heading, Text } from '@chakra-ui/react';
-import PrivateInfo from './privateInfo';
 
 const PrivateInfoList = () => {
   const data = useStaticQuery(graphql`
@@ -73,7 +72,7 @@ const PrivateInfoList = () => {
               >
                 <Link
                   as={GatsbyLink}
-                  to='#'
+                  to={`/informasjon/post/${post.slug}`}
                   color='black'
                   _hover={{ textDecor: 'none' }}
                 >
