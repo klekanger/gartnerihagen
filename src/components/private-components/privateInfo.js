@@ -1,26 +1,20 @@
 import React from 'react';
+import { Link as GatsbyLink } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
+import { Box, Image, Heading, Text, Link, Button } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
 
 const PrivateInfo = (props) => {
+  // Get slug of current post
   const { slug } = props;
-
   const postNodes = props?.postData?.privatePosts?.nodes || [];
-
-  const postToShow = postNodes.filter((post) => post.slug === slug);
-
-  const {
-    title,
-    bodyText,
-    featuredImage,
-    createdAt,
-    updatedAt,
-  } = postToShow[0];
+  // Find the post with the same slug as the current page
+  const postToShow = postNodes.find((post) => post.slug === slug);
+  const { title, bodyText, featuredImage, createdAt, updatedAt } = postToShow;
 
   // Format article dates
   const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
@@ -63,11 +57,24 @@ const PrivateInfo = (props) => {
       <Text
         fontSize={['sm', 'sm', 'sm', 'sm']}
         fontStyle='italic'
-        pb={4}
+        pb={8}
         textAlign='left'
       >
         {publishDate}
       </Text>
+
+      <Box align='left'>
+        <Button
+          as={GatsbyLink}
+          to={`/informasjon/`}
+          color='black'
+          variant='standard'
+          mb={16}
+          _hover={{ textDecor: 'none' }}
+        >
+          Gå tilbake
+        </Button>
+      </Box>
     </Box>
   );
 };
