@@ -13,7 +13,9 @@ exports.createPages = ({ graphql, actions }) => {
           slug
         }
       }
-      allContentfulBlogPost {
+      publicPosts: allContentfulBlogPost(
+        filter: { privatePost: { eq: false } }
+      ) {
         nodes {
           contentful_id
           slug
@@ -25,7 +27,7 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors;
     }
 
-    const blogNodes = (result.data.allContentfulBlogPost || {}).nodes || [];
+    const blogNodes = (result.data.publicPosts || {}).nodes || [];
     const pageNodes = (result.data.allContentfulSide || {}).nodes || [];
 
     // Create pages.
@@ -39,7 +41,9 @@ exports.createPages = ({ graphql, actions }) => {
         context: { id },
       });
     });
-    // Create blog post pages.
+
+    // Create public blog post pages.
+    // Skip private pages (in graphQl query)
     blogNodes.forEach((node) => {
       const id = node.contentful_id;
       const slug = node.slug;
