@@ -53,9 +53,23 @@ const PrivateInfoList = () => {
             direction={['column-reverse', 'column-reverse', 'row', 'row']}
           >
             <Box ml={0} mb={[4, 4, 0, 0]} w={['100%', '100%', '50%', '50%']}>
-              <Heading as='h1' size='xl' mb={4} my={[]} textAlign='left'>
-                {post.title}
-              </Heading>
+              <Link
+                as={GatsbyLink}
+                to={`/informasjon/post/${post.slug}`}
+                color='black'
+                _hover={{ textDecor: 'none' }}
+              >
+                <Heading
+                  as='h1'
+                  size='xl'
+                  mb={4}
+                  my={[]}
+                  textAlign='left'
+                  _hover={{ color: 'blue.700' }}
+                >
+                  {post.title}
+                </Heading>
+              </Link>
               <Text
                 fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
                 textAlign='left'
@@ -74,12 +88,13 @@ const PrivateInfoList = () => {
                   as={GatsbyLink}
                   to={`/informasjon/post/${post.slug}`}
                   color='black'
-                  _hover={{ textDecor: 'none' }}
+                  _hover={{ textDecor: 'none', color: 'blue.700' }}
                 >
                   Les mer <ChevronRightIcon />
                 </Link>
               </Text>
             </Box>
+
             <Image
               as={GatsbyImage}
               fluid={post.featuredImage.fluid}
