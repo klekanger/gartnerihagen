@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
@@ -13,41 +13,16 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import Tulip from '../../images/tulip.svg';
-
 import { IdentityContext } from '../../context/identity-context';
 
-// Render one menu item
-const MenuItems = (props) => {
-  const { children, isLast, to = '/', ...rest } = props;
-  return (
-    <Text
-      variant='light'
-      mb={{ base: isLast ? 0 : 8, sm: 0 }}
-      mr={{ base: 0, sm: isLast ? 0 : 8 }}
-      fontSize={['lg', 'lg', 'lg', '2xl']}
-      display='block'
-      {...rest}
-    >
-      <Link as={GatsbyLink} to={to} _hover={{ textDecor: 'none' }}>
-        {children}
-      </Link>
-    </Text>
-  );
-};
-
+//
 // Main header component
+//
 const Header = (props) => {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
   const toggleMenu = () => setShowMenuItems(!showMenuItems);
   const { user, netlifyIdentity } = useContext(IdentityContext);
-
-  // Hide menu if scrolled more than 15 % of the screen height
-  const handleScroll = () => {
-    const yPos = window.scrollY || 0;
-    const scrHeight = window.innerHeight || 900;
-    yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
-  };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -60,6 +35,33 @@ const Header = (props) => {
   useEffect(() => {
     setShowMenuItems(false);
   }, [hideMenu]);
+
+  // Hide menu if scrolled more than 15 % of the screen height
+  const handleScroll = () => {
+    const yPos = window.scrollY || 0;
+    const scrHeight = window.innerHeight || 900;
+    yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
+  };
+
+  // Render one menu item
+  const MenuItems = (props) => {
+    const { children, isLast, to = '/', ...rest } = props;
+    return (
+      <Text
+        variant='light'
+        mb={{ base: isLast ? 0 : 8, sm: 0 }}
+        mr={{ base: 0, sm: isLast ? 0 : 8 }}
+        fontSize={['lg', 'lg', 'lg', '2xl']}
+        display='block'
+        onClick={() => setShowMenuItems(false)}
+        {...rest}
+      >
+        <Link as={GatsbyLink} to={to} _hover={{ textDecor: 'none' }}>
+          {children}
+        </Link>
+      </Text>
+    );
+  };
 
   const loginButtonText = user
     ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.')
