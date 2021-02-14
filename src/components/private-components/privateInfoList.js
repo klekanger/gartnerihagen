@@ -23,9 +23,11 @@ const PrivateInfoList = () => {
           }
           privatePost
           featuredImage {
-            fluid {
+            fluid(maxWidth: 2000) {
               ...GatsbyContentfulFluid_withWebp
             }
+            description
+            title
           }
         }
       }
