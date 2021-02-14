@@ -3,7 +3,7 @@
 
 import React, { useContext } from 'react';
 import { IdentityContext } from '../context/identity-context';
-import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 import Main from '../components/private-components/main';
@@ -65,8 +65,11 @@ const Informasjon = () => {
   return (
     <Router>
       <PrivateRoute path='/informasjon' component={Main} />
-      {/* <PrivateRoute path='/informasjon/post/:slug' component={PrivateInfo} /> */}
-      <PrivateInfo path='/informasjon/post/:slug' postData={data} />
+      <PrivateRoute
+        path='/informasjon/post/:slug'
+        component={PrivateInfo}
+        postData={data}
+      />
     </Router>
   );
 };
