@@ -21,8 +21,8 @@ import { IdentityContext } from '../../context/identity-context';
 const Header = (props) => {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
-  const toggleMenu = () => setShowMenuItems(!showMenuItems);
   const { user, netlifyIdentity } = useContext(IdentityContext);
+  const toggleMenu = () => setShowMenuItems(!showMenuItems);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
