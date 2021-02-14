@@ -56,6 +56,11 @@ const Header = (props) => {
     };
   }, []);
 
+  // Hide open hamburger menu items when scrolled down
+  useEffect(() => {
+    setShowMenuItems(false);
+  }, [hideMenu]);
+
   const loginButtonText = user
     ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.')
     : 'Logg inn';
