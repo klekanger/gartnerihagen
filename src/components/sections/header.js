@@ -63,9 +63,12 @@ const Header = (props) => {
     );
   };
 
-  const loginButtonText = user
-    ? user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.')
-    : 'Logg inn';
+  let loginButtonText;
+  if (user) {
+    loginButtonText = user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.');
+  } else {
+    loginButtonText = 'Logg inn';
+  }
 
   const loginButton = !user ? (
     <Button

@@ -77,3 +77,6 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+// TODO
+// Refactor cookie consent into its own component
