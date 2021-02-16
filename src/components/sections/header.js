@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
@@ -63,12 +63,9 @@ const Header = (props) => {
     );
   };
 
-  let loginButtonText;
-  if (user) {
-    loginButtonText = user?.user_metadata.full_name.slice(0, 6).padEnd(9, '.');
-  } else {
-    loginButtonText = 'Logg inn';
-  }
+  const userName = user?.user_metadata.full_name || '';
+  const loginButtonText =
+    userName !== '' ? userName.slice(0, 6).padEnd(9, '.') : 'Logg inn';
 
   const loginButton = !user ? (
     <Button
