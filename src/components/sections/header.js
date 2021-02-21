@@ -10,9 +10,11 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Icon,
 } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import Tulip from '../../images/tulip.svg';
+import GartnerihagenLogo from '../../images/gartnerihagen.svg';
 import { IdentityContext } from '../../context/identity-context';
 
 //
@@ -49,14 +51,23 @@ const Header = (props) => {
     return (
       <Text
         variant='light'
-        mb={{ base: isLast ? 0 : 8, sm: 0 }}
+        mb={{ base: isLast ? '-14px' : 8, sm: '-14px' }}
         mr={{ base: 0, sm: isLast ? 0 : 8 }}
-        fontSize={['lg', 'lg', 'lg', '2xl']}
+        fontSize={['md', 'md', 'md', 'xl']}
         display='block'
         onClick={() => setShowMenuItems(false)}
         {...rest}
       >
-        <Link as={GatsbyLink} to={to} _hover={{ textDecor: 'none' }}>
+        <Link
+          as={GatsbyLink}
+          to={to}
+          _hover={{ textDecor: 'none' }}
+          _focus={{
+            outline: 'none',
+            borderBottom: '2px solid #d9edff',
+            pb: '5px',
+          }}
+        >
           {children}
         </Link>
       </Text>
@@ -119,9 +130,9 @@ const Header = (props) => {
       justify='space-between'
       wrap='wrap'
       w='100%'
-      mb={4}
-      mt={hideMenu ? '-100' : '0'}
-      py={3}
+      mt={hideMenu ? '-120' : '0'}
+      pt={4}
+      pb={5}
       px={[4, 4, 10, 10]}
       {...props}
       bgColor='dark'
@@ -131,16 +142,12 @@ const Header = (props) => {
       shadow='md'
       transition='margin-top 0.5s'
     >
-      <Link
-        as={GatsbyLink}
-        to='/'
-        _hover={{ textDecor: 'none' }}
-        fontSize={['xl', 'xl', 'xl', '2xl']}
-      >
-        <Tulip height='1.8rem' width='1.8rem' />
-        <Text variant='light' as='span' ml={3}>
-          Boligsameiet Gartnerihagen
-        </Text>
+      <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
+        <Icon
+          as={GartnerihagenLogo}
+          w={['80vw', '55vw', '35vw', '30vw']}
+          h='auto'
+        />
       </Link>
 
       <Box
@@ -182,3 +189,6 @@ const Header = (props) => {
 };
 
 export default Header;
+
+// TODO
+// Use nullish coalescing operator for setting the login button text

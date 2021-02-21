@@ -71,7 +71,7 @@ const HeroWide = () => {
         <Heading
           as='h1'
           fontWeight='semibold'
-          fontSize={['4xl', '4xl', '6xl', '6xl']}
+          fontSize={['2xl', '2xl', '4xl', '4xl']}
           color='white'
           m={0}
           textAlign={['center', 'left', 'left', 'left']}

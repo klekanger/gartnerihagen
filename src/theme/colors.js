@@ -4,8 +4,10 @@
 export default {
   black: '#090A24',
   white: '#F6F7FD',
-  dark: '#13254C',
-  darkTransparent: 'rgba(19, 37, 76,0.7)',
+  dark: '#0a0a0a',
+  /* dark: '#13254C', */
+  /* darkTransparent: 'rgba(19, 37, 76,0.7)', */
+  darkTransparent: 'rgba(10, 10, 10,0.7)',
   primary: '#628CF6',
   secondary: '#457bac',
   light: '#cfe9ff',
