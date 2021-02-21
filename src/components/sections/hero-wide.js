@@ -40,8 +40,7 @@ const HeroWide = () => {
   } = data.contentfulForsidetekst;
 
   return (
-    <Box w='200' mx='0' mt='-80px'>
-      {/* <Box w='100vw' mx='0' mt={[0, 8, 8, 8]} mb={12} shadow='lg'> */}
+    <Box className='test' w='100vw' maxW='100%' mt='-80px'>
       <Box as='div' overflow='hidden'>
         <MotionBox
           initial={{ scale: 1.0 }}
@@ -56,7 +55,6 @@ const HeroWide = () => {
             as={GatsbyImage}
             fluid={pageImage.fluid}
             alt={imageDesc}
-            /* h={['50vh', '70vh', '80vh', '80vh']} */
             h={['70vh', '100vh']}
           />
         </MotionBox>
@@ -65,18 +63,17 @@ const HeroWide = () => {
       <Box
         bgColor='darkTransparent'
         position='absolute'
-        w={['70vw', '90vw', '60vw', '60vw']}
+        w={['90vw', '90vw', '60vw', '60vw']}
+        maxW='90%'
         px={[0, 5]}
-        ml={['15vw', '5vw', '20vw', '20vw']}
-        maxH={['70%', '60vw', '40vw', '40vw']}
-        top={['20vh', '45vh', '40vh', '40vh']}
-        overflow='hidden'
+        mx={['5vw', '5vw', '20vw', '20vw']}
+        top={['20vh', '45vh', '30vh', '30vh']}
         rounded='md'
       >
         <Heading
           as='h1'
           fontWeight='semibold'
-          fontSize={['2xl', '4xl', '6xl', '6xl']}
+          fontSize={['3xl', '5xl', '6xl', '6xl']}
           color='white'
           m={0}
           textAlign={['center', 'left', 'left', 'left']}
@@ -85,7 +82,7 @@ const HeroWide = () => {
           {pageTitle}
           <Text
             variant='light'
-            fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
+            fontSize={{ base: 'md', sm: 'md', md: 'lg' }}
             fontWeight='normal'
             lineHeight='normal'
             mt={3}

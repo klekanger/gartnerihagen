@@ -37,16 +37,8 @@ const PrivateInfoList = () => {
   const postNodes = data.posts.nodes || [];
 
   return (
-    <Box textAlign='left' mb={8}>
-      <Box
-        bg='#78ad96'
-        px={4}
-        pt={4}
-        pb={8}
-        mb={[8, 8, 16, 16]}
-        rounded='md'
-        shadow='lg'
-      >
+    <Box textAlign='left'>
+      <Box bg='#78ad96' px={4} pt={4} pb={8} rounded='md' shadow='lg'>
         <Heading as='h1' size='2xl' textColor='black'>
           Informasjon fra styret
         </Heading>
@@ -56,7 +48,7 @@ const PrivateInfoList = () => {
         </Text>
       </Box>
 
-      <Box>
+      <Box pt={['8', '8', '16', '16']}>
         {postNodes.map((post) => (
           <Flex
             key={post.contentful_id}

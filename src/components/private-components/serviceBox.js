@@ -93,12 +93,11 @@ export default function ServiceBox() {
   const { menuItems } = data;
 
   return (
-    <Box py={[0, 0, 16, 16]} textAlign='left'>
+    <Box pt={[4, 8, 8, 16]} pb={[8, 8, 16, 16]} textAlign='left'>
       <Stack
         direction={['column', 'column', 'row', 'row']}
         justify='space-between'
-        pb={0}
-        my={['2', '2', '4', '4']}
+        py={['2', '2', '8', '8']}
       >
         <MenuButton linkTo={menuItems.menu1File.file.url}>
           <Text variant='dark' textAlign='center'>
