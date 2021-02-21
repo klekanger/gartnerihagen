@@ -13,7 +13,6 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
-import Tulip from '../../images/tulip.svg';
 import GartnerihagenLogo from '../../images/gartnerihagen.svg';
 import { IdentityContext } from '../../context/identity-context';
 
@@ -138,14 +137,14 @@ const Header = (props) => {
       bgColor='dark'
       opacity={showMenuItems ? '100%' : '90%'}
       position='fixed'
-      zIndex='2'
+      zIndex='banner'
       shadow='md'
       transition='margin-top 0.5s'
     >
       <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
         <Icon
           as={GartnerihagenLogo}
-          w={['80vw', '55vw', '35vw', '30vw']}
+          w={['60vw', '55vw', '35vw', '30vw']}
           h='auto'
         />
       </Link>

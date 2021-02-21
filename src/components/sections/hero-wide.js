@@ -40,7 +40,8 @@ const HeroWide = () => {
   } = data.contentfulForsidetekst;
 
   return (
-    <Box w='95vw' mx='0' mt={[0, 8, 8, 8]} mb={12} shadow='lg'>
+    <Box w='200' mx='0' mt='-80px'>
+      {/* <Box w='100vw' mx='0' mt={[0, 8, 8, 8]} mb={12} shadow='lg'> */}
       <Box as='div' overflow='hidden'>
         <MotionBox
           initial={{ scale: 1.0 }}
@@ -55,23 +56,26 @@ const HeroWide = () => {
             as={GatsbyImage}
             fluid={pageImage.fluid}
             alt={imageDesc}
-            h={['50vh', '70vh', '80vh', '80vh']}
+            /* h={['50vh', '70vh', '80vh', '80vh']} */
+            h={['70vh', '100vh']}
           />
         </MotionBox>
       </Box>
 
       <Box
         bgColor='darkTransparent'
-        w={['90vw', '90vw', '80vw', '60vw']} // Set height of transparent background drop to height of text/heading container
         position='absolute'
-        top={[150, 150, 180, 180]}
-        left={[4, 4, 16, 16]}
-        overflow='auto'
+        w={['70vw', '90vw', '60vw', '60vw']}
+        px={[0, 5]}
+        ml={['15vw', '5vw', '20vw', '20vw']}
+        maxH={['70%', '60vw', '40vw', '40vw']}
+        top={['20vh', '45vh', '30vh', '30vh']}
+        overflow='hidden'
       >
         <Heading
           as='h1'
           fontWeight='semibold'
-          fontSize={['2xl', '2xl', '4xl', '4xl']}
+          fontSize={['2xl', '4xl', '6xl', '6xl']}
           color='white'
           m={0}
           textAlign={['center', 'left', 'left', 'left']}
