@@ -83,7 +83,7 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={pageImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']}>
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={16}>
         <Heading
           as='h1'
           fontSize={['4xl', '4xl', '6xl', '6xl']}

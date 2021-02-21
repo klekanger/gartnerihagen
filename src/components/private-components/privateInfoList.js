@@ -105,6 +105,8 @@ const PrivateInfoList = () => {
               ml={[0, 0, 39, 39]}
               w={['100%', '100%', '50%', '50%']}
               alt={post.featuredImage.description}
+              rounded='md'
+              shadow='lg'
             />
           </Flex>
         ))}

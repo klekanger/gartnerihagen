@@ -69,8 +69,9 @@ const HeroWide = () => {
         px={[0, 5]}
         ml={['15vw', '5vw', '20vw', '20vw']}
         maxH={['70%', '60vw', '40vw', '40vw']}
-        top={['20vh', '45vh', '30vh', '30vh']}
+        top={['20vh', '45vh', '40vh', '40vh']}
         overflow='hidden'
+        rounded='md'
       >
         <Heading
           as='h1'

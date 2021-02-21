@@ -65,6 +65,7 @@ const ArticleGrid = () => {
               _active={{
                 transform: 'scale(1.00)',
               }}
+              rounded='md'
               shadow='lg'
             />
           </Link>
