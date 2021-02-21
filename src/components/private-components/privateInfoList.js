@@ -38,8 +38,16 @@ const PrivateInfoList = () => {
 
   return (
     <Box textAlign='left' mb={8}>
-      <Box bg='light2' px={4} pt={4} pb={8} mb={[8, 8, 16, 16]}>
-        <Heading as='h1' size='2xl'>
+      <Box
+        bg='#78ad96'
+        px={4}
+        pt={4}
+        pb={8}
+        mb={[8, 8, 16, 16]}
+        rounded='md'
+        shadow='lg'
+      >
+        <Heading as='h1' size='2xl' textColor='black'>
           Informasjon fra styret
         </Heading>
         <Text as='p' fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}>

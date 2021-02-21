@@ -93,7 +93,7 @@ export default function ServiceBox() {
   const { menuItems } = data;
 
   return (
-    <Box my={[0, 0, 8, 8]} textAlign='left' pb={8}>
+    <Box py={[0, 0, 16, 16]} textAlign='left'>
       <Stack
         direction={['column', 'column', 'row', 'row']}
         justify='space-between'

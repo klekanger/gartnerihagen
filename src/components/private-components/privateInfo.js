@@ -67,7 +67,6 @@ const PrivateInfo = (props) => {
         <Button
           as={GatsbyLink}
           to={`/informasjon/`}
-          color='black'
           variant='standard'
           mb={16}
           _hover={{ textDecor: 'none' }}

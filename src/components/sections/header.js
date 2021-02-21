@@ -79,7 +79,8 @@ const Header = (props) => {
 
   const loginButton = !user ? (
     <Button
-      variant='menu-button'
+      bg='primaryButton'
+      color='black'
       size='md'
       fontSize='sm'
       fontWeight={600}
@@ -96,13 +97,14 @@ const Header = (props) => {
       <MenuButton
         as={Button}
         bg='primaryButton'
+        color='black'
         ml={{ base: '0px', md: '20px', lg: '30px' }}
         mt={{ base: '20px', sm: '0px' }}
         _hover={{ bgColor: 'secondaryButton' }}
       >
         {loginButtonText}
       </MenuButton>
-      <MenuList bg='primaryButton' color='dark'>
+      <MenuList bg='secondaryButton' color='dark'>
         <MenuItem
           onClick={() => netlifyIdentity.logout()}
           _hover={{ textDecor: 'none', textColor: 'accent' }}

@@ -7,13 +7,13 @@ const Button = {
       textColor: '#eee',
     },
     standard: {
-      bg: '#BECBD7',
-      color: '#090A24',
+      bg: '#0a0a0a',
+      textColor: '#fff',
       shadow: 'md',
     },
     'menu-button': {
       bg: 'primaryButton',
-      color: 'dark',
+      textColor: '#eee',
     },
     solid: (props) => ({
       bg: props.colorMode === 'dark' ? 'yellow.300' : 'gray.500',

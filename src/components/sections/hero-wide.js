@@ -104,7 +104,7 @@ const HeroWide = () => {
               lineHeight='1'
               shadow='lg'
               bgColor='primaryButton'
-              color='dark'
+              color='black'
               _hover={{ bgColor: 'secondaryButton' }}
             >
               Les mer
