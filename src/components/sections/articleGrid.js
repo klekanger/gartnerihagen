@@ -7,7 +7,11 @@ import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
 const ArticleGrid = () => {
   const data = useStaticQuery(graphql`
     query {
-      posts: allContentfulBlogPost(filter: { privatePost: { eq: false } }) {
+      posts: allContentfulBlogPost(
+        filter: { privatePost: { eq: false } }
+        limit: 4
+        sort: { fields: [updatedAt], order: DESC }
+      ) {
         nodes {
           contentful_id
           createdAt
