@@ -76,7 +76,8 @@ const BlogPostTemplate = ({ data, errors }) => {
   const topImage = featuredImage?.fluid ? (
     <Image
       as={GatsbyImage}
-      fluid={featuredImage.fluid}
+      fluid={{ ...featuredImage.fluid, aspectRatio: 16 / 10 }}
+      rounded='md'
       shadow='lg'
       alt={featuredImage.description}
     />

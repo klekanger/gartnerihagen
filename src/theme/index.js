@@ -8,8 +8,6 @@ import styles from './styles';
 // Custom colors
 import colors from './colors';
 
-// Foundational style overrides
-
 // Component style overrides
 import Button from './components/button';
 import Heading from './components/heading';
@@ -29,6 +27,10 @@ const overrides = {
   },
   styles,
   colors,
+  /*   fonts: {
+    heading: 'Open Sans',
+    body: 'Source Sans Pro',
+  }, */
   components: {
     Button,
     Heading,

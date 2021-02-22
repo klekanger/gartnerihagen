@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link as GatsbyLink } from 'gatsby';
 import {
   Drawer,
   DrawerBody,
@@ -9,6 +10,7 @@ import {
   Button,
   useDisclosure,
   Link,
+  Text,
 } from '@chakra-ui/react';
 
 import SEO from '../components/seo';
@@ -48,15 +50,17 @@ const IndexPage = () => {
               Denne nettsiden brukes cookies
             </DrawerHeader>
             <DrawerBody>
-              <p>
+              <Text color='light'>
                 Vi bruker cookies (informasjonskapsler) for blant annet at du
                 skal slippe å måtte logge deg inn på nytt. Ved å fortsette å
                 surfe videre aksepterer du dette.{' '}
-              </p>
-              <p>Les mer om cookies og personvern her.</p>
+                <Link as={GatsbyLink} to='/cookies-og-personvern-gdpr'>
+                  <strong>Les mer om cookies og personvern her.</strong>
+                </Link>
+              </Text>
             </DrawerBody>
             <DrawerFooter>
-              <Button variant='standard' onClick={onClose}>
+              <Button variant='menu-button' color='black' onClick={onClose}>
                 Den er grei!
               </Button>
             </DrawerFooter>

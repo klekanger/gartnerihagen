@@ -43,8 +43,8 @@ const PrivateInfoList = () => {
           Informasjon fra styret
         </Heading>
         <Text as='p' fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          at massa hendrerit, ultrices justo quis, vestibulum erat.
+          På denne siden finner du nyttig informasjon fra styret. Ta kontakt
+          hvis det er noe du savner, eller har tilbakemeldinger.
         </Text>
       </Box>
 
@@ -99,8 +99,7 @@ const PrivateInfoList = () => {
 
             <Image
               as={GatsbyImage}
-              fluid={post.featuredImage.fluid}
-              shadow='lg'
+              fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
               mb={[2, 2, 8, 8]}
               ml={[0, 0, 39, 39]}
               w={['100%', '100%', '50%', '50%']}

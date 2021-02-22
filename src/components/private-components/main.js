@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import ServiceBox from './serviceBox';
-import ArticleGrid from '../sections/articleGrid';
 import PrivateInfoList from './privateInfoList';
 import SEO from '../seo';
 

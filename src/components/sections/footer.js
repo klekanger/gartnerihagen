@@ -71,7 +71,7 @@ export default function Footer() {
               href='https://www.gatsbyjs.com/'
               _hover={{ textDecor: 'none', color: 'light' }}
             >
-              Gatsby <SiGatsby />
+              Gatsby <SiGatsby style={{ display: 'inline' }} />
             </Link>
           </Text>
         </Box>

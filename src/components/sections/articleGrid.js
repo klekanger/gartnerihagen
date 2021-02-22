@@ -55,7 +55,7 @@ const ArticleGrid = () => {
           <Link as={GatsbyLink} to={`/blog/${post.slug}`}>
             <Image
               as={GatsbyImage}
-              fluid={post.featuredImage.fluid}
+              fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
               mb={5}
               alt={post.featuredImage.description}
               _hover={{
