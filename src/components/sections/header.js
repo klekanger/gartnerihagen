@@ -146,9 +146,10 @@ const Header = (props) => {
       <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
         <Icon
           as={GartnerihagenLogo}
-          aria-label='Gartnerihagen logo'
           w={['60vw', '55vw', '35vw', '30vw']}
           h='auto'
+          aria-label='Gartnerihagen logo'
+          alt='Gartnerihagen logo'
         />
       </Link>
 
