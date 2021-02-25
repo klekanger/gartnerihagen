@@ -19,7 +19,7 @@ import ArticleGrid from '../components/sections/articleGrid';
 
 const IndexPage = () => {
   const [hasSeenCookieBanner, setHasSeenCookieBanner] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
   // Set GDPR consent cookie (if it does not excist)
   const setGDPRCookieOnce = () => {

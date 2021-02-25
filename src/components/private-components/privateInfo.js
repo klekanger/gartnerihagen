@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
-import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Image, Heading, Text, Link, Button } from '@chakra-ui/react';
+import { Box, Image, Heading, Text, Button } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { format, parseISO } from 'date-fns';
