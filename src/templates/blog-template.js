@@ -118,3 +118,6 @@ const BlogPostTemplate = ({ data, errors }) => {
 };
 
 export default BlogPostTemplate;
+
+// TODO
+// Add error checking

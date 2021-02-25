@@ -4,6 +4,9 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   const blogPostTemplate = path.resolve(`src/templates/blog-template.js`);
   const pageTemplate = path.resolve(`src/templates/page-template.js`);
+  const blogArchiveTemplate = path.resolve(
+    `./src/templates/blog-archive-template.js`
+  );
 
   return graphql(`
     {
@@ -52,6 +55,22 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/blog/${slug}`,
         component: blogPostTemplate,
         context: { id },
+      });
+    });
+
+    // Create blog archive pages
+    const postsPerPage = 2;
+    const numPages = Math.ceil(blogNodes.length / postsPerPage);
+    Array.from({ length: numPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+        component: blogArchiveTemplate,
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages,
+          currentPage: i + 1,
+        },
       });
     });
   });
