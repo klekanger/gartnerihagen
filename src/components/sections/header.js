@@ -146,6 +146,7 @@ const Header = (props) => {
       <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
         <Icon
           as={GartnerihagenLogo}
+          aria-label='Gartnerihagen logo'
           w={['60vw', '55vw', '35vw', '30vw']}
           h='auto'
         />
@@ -176,7 +177,7 @@ const Header = (props) => {
           pt={[4, 4, 0, 0]}
         >
           <MenuItems to='/informasjon'>For beboere</MenuItems>
-          <MenuItems to='/blogg'>Blogg</MenuItems>
+          <MenuItems to='/blog'>Blogg</MenuItems>
           <MenuItems to='/om-boligsameiet-gartnerihagen'>Om oss</MenuItems>
           <MenuItems to='/styret' isLast>
             Styret
