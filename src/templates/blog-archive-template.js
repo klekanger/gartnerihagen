@@ -1,10 +1,24 @@
-import React from 'react';
+// Blog archive page
+// Number of blog posts per page are set in gatsby-node.js (postsPerPage)
 
+import React from 'react';
 import { graphql, Link as GatsbyLink } from 'gatsby';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import {
+  ChevronRightIcon,
+  ArrowForwardIcon,
+  ArrowBackIcon,
+} from '@chakra-ui/icons';
 import GatsbyImage from 'gatsby-image';
 import SEO from '../components/seo';
-import { Box, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Link,
+  Text,
+} from '@chakra-ui/react';
 
 export const query = graphql`
   query blogListQuery($skip: Int!, $limit: Int!) {
@@ -39,8 +53,26 @@ export const query = graphql`
   }
 `;
 
-const BlogArchive = ({ data, errors }) => {
+const BlogArchive = ({ pageContext, data, errors }) => {
   const { nodes } = data.posts;
+  const { currentPage, numPages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
+  const prevPage =
+    currentPage - 1 === 1 ? '/blog' : `/blog/${(currentPage - 1).toString()}`;
+  const nextPage = `/blog/${(currentPage + 1).toString()}`;
+
+  if (errors) {
+    return (
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={8} pb={16}>
+        <Box pt={['8', '8', '16', '16']} textAlign='left'>
+          <Heading as='h1' size='3xl' textColor='black' pb={16}>
+            Noe gikk galt...
+          </Heading>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -97,6 +129,7 @@ const BlogArchive = ({ data, errors }) => {
                   </Link>
                 </Text>
               </Box>
+
               <Image
                 as={GatsbyImage}
                 fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
@@ -110,6 +143,36 @@ const BlogArchive = ({ data, errors }) => {
             </Flex>
           ))}
         </Box>
+        <Text
+          fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
+          align={['center', 'left']}
+        >
+          {!isFirst && (
+            <Button
+              as={GatsbyLink}
+              to={prevPage}
+              rel='prev'
+              variant='menu-button'
+              leftIcon={<ArrowBackIcon />}
+              mr={1}
+            >
+              Forrige side
+            </Button>
+          )}
+
+          {!isLast && (
+            <Button
+              as={GatsbyLink}
+              to={nextPage}
+              rel='next'
+              variant='menu-button'
+              rightIcon={<ArrowForwardIcon />}
+              ml={1}
+            >
+              Neste side
+            </Button>
+          )}
+        </Text>
       </Box>
     </>
   );
