@@ -1,10 +1,10 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link as GatsbyLink } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { Box, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Image } from '@chakra-ui/react';
 import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
@@ -116,12 +116,20 @@ const BlogPostTemplate = ({ data, errors }) => {
         >
           {publishDate}
         </Text>
+        <Box align='left'>
+          <Button
+            as={GatsbyLink}
+            to={`/blog/`}
+            variant='standard'
+            mb={16}
+            _hover={{ textDecor: 'none' }}
+          >
+            Gå tilbake
+          </Button>
+        </Box>
       </Box>
     </>
   );
 };
 
 export default BlogPostTemplate;
-
-// TODO
-// Add error checking

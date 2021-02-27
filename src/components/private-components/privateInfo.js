@@ -56,7 +56,7 @@ const PrivateInfo = (props) => {
       <Text
         fontSize={['sm', 'sm', 'sm', 'sm']}
         fontStyle='italic'
-        pb={8}
+        pb={[4, 16]}
         textAlign='left'
       >
         {publishDate}

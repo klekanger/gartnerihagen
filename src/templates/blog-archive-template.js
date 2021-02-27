@@ -146,7 +146,7 @@ const BlogArchive = ({ pageContext, data, errors }) => {
               as={GatsbyLink}
               to={prevPage}
               rel='prev'
-              variant='menu-button'
+              variant='standard'
               leftIcon={<ArrowBackIcon />}
               mr={1}
             >
@@ -159,7 +159,7 @@ const BlogArchive = ({ pageContext, data, errors }) => {
               as={GatsbyLink}
               to={nextPage}
               rel='next'
-              variant='menu-button'
+              variant='standard'
               rightIcon={<ArrowForwardIcon />}
               ml={1}
             >
