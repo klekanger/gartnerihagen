@@ -5,6 +5,7 @@ export default {
   black: '#090A24',
   white: '#F6F7FD',
   dark: '#0a0a0a',
+  primaryLight: '#78ad96',
   logoDarkGreen: '#43A889',
   logoLightGreen: '#C8DD80',
   /* dark: '#13254C', */
