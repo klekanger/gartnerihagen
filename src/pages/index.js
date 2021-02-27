@@ -1,5 +1,4 @@
 import React from 'react';
-
 import SEO from '../components/seo';
 import CookieConsent from '../components/cookieConsent';
 import HeroWide from '../components/sections/hero-wide';

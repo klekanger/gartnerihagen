@@ -90,7 +90,7 @@ export default function ServiceBox() {
     }
   `);
 
-  const { menuItems } = data;
+  const { menuItems } = data || [];
 
   return (
     <Box pt={[4, 8, 8, 16]} pb={[8, 8, 16, 16]} textAlign='left'>
@@ -99,20 +99,20 @@ export default function ServiceBox() {
         justify='space-between'
         py={['2', '2', '8', '8']}
       >
-        <MenuButton linkTo={menuItems.menu1File.file.url}>
+        <MenuButton linkTo={menuItems?.menu1File.file.url}>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu1}
+            {menuItems?.menu1}
           </Text>
         </MenuButton>
 
-        <MenuButton linkTo={menuItems.menu2File.file.url}>
+        <MenuButton linkTo={menuItems?.menu2File.file.url}>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu2}
+            {menuItems?.menu2}
           </Text>
         </MenuButton>
-        <MenuButton linkTo={menuItems.menu3File.file.url}>
+        <MenuButton linkTo={menuItems?.menu3File.file.url}>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu3}
+            {menuItems?.menu3}
           </Text>
         </MenuButton>
       </Stack>
@@ -121,19 +121,19 @@ export default function ServiceBox() {
         justify='space-between'
         pt={0}
       >
-        <MenuButton linkTo={menuItems.menu4File.file.url}>
+        <MenuButton linkTo={menuItems?.menu4File.file.url}>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu4}
+            {menuItems?.menu4}
           </Text>
         </MenuButton>
         <MenuButton>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu5}
+            {menuItems?.menu5}
           </Text>
         </MenuButton>
         <MenuButton>
           <Text variant='dark' textAlign='center'>
-            {menuItems.menu6}
+            {menuItems?.menu6}
           </Text>
         </MenuButton>
       </Stack>

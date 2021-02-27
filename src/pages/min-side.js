@@ -12,6 +12,7 @@ import NotLoggedIn from '../components/private-components/notLoggedIn';
 const Informasjon = () => {
   const { user, netlifyIdentity } = useContext(IdentityContext);
 
+  // Prevent not logged in users from accessing private routes
   if (!user) {
     netlifyIdentity.open();
     return <NotLoggedIn />;
