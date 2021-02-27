@@ -27,7 +27,7 @@ const overrides = {
   },
   styles,
   colors,
-  /*   fonts: {
+  /* fonts: {
     heading: 'Open Sans',
     body: 'Source Sans Pro',
   }, */
