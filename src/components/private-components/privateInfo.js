@@ -7,10 +7,8 @@ import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
 
-const PrivateInfo = (props) => {
-  // Get slug of current post
-  const { slug } = props;
-  const postNodes = props?.postData?.privatePosts?.nodes || [];
+const PrivateInfo = ({ slug, postData }) => {
+  const postNodes = postData?.privatePosts?.nodes || [];
   // Find the post with the same slug as the current page
   const postToShow = postNodes.find((post) => post.slug === slug);
   const { title, bodyText, featuredImage, createdAt, updatedAt } = postToShow;
