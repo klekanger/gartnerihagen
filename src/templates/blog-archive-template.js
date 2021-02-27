@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/icons';
 import GatsbyImage from 'gatsby-image';
 import SEO from '../components/seo';
+import ErrorPage from '../components/errorPage';
 import {
   Box,
   Button,
@@ -63,21 +64,13 @@ const BlogArchive = ({ pageContext, data, errors }) => {
   const nextPage = `/blog/${(currentPage + 1).toString()}`;
 
   if (errors) {
-    return (
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={8} pb={16}>
-        <Box pt={['8', '8', '16', '16']} textAlign='left'>
-          <Heading as='h1' size='3xl' textColor='black' pb={16}>
-            Noe gikk galt...
-          </Heading>
-        </Box>
-      </Box>
-    );
+    return <ErrorPage />;
   }
 
   return (
     <>
       <SEO />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={8} pb={16}>
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pt={8} pb={16}>
         <Box pt={['8', '8', '16', '16']} textAlign='left'>
           <Heading as='h1' size='3xl' textColor='black' pb={16}>
             Blogg

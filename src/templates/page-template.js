@@ -6,6 +6,7 @@ import norwegian from 'date-fns/locale/nb';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { Box, Heading, Text, Image } from '@chakra-ui/react';
 import SEO from '../components/seo';
+import ErrorPage from '../components/errorPage';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
 export const query = graphql`
@@ -53,6 +54,10 @@ const BlogPostTemplate = ({ data, errors }) => {
     excerpt,
   } = data.contentfulSide;
 
+  if (errors) {
+    return <ErrorPage />;
+  }
+
   // Format article dates
   const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
     locale: norwegian,
@@ -84,7 +89,7 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={pageImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={16}>
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pt={16}>
         <Heading
           as='h1'
           fontSize={['4xl', '4xl', '6xl', '6xl']}
