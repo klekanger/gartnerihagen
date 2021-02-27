@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <>
       <SEO />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']}>
+      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']}>
         <ServiceBox />
         <PrivateInfoList />
       </Box>
