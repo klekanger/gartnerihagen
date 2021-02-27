@@ -69,6 +69,8 @@ const renderRichTextOptions = {
             as={GatsbyImage}
             fluid={fluid}
             size='100%'
+            mt={8}
+            mb={4}
             shadow='lg'
             alt={description}
           />

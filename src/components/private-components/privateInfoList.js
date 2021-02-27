@@ -52,6 +52,7 @@ const PrivateInfoList = () => {
         {postNodes.map((post) => (
           <Flex
             key={post.contentful_id}
+            pb={8}
             direction={['column-reverse', 'column-reverse', 'row', 'row']}
           >
             <Box ml={0} mb={[4, 4, 0, 0]} w={['100%', '100%', '50%', '50%']}>

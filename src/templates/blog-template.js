@@ -111,7 +111,7 @@ const BlogPostTemplate = ({ data, errors }) => {
         <Text
           fontSize={['sm', 'sm', 'sm', 'sm']}
           fontStyle='italic'
-          pb={4}
+          pb={[4, 16]}
           textAlign='left'
         >
           {publishDate}
