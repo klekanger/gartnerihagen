@@ -2,8 +2,8 @@
 // Providing the user with useful links to documents etc.
 
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { Box, Stack, Text } from '@chakra-ui/react';
+import { useStaticQuery, graphql, Link as GatsbyLink } from 'gatsby';
+import { Box, Link, Stack, Text } from '@chakra-ui/react';
 
 // Define custom servicebox buttons as clickable links
 // Button title and link URL are fetched from Contentful
@@ -12,35 +12,68 @@ import { Box, Stack, Text } from '@chakra-ui/react';
 // fetching all documents for menu5files and menu6files
 
 const MenuButton = (props) => {
-  return (
-    <Box
-      as='a'
-      w={['95vw', '95vw', '30%', '30%']}
-      h={['4rem', '6rem']}
-      p={3}
-      bg='tertiaryButton'
-      rounded='md'
-      shadow='lg'
-      d='flex'
-      alignItems='center'
-      justifyContent='center'
-      fontSize={['md', '2xl', '2xl', '2xl']}
-      fontWeight='600'
-      href={props.linkTo || null}
-      target='_blank'
-      rel='noopener noreferrer'
-      _hover={{
-        transform: 'scale(1.02)',
-        transitionDuration: '0.1s',
-        textColor: 'white',
-      }}
-      _active={{
-        transform: 'scale(1.00)',
-      }}
-    >
-      {props.children}
-    </Box>
-  );
+  if (!props.multiLink) {
+    return (
+      <Box
+        as='a'
+        w={['95vw', '95vw', '30%', '30%']}
+        h={['4rem', '6rem']}
+        p={3}
+        bg='tertiaryButton'
+        rounded='md'
+        shadow='lg'
+        d='flex'
+        alignItems='center'
+        justifyContent='center'
+        fontSize={['md', '2xl', '2xl', '2xl']}
+        fontWeight='600'
+        href={props.linkTo || null}
+        target='_blank'
+        rel='noopener noreferrer'
+        _hover={{
+          transform: 'scale(1.02)',
+          transitionDuration: '0.1s',
+          textColor: 'white',
+        }}
+        _active={{
+          transform: 'scale(1.00)',
+        }}
+      >
+        {props.children}
+      </Box>
+    );
+  } else {
+    return (
+      <Box
+        as={GatsbyLink}
+        to={props.to || '#'}
+        w={['95vw', '95vw', '30%', '30%']}
+        h={['4rem', '6rem']}
+        p={3}
+        bg='tertiaryButton'
+        rounded='md'
+        shadow='lg'
+        d='flex'
+        alignItems='center'
+        justifyContent='center'
+        fontSize={['md', '2xl', '2xl', '2xl']}
+        fontWeight='600'
+        href={props.linkTo || null}
+        target='_blank'
+        rel='noopener noreferrer'
+        _hover={{
+          transform: 'scale(1.02)',
+          transitionDuration: '0.1s',
+          textColor: 'white',
+        }}
+        _active={{
+          transform: 'scale(1.00)',
+        }}
+      >
+        {props.children}
+      </Box>
+    );
+  }
 };
 
 export default function ServiceBox() {
@@ -126,12 +159,12 @@ export default function ServiceBox() {
             {menuItems?.menu4}
           </Text>
         </MenuButton>
-        <MenuButton>
+        <MenuButton multiLink to='/informasjon/referater'>
           <Text variant='dark' textAlign='center'>
             {menuItems?.menu5}
           </Text>
         </MenuButton>
-        <MenuButton>
+        <MenuButton multiLink to='/informasjon/dokumenter'>
           <Text variant='dark' textAlign='center'>
             {menuItems?.menu6}
           </Text>

@@ -3,7 +3,6 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../sections/documentLibrary';
 
 export default function Referater({ title, excerpt, content, ...props }) {
-  console.log(props);
   return (
     <Box
       w='95vw'
