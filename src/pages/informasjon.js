@@ -8,6 +8,7 @@ import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 import Main from '../components/private-components/main';
 import PrivateInfo from '../components/private-components/privateInfo';
+import Referater from '../components/private-components/referater';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
 
 const Informasjon = () => {
@@ -69,6 +70,12 @@ const Informasjon = () => {
         path='/informasjon/post/:slug'
         component={PrivateInfo}
         postData={data}
+      />
+      <PrivateRoute
+        path='/informasjon/referater'
+        component={Referater}
+        title='Referater fra årsmøter'
+        excerpt='På denne siden finner du referater fra alle tidligere årsmøter. Er det noe du savner, ta kontakt med styret.'
       />
     </Router>
   );
