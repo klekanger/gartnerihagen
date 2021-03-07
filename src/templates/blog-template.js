@@ -83,10 +83,10 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={featuredImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pt={16}>
+      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={[8, 12, 16, 24]}>
         <Heading
           as='h1'
-          fontSize={['4xl', '4xl', '6xl', '6xl']}
+          fontSize={['4xl', '6xl', '6xl', '7xl']}
           textAlign={['center', 'left', 'left', 'left']}
           pb={2}
         >

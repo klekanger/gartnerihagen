@@ -9,7 +9,7 @@ export default function Main() {
   return (
     <>
       <SEO />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pb={16}>
+      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={4}>
         <ServiceBox />
         <InfoFraStyret />
         <PrivateInfoList />
