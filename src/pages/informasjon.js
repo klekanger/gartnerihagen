@@ -9,6 +9,7 @@ import PrivateRoute from '../utils/privateRoute';
 import Main from '../components/private-components/main';
 import PrivateInfo from '../components/private-components/privateInfo';
 import Referater from '../components/private-components/referater';
+import Dokumenter from '../components/private-components/dokumenter';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
 
 const Informasjon = () => {
@@ -76,6 +77,12 @@ const Informasjon = () => {
         component={Referater}
         title='Referater fra årsmøter'
         excerpt='På denne siden finner du referater fra alle tidligere årsmøter. Er det noe du savner, ta kontakt med styret.'
+      />
+      <PrivateRoute
+        path='/informasjon/dokumenter'
+        component={Dokumenter}
+        title='Dokumenter'
+        excerpt='Her kan du laste ned relevante dokumenter. Er det noe du savner, ta kontakt med styret.'
       />
     </Router>
   );

@@ -3,11 +3,11 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../sections/documentLibrary';
 
-export default function Referater({ title, excerpt, ...props }) {
+export default function Dokumenter({ title, excerpt, ...props }) {
   const { menu } = useStaticQuery(graphql`
     {
       menu: contentfulServiceMenu {
-        files: menu5Files {
+        files: menu6Files {
           contentful_id
           file {
             url
