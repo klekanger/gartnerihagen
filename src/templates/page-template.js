@@ -1,8 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
-import { format, parseISO } from 'date-fns';
-import norwegian from 'date-fns/locale/nb';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { Box, Heading, Text, Image } from '@chakra-ui/react';
 import SEO from '../components/seo';
@@ -13,8 +11,8 @@ export const query = graphql`
   query PageQuery($id: String!) {
     contentfulSide(contentful_id: { eq: $id }) {
       pageTitle
-      createdAt
-      updatedAt
+      createdAt(formatString: "DD.MM.YYYY")
+      updatedAt(formatString: "DD.MM.YYYY")
       excerpt {
         excerpt
       }
@@ -58,19 +56,11 @@ const BlogPostTemplate = ({ data, errors }) => {
     return <ErrorPage />;
   }
 
-  // Format article dates
-  const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
-    locale: norwegian,
-  });
-  const updatedAtFormated = format(parseISO(updatedAt), 'dd. LLLL yyyy', {
-    locale: norwegian,
-  });
-
   // Show publish date on article. Update date only if updated.
   const publishDate =
     createdAt !== updatedAt
-      ? `Publisert: ${createdAtFormated} (oppdatert: ${updatedAtFormated})`
-      : `Publisert: ${createdAtFormated}`;
+      ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
+      : `Publisert: ${createdAt}`;
 
   const topImage = pageImage?.fluid ? (
     <Image
