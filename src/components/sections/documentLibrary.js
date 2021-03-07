@@ -1,14 +1,29 @@
 import React from 'react';
-import { Link, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import {
+  Link,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 
 export default function DocumentLibrary({ content }) {
+  const smallScreen = useBreakpointValue({
+    base: true,
+    sm: false,
+  });
+
+  console.log(smallScreen);
   return (
     <Table variant='unstyled' mt={8} mb={16}>
       <Thead>
         <Tr borderBottom='1px solid #333'>
           <Th>Filnavn</Th>
           <Th>Opprettet</Th>
-          <Th>Oppdatert</Th>
+          <Th hidden={smallScreen}>Oppdatert</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -20,7 +35,7 @@ export default function DocumentLibrary({ content }) {
               </Link>
             </Td>
             <Td>{element.createdAt}</Td>
-            <Td>{element.updatedAt}</Td>
+            <Td hidden={smallScreen}>{element.updatedAt}</Td>
             {element.file.contentful_id}
           </Tr>
         ))}
