@@ -3,12 +3,12 @@
 
 import React from 'react';
 import { useStaticQuery, graphql, Link as GatsbyLink } from 'gatsby';
-import { Box, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
 
 // Define custom servicebox buttons as clickable links
 // Button title and link URL are fetched from Contentful
 // The first four buttons link to one document per button
-// The two last buttons (5 and 6) are multi document buttons and should go to pages
+// The two last buttons (5 and 6) are multi document buttons and should go to a component
 // fetching all documents for menu5files and menu6files
 
 const MenuButton = (props) => {
@@ -108,17 +108,7 @@ export default function ServiceBox() {
           }
         }
         menu5
-        menu5Files {
-          file {
-            url
-          }
-        }
         menu6
-        menu6Files {
-          file {
-            url
-          }
-        }
       }
     }
   `);

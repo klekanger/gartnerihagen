@@ -1,8 +1,27 @@
 import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../sections/documentLibrary';
 
-export default function Referater({ title, excerpt, content, ...props }) {
+export default function Referater({ title, excerpt, ...props }) {
+  const { menu } = useStaticQuery(graphql`
+    query GetFiles {
+      menu: contentfulServiceMenu {
+        files: menu5Files {
+          contentful_id
+          file {
+            url
+            fileName
+          }
+          createdAt(formatString: "DD.MM.YYYY")
+          updatedAt(formatString: "DD.MM.YYYY")
+        }
+      }
+    }
+  `);
+
+  const content = menu?.files || [];
+
   return (
     <Box
       w='95vw'
@@ -22,7 +41,7 @@ export default function Referater({ title, excerpt, content, ...props }) {
         {title}
       </Heading>
       <Text>{excerpt}</Text>
-      <DocumentLibrary data={content} />
+      <DocumentLibrary content={content} />
     </Box>
   );
 }
