@@ -1,11 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
-import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { Box, Heading, Text, Image } from '@chakra-ui/react';
 import SEO from '../components/seo';
+import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
-import renderRichTextOptions from '../theme/renderRichTextOptions';
 
 export const query = graphql`
   query PageQuery($id: String!) {
@@ -56,22 +53,6 @@ const BlogPostTemplate = ({ data, errors }) => {
     return <ErrorPage />;
   }
 
-  // Show publish date on article. Update date only if updated.
-  const publishDate =
-    createdAt !== updatedAt
-      ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
-      : `Publisert: ${createdAt}`;
-
-  const topImage = pageImage?.fluid ? (
-    <Image
-      as={GatsbyImage}
-      fluid={{ ...pageImage.fluid, aspectRation: 16 / 10 }}
-      rounded='md'
-      shadow='lg'
-      alt={pageImage.description}
-    />
-  ) : null;
-
   return (
     <>
       <SEO
@@ -79,28 +60,13 @@ const BlogPostTemplate = ({ data, errors }) => {
         image={pageImage?.fluid?.src || null}
         description={excerpt?.excerpt || null}
       />
-      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={[8, 12, 16, 24]}>
-        <Heading
-          as='h1'
-          fontSize={['4xl', '6xl', '6xl', '7xl']}
-          textAlign={['center', 'left', 'left', 'left']}
-          pb={2}
-        >
-          {pageTitle}
-        </Heading>
-        {topImage}
-        <Text as='div' my={[5, 10, 10, 10]}>
-          {renderRichText(pageText, renderRichTextOptions)}
-        </Text>
-        <Text
-          fontSize={['sm', 'sm', 'sm', 'sm']}
-          fontStyle='italic'
-          pb={[4, 16]}
-          textAlign='left'
-        >
-          {publishDate}
-        </Text>
-      </Box>
+      <Article
+        title={pageTitle}
+        bodyText={pageText}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        mainImage={pageImage}
+      />
     </>
   );
 };

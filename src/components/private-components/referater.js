@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
-import DocumentLibrary from '../sections/documentLibrary';
+import DocumentLibrary from '../documentLibrary';
 
 export default function Referater({ title, excerpt, ...props }) {
   const { menu } = useStaticQuery(graphql`

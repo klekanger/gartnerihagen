@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
-import { MotionBox } from '../../utils/MotionBox';
+import { MotionBox } from '../motionBox';
 import { Box, Button, Image, Heading, Text } from '@chakra-ui/react';
 
 const HeroWide = () => {

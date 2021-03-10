@@ -3,14 +3,12 @@
 
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import Layout from './components/layouts/layout'; // We're going with the standard Chakra-fonts
-/* import { Fonts } from './theme/fonts'; */
+import Layout from './components/layouts/layout';
 import theme from './theme/';
 
 export const wrapPageElement = ({ element }) => {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      {/* <Fonts /> */}
       <Layout>{element}</Layout>
     </ChakraProvider>
   );

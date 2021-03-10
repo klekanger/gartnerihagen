@@ -131,7 +131,7 @@ const Header = (props) => {
       justify='space-between'
       wrap='wrap'
       w='100%'
-      mt={hideMenu ? '-120' : '0'}
+      mt={hideMenu ? '-150' : '0'}
       pt={4}
       pb={5}
       px={[4, 4, 10, 10]}
@@ -146,7 +146,7 @@ const Header = (props) => {
       <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
         <Icon
           as={GartnerihagenLogo}
-          w={['60vw', '55vw', '35vw', '30vw']}
+          w={['60vw', '55vw', '35vw', '25vw']}
           h='auto'
           aria-label='Gartnerihagen logo'
           alt='Gartnerihagen logo'
@@ -195,3 +195,5 @@ export default Header;
 
 // TODO
 // Use nullish coalescing operator for setting the login button text
+//
+// USe position: sticky in stead of JS for sticky navbar

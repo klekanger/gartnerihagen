@@ -8,9 +8,20 @@ import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
 
 const PrivateInfo = ({ slug, postData }) => {
-  const postNodes = postData?.privatePosts?.nodes || [];
+  const postNodes = postData?.privatePosts.nodes ?? [];
+
   // Find the post with the same slug as the current page
   const postToShow = postNodes.find((post) => post.slug === slug);
+
+  // Slug does not exist -- redirect to 404
+  if (!postToShow) {
+    return (
+      <Box maxWidth={['97%', '95%', '95%', '70%']} py={[8, 12, 16, 24]}>
+        <Heading as='h1'>Siden eksisterer ikke</Heading>
+      </Box>
+    );
+  }
+
   const { title, bodyText, featuredImage, createdAt, updatedAt } = postToShow;
 
   // Format article dates
