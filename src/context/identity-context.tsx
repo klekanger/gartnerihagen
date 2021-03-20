@@ -1,15 +1,11 @@
-import * as React from 'react'
+import * as React from 'react';
 import { createContext, useState, useEffect } from 'react';
 import * as netlifyIdentity from 'netlify-identity-widget';
 
-export const IdentityContext: any = createContext({});
+export const IdentityContext = createContext<any>({});
 
-type IdentityProviderProps = {
-  children: React.ReactNode | undefined
-}
-
-const IdentityProvider = (props: IdentityProviderProps) => {
-  const [user, setUser] = useState();
+const IdentityProvider = ({children}: {children: React.ReactNode}) => {
+  const [user, setUser] = useState<object | null>();
 
   useEffect(() => {
     netlifyIdentity.setLocale('en');
@@ -25,11 +21,9 @@ const IdentityProvider = (props: IdentityProviderProps) => {
 
   return (
     <IdentityContext.Provider value={{ netlifyIdentity, user }}>
-      {props.children}
+      {children}
     </IdentityContext.Provider>
   );
 };
 
-const el = ({ element } : {element: any}) => <IdentityProvider>{element}</IdentityProvider>;
-
-export default el;
+export default IdentityProvider
