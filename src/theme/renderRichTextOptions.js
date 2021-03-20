@@ -1,5 +1,5 @@
-import React from 'react';
-import GatsbyImage from 'gatsby-image';
+import * as React from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { Heading, Text, List, ListItem, Image, Box } from '@chakra-ui/react';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 
@@ -61,13 +61,13 @@ const renderRichTextOptions = {
     ),
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const { fluid, description, title } = node.data.target;
+      const { gatsbyImageData, description, title } = node.data.target;
 
       return (
         <Box>
           <Image
             as={GatsbyImage}
-            fluid={fluid}
+            image={gatsbyImageData}
             size='100%'
             mt={8}
             mb={4}

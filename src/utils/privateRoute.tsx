@@ -1,10 +1,19 @@
-import React, { useEffect, useContext } from 'react';
+import * as React from 'react';
+import { useEffect, useContext } from 'react';
 import { navigate } from 'gatsby';
 import { IdentityContext } from '../context/identity-context';
 
-function PrivateRoute(props) {
+interface IPrivateroute {
+  component: any,
+  location?: string,
+  path?: string,
+  postData?: any,
+  title?: string,
+  excerpt?: string,
+}
+
+function PrivateRoute({ component: Component, location, ...rest }: IPrivateroute) {
   const { user } = useContext(IdentityContext);
-  const { component: Component, location, ...rest } = props;
 
   useEffect(() => {
     if (!user) {

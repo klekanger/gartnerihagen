@@ -24,26 +24,12 @@ module.exports = {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/informasjon/*`, `/min-side/*`] },
     },
-    {
-      resolve: '@chakra-ui/gatsby-plugin',
-      options: {
-        /**
-         * @property {boolean} [isResettingCSS=true]
-         * if false, this plugin will not use `<CSSReset />
-         */
-        isResettingCSS: true,
-        /**
-         * @property {boolean} [isUsingColorMode=true]
-         * if false, this plugin will not use <ColorModeProvider />
-         */
-        isUsingColorMode: false,
-      },
-    },
     'gatsby-plugin-emotion',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {

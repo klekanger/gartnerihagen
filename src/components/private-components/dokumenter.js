@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../documentLibrary';
 
-export default function Dokumenter({ title, excerpt, ...props }) {
+function Dokumenter({ title, excerpt, ...props }) {
   const { menu } = useStaticQuery(graphql`
     {
       menu: contentfulServiceMenu {
@@ -45,3 +45,5 @@ export default function Dokumenter({ title, excerpt, ...props }) {
     </Box>
   );
 }
+
+export default Dokumenter;

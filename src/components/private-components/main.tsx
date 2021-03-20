@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { Box } from '@chakra-ui/react';
 import ServiceBox from './serviceBox';
 import InfoFraStyret from './infoFraStyret';
 import PrivateInfoList from './privateInfoList';
 import SEO from '../seo';
 
-export default function Main() {
+function Main() {
   return (
     <>
       <SEO />
@@ -17,3 +17,5 @@ export default function Main() {
     </>
   );
 }
+
+export default Main;

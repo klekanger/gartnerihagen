@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import * as React from 'react'
+import  { useState, useContext, useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
@@ -19,12 +20,31 @@ import { IdentityContext } from '../../context/identity-context';
 //
 // Main header component
 //
-const Header = (props) => {
+
+interface HeaderProps {
+  children: React.ReactNode
+}
+
+interface MenuItemsProps {
+  to: string,
+  children: string,
+  isLast?: boolean
+}
+
+function Header (props: HeaderProps) {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
   const { user, netlifyIdentity } = useContext(IdentityContext);
   const toggleMenu = () => setShowMenuItems(!showMenuItems);
 
+
+  // Hide menu if scrolled more than 15 % of the screen height
+  const handleScroll= () => {
+    const yPos: number = window.scrollY || 0;
+    const scrHeight: number = window.innerHeight || 900;
+    yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
+  };
+  
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -37,15 +57,10 @@ const Header = (props) => {
     setShowMenuItems(false);
   }, [hideMenu]);
 
-  // Hide menu if scrolled more than 15 % of the screen height
-  const handleScroll = () => {
-    const yPos = window.scrollY || 0;
-    const scrHeight = window.innerHeight || 900;
-    yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
-  };
 
   // Render one menu item
-  const MenuItems = (props) => {
+  const MenuItems = (props: MenuItemsProps) => {
+    
     const { children, isLast, to = '/', ...rest } = props;
     return (
       <Text
@@ -73,6 +88,7 @@ const Header = (props) => {
     );
   };
 
+  // Show user name or "Logg inn" on Login button
   const userName = user?.user_metadata.full_name || '';
   const loginButtonText =
     userName !== '' ? userName.slice(0, 6).padEnd(9, '.') : 'Logg inn';
@@ -192,8 +208,3 @@ const Header = (props) => {
 };
 
 export default Header;
-
-// TODO
-// Use nullish coalescing operator for setting the login button text
-//
-// USe position: sticky in stead of JS for sticky navbar

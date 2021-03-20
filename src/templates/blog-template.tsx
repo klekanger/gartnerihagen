@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import Article from '../components/article';
 
-export const query = graphql`
+export const query: void = graphql`
   query BlogPostQuery($id: String!) {
     contentfulBlogPost(contentful_id: { eq: $id }) {
       title
@@ -25,17 +25,17 @@ export const query = graphql`
             __typename
             title
             description
-            fluid {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(
+              layout: CONSTRAINED
+              aspectRatio: 1.6)
           }
         }
       }
 
       featuredImage {
-        fluid {
-          ...GatsbyContentfulFluid_withWebp
-          src
+        gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
+        file {
+          url
         }
         title
         description
@@ -44,25 +44,49 @@ export const query = graphql`
   }
 `;
 
-const BlogPostTemplate = ({ data, errors }) => {
-  const {
-    title,
-    createdAt,
-    updatedAt,
-    bodyText,
-    excerpt,
-    featuredImage,
-  } = data.contentfulBlogPost;
+interface IContentfulBlogPost  {
+  data: {
+    contentfulBlogPost: {
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      bodyText: {
+        raw: string,
+      },
+      excerpt: any,
+      featuredImage: {
+        description: string,
+        title: string,
+        file: {
+          url: string
+        },
+        gatsbyImageData: JSON
+      } 
+    }
+  }
+  errors: any
+}
+
+const BlogPostTemplate = ({ data: {contentfulBlogPost}, errors }: IContentfulBlogPost) => {
 
   if (errors) {
     return <ErrorPage />;
   }
 
+  const {
+    title ,
+    createdAt,
+    updatedAt,
+    bodyText,
+    excerpt,
+    featuredImage,
+  } = contentfulBlogPost;
+
   return (
     <>
       <SEO
-        title={title || null}
-        image={featuredImage?.fluid?.src || null}
+        title={title}
+        image={featuredImage?.file?.url || null}
         description={excerpt?.excerpt || null}
       />
       <Article

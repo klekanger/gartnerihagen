@@ -1,10 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql } from 'gatsby';
 import SEO from '../components/seo';
 import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
 
-export const query = graphql`
+
+export const query: void = graphql`
   query PageQuery($id: String!) {
     contentfulSide(contentful_id: { eq: $id }) {
       pageTitle
@@ -21,16 +22,14 @@ export const query = graphql`
             __typename
             title
             description
-            fluid {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
       }
       pageImage {
-        fluid {
-          ...GatsbyContentfulFluid_withWebp
-          src
+        gatsbyImageData(layout: CONSTRAINED)
+        file {
+          url
         }
         title
         description
@@ -39,7 +38,18 @@ export const query = graphql`
   }
 `;
 
-const BlogPostTemplate = ({ data, errors }) => {
+type ContentfulSideTypes = {
+  pageTitle: string,
+  createdAt: string,
+  updatedAt: string,
+  pageText: {
+    raw: string
+  },
+  pageImage: any,
+  excerpt: any,
+}
+
+const BlogPostTemplate = ({ data, errors }: { data: any, errors: any }) => {
   const {
     pageTitle,
     createdAt,
@@ -47,7 +57,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     pageText,
     pageImage,
     excerpt,
-  } = data.contentfulSide;
+  } : ContentfulSideTypes = data.contentfulSide;
 
   if (errors) {
     return <ErrorPage />;
@@ -57,7 +67,7 @@ const BlogPostTemplate = ({ data, errors }) => {
     <>
       <SEO
         title={pageTitle || null}
-        image={pageImage?.fluid?.src || null}
+        image={pageImage?.file?.url || null}
         description={excerpt?.excerpt || null}
       />
       <Article

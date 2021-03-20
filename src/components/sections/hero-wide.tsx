@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
-import { MotionBox } from '../motionBox';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { motion } from 'framer-motion';
 import { Box, Button, Image, Heading, Text } from '@chakra-ui/react';
 
-const HeroWide = () => {
+function HeroWide ()  {
   const data = useStaticQuery(
     graphql`
       query {
@@ -16,9 +16,7 @@ const HeroWide = () => {
           }
           contentful_id
           pageImage {
-            fluid(maxWidth: 3000) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(layout: FULL_WIDTH, formats: WEBP, aspectRatio: 1.6)
             title
             imageDesc: description
           }
@@ -38,6 +36,8 @@ const HeroWide = () => {
     pageImage: { imageDesc },
   } = data.contentfulForsidetekst;
 
+  const MotionBox = motion(Box);
+
   return (
     <Box className='test' w='100vw' maxW='100%' mt='-80px'>
       <Box as='div' overflow='hidden'>
@@ -52,7 +52,7 @@ const HeroWide = () => {
         >
           <Image
             as={GatsbyImage}
-            fluid={pageImage.fluid}
+            image={pageImage.gatsbyImageData}
             alt={imageDesc}
             h={['70vh', '100vh']}
           />

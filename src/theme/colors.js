@@ -1,7 +1,7 @@
 // Custom color palette
 // Global CSS color settings for background and text are defined in styles.js
 
-export default {
+const colors = {
   black: '#090A24',
   white: '#F6F7FD',
   dark: '#0a0a0a',
@@ -21,6 +21,8 @@ export default {
   tertiaryButton: '#BECBD7',
   danger: '#ff3333',
 };
+
+export default colors;
 
 // Logo dark green: #43A889
 // Logo light green: #C8DD80

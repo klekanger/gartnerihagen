@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
-export default function InfoFraStyret() {
+function InfoFraStyret() {
   return (
     <Box
       bg='primaryLight'
@@ -22,3 +22,5 @@ export default function InfoFraStyret() {
     </Box>
   );
 }
+
+export default InfoFraStyret;

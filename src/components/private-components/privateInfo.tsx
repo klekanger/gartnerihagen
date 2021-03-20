@@ -1,17 +1,51 @@
-import React from 'react';
+import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { Box, Image, Heading, Text, Button } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { format, parseISO } from 'date-fns';
 import norwegian from 'date-fns/locale/nb';
 
-const PrivateInfo = ({ slug, postData }) => {
-  const postNodes = postData?.privatePosts.nodes ?? [];
+
+interface IPrivateInfoProps {
+  slug: string,
+  postData: {
+    privatePosts: {
+      nodes: {
+        author?: {
+          firstName: string,
+          lastName: string,
+        },
+        contentful_id: string,
+        createdAt: string ,
+        updatedAt: string,
+        title: string,
+        slug: string,
+        excerpt?: {
+          excerpt: string,
+        },
+        bodyText: {
+          raw: string,
+          references: any,
+        },
+        privatePost: boolean,
+        featuredImage?: {
+          description: string,
+          title: string,
+          gatsbyImageData: IGatsbyImageData
+        }
+        
+      }[]
+    }
+  }
+}
+
+function PrivateInfo({ slug, postData }: IPrivateInfoProps) {
+  const postNodes= postData?.privatePosts.nodes ?? [];
 
   // Find the post with the same slug as the current page
-  const postToShow = postNodes.find((post) => post.slug === slug);
+  const postToShow = postNodes.find((post: any) => post.slug === slug);
 
   // Slug does not exist -- redirect to 404
   if (!postToShow) {
@@ -38,10 +72,10 @@ const PrivateInfo = ({ slug, postData }) => {
       ? `Publisert: ${createdAtFormated} (oppdatert: ${updatedAtFormated})`
       : `Publisert: ${createdAtFormated}`;
 
-  const topImage = featuredImage?.fluid ? (
+  const topImage = featuredImage?.gatsbyImageData ? (
     <Image
       as={GatsbyImage}
-      fluid={featuredImage.fluid}
+      image={featuredImage.gatsbyImageData}
       shadow='lg'
       alt={featuredImage.description}
     />
@@ -84,11 +118,6 @@ const PrivateInfo = ({ slug, postData }) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default PrivateInfo;
-
-/*
-<Box w='95vw' ml='0' pr={['0', '0', '5vw', '30vw']} pt={16}>
-
-*/

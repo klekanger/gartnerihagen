@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Link,
   Table,
@@ -16,7 +16,6 @@ export default function DocumentLibrary({ content }) {
     sm: false,
   });
 
-  console.log(smallScreen);
   return (
     <Table variant='unstyled' mt={8} mb={16}>
       <Thead>

@@ -32,7 +32,7 @@ const NotFoundPage = () => {
         <br />
         <br />
         <Link to='/'>
-          <b>Gå tilbake til forsiden ></b>
+          <b>Gå tilbake til forsiden `{'>'}`</b>
         </Link>
       </p>
     </main>

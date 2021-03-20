@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { Flex, Box, Image, Link, Heading, Text } from '@chakra-ui/react';
 
 const PrivateInfoList = () => {
@@ -23,9 +23,7 @@ const PrivateInfoList = () => {
           }
           privatePost
           featuredImage {
-            fluid(maxWidth: 2000) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
             description
             title
           }
@@ -56,7 +54,6 @@ const PrivateInfoList = () => {
                   as='h1'
                   size='xl'
                   mb={4}
-                  my={[]}
                   textAlign='left'
                   _hover={{ color: 'blue.700' }}
                 >
@@ -90,7 +87,7 @@ const PrivateInfoList = () => {
 
             <Image
               as={GatsbyImage}
-              fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
+              image={post.featuredImage.gatsbyImageData}
               mb={[2, 2, 8, 8]}
               ml={[0, 0, 39, 39]}
               w={['100%', '100%', '50%', '50%']}

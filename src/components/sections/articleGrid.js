@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
 
@@ -26,9 +26,7 @@ const ArticleGrid = () => {
             lastName
           }
           featuredImage {
-            fluid(maxWidth: 2000) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
             description
             title
           }
@@ -56,11 +54,10 @@ const ArticleGrid = () => {
     >
       {postNodes.map((post) => (
         <Box key={post.contentful_id}>
-          <Link as={GatsbyLink} to={`/blog/${post.slug}`}>
+          <GatsbyLink to={`/blog/${post.slug}`}>
             <Image
               as={GatsbyImage}
-              fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
-              mb={5}
+              image={post.featuredImage.gatsbyImageData}
               alt={post.featuredImage.description}
               _hover={{
                 transform: 'scale(1.01)',
@@ -72,11 +69,12 @@ const ArticleGrid = () => {
               rounded='md'
               shadow='lg'
             />
-          </Link>
+          </GatsbyLink>
           <Heading
             as='h1'
             size='xl'
             mb={4}
+            mt={4}
             fontWeight='bold'
             color='gray.700'
             textAlign='left'

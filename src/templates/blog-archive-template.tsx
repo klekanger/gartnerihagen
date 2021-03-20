@@ -1,14 +1,14 @@
 // Blog archive page
 // Number of blog posts per page are set in gatsby-node.js (postsPerPage)
 
-import React from 'react';
+import * as React from 'react';
 import { graphql, Link as GatsbyLink } from 'gatsby';
 import {
   ChevronRightIcon,
   ArrowForwardIcon,
   ArrowBackIcon,
 } from '@chakra-ui/icons';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import {
@@ -21,7 +21,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-export const query = graphql`
+export const query: void = graphql`
   query blogListQuery($skip: Int!, $limit: Int!) {
     posts: allContentfulBlogPost(
       filter: { privatePost: { eq: false } }
@@ -43,9 +43,7 @@ export const query = graphql`
           lastName
         }
         featuredImage {
-          fluid(maxWidth: 2000) {
-            ...GatsbyContentfulFluid_withWebp
-          }
+          gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
           description
           title
         }
@@ -54,8 +52,38 @@ export const query = graphql`
   }
 `;
 
-const BlogArchive = ({ pageContext, data, errors }) => {
-  const { nodes } = data.posts;
+interface IBlogArchive {
+  pageContext: {
+    currentPage: number,
+    limit: number,
+    numPages: number,
+    skip: number
+  },
+  data: {
+    posts: {
+      nodes: {
+        contentful_id: string,
+        createdAt: string ,
+        updatedAt: string,
+        title: string,
+        slug: string,
+        excerpt?: {
+          excerpt: string,
+        },
+        featuredImage: {
+          description: string,
+          title: string,
+          gatsbyImageData: IGatsbyImageData
+        }
+      }[]
+    }
+  },
+  errors: any
+}
+
+const BlogArchive = ({ pageContext, data, errors }: IBlogArchive) => {
+  const { nodes }  = data.posts;
+  
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
@@ -70,7 +98,7 @@ const BlogArchive = ({ pageContext, data, errors }) => {
   return (
     <>
       <SEO />
-      <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pt={8} pb={16}>
+      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={8} pb={16}>
         <Box pt={['8', '8', '16', '16']} textAlign='left'>
           <Heading as='h1' size='3xl' textColor='black' pb={16}>
             Blogg
@@ -104,7 +132,7 @@ const BlogArchive = ({ pageContext, data, errors }) => {
                   textAlign='left'
                   noOfLines={6}
                 >
-                  {post.excerpt.excerpt}
+                  {post.excerpt?.excerpt}
                 </Text>
                 <Text
                   textAlign='left'
@@ -126,11 +154,11 @@ const BlogArchive = ({ pageContext, data, errors }) => {
 
               <Image
                 as={GatsbyImage}
-                fluid={{ ...post.featuredImage.fluid, aspectRatio: 16 / 10 }}
+                image={post.featuredImage.gatsbyImageData}
                 mb={[2, 2, 8, 8]}
                 ml={[0, 0, 39, 39]}
                 w={['100%', '100%', '50%', '50%']}
-                alt={post.featuredImage.description}
+                alt={post.featuredImage?.description}
                 rounded='md'
                 shadow='lg'
               />

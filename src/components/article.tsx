@@ -1,11 +1,24 @@
-import React from 'react';
-import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
+import { Link as GatsbyLink} from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
-const Article = ({ mainImage, title, bodyText, createdAt, updatedAt }) => {
+interface ArticleProps  {
+  mainImage: {
+    gatsbyImageData: any,
+    description: string
+  },
+  title: string,
+  bodyText: any,
+  createdAt: string,
+  updatedAt: string
+}
+
+
+function Article ({ mainImage, title, bodyText, createdAt, updatedAt }: ArticleProps) {
+ 
   const publishDate =
     createdAt !== updatedAt
       ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
@@ -24,7 +37,7 @@ const Article = ({ mainImage, title, bodyText, createdAt, updatedAt }) => {
       {mainImage && (
         <Image
           as={GatsbyImage}
-          fluid={{ ...mainImage.fluid, aspectRatio: 16 / 10 }}
+          image={mainImage.gatsbyImageData}
           rounded='md'
           shadow='lg'
           alt={mainImage.description}

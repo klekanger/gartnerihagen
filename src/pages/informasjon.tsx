@@ -1,7 +1,7 @@
 // Client only route (static page is not generated on the server)
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
-
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import { IdentityContext } from '../context/identity-context';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Router } from '@reach/router';
@@ -39,18 +39,13 @@ const Informasjon = () => {
                 __typename
                 title
                 description
-                fluid {
-                  ...GatsbyContentfulFluid_withWebp
-                }
+                gatsbyImageData
               }
             }
           }
           privatePost
           featuredImage {
-            fluid {
-              ...GatsbyContentfulFluid_withWebp
-              src
-            }
+            gatsbyImageData
           }
         }
       }

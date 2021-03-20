@@ -1,4 +1,5 @@
-import React, { useContext, useRef, useState } from 'react';
+import * as React from 'react'
+import { useContext, useRef, useState } from 'react';
 import {
   Box,
   Heading,
@@ -18,7 +19,7 @@ export default function MinSide() {
   const { user, netlifyIdentity } = useContext(IdentityContext);
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
-  const cancelRef = useRef();
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   // Define alert dialog. Are you sure you want to log out?
   const logOutAlert = (
@@ -78,7 +79,7 @@ export default function MinSide() {
       </Text>
       <Stack
         direction={['column', 'column', 'row', 'row']}
-        my={(4, 4, 8, 8)}
+        my={[4,4,8,8]}
         align={['center', 'center', 'left', 'left']}
       >
         <Button

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Flex, Text, Link, Box } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
 import { SiGatsby } from 'react-icons/si';
