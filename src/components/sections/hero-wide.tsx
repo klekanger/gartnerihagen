@@ -39,7 +39,7 @@ function HeroWide ()  {
   const MotionBox = motion(Box);
 
   return (
-    <Box className='test' w='100vw' maxW='100%' mt='-80px'>
+    <Box w='100vw' maxW='100%' mt='-80px'>
       <Box as='div' overflow='hidden'>
         <MotionBox
           initial={{ scale: 1.0 }}

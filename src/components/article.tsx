@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Link as GatsbyLink} from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
 interface ArticleProps  {
   mainImage: {
-    gatsbyImageData: any,
+    gatsbyImageData: IGatsbyImageData,
     description: string
   },
   title: string,
