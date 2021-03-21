@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import Article from '../components/article';
 
-export const query: void = graphql`
+export const query = graphql`
   query BlogPostQuery($id: String!) {
     contentfulBlogPost(contentful_id: { eq: $id }) {
       title
@@ -25,9 +26,7 @@ export const query: void = graphql`
             __typename
             title
             description
-            gatsbyImageData(
-              layout: CONSTRAINED
-              aspectRatio: 1.6)
+            gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
           }
         }
       }
@@ -44,37 +43,41 @@ export const query: void = graphql`
   }
 `;
 
-interface IContentfulBlogPost  {
+interface IContentfulBlogPost {
   data: {
     contentfulBlogPost: {
-      title: string,
-      createdAt: string,
-      updatedAt: string,
+      title: string;
+      createdAt: string;
+      updatedAt: string;
       bodyText: {
-        raw: string,
-      },
-      excerpt: any,
+        raw: string;
+      };
+      excerpt: {
+        excerpt: string;
+      };
       featuredImage: {
-        description: string,
-        title: string,
+        description: string;
+        title: string;
         file: {
-          url: string
-        },
-        gatsbyImageData: JSON
-      } 
-    }
-  }
-  errors: any
+          url: string;
+        };
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
+  errors: any;
 }
 
-const BlogPostTemplate = ({ data: {contentfulBlogPost}, errors }: IContentfulBlogPost) => {
-
+const BlogPostTemplate = ({
+  data: { contentfulBlogPost },
+  errors,
+}: IContentfulBlogPost) => {
   if (errors) {
     return <ErrorPage />;
   }
 
   const {
-    title ,
+    title,
     createdAt,
     updatedAt,
     bodyText,

@@ -1,24 +1,28 @@
 import * as React from 'react';
-import { Link as GatsbyLink} from 'gatsby';
+import { Link as GatsbyLink } from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
-interface ArticleProps  {
+interface IArticleProps {
   mainImage: {
-    gatsbyImageData: IGatsbyImageData,
-    description: string
-  },
-  title: string,
-  bodyText: any,
-  createdAt: string,
-  updatedAt: string
+    gatsbyImageData: IGatsbyImageData;
+    description: string;
+  };
+  title: string;
+  bodyText: any;
+  createdAt: string;
+  updatedAt: string;
 }
 
-
-function Article ({ mainImage, title, bodyText, createdAt, updatedAt }: ArticleProps) {
- 
+function Article({
+  mainImage,
+  title,
+  bodyText,
+  createdAt,
+  updatedAt,
+}: IArticleProps) {
   const publishDate =
     createdAt !== updatedAt
       ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
@@ -68,6 +72,6 @@ function Article ({ mainImage, title, bodyText, createdAt, updatedAt }: ArticleP
       </Box>
     </Box>
   );
-};
+}
 
 export default Article;

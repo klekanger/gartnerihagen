@@ -21,7 +21,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-export const query: void = graphql`
+export const query = graphql`
   query blogListQuery($skip: Int!, $limit: Int!) {
     posts: allContentfulBlogPost(
       filter: { privatePost: { eq: false } }

@@ -4,3 +4,4 @@ public
 .env*
 TODO.md
 src/components/authenticated-components/todo.txt
+src/pages/test.tsx

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 import SEO from '../components/seo';
 import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
 
-
-export const query: void = graphql`
+export const query = graphql`
   query PageQuery($id: String!) {
     contentfulSide(contentful_id: { eq: $id }) {
       pageTitle
@@ -38,18 +38,41 @@ export const query: void = graphql`
   }
 `;
 
-type ContentfulSideTypes = {
-  pageTitle: string,
-  createdAt: string,
-  updatedAt: string,
-  pageText: {
-    raw: string
-  },
-  pageImage: any,
-  excerpt: any,
+interface IContentfulSide {
+  data: {
+    contentfulSide: {
+      pageTitle: string;
+      createdAt: string;
+      updatedAt: string;
+      pageText: {
+        raw: string;
+      };
+      excerpt: any;
+      title: string;
+      bodyText: {
+        raw: string;
+      };
+      pageImage: {
+        description: string;
+        title: string;
+        file: {
+          url: string;
+        };
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
+  errors: any;
 }
 
-const BlogPostTemplate = ({ data, errors }: { data: any, errors: any }) => {
+const BlogPostTemplate = ({
+  data: { contentfulSide },
+  errors,
+}: IContentfulSide) => {
+  if (errors) {
+    return <ErrorPage />;
+  }
+
   const {
     pageTitle,
     createdAt,
@@ -57,11 +80,7 @@ const BlogPostTemplate = ({ data, errors }: { data: any, errors: any }) => {
     pageText,
     pageImage,
     excerpt,
-  } : ContentfulSideTypes = data.contentfulSide;
-
-  if (errors) {
-    return <ErrorPage />;
-  }
+  } = contentfulSide;
 
   return (
     <>
