@@ -1,10 +1,23 @@
 import * as React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { motion } from 'framer-motion';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { Box, Button, Image, Heading, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
-function HeroWide ()  {
+interface IHeroWide {
+  contentful_id: string;
+  pageTitle: string;
+  excerpt: {
+    excerpt: string;
+  };
+  pageImage: {
+    gatsbyImageData: IGatsbyImageData;
+    title: string;
+    description: string;
+  };
+}
+
+function HeroWide() {
   const data = useStaticQuery(
     graphql`
       query {
@@ -14,15 +27,10 @@ function HeroWide ()  {
           excerpt {
             excerpt
           }
-          contentful_id
           pageImage {
             gatsbyImageData(layout: FULL_WIDTH, formats: WEBP, aspectRatio: 1.6)
             title
-            imageDesc: description
-          }
-          buttonLink {
-            contentful_id
-            pageTitle
+            description
           }
         }
       }
@@ -33,8 +41,7 @@ function HeroWide ()  {
     pageTitle,
     excerpt: { excerpt },
     pageImage,
-    pageImage: { imageDesc },
-  } = data.contentfulForsidetekst;
+  }: IHeroWide = data.contentfulForsidetekst;
 
   const MotionBox = motion(Box);
 
@@ -53,7 +60,7 @@ function HeroWide ()  {
           <Image
             as={GatsbyImage}
             image={pageImage.gatsbyImageData}
-            alt={imageDesc}
+            alt={pageImage.description}
             h={['70vh', '100vh']}
           />
         </MotionBox>
@@ -110,6 +117,6 @@ function HeroWide ()  {
       </Box>
     </Box>
   );
-};
+}
 
 export default HeroWide;

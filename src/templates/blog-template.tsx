@@ -5,6 +5,66 @@ import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import Article from '../components/article';
 
+interface IContentfulBlogPost {
+  data: {
+    contentfulBlogPost: {
+      title: string;
+      createdAt: string;
+      updatedAt: string;
+      bodyText: {
+        raw: string;
+      };
+      excerpt: {
+        excerpt: string;
+      };
+      featuredImage: {
+        description: string;
+        title: string;
+        file: {
+          url: string;
+        };
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
+  errors: any;
+}
+
+export default function BlogPostTemplate({
+  data: { contentfulBlogPost },
+  errors,
+}: IContentfulBlogPost) {
+  if (errors) {
+    return <ErrorPage />;
+  }
+
+  const {
+    title,
+    createdAt,
+    updatedAt,
+    bodyText,
+    excerpt,
+    featuredImage,
+  } = contentfulBlogPost;
+
+  return (
+    <>
+      <SEO
+        title={title}
+        image={featuredImage?.file?.url || null}
+        description={excerpt?.excerpt || null}
+      />
+      <Article
+        title={title}
+        bodyText={bodyText}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        mainImage={featuredImage}
+      />
+    </>
+  );
+}
+
 export const query = graphql`
   query BlogPostQuery($id: String!) {
     contentfulBlogPost(contentful_id: { eq: $id }) {
@@ -42,65 +102,3 @@ export const query = graphql`
     }
   }
 `;
-
-interface IContentfulBlogPost {
-  data: {
-    contentfulBlogPost: {
-      title: string;
-      createdAt: string;
-      updatedAt: string;
-      bodyText: {
-        raw: string;
-      };
-      excerpt: {
-        excerpt: string;
-      };
-      featuredImage: {
-        description: string;
-        title: string;
-        file: {
-          url: string;
-        };
-        gatsbyImageData: IGatsbyImageData;
-      };
-    };
-  };
-  errors: any;
-}
-
-const BlogPostTemplate = ({
-  data: { contentfulBlogPost },
-  errors,
-}: IContentfulBlogPost) => {
-  if (errors) {
-    return <ErrorPage />;
-  }
-
-  const {
-    title,
-    createdAt,
-    updatedAt,
-    bodyText,
-    excerpt,
-    featuredImage,
-  } = contentfulBlogPost;
-
-  return (
-    <>
-      <SEO
-        title={title}
-        image={featuredImage?.file?.url || null}
-        description={excerpt?.excerpt || null}
-      />
-      <Article
-        title={title}
-        bodyText={bodyText}
-        createdAt={createdAt}
-        updatedAt={updatedAt}
-        mainImage={featuredImage}
-      />
-    </>
-  );
-};
-
-export default BlogPostTemplate;

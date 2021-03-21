@@ -5,6 +5,68 @@ import SEO from '../components/seo';
 import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
 
+interface IContentfulSide {
+  data: {
+    contentfulSide: {
+      pageTitle: string;
+      createdAt: string;
+      updatedAt: string;
+      pageText: {
+        raw: string;
+      };
+      excerpt: any;
+      title: string;
+      bodyText: {
+        raw: string;
+      };
+      pageImage: {
+        description: string;
+        title: string;
+        file: {
+          url: string;
+        };
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
+  errors: any;
+}
+
+export default function BlogPostTemplate({
+  data: { contentfulSide },
+  errors,
+}: IContentfulSide) {
+  if (errors) {
+    return <ErrorPage />;
+  }
+
+  const {
+    pageTitle,
+    createdAt,
+    updatedAt,
+    pageText,
+    pageImage,
+    excerpt,
+  } = contentfulSide;
+
+  return (
+    <>
+      <SEO
+        title={pageTitle || null}
+        image={pageImage?.file?.url || null}
+        description={excerpt?.excerpt || null}
+      />
+      <Article
+        title={pageTitle}
+        bodyText={pageText}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        mainImage={pageImage}
+      />
+    </>
+  );
+}
+
 export const query = graphql`
   query PageQuery($id: String!) {
     contentfulSide(contentful_id: { eq: $id }) {
@@ -37,67 +99,3 @@ export const query = graphql`
     }
   }
 `;
-
-interface IContentfulSide {
-  data: {
-    contentfulSide: {
-      pageTitle: string;
-      createdAt: string;
-      updatedAt: string;
-      pageText: {
-        raw: string;
-      };
-      excerpt: any;
-      title: string;
-      bodyText: {
-        raw: string;
-      };
-      pageImage: {
-        description: string;
-        title: string;
-        file: {
-          url: string;
-        };
-        gatsbyImageData: IGatsbyImageData;
-      };
-    };
-  };
-  errors: any;
-}
-
-const BlogPostTemplate = ({
-  data: { contentfulSide },
-  errors,
-}: IContentfulSide) => {
-  if (errors) {
-    return <ErrorPage />;
-  }
-
-  const {
-    pageTitle,
-    createdAt,
-    updatedAt,
-    pageText,
-    pageImage,
-    excerpt,
-  } = contentfulSide;
-
-  return (
-    <>
-      <SEO
-        title={pageTitle || null}
-        image={pageImage?.file?.url || null}
-        description={excerpt?.excerpt || null}
-      />
-      <Article
-        title={pageTitle}
-        bodyText={pageText}
-        createdAt={createdAt}
-        updatedAt={updatedAt}
-        mainImage={pageImage}
-      />
-    </>
-  );
-};
-
-export default BlogPostTemplate;

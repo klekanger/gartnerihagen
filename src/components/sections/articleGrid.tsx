@@ -1,10 +1,30 @@
 import * as React from 'react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
 
-const ArticleGrid = () => {
+interface IArticleGrid {
+  contentful_id: string;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  slug: string;
+  excerpt: {
+    excerpt: string;
+  };
+  author: {
+    firstName: string;
+    lastName: string;
+  };
+  featuredImage: {
+    gatsbyImageData: IGatsbyImageData;
+    description: string;
+    title: string;
+  };
+}
+
+export default function ArticleGrid() {
   const data = useStaticQuery(graphql`
     query {
       posts: allContentfulBlogPost(
@@ -35,7 +55,7 @@ const ArticleGrid = () => {
     }
   `);
 
-  const postNodes = data.posts.nodes || [];
+  const postNodes: IArticleGrid[] = data.posts.nodes || [];
 
   return (
     <Grid
@@ -114,6 +134,4 @@ const ArticleGrid = () => {
       ))}
     </Grid>
   );
-};
-
-export default ArticleGrid;
+}

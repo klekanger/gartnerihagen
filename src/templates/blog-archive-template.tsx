@@ -21,79 +21,51 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-export const query = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
-    posts: allContentfulBlogPost(
-      filter: { privatePost: { eq: false } }
-      limit: $limit
-      skip: $skip
-      sort: { fields: [updatedAt], order: DESC }
-    ) {
-      nodes {
-        contentful_id
-        createdAt
-        updatedAt
-        title
-        slug
-        excerpt {
-          excerpt
-        }
-        author {
-          firstName
-          lastName
-        }
-        featuredImage {
-          gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
-          description
-          title
-        }
-      }
-    }
-  }
-`;
-
 interface IBlogArchive {
   pageContext: {
-    currentPage: number,
-    limit: number,
-    numPages: number,
-    skip: number
-  },
+    currentPage: number;
+    limit: number;
+    numPages: number;
+    skip: number;
+  };
   data: {
     posts: {
       nodes: {
-        contentful_id: string,
-        createdAt: string ,
-        updatedAt: string,
-        title: string,
-        slug: string,
+        contentful_id: string;
+        createdAt: string;
+        updatedAt: string;
+        title: string;
+        slug: string;
         excerpt?: {
-          excerpt: string,
-        },
+          excerpt: string;
+        };
         featuredImage: {
-          description: string,
-          title: string,
-          gatsbyImageData: IGatsbyImageData
-        }
-      }[]
-    }
-  },
-  errors: any
+          description: string;
+          title: string;
+          gatsbyImageData: IGatsbyImageData;
+        };
+      }[];
+    };
+  };
+  errors: any;
 }
 
-const BlogArchive = ({ pageContext, data, errors }: IBlogArchive) => {
-  const { nodes }  = data.posts;
-  
+export default function BlogArchive({
+  pageContext,
+  data,
+  errors,
+}: IBlogArchive) {
+  if (errors) {
+    return <ErrorPage />;
+  }
+
+  const { nodes } = data.posts;
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
   const prevPage =
     currentPage - 1 === 1 ? '/blog' : `/blog/${(currentPage - 1).toString()}`;
   const nextPage = `/blog/${(currentPage + 1).toString()}`;
-
-  if (errors) {
-    return <ErrorPage />;
-  }
 
   return (
     <>
@@ -198,9 +170,38 @@ const BlogArchive = ({ pageContext, data, errors }: IBlogArchive) => {
       </Box>
     </>
   );
-};
+}
 
-export default BlogArchive;
+export const query = graphql`
+  query blogListQuery($skip: Int!, $limit: Int!) {
+    posts: allContentfulBlogPost(
+      filter: { privatePost: { eq: false } }
+      limit: $limit
+      skip: $skip
+      sort: { fields: [updatedAt], order: DESC }
+    ) {
+      nodes {
+        contentful_id
+        createdAt
+        updatedAt
+        title
+        slug
+        excerpt {
+          excerpt
+        }
+        author {
+          firstName
+          lastName
+        }
+        featuredImage {
+          gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
+          description
+          title
+        }
+      }
+    }
+  }
+`;
 
 // TODO
 // Add pagination at the bottom of each page
