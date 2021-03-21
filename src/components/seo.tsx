@@ -1,31 +1,35 @@
-import  * as React from 'react';
+import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import { useLocation } from '@reach/router';
 
-interface SEOProps {
-  title?: string | null,
-  description?: string,
-  lang?: string,
-  meta?: Array<{name: string, content: string}>,
-  image?: string | null
+interface ISEOProps {
+  title?: string | null;
+  description?: string;
+  lang?: string;
+  meta?: Array<{ name: string; content: string }>;
+  image?: string | null;
 }
 
-interface QueryDataTypes {
+interface IQueryDataTypes {
   site: {
     siteMetadata: {
-      defaultDescription: string,
-      defaultTitle: string,
-      siteLanguage: string,
-      defaultImage: string,
-      siteUrl: string
-    }
-  }
+      defaultDescription: string;
+      defaultTitle: string;
+      siteLanguage: string;
+      defaultImage: string;
+      siteUrl: string;
+    };
+  };
 }
 
-function SEO ({ title = 'Boligsameiet Gartnerihagen', description = 'Askims hyggeligste nabolag', image = null }: SEOProps) {
-  const { pathname }: {pathname: string} = useLocation();
-  const { site }: QueryDataTypes  = useStaticQuery(query);
+export default function SEO({
+  title = 'Boligsameiet Gartnerihagen',
+  description = 'Askims hyggeligste nabolag',
+  image = null,
+}: ISEOProps) {
+  const { pathname }: { pathname: string } = useLocation();
+  const { site }: IQueryDataTypes = useStaticQuery(query);
 
   const {
     defaultDescription,
@@ -35,15 +39,15 @@ function SEO ({ title = 'Boligsameiet Gartnerihagen', description = 'Askims hygg
     siteUrl,
   } = site.siteMetadata;
 
-  let seoImage: string | object
-  (!image) ? seoImage = `${siteUrl}${defaultImage}` : seoImage = image
+  let seoImage: string | object;
+  !image ? (seoImage = `${siteUrl}${defaultImage}`) : (seoImage = image);
 
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
     image: `${seoImage}`,
     url: `${siteUrl}${pathname}`,
-  }
+  };
 
   return (
     <Helmet
@@ -81,9 +85,7 @@ function SEO ({ title = 'Boligsameiet Gartnerihagen', description = 'Askims hygg
       ]}
     ></Helmet>
   );
-};
-
-export default SEO;
+}
 
 const query: void = graphql`
   query SEO {

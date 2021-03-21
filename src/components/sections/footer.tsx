@@ -1,3 +1,7 @@
+//
+// Footer component
+//
+
 import * as React from 'react';
 import { Flex, Text, Link, Box } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
@@ -8,7 +12,6 @@ export default function Footer() {
 
   return (
     <>
-      <hr />
       <Flex
         as='nav'
         align='center'

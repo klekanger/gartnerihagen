@@ -45,6 +45,8 @@ const Informasjon = () => {
           }
           privatePost
           featuredImage {
+            description
+            title
             gatsbyImageData
           }
         }

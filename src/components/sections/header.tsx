@@ -1,5 +1,9 @@
-import * as React from 'react'
-import  { useState, useContext, useEffect } from 'react';
+//
+// Main header component
+//
+
+import * as React from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
@@ -17,34 +21,29 @@ import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import GartnerihagenLogo from '../../images/gartnerihagen.svg';
 import { IdentityContext } from '../../context/identity-context';
 
-//
-// Main header component
-//
-
 interface HeaderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 interface MenuItemsProps {
-  to: string,
-  children: string,
-  isLast?: boolean
+  to: string;
+  children: string;
+  isLast?: boolean;
 }
 
-function Header (props: HeaderProps) {
+export default function Header(props: HeaderProps) {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
   const { user, netlifyIdentity } = useContext(IdentityContext);
   const toggleMenu = () => setShowMenuItems(!showMenuItems);
 
-
   // Hide menu if scrolled more than 15 % of the screen height
-  const handleScroll= () => {
+  const handleScroll = () => {
     const yPos: number = window.scrollY || 0;
     const scrHeight: number = window.innerHeight || 900;
     yPos > (scrHeight / 100) * 15 ? setHideMenu(true) : setHideMenu(false);
   };
-  
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -57,10 +56,8 @@ function Header (props: HeaderProps) {
     setShowMenuItems(false);
   }, [hideMenu]);
 
-
   // Render one menu item
   const MenuItems = (props: MenuItemsProps) => {
-    
     const { children, isLast, to = '/', ...rest } = props;
     return (
       <Text
@@ -205,6 +202,4 @@ function Header (props: HeaderProps) {
       </Box>
     </Flex>
   );
-};
-
-export default Header;
+}

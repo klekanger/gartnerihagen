@@ -39,13 +39,24 @@ function Article({
         {title}
       </Heading>
       {mainImage && (
-        <Image
-          as={GatsbyImage}
-          image={mainImage.gatsbyImageData}
-          rounded='md'
-          shadow='lg'
-          alt={mainImage.description}
-        />
+        <>
+          <Image
+            as={GatsbyImage}
+            image={mainImage.gatsbyImageData}
+            rounded='md'
+            shadow='lg'
+            alt={mainImage.description}
+          />
+          <Text
+            as='p'
+            textAlign='left'
+            ml={2}
+            p={2}
+            fontSize={['sm', 'sm', 'sm', 'md']}
+          >
+            <em>{mainImage.description}</em>
+          </Text>
+        </>
       )}
       <Text as='div' my={[5, 10, 10, 10]} textAlign='left'>
         {renderRichText(bodyText, renderRichTextOptions)}

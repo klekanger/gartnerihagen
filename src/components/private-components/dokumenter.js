@@ -24,11 +24,8 @@ function Dokumenter({ title, excerpt, ...props }) {
 
   return (
     <Box
-      w='95vw'
-      ml='0'
-      pt={[8, 16, 8, 16]}
-      pb={[8, 8, 8, 16]}
-      pr={['0', '0', '5vw', '30vw']}
+      maxWidth={['97%', '95%', '95%', '70%']}
+      pt={[8, 8, 8, 16]}
       textAlign={['center', 'center', 'left', 'left']}
     >
       <Heading

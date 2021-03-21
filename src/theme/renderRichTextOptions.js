@@ -72,6 +72,7 @@ const renderRichTextOptions = {
             mt={8}
             mb={4}
             shadow='lg'
+            rounded='md'
             alt={description}
           />
           <Text

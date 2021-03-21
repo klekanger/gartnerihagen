@@ -17,9 +17,9 @@ export default function DocumentLibrary({ content }) {
   });
 
   return (
-    <Table variant='unstyled' mt={8} mb={16}>
-      <Thead>
-        <Tr borderBottom='1px solid #333'>
+    <Table variant='unstyled' mt={8} mb={16} size='lg'>
+      <Thead bg='#ddd' textColor='black'>
+        <Tr>
           <Th>Filnavn</Th>
           <Th>Opprettet</Th>
           <Th hidden={smallScreen}>Oppdatert</Th>
@@ -27,7 +27,11 @@ export default function DocumentLibrary({ content }) {
       </Thead>
       <Tbody>
         {content.map((element) => (
-          <Tr borderBottom='1px solid #ddd' key={element.contentful_id}>
+          <Tr
+            borderBottom='1px solid #ddd'
+            bg='gray.100'
+            key={element.contentful_id}
+          >
             <Td>
               <Link href={element.file.url} isExternal>
                 {element.file.fileName}
