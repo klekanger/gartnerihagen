@@ -10,7 +10,19 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 
-export default function DocumentLibrary({ content }) {
+interface IDocumentLibrary {
+  content: {
+    contentful_id: string;
+    file: {
+      url: string;
+      fileName: string;
+    };
+    createdAt: string;
+    updatedAt: string;
+  }[];
+}
+
+export default function DocumentLibrary({ content }: IDocumentLibrary) {
   const smallScreen = useBreakpointValue({
     base: true,
     sm: false,
@@ -39,7 +51,6 @@ export default function DocumentLibrary({ content }) {
             </Td>
             <Td>{element.createdAt}</Td>
             <Td hidden={smallScreen}>{element.updatedAt}</Td>
-            {element.file.contentful_id}
           </Tr>
         ))}
       </Tbody>

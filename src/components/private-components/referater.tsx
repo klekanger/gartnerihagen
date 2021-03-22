@@ -3,11 +3,37 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../documentLibrary';
 
-function Dokumenter({ title, excerpt, ...props }) {
-  const { menu } = useStaticQuery(graphql`
+interface IReferater {
+  title: string;
+  excerpt: string;
+  props: {
+    path: string;
+    uri: string;
+    children: React.ReactNode;
+    navigate?: any;
+  };
+}
+
+interface IMenu {
+  menu: {
+    files: {
+      contentful_id: string;
+      file: {
+        url: string;
+        fileName: string;
+      };
+      createdAt: string;
+      updatedAt: string;
+    }[];
+  };
+}
+
+export default function Referater({ title, excerpt, ...props }: IReferater) {
+  console.log(props);
+  const { menu }: IMenu = useStaticQuery(graphql`
     {
       menu: contentfulServiceMenu {
-        files: menu6Files {
+        files: menu5Files {
           contentful_id
           file {
             url
@@ -42,5 +68,3 @@ function Dokumenter({ title, excerpt, ...props }) {
     </Box>
   );
 }
-
-export default Dokumenter;

@@ -4,6 +4,7 @@
 import * as React from 'react';
 import { useStaticQuery, graphql, Link as GatsbyLink } from 'gatsby';
 import { Box, Stack, Text } from '@chakra-ui/react';
+import MenuButton from '../menubutton'; // Custom button component
 
 // Define custom servicebox buttons as clickable links
 // Button title and link URL are fetched from Contentful
@@ -11,70 +12,37 @@ import { Box, Stack, Text } from '@chakra-ui/react';
 // The two last buttons (5 and 6) are multi document buttons and should go to a component
 // fetching all documents for menu5files and menu6files
 
-const MenuButton = (props) => {
-  if (!props.multiLink) {
-    return (
-      <Box
-        as='a'
-        w={['95vw', '95vw', '30%', '30%']}
-        h={['4rem', '6rem']}
-        p={3}
-        bg='tertiaryButton'
-        rounded='md'
-        shadow='lg'
-        d='flex'
-        alignItems='center'
-        justifyContent='center'
-        fontSize={['md', '2xl', '2xl', '2xl']}
-        fontWeight='600'
-        href={props.linkTo || null}
-        target='_blank'
-        rel='noopener noreferrer'
-        _hover={{
-          transform: 'scale(1.02)',
-          transitionDuration: '0.1s',
-          textColor: 'white',
-        }}
-        _active={{
-          transform: 'scale(1.00)',
-        }}
-      >
-        {props.children}
-      </Box>
-    );
-  } else {
-    return (
-      <Box
-        as={GatsbyLink}
-        to={props.to || '#'}
-        w={['95vw', '95vw', '30%', '30%']}
-        h={['4rem', '6rem']}
-        p={3}
-        bg='tertiaryButton'
-        rounded='md'
-        shadow='lg'
-        d='flex'
-        alignItems='center'
-        justifyContent='center'
-        fontSize={['md', '2xl', '2xl', '2xl']}
-        fontWeight='600'
-        href={props.linkTo || null}
-        target='_blank'
-        rel='noopener noreferrer'
-        _hover={{
-          transform: 'scale(1.02)',
-          transitionDuration: '0.1s',
-          textColor: 'white',
-        }}
-        _active={{
-          transform: 'scale(1.00)',
-        }}
-      >
-        {props.children}
-      </Box>
-    );
-  }
-};
+interface IServiceBoxQuery {
+  menuItems: {
+    id: string;
+    menu1: string;
+    menu1File: {
+      file: {
+        url: string;
+      };
+    };
+    menu2: string;
+    menu2File: {
+      file: {
+        url: string;
+      };
+    };
+    menu3: string;
+    menu3File: {
+      file: {
+        url: string;
+      };
+    };
+    menu4: string;
+    menu4File: {
+      file: {
+        url: string;
+      };
+    };
+    menu5: string;
+    menu6: string;
+  };
+}
 
 export default function ServiceBox() {
   // Get text and links for menu items from Contentful
@@ -113,7 +81,7 @@ export default function ServiceBox() {
     }
   `);
 
-  const { menuItems } = data || [];
+  const { menuItems }: IServiceBoxQuery = data || [];
 
   return (
     <Box pt={[4, 8, 8, 16]} pb={[8, 8, 16, 16]} textAlign='left'>
@@ -163,10 +131,3 @@ export default function ServiceBox() {
     </Box>
   );
 }
-
-// TODO
-// Make pages for these two links:
-// "Referater fra årsmøter"
-// "Diverse dokumenter"
-//
-// Should link to pages with all content in that category
