@@ -21,17 +21,13 @@ import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import GartnerihagenLogo from '../../images/gartnerihagen.svg';
 import { IdentityContext } from '../../context/identity-context';
 
-interface HeaderProps {
-  children: React.ReactNode;
-}
-
 interface MenuItemsProps {
   to: string;
   children: string;
   isLast?: boolean;
 }
 
-export default function Header(props: HeaderProps) {
+export default function Header() {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
   const { user, netlifyIdentity } = useContext(IdentityContext);
@@ -148,7 +144,6 @@ export default function Header(props: HeaderProps) {
       pt={4}
       pb={5}
       px={[4, 4, 10, 10]}
-      {...props}
       bgColor='dark'
       opacity={showMenuItems ? '100%' : '90%'}
       position='fixed'
@@ -196,7 +191,6 @@ export default function Header(props: HeaderProps) {
           <MenuItems to='/styret' isLast>
             Styret
           </MenuItems>
-
           {loginButton}
         </Flex>
       </Box>

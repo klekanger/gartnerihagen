@@ -11,7 +11,7 @@ interface LayoutProps {
 function Layout(props: LayoutProps) {
   return (
     <Box direction='column' align='center' m='0 auto' {...props}>
-      <Header {...props} />
+      <Header />
       <Box pb={20} />
       {props.children}
       <Footer />
