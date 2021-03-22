@@ -18,7 +18,7 @@
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^1.0.1",
     "@chakra-ui/icons": "^1.0.6",
-    "@chakra-ui/react": "^1.4.0",
+    "@chakra-ui/react": "^1.4.1",
     "@contentful/rich-text-react-renderer": "^14.1.2",
     "@contentful/rich-text-types": "^14.1.2",
     "@emotion/react": "^11.1.5",
