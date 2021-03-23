@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useEffect, useContext } from 'react';
-import { Box } from '@chakra-ui/react';
 import { navigate } from 'gatsby';
 import { IdentityContext } from '../context/identity-context';
-import LoadingSpinner from '../components/loading-spinner';
 
 interface IPrivateroute {
   component: any;
@@ -19,15 +17,7 @@ function PrivateRoute({
   location,
   ...rest
 }: IPrivateroute) {
-  const { user, isLoggingIn } = useContext(IdentityContext);
-
-  if (isLoggingIn) {
-    return (
-      <Box>
-        <LoadingSpinner spinnerMessage='Autentiserer bruker' />
-      </Box>
-    );
-  }
+  const { user } = useContext(IdentityContext);
 
   useEffect(() => {
     if (!user) {
