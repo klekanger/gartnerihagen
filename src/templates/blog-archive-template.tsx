@@ -81,7 +81,11 @@ export default function BlogArchive({
               pb={8}
               direction={['column-reverse', 'column-reverse', 'row', 'row']}
             >
-              <Box ml={0} mb={[4, 4, 0, 0]} w={['100%', '100%', '50%', '50%']}>
+              <Box
+                mb={[4, 4, 0, 0]}
+                pr={[0, 0, 8, 8]}
+                w={['100%', '100%', '50%', '50%']}
+              >
                 <Link
                   as={GatsbyLink}
                   to={`/blog/${post.slug}`}
@@ -123,17 +127,20 @@ export default function BlogArchive({
                   </Link>
                 </Text>
               </Box>
-
-              <Image
-                as={GatsbyImage}
-                image={post.featuredImage.gatsbyImageData}
-                mb={[2, 2, 8, 8]}
-                ml={[0, 0, 39, 39]}
-                w={['100%', '100%', '50%', '50%']}
-                alt={post.featuredImage?.description}
-                rounded='md'
-                shadow='lg'
-              />
+              <Link
+                as={GatsbyLink}
+                to={`/informasjon/post/${post.slug}`}
+                w={['100%', '100%', '60%', '60%']}
+              >
+                <Image
+                  as={GatsbyImage}
+                  image={post.featuredImage.gatsbyImageData}
+                  w='auto'
+                  alt={post.featuredImage?.description}
+                  rounded='md'
+                  shadow='lg'
+                />
+              </Link>
             </Flex>
           ))}
         </Box>
