@@ -123,7 +123,7 @@ export default function Header() {
         <MenuItem>
           <Link
             as={GatsbyLink}
-            to='/min-side'
+            to='/min-side/'
             _hover={{ textDecor: 'none', textColor: 'accent' }}
           >
             Min side

@@ -80,13 +80,13 @@ const Informasjon = () => {
         postData={data}
       />
       <PrivateRoute
-        path='/informasjon/referater'
+        path='/informasjon/referater/'
         component={Referater}
         title='Referater fra årsmøter'
         excerpt='På denne siden finner du referater fra alle tidligere årsmøter. Er det noe du savner, ta kontakt med styret.'
       />
       <PrivateRoute
-        path='/informasjon/dokumenter'
+        path='/informasjon/dokumenter/'
         component={Dokumenter}
         title='Dokumenter'
         excerpt='Her kan du laste ned relevante dokumenter. Er det noe du savner, ta kontakt med styret.'
