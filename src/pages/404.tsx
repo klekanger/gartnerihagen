@@ -19,6 +19,12 @@ const paragraphStyles = {
 
 // markup
 const NotFoundPage = () => {
+  // Check if on server or in browser
+  // to avoid flickering 404 page while loading some authenticated pages
+  if (typeof window === 'undefined') {
+    return;
+  }
+
   return (
     <main style={pageStyles}>
       <title>Not found</title>

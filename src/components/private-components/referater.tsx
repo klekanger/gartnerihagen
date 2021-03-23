@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { useContext } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../documentLibrary';
-import { IdentityContext } from '../../context/identity-context';
-import LoadingSpinner from '../loading-spinner';
 
 interface IReferater {
   title: string;
@@ -49,16 +46,6 @@ export default function Referater({ title, excerpt, ...props }: IReferater) {
   `);
 
   const content = menu?.files || [];
-
-  const { isLoggingIn } = useContext(IdentityContext);
-
-  if (isLoggingIn) {
-    return (
-      <Box>
-        <LoadingSpinner spinnerMessage='Autentiserer bruker' />
-      </Box>
-    );
-  }
 
   return (
     <Box
