@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { useContext, useRef, useState } from 'react';
 import {
   Box,
@@ -55,12 +55,12 @@ export default function MinSide() {
 
   return (
     <Box
-      w='95vw'
+      maxWidth={['97%', '95%', '95%', '70%']}
+      h='80vh'
       ml='0'
       pt={[8, 16, 8, 16]}
       pb={[8, 8, 8, 16]}
-      pr={['0', '0', '5vw', '30vw']}
-      textAlign={['center', 'center', 'left', 'left']}
+      textAlign='center'
     >
       <Heading
         as='h1'
@@ -79,8 +79,9 @@ export default function MinSide() {
       </Text>
       <Stack
         direction={['column', 'column', 'row', 'row']}
-        my={[4,4,8,8]}
-        align={['center', 'center', 'left', 'left']}
+        my={[4, 4, 8, 8]}
+        align='center'
+        justify='center'
       >
         <Button
           minW={['40%', '40%', '20%', '20%']}
