@@ -4,12 +4,14 @@ import * as netlifyIdentity from 'netlify-identity-widget';
 
 export const IdentityContext = createContext<any>({});
 
-const IdentityProvider = ({children}: {children: React.ReactNode}) => {
-  const [user, setUser] = useState<object | null>();
+const IdentityProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState();
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   useEffect(() => {
     netlifyIdentity.setLocale('en');
     netlifyIdentity.init({});
+    setIsLoggingIn(true);
   }, []);
 
   netlifyIdentity.on('login', (user: any) => {
@@ -20,10 +22,10 @@ const IdentityProvider = ({children}: {children: React.ReactNode}) => {
   netlifyIdentity.on('logout', () => setUser(undefined));
 
   return (
-    <IdentityContext.Provider value={{ netlifyIdentity, user }}>
+    <IdentityContext.Provider value={{ netlifyIdentity, user, isLoggingIn }}>
       {children}
     </IdentityContext.Provider>
   );
 };
 
-export default IdentityProvider
+export default IdentityProvider;

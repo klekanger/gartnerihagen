@@ -1,6 +1,7 @@
 // Client only route (static page is not generated on the server)
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
 import * as React from 'react';
+import { Box } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { IdentityContext } from '../context/identity-context';
 import { graphql, useStaticQuery } from 'gatsby';
@@ -10,6 +11,7 @@ import Main from '../components/private-components/main';
 import PrivateInfo from '../components/private-components/privateInfo';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
+import LoadingSpinner from '../components/loading-spinner';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
 
 const Informasjon = () => {
@@ -54,7 +56,15 @@ const Informasjon = () => {
     }
   `);
 
-  const { user, netlifyIdentity } = useContext(IdentityContext);
+  const { user, isLoggingIn, netlifyIdentity } = useContext(IdentityContext);
+
+  if (!isLoggingIn) {
+    return (
+      <Box>
+        <LoadingSpinner spinnerMessage='Autentiserer bruker' />
+      </Box>
+    );
+  }
 
   if (!user) {
     netlifyIdentity.open();
