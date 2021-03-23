@@ -58,7 +58,7 @@ const Informasjon = () => {
 
   const { user, isLoggingIn, netlifyIdentity } = useContext(IdentityContext);
 
-  if (!isLoggingIn) {
+  if (isLoggingIn) {
     return (
       <Box>
         <LoadingSpinner spinnerMessage='Autentiserer bruker' />

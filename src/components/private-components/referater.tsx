@@ -29,7 +29,6 @@ interface IMenu {
 }
 
 export default function Referater({ title, excerpt, ...props }: IReferater) {
-  console.log(props);
   const { menu }: IMenu = useStaticQuery(graphql`
     {
       menu: contentfulServiceMenu {

@@ -6,12 +6,12 @@ export const IdentityContext = createContext<any>({});
 
 const IdentityProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState();
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
 
   useEffect(() => {
     netlifyIdentity.setLocale('en');
     netlifyIdentity.init({});
-    setIsLoggingIn(true);
+    setIsLoggingIn(false);
   }, []);
 
   netlifyIdentity.on('login', (user: any) => {

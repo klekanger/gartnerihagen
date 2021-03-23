@@ -103,6 +103,3 @@ const PrivateInfoList = () => {
 };
 
 export default PrivateInfoList;
-
-// TODO
-// Make links to articles (logged in only) clickable
