@@ -41,7 +41,3 @@ const overrides = {
 const theme = extendTheme(overrides);
 
 export default theme;
-
-// TODO
-// Finne fornuftige linjeavstander og definere dette på tvers av alle komponenter
-// Definere fonter og fontstørrelser
