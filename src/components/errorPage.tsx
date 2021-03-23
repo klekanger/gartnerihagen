@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 
-function ErrorPage({ errorMsg = 'Noe gikk galt' }: { errorMsg: string }) {
+function ErrorPage({ errorMsg = 'Noe gikk galt' }: { errorMsg?: string }) {
   return (
     <Box w='95vw' ml='0' pr={['0', '0', '5vw', '25vw']} pt={8} pb={16}>
       <Box pt={['8', '8', '16', '16']} textAlign='left'>
