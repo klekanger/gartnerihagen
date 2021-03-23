@@ -17,7 +17,7 @@ export default function MenuButton(props: IMenuButton) {
         href={props.linkTo || null}
         target='_blank'
         rel='noopener noreferrer'
-        w={['95vw', '95vw', '30%', '30%']}
+        w={['auto', 'auto', '30%', '30%']}
         h={['4rem', '6rem']}
         p={3}
         bg='tertiaryButton'
@@ -45,7 +45,7 @@ export default function MenuButton(props: IMenuButton) {
       <Box
         as={GatsbyLink}
         to={props.to || '#'}
-        w={['95vw', '95vw', '30%', '30%']}
+        w={['auto', 'auto', '30%', '30%']}
         h={['4rem', '6rem']}
         p={3}
         bg='tertiaryButton'
