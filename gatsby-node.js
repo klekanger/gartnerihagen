@@ -59,7 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
     });
 
     // Create blog archive pages
-    const postsPerPage = 4;
+    const postsPerPage = 6;
     const numPages = Math.ceil(blogNodes.length / postsPerPage);
     Array.from({ length: numPages }).forEach((_, i) => {
       createPage({
