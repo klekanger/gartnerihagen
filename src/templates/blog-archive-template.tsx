@@ -189,7 +189,7 @@ export const query = graphql`
       filter: { privatePost: { eq: false } }
       limit: $limit
       skip: $skip
-      sort: { fields: [updatedAt], order: DESC }
+      sort: { fields: [createdAt], order: DESC }
     ) {
       nodes {
         contentful_id

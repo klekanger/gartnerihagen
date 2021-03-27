@@ -7,7 +7,10 @@ import { Flex, Box, Image, Link, Heading, Text } from '@chakra-ui/react';
 const PrivateInfoList = () => {
   const data = useStaticQuery(graphql`
     query {
-      posts: allContentfulBlogPost(filter: { privatePost: { eq: true } }) {
+      posts: allContentfulBlogPost(
+        sort: { fields: createdAt, order: DESC }
+        filter: { privatePost: { eq: true } }
+      ) {
         nodes {
           author {
             firstName
@@ -33,6 +36,7 @@ const PrivateInfoList = () => {
   `);
 
   const postNodes = data.posts.nodes || [];
+  console.log(postNodes[1]);
 
   return (
     <Box textAlign='left'>
