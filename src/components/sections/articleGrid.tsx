@@ -136,6 +136,17 @@ export default function ArticleGrid() {
           </Text>
         </Box>
       ))}
+      <Text textAlign='left' mt={-8} fontSize='lg'>
+        <Link
+          as={GatsbyLink}
+          to='/blog'
+          color='black'
+          _hover={{ textDecor: 'none' }}
+        >
+          <em>Gå til bloggarkivet </em>
+          <ChevronRightIcon />
+        </Link>
+      </Text>
     </Grid>
   );
 }
