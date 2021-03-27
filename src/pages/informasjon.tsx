@@ -8,7 +8,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 import Main from '../components/private-components/main';
-import PrivateInfo from '../components/private-components/privateInfo';
+import PrivateInfoArticle from '../components/private-components/privateInfoArticle';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
 import LoadingSpinner from '../components/loading-spinner';
@@ -76,7 +76,7 @@ const Informasjon = () => {
       <PrivateRoute path='/informasjon' component={Main} />
       <PrivateRoute
         path='/informasjon/post/:slug'
-        component={PrivateInfo}
+        component={PrivateInfoArticle}
         postData={data}
       />
       <PrivateRoute

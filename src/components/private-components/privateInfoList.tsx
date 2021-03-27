@@ -111,3 +111,7 @@ const PrivateInfoList = () => {
 };
 
 export default PrivateInfoList;
+
+// TODO
+//
+// Make pagination

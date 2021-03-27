@@ -37,7 +37,10 @@ interface IPrivateInfoProps {
   };
 }
 
-export default function PrivateInfo({ slug, postData }: IPrivateInfoProps) {
+export default function PrivateInfoArticle({
+  slug,
+  postData,
+}: IPrivateInfoProps) {
   const postNodes = postData?.privatePosts.nodes ?? [];
 
   // Find the post with the same slug as the current page
