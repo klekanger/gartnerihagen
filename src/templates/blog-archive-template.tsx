@@ -213,7 +213,3 @@ export const query = graphql`
     }
   }
 `;
-
-// TODO
-// Add pagination at the bottom of each page
-// (see https://nickymeuleman.netlify.app/blog/gatsby-pagination )
