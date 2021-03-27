@@ -70,8 +70,12 @@ export default function BlogArchive({
   return (
     <>
       <SEO />
-      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={8} pb={16}>
-        <Box pt={[12, 16, 16, 24]} textAlign='left'>
+      <Box
+        maxWidth={['97%', '95%', '95%', '70%']}
+        pt={[12, 16, 16, 24]}
+        pb={16}
+      >
+        <Box textAlign='left'>
           <Heading as='h1' size='3xl' textColor='black' pb={16}>
             Blogg
           </Heading>
@@ -119,7 +123,7 @@ export default function BlogArchive({
                 >
                   <Link
                     as={GatsbyLink}
-                    to={`/informasjon/post/${post.slug}`}
+                    to={`/blog/${post.slug}`}
                     color='black'
                     _hover={{ textDecor: 'none', color: 'blue.700' }}
                   >
@@ -129,7 +133,7 @@ export default function BlogArchive({
               </Box>
               <Link
                 as={GatsbyLink}
-                to={`/informasjon/post/${post.slug}`}
+                to={`/blog/${post.slug}`}
                 w={['100%', '100%', '60%', '60%']}
               >
                 <Image
