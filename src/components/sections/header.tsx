@@ -58,7 +58,7 @@ export default function Header() {
     return (
       <Text
         variant='light'
-        mb={{ base: isLast ? '-14px' : 8, sm: '-14px' }}
+        mb={{ base: isLast ? 0 : 8, sm: '0' }}
         mr={{ base: 0, sm: isLast ? 0 : 8 }}
         fontSize={['md', 'md', 'md', 'xl']}
         display='block'
