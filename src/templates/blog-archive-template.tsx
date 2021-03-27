@@ -71,7 +71,7 @@ export default function BlogArchive({
     <>
       <SEO />
       <Box maxWidth={['97%', '95%', '95%', '70%']} pt={8} pb={16}>
-        <Box pt={['8', '8', '16', '16']} textAlign='left'>
+        <Box pt={[12, 16, 16, 24]} textAlign='left'>
           <Heading as='h1' size='3xl' textColor='black' pb={16}>
             Blogg
           </Heading>
