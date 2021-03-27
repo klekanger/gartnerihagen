@@ -158,6 +158,7 @@ export default function Header() {
           h='auto'
           aria-label='Gartnerihagen logo'
           alt='Gartnerihagen logo'
+          onClick={() => setShowMenuItems(false)}
         />
       </Link>
 
