@@ -19,7 +19,7 @@ export default function Footer() {
         wrap='wrap'
         w='100%'
         mb={0}
-        pt={10}
+        pt={16}
         pb={20}
         px={10}
         bgColor='dark'
@@ -30,14 +30,7 @@ export default function Footer() {
       >
         <Box>
           <Text variant='light' mb={[4, 4, 0, 0]}>
-            &copy; {currentYear} Boligsameiet Gartnerihagen{' '}
-          </Text>
-
-          <Text
-            variant='light'
-            mb={[4, 4, 0, 0]}
-            textAlign={['center', 'center', 'left', 'left']}
-          >
+            &copy; {currentYear} Boligsameiet Gartnerihagen <br />
             <Link
               as={GatsbyLink}
               to='/cookies-og-personvern-gdpr'
@@ -67,8 +60,7 @@ export default function Footer() {
             >
               Kurt Lekanger
             </Link>
-          </Text>
-          <Text variant='light'>
+            <br />
             Bygget med{' '}
             <Link
               href='https://www.gatsbyjs.com/'
