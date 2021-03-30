@@ -14,6 +14,7 @@ interface IArticleProps {
   bodyText: any;
   createdAt: string;
   updatedAt: string;
+  isPage?: boolean;
 }
 
 function Article({
@@ -22,6 +23,7 @@ function Article({
   bodyText,
   createdAt,
   updatedAt,
+  isPage,
 }: IArticleProps) {
   const publishDate =
     createdAt !== updatedAt
@@ -73,7 +75,7 @@ function Article({
       <Box align='left'>
         <Button
           as={GatsbyLink}
-          to={`/blog/`}
+          to={isPage ? `/` : `/blog/`}
           variant='standard'
           mb={16}
           _hover={{ textDecor: 'none' }}
