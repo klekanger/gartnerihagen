@@ -29,3 +29,9 @@ const IdentityProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default IdentityProvider;
+
+// TODO
+// Alternativ autentiseringsløsning
+// https://github.com/jon-sully/react-netlify-identity-gotrue
+//
+//
