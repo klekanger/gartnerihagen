@@ -70,14 +70,10 @@ export default function BlogArchive({
   return (
     <>
       <SEO />
-      <Box
-        maxWidth={['97%', '95%', '95%', '60%']}
-        pt={[12, 16, 16, 24]}
-        pb={16}
-      >
+      <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
         <Box textAlign='left'>
-          <Heading as='h1' size='3xl' textColor='black' pb={16}>
-            Blogg
+          <Heading as='h1' size='3xl' textColor='black' pb={[8, 8, 16, 16]}>
+            Siste blogg&shy;innlegg
           </Heading>
           {nodes.map((post) => (
             <Flex

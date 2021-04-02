@@ -21,49 +21,49 @@ const renderRichTextOptions = {
     [BLOCKS.PARAGRAPH]: (node, children) => (
       <Text
         textAlign='left'
-        my={4}
+        my={8}
         fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
       >
         {children}
       </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
-      <Heading as='h1' textAlign='left' size='4xl' pt={3}>
+      <Heading as='h1' textAlign='left' size='4xl' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_2]: (node, children) => (
-      <Heading as='h2' textAlign='left' size='3xl' pt={3}>
+      <Heading as='h2' textAlign='left' size='xl' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_3]: (node, children) => (
-      <Heading as='h3' textAlign='left' size='2xl' pt={3}>
+      <Heading as='h3' textAlign='left' size='lg' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_4]: (node, children) => (
-      <Heading as='h4' textAlign='left' size='xl' pt={3}>
+      <Heading as='h4' textAlign='left' size='md' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_5]: (node, children) => (
-      <Heading as='h5' textAlign='left' size='lg' pt={3}>
+      <Heading as='h5' textAlign='left' size='sm' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_6]: (node, children) => (
-      <Heading as='h6' textAlign='left' size='md' pt={3}>
+      <Heading as='h6' textAlign='left' size='sm' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.UL_LIST]: (node, children) => (
-      <UnorderedList textAlign='left' my={4}>
+      <UnorderedList textAlign='left' my={8}>
         {children}
       </UnorderedList>
     ),
     [BLOCKS.OL_LIST]: (node, children) => (
-      <OrderedList textAlign='left' my={4}>
+      <OrderedList textAlign='left' my={8}>
         {children}
       </OrderedList>
     ),
@@ -77,8 +77,6 @@ const renderRichTextOptions = {
             as={GatsbyImage}
             image={gatsbyImageData}
             size='100%'
-            mt={8}
-            mb={4}
             shadow='lg'
             rounded='md'
             alt={title}
@@ -86,8 +84,9 @@ const renderRichTextOptions = {
           <Text
             as='p'
             textAlign='left'
-            ml={2}
-            p={2}
+            p={4}
+            mb={[0, 0, 4, 4]}
+            bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}
           >
             <em>{description}</em>

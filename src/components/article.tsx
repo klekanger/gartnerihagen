@@ -73,7 +73,8 @@ function Article({
             as='p'
             textAlign='left'
             ml={2}
-            p={2}
+            p={4}
+            bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}
           >
             <em>{mainImage.description}</em>
