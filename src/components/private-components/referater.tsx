@@ -34,6 +34,7 @@ export default function Referater({ title, excerpt, ...props }: IReferater) {
       menu: contentfulServiceMenu {
         files: menu5Files {
           contentful_id
+          title
           file {
             url
             fileName

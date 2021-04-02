@@ -13,6 +13,7 @@ import {
 interface IDocumentLibrary {
   content: {
     contentful_id: string;
+    title?: string;
     file: {
       url: string;
       fileName: string;
@@ -46,7 +47,7 @@ export default function DocumentLibrary({ content }: IDocumentLibrary) {
           >
             <Td>
               <Link href={element.file.url} isExternal>
-                {element.file.fileName}
+                {element.title}
               </Link>
             </Td>
             <Td>{element.createdAt}</Td>
