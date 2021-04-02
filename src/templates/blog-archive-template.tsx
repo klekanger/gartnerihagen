@@ -71,7 +71,7 @@ export default function BlogArchive({
     <>
       <SEO />
       <Box
-        maxWidth={['97%', '95%', '95%', '70%']}
+        maxWidth={['97%', '95%', '95%', '60%']}
         pt={[12, 16, 16, 24]}
         pb={16}
       >
