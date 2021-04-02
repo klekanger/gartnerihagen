@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Heading, Text, List, ListItem, Image, Box } from '@chakra-ui/react';
+import {
+  Heading,
+  Text,
+  ListItem,
+  Image,
+  Box,
+  OrderedList,
+  UnorderedList,
+} from '@chakra-ui/react';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 
 const renderRichTextOptions = {
@@ -50,14 +58,14 @@ const renderRichTextOptions = {
       </Heading>
     ),
     [BLOCKS.UL_LIST]: (node, children) => (
-      <List textAlign='left' mx={10} my={4}>
+      <UnorderedList textAlign='left' my={4}>
         {children}
-      </List>
+      </UnorderedList>
     ),
     [BLOCKS.OL_LIST]: (node, children) => (
-      <List as='ol' textAlign='left' mx={10} my={4}>
+      <OrderedList textAlign='left' my={4}>
         {children}
-      </List>
+      </OrderedList>
     ),
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
