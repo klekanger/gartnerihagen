@@ -13,10 +13,11 @@ interface IPrivateInfoProps {
         author?: {
           firstName: string;
           lastName: string;
-        };
+        }[];
         contentful_id: string;
         createdAt: string;
         updatedAt: string;
+
         title: string;
         slug: string;
         excerpt?: {
@@ -55,7 +56,14 @@ export default function PrivateInfoArticle({
     );
   }
 
-  const { title, bodyText, featuredImage, createdAt, updatedAt } = postToShow;
+  const {
+    title,
+    author,
+    bodyText,
+    featuredImage,
+    createdAt,
+    updatedAt,
+  } = postToShow;
 
   // Format article dates
   const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
@@ -88,6 +96,7 @@ export default function PrivateInfoArticle({
       createdAt={createdAt}
       updatedAt={updatedAt}
       mainImage={featuredImage}
+      author={author}
     />
   );
 }

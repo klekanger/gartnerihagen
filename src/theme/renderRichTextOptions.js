@@ -73,7 +73,7 @@ const renderRichTextOptions = {
             mb={4}
             shadow='lg'
             rounded='md'
-            alt={description}
+            alt={title}
           />
           <Text
             as='p'
@@ -82,9 +82,7 @@ const renderRichTextOptions = {
             p={2}
             fontSize={['sm', 'sm', 'sm', 'md']}
           >
-            <em>
-              {title}: {description}
-            </em>
+            <em>{description}</em>
           </Text>
         </Box>
       );
