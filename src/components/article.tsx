@@ -73,7 +73,8 @@ function Article({
             as='p'
             textAlign='left'
             ml={2}
-            p={4}
+            px={4}
+            py={2}
             bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}
           >

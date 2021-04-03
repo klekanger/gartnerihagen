@@ -90,7 +90,6 @@ function HeroWide() {
             variant='light'
             fontSize={{ base: 'md', sm: 'md', md: 'lg' }}
             fontWeight='normal'
-            lineHeight='normal'
             mt={3}
             mb={5}
           >
@@ -104,7 +103,6 @@ function HeroWide() {
               px={[2, 5, 5, 5]}
               py={[2, 7, 7, 7]}
               fontSize={[12, 20, 20, 20]}
-              lineHeight='1'
               shadow='lg'
               bgColor='primaryButton'
               color='black'

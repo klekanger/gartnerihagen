@@ -8,6 +8,9 @@ import styles from './styles';
 // Custom colors
 import colors from './colors';
 
+// Typography
+import textStyles from './textStyles';
+
 // Component style overrides
 import Button from './components/button';
 import Heading from './components/heading';
@@ -27,6 +30,7 @@ const overrides = {
   },
   styles,
   colors,
+
   /* fonts: {
     heading: 'Open Sans',
     body: 'Source Sans Pro',
@@ -39,5 +43,6 @@ const overrides = {
 };
 
 const theme = extendTheme(overrides);
+console.log(theme);
 
 export default theme;

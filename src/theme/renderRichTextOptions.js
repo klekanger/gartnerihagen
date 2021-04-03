@@ -21,19 +21,19 @@ const renderRichTextOptions = {
     [BLOCKS.PARAGRAPH]: (node, children) => (
       <Text
         textAlign='left'
-        my={8}
+        my={4}
         fontSize={{ base: 'sm', sm: 'md', md: 'lg' }}
       >
         {children}
       </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
-      <Heading as='h1' textAlign='left' size='4xl' pt={8}>
+      <Heading as='h1' textAlign='left' size='4xl'>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_2]: (node, children) => (
-      <Heading as='h2' textAlign='left' size='xl' pt={8}>
+      <Heading as='h2' textAlign='left' size='xl'>
         {children}
       </Heading>
     ),
@@ -84,7 +84,8 @@ const renderRichTextOptions = {
           <Text
             as='p'
             textAlign='left'
-            p={4}
+            px={4}
+            py={2}
             mb={[0, 0, 4, 4]}
             bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}

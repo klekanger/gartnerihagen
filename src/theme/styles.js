@@ -1,9 +1,12 @@
 const styles = {
-  global: {
-    body: {
-      bg: '#F6F8FF',
-      textColor: 'gray.700',
-    },
+  global: (props) => {
+    console.log('props: ', props);
+    return {
+      body: {
+        bg: '#F6F8FF',
+        lineHeight: 'base',
+      },
+    };
   },
 };
 
