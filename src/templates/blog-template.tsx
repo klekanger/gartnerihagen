@@ -66,6 +66,7 @@ export default function BlogPostTemplate({
         updatedAt={updatedAt}
         mainImage={featuredImage}
         author={author}
+        buttonLink='/blog'
       />
     </>
   );

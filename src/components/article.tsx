@@ -4,6 +4,8 @@ import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
+import { format, parseISO } from 'date-fns';
+import norwegian from 'date-fns/locale/nb';
 
 interface IArticleProps {
   mainImage: {
@@ -18,7 +20,7 @@ interface IArticleProps {
   bodyText: any;
   createdAt: string;
   updatedAt: string;
-  isPage?: boolean;
+  buttonLink: string;
 }
 
 function Article({
@@ -28,7 +30,7 @@ function Article({
   bodyText,
   createdAt,
   updatedAt,
-  isPage,
+  buttonLink,
 }: IArticleProps) {
   const publishDate: string =
     createdAt !== updatedAt
@@ -99,7 +101,7 @@ function Article({
       <Box align='left'>
         <Button
           as={GatsbyLink}
-          to={isPage ? `/` : `/blog/`}
+          to={buttonLink}
           variant='standard'
           mb={16}
           _hover={{ textDecor: 'none' }}

@@ -62,7 +62,7 @@ export default function BlogPostTemplate({
         createdAt={createdAt}
         updatedAt={updatedAt}
         mainImage={pageImage}
-        isPage
+        buttonLink='/'
       />
     </>
   );
