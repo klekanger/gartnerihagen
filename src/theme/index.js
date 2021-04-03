@@ -43,6 +43,5 @@ const overrides = {
 };
 
 const theme = extendTheme(overrides);
-console.log(theme);
 
 export default theme;
