@@ -2,8 +2,6 @@ import * as React from 'react';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { Box, Image, Heading, Text, Button } from '@chakra-ui/react';
 import Article from '../article';
-import { format, parseISO } from 'date-fns';
-import norwegian from 'date-fns/locale/nb';
 
 interface IPrivateInfoProps {
   slug: string;
@@ -65,30 +63,6 @@ export default function PrivateInfoArticle({
     updatedAt,
   } = postToShow;
 
-  // Format article dates
-  const createdAtFormated = format(parseISO(createdAt), 'dd. LLLL yyyy', {
-    locale: norwegian,
-  });
-  const updatedAtFormated = format(parseISO(updatedAt), 'dd. LLLL yyyy', {
-    locale: norwegian,
-  });
-
-  // Show publish date on article. Update date only if updated.
-  const publishDate =
-    createdAt !== updatedAt
-      ? `Publisert: ${createdAtFormated} (oppdatert: ${updatedAtFormated})`
-      : `Publisert: ${createdAtFormated}`;
-
-  const topImage = featuredImage?.gatsbyImageData ? (
-    <Image
-      as={GatsbyImage}
-      image={featuredImage.gatsbyImageData}
-      shadow='lg'
-      rounded='md'
-      alt={featuredImage.description}
-    />
-  ) : null;
-
   return (
     <Article
       title={title}
@@ -97,6 +71,7 @@ export default function PrivateInfoArticle({
       updatedAt={updatedAt}
       mainImage={featuredImage}
       author={author}
+      buttonLink='/informasjon'
     />
   );
 }
