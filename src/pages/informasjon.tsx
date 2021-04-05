@@ -26,8 +26,8 @@ const Informasjon = () => {
             lastName
           }
           contentful_id
-          createdAt
-          updatedAt
+          createdAt(formatString: "DD.MM.YYYY")
+          updatedAt(formatString: "DD.MM.YYYY")
           title
           slug
           excerpt {

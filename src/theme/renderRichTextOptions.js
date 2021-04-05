@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Heading, Text, List, ListItem, Image, Box } from '@chakra-ui/react';
+import {
+  Heading,
+  Text,
+  ListItem,
+  Image,
+  Box,
+  OrderedList,
+  UnorderedList,
+} from '@chakra-ui/react';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 
 const renderRichTextOptions = {
@@ -20,44 +28,44 @@ const renderRichTextOptions = {
       </Text>
     ),
     [BLOCKS.HEADING_1]: (node, children) => (
-      <Heading as='h1' textAlign='left' size='4xl' pt={3}>
+      <Heading as='h1' textAlign='left' size='4xl'>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_2]: (node, children) => (
-      <Heading as='h2' textAlign='left' size='3xl' pt={3}>
+      <Heading as='h2' textAlign='left' size='xl'>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_3]: (node, children) => (
-      <Heading as='h3' textAlign='left' size='2xl' pt={3}>
+      <Heading as='h3' textAlign='left' size='lg' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_4]: (node, children) => (
-      <Heading as='h4' textAlign='left' size='xl' pt={3}>
+      <Heading as='h4' textAlign='left' size='md' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_5]: (node, children) => (
-      <Heading as='h5' textAlign='left' size='lg' pt={3}>
+      <Heading as='h5' textAlign='left' size='sm' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.HEADING_6]: (node, children) => (
-      <Heading as='h6' textAlign='left' size='md' pt={3}>
+      <Heading as='h6' textAlign='left' size='sm' pt={8}>
         {children}
       </Heading>
     ),
     [BLOCKS.UL_LIST]: (node, children) => (
-      <List textAlign='left' mx={10} my={4}>
+      <UnorderedList textAlign='left' my={8}>
         {children}
-      </List>
+      </UnorderedList>
     ),
     [BLOCKS.OL_LIST]: (node, children) => (
-      <List as='ol' textAlign='left' mx={10} my={4}>
+      <OrderedList textAlign='left' my={8}>
         {children}
-      </List>
+      </OrderedList>
     ),
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
@@ -69,22 +77,20 @@ const renderRichTextOptions = {
             as={GatsbyImage}
             image={gatsbyImageData}
             size='100%'
-            mt={8}
-            mb={4}
             shadow='lg'
             rounded='md'
-            alt={description}
+            alt={title}
           />
           <Text
             as='p'
             textAlign='left'
-            ml={2}
-            p={2}
+            px={4}
+            py={2}
+            mb={[0, 0, 4, 4]}
+            bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}
           >
-            <em>
-              {title}: {description}
-            </em>
+            <em>{description}</em>
           </Text>
         </Box>
       );

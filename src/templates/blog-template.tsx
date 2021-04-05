@@ -11,6 +11,10 @@ interface IContentfulBlogPost {
       title: string;
       createdAt: string;
       updatedAt: string;
+      author: {
+        firstName: string;
+        lastName: string;
+      }[];
       bodyText: {
         raw: string;
       };
@@ -40,6 +44,7 @@ export default function BlogPostTemplate({
 
   const {
     title,
+    author,
     createdAt,
     updatedAt,
     bodyText,
@@ -60,6 +65,8 @@ export default function BlogPostTemplate({
         createdAt={createdAt}
         updatedAt={updatedAt}
         mainImage={featuredImage}
+        author={author}
+        buttonLink='/blog'
       />
     </>
   );

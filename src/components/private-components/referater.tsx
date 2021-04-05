@@ -18,6 +18,7 @@ interface IMenu {
   menu: {
     files: {
       contentful_id: string;
+      title: string;
       file: {
         url: string;
         fileName: string;
@@ -34,6 +35,7 @@ export default function Referater({ title, excerpt, ...props }: IReferater) {
       menu: contentfulServiceMenu {
         files: menu5Files {
           contentful_id
+          title
           file {
             url
             fileName
@@ -49,7 +51,7 @@ export default function Referater({ title, excerpt, ...props }: IReferater) {
 
   return (
     <Box
-      maxWidth={['97%', '95%', '95%', '70%']}
+      maxWidth={['97%', '95%', '95%', '60%']}
       pt={[8, 8, 8, 16]}
       textAlign={['center', 'center', 'left', 'left']}
     >

@@ -4,6 +4,8 @@ import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
+import { format, parseISO } from 'date-fns';
+import norwegian from 'date-fns/locale/nb';
 
 interface IArticleProps {
   mainImage: {
@@ -11,27 +13,47 @@ interface IArticleProps {
     description: string;
   };
   title: string;
+  author?: {
+    firstName: string;
+    lastName: string;
+  }[];
   bodyText: any;
   createdAt: string;
   updatedAt: string;
-  isPage?: boolean;
+  buttonLink: string;
 }
 
 function Article({
   mainImage,
   title,
+  author,
   bodyText,
   createdAt,
   updatedAt,
-  isPage,
+  buttonLink,
 }: IArticleProps) {
-  const publishDate =
+  const publishDate: string =
     createdAt !== updatedAt
       ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
       : `Publisert: ${createdAt}`;
 
+  // Make string that will be used to show
+  // a list of authors (with comma separators if there are more than one)
+  let authorsToShow: string;
+  author ? (authorsToShow = 'Av: ') : '';
+  // Skip if author is not passed as props to this component
+  if (author) {
+    author.forEach((el, index) => {
+      if (index < author.length - 1 && author.length !== 1) {
+        authorsToShow = authorsToShow + el.firstName + ' ' + el.lastName + ', ';
+      } else {
+        authorsToShow = authorsToShow + el.firstName + ' ' + el.lastName;
+      }
+    });
+  }
+
   return (
-    <Box maxWidth={['97%', '95%', '95%', '70%']} pt={[12, 16, 16, 24]}>
+    <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
       <Heading
         as='h1'
         fontSize={['4xl', '6xl', '6xl', '7xl']}
@@ -53,7 +75,9 @@ function Article({
             as='p'
             textAlign='left'
             ml={2}
-            p={2}
+            px={4}
+            py={2}
+            bgColor='#efefef'
             fontSize={['sm', 'sm', 'sm', 'md']}
           >
             <em>{mainImage.description}</em>
@@ -71,11 +95,13 @@ function Article({
         textAlign='left'
       >
         {publishDate}
+        <br />
+        {authorsToShow}
       </Text>
       <Box align='left'>
         <Button
           as={GatsbyLink}
-          to={isPage ? `/` : `/blog/`}
+          to={buttonLink}
           variant='standard'
           mb={16}
           _hover={{ textDecor: 'none' }}

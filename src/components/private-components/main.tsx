@@ -9,7 +9,7 @@ function Main() {
   return (
     <>
       <SEO />
-      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={4}>
+      <Box maxWidth={['97%', '95%', '95%', '60%']} pt={4}>
         <ServiceBox />
         <InfoFraStyret />
         <PrivateInfoList />

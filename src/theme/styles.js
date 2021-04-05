@@ -1,10 +1,10 @@
 const styles = {
-  global: {
+  global: (props) => ({
     body: {
       bg: '#F6F8FF',
-      textColor: 'gray.700',
+      lineHeight: 'base',
     },
-  },
+  }),
 };
 
 export default styles;

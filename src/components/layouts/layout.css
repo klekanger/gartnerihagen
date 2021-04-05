@@ -15,3 +15,8 @@
     opacity: 100%;
   }
 }
+
+/* Make sure soft returns (<br /> are rendered */
+p {
+  white-space: pre-line;
+}

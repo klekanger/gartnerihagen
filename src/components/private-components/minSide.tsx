@@ -95,6 +95,8 @@ export default function MinSide() {
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
           variant='standard'
+          disabled
+          _hover={{ bg: '#555' }}
         >
           Bytt passord
         </Button>
@@ -102,10 +104,14 @@ export default function MinSide() {
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
           variant='standard'
+          disabled
+          _hover={{ bg: '#555' }}
         >
-          Slett konto
+          Endre kontoopplysninger
         </Button>
       </Stack>
+      <Text>For å slette konto eller endre kontoopplysninger,</Text>
+      <Text>ta kontakt med styret. </Text>
       {logOutAlert}
     </Box>
   );
