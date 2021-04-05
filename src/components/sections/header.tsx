@@ -82,7 +82,12 @@ export default function Header() {
   };
 
   // Show user name or "Logg inn" on Login button
-  const userName = user?.user_metadata.full_name || '';
+  let userName: string;
+  if (user && user?.user_metadata.full_name === undefined) {
+    userName = 'Innlogget'; // Use if no user name is defined, but the user is logged in
+  } else {
+    userName = user?.user_metadata.full_name || '';
+  }
   const loginButtonText =
     userName !== '' ? userName.slice(0, 6).padEnd(9, '.') : 'Logg inn';
 

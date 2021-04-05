@@ -91,6 +91,7 @@ function HeroWide() {
             fontSize={{ base: 'md', sm: 'md', md: 'lg' }}
             fontWeight='normal'
             mt={3}
+            lineHeight='base'
             mb={5}
           >
             {excerpt}
