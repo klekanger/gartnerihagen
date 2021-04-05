@@ -38,7 +38,7 @@ export default function DocumentLibrary({ content }: IDocumentLibrary) {
           <Th hidden={smallScreen}>Oppdatert</Th>
         </Tr>
       </Thead>
-      <Tbody>
+      <Tbody textColor='black'>
         {content.map((element) => (
           <Tr
             borderBottom='1px solid #ddd'
