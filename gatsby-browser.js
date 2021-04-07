@@ -7,3 +7,6 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const wrapPageElement = wrap;
+
+// TODO
+// Add Auth 0
