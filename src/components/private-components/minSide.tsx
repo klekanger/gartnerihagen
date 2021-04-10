@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import {
   Box,
+  Image,
   Heading,
   Text,
   Button,
@@ -16,10 +17,14 @@ import {
 } from '@chakra-ui/react';
 
 export default function MinSide() {
-  const { user, isLoading, isAuthenticated, logout } = useAuth0();
+  const { user, isAuthenticated, logout } = useAuth0();
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
+
+  if (!isAuthenticated) {
+    return;
+  }
 
   // Define alert dialog. Are you sure you want to log out?
   const logOutAlert = (
@@ -71,6 +76,9 @@ export default function MinSide() {
       >
         Min side
       </Heading>
+      <Box align='center' pb={8}>
+        <Image src={user?.picture} alt={user?.nickname} />
+      </Box>
       <Text>
         <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
