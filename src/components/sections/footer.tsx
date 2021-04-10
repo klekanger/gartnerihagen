@@ -14,13 +14,13 @@ export default function Footer() {
     <>
       <Flex
         as='nav'
-        align='center'
+        align={['center', 'center', 'flex-start', 'flex-start']}
         justify='space-between'
         wrap='wrap'
         w='100%'
         mb={0}
         pt={16}
-        pb={20}
+        pb={16}
         px={10}
         bgColor='dark'
         color='gray.300'
@@ -40,17 +40,27 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
-        <Text variant='light' mb={[4, 4, 0, 0]}>
-          Epost:{' '}
-          <Link
-            href='mailto:gartnerihagen@gmail.com'
-            _hover={{ textDecor: 'none', color: 'light' }}
-          >
-            gartnerihagen@gmail.com
-          </Link>{' '}
+        <Box>
+          {' '}
+          <Text variant='light' mb={[4, 4, 0, 0]}>
+            Epost:{' '}
+            <Link
+              href='mailto:gartnerihagen@gmail.com'
+              _hover={{ textDecor: 'none', color: 'light' }}
+            >
+              gartnerihagen@gmail.com
+            </Link>{' '}
+            <br />
+            Telefon: +47 - 4021 0140 <br />
+          </Text>
           <br />
-          Telefon: +47 - 4021 0140{' '}
-        </Text>
+          <Text color='secondaryButton' pb={[8, 8, 0, 0]}>
+            Vil du ha en nettside som dette? <br />
+            Ta kontakt med{' '}
+            <a href='mailto:kurt@lekanger.no'>kurt@lekanger.no</a>
+          </Text>
+        </Box>
+
         <Box>
           <Text variant='light' mb={[4, 4, 0, 0]}>
             Webdesign:{' '}

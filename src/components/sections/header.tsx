@@ -1,9 +1,10 @@
 //
-// Main header component
+// Main header and navbar component
 //
 
 import * as React from 'react';
 import { useState, useContext, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
@@ -19,7 +20,6 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 import GartnerihagenLogo from '../../images/gartnerihagen.svg';
-import { IdentityContext } from '../../context/identity-context';
 
 interface MenuItemsProps {
   to: string;
@@ -30,10 +30,13 @@ interface MenuItemsProps {
 export default function Header() {
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [hideMenu, setHideMenu] = useState(false);
-  const { user, netlifyIdentity } = useContext(IdentityContext);
+
+  const { user, loginWithRedirect, logout } = useAuth0();
+
   const toggleMenu = () => setShowMenuItems(!showMenuItems);
 
   // Hide menu if scrolled more than 15 % of the screen height
+
   const handleScroll = () => {
     const yPos: number = window.scrollY || 0;
     const scrHeight: number = window.innerHeight || 900;
@@ -83,10 +86,10 @@ export default function Header() {
 
   // Show user name or "Logg inn" on Login button
   let userName: string;
-  if (user && user?.user_metadata.full_name === undefined) {
+  if (user && user?.nickname === undefined) {
     userName = 'Innlogget'; // Use if no user name is defined, but the user is logged in
   } else {
-    userName = user?.user_metadata.full_name || '';
+    userName = user?.nickname || '';
   }
   const loginButtonText =
     userName !== '' ? userName.slice(0, 6).padEnd(9, '.') : 'Logg inn';
@@ -101,7 +104,7 @@ export default function Header() {
       rounded='md'
       ml={{ base: '0px', md: '20px', lg: '30px' }}
       mt={{ base: '20px', sm: '0px' }}
-      onClick={() => netlifyIdentity.open()}
+      onClick={() => loginWithRedirect({ ui_locales: 'nb' })}
       _hover={{ bgColor: 'secondaryButton' }}
     >
       {loginButtonText}
@@ -120,7 +123,7 @@ export default function Header() {
       </MenuButton>
       <MenuList bg='secondaryButton' color='dark'>
         <MenuItem
-          onClick={() => netlifyIdentity.logout()}
+          onClick={() => logout()}
           _hover={{ textDecor: 'none', textColor: 'accent' }}
         >
           Logg ut

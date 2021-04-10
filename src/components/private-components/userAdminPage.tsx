@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+
 import {
   Box,
-  Image,
   Heading,
   Text,
   Button,
@@ -16,48 +15,9 @@ import {
   AlertDialogOverlay,
 } from '@chakra-ui/react';
 
-export default function MinSide() {
-  const { user, isAuthenticated, logout } = useAuth0();
-  const [isOpen, setIsOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
-  const cancelRef = useRef<HTMLButtonElement>(null);
-
-  if (!isAuthenticated) {
-    return;
-  }
-
-  // Define alert dialog. Are you sure you want to log out?
-  const logOutAlert = (
-    <AlertDialog
-      isOpen={isOpen}
-      leastDestructiveRef={cancelRef}
-      onClose={onClose}
-    >
-      <AlertDialogOverlay>
-        <AlertDialogContent bg='white'>
-          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-            Logg ut
-          </AlertDialogHeader>
-          <AlertDialogBody>Er du sikker på at du vil logge ut?</AlertDialogBody>
-
-          <AlertDialogFooter>
-            <Button variant='standard' ref={cancelRef} onClick={onClose}>
-              Avbryt
-            </Button>
-            <Button
-              variant='danger'
-              textColor='white'
-              onClick={() => logout()}
-              ml={3}
-            >
-              Logg ut
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialogOverlay>
-    </AlertDialog>
-  );
-
+export default function UserAdminPage() {
+  const { user, isLoading, isAuthenticated, logout } = useAuth0();
+  console.log('user: ', user);
   return (
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
@@ -74,11 +34,8 @@ export default function MinSide() {
         pb={[0, 0, 4, 4]}
         maxWidth='95vw'
       >
-        Min side
+        Brukeradministrasjon
       </Heading>
-      <Box align='center' pb={8}>
-        <Image src={user?.picture} alt={user?.nickname} />
-      </Box>
       <Text>
         <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
@@ -95,7 +52,7 @@ export default function MinSide() {
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
           variant='standard'
-          onClick={() => setIsOpen(true)}
+          onClick={() => logout()}
         >
           Logg ut
         </Button>
@@ -118,9 +75,6 @@ export default function MinSide() {
           Endre kontoopplysninger
         </Button>
       </Stack>
-      <Text>For å slette konto eller endre kontoopplysninger,</Text>
-      <Text>ta kontakt med styret. </Text>
-      {logOutAlert}
     </Box>
   );
 }
