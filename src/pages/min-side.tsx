@@ -1,20 +1,24 @@
 // Client only route (static page is not generated on the server)
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
 
-import * as React from 'react'
-import  { useContext } from 'react';
-import { IdentityContext } from '../context/identity-context';
+import * as React from 'react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 import MinSide from '../components/private-components/minSide';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
+import LoadingSpinner from '../components/loading-spinner';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Informasjon = () => {
-  const { user, netlifyIdentity } = useContext(IdentityContext);
+  const { user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   // Prevent not logged in users from accessing private routes
-  if (!user) {
-    netlifyIdentity.open();
+  if (!isAuthenticated) {
+    loginWithRedirect();
     return <NotLoggedIn />;
   }
 
