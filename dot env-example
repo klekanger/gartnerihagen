@@ -1,0 +1,6 @@
+// You need to fill out these and rename to .env.development and .env.production
+
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_SPACE_ID=
+AUTH0_DOMAIN=
+AUTH0_CLIENT_ID=
