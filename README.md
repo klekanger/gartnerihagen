@@ -1,6 +1,8 @@
 # Webside for Boligsameiet Gartnerihagen
 
-Nye nettsider for Gartnerihagen Boligsameie.
+Nye nettsider for Gartnerihagen Boligsameie, laget i Gatsby/React med Chakra UI. Innholdet hostes på Contentful, og bygging trigges hos Netlify når nytt innhold publiseres på Contentful (via "build hooks"). 
+
+Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gartnerihagen-askim.no)
 
 # Teknologivalg
 
@@ -22,5 +24,5 @@ Nye nettsider for Gartnerihagen Boligsameie.
 - Animasjoner med Framer Motion
   - [https://www.framer.com/api/motion/](https://www.framer.com/api/motion/)
   - [https://chakra-ui.com/guides/integrations/with-framer](https://chakra-ui.com/guides/integrations/with-framer)
-- Netlify Identity Service for autentisering
-  - [https://docs.netlify.com/visitor-access/identity/](https://docs.netlify.com/visitor-access/identity/)
+- Auth0 for autentisering
+  - [https://auth0.com/](https://auth0.com/)
