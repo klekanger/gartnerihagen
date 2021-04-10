@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { wrapPageElement as wrap } from './src/chakra-wrapper';
-import { Auth0Provider } from '@auth0/auth0-react';
+/* import { Auth0Provider } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 
 const onRedirectCallback = (appState) => {
@@ -17,6 +17,6 @@ export const wrapRootElement = ({ element }) => (
   >
     {element}
   </Auth0Provider>
-);
+); */
 
 export const wrapPageElement = wrap;
