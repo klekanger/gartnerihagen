@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   Box,
   Heading,
@@ -13,10 +14,9 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from '@chakra-ui/react';
-import { IdentityContext } from '../../context/identity-context';
 
 export default function MinSide() {
-  const { user, netlifyIdentity } = useContext(IdentityContext);
+  const { user, isLoading, isAuthenticated, logout } = useAuth0();
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -42,7 +42,7 @@ export default function MinSide() {
             <Button
               variant='danger'
               textColor='white'
-              onClick={netlifyIdentity.logout}
+              onClick={() => logout()}
               ml={3}
             >
               Logg ut
@@ -72,7 +72,7 @@ export default function MinSide() {
         Min side
       </Heading>
       <Text>
-        <b>Du er innlogget som:</b> {user?.user_metadata.full_name}
+        <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
           <b>E-post:</b> {user?.email}
         </Text>
