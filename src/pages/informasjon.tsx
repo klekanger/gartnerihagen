@@ -2,8 +2,7 @@
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
 import * as React from 'react';
 import { Box } from '@chakra-ui/react';
-import { useContext } from 'react';
-import { IdentityContext } from '../context/identity-context';
+import { useAuth0 } from '@auth0/auth0-react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
@@ -56,9 +55,9 @@ const Informasjon = () => {
     }
   `);
 
-  const { user, isLoggingIn, netlifyIdentity } = useContext(IdentityContext);
+  const { isLoading, isAuthenticated } = useAuth0();
 
-  if (isLoggingIn) {
+  if (isLoading) {
     return (
       <Box>
         <LoadingSpinner spinnerMessage='Autentiserer bruker' />
@@ -66,8 +65,7 @@ const Informasjon = () => {
     );
   }
 
-  if (!user) {
-    netlifyIdentity.open();
+  if (!isAuthenticated) {
     return <NotLoggedIn />;
   }
 

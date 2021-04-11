@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useContext } from 'react';
 import { navigate } from 'gatsby';
-import { IdentityContext } from '../context/identity-context';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface IPrivateroute {
   component: any;
@@ -17,15 +17,16 @@ function PrivateRoute({
   location,
   ...rest
 }: IPrivateroute) {
-  const { user } = useContext(IdentityContext);
+  const { user, isAuthenticated } = useAuth0();
+  console.log('Is authenticated: ', isAuthenticated);
 
   useEffect(() => {
-    if (!user) {
+    if (!isAuthenticated) {
       navigate(`/`);
     }
-  }, [user, location]);
+  }, [user, isAuthenticated]);
 
-  return user ? <Component {...rest} /> : null;
+  return isAuthenticated ? <Component {...rest} /> : null;
 }
 
 export default PrivateRoute;
