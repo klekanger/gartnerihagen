@@ -1,6 +1,8 @@
 # Webside for Boligsameiet Gartnerihagen
 
-Nye nettsider for Gartnerihagen Boligsameie.
+Nye nettsider for Gartnerihagen Boligsameie, laget i Gatsby/React med Chakra UI. Innholdet hostes på Contentful, og bygging trigges hos Netlify når nytt innhold publiseres på Contentful (via "build hooks"). 
+
+Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gartnerihagen-askim.no)
 
 # Teknologivalg
 
