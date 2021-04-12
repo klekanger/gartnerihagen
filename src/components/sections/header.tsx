@@ -104,7 +104,11 @@ export default function Header() {
       rounded='md'
       ml={{ base: '0px', md: '20px', lg: '30px' }}
       mt={{ base: '20px', sm: '0px' }}
-      onClick={() => loginWithRedirect({ ui_locales: 'nb' })}
+      onClick={() =>
+        loginWithRedirect({
+          ui_locales: 'nb',
+        })
+      }
       _hover={{ bgColor: 'secondaryButton' }}
     >
       {loginButtonText}
