@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import { Box, Image, Heading, Text, Button } from '@chakra-ui/react';
+import { useStaticQuery, graphql } from 'gatsby';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
+import { Box, Heading } from '@chakra-ui/react';
 import Article from '../article';
 
 interface IPrivateInfoProps {
@@ -36,11 +37,49 @@ interface IPrivateInfoProps {
   };
 }
 
-export default function PrivateInfoArticle({
-  slug,
-  postData,
-}: IPrivateInfoProps) {
-  const postNodes = postData?.privatePosts.nodes ?? [];
+export default function PrivateInfoArticle({ slug }: IPrivateInfoProps) {
+  const data = useStaticQuery(graphql`
+    query {
+      privatePosts: allContentfulBlogPost(
+        filter: { privatePost: { eq: true } }
+      ) {
+        nodes {
+          author {
+            firstName
+            lastName
+          }
+          contentful_id
+          createdAt(formatString: "DD.MM.YYYY")
+          updatedAt(formatString: "DD.MM.YYYY")
+          title
+          slug
+          excerpt {
+            excerpt
+          }
+          bodyText {
+            raw
+            references {
+              ... on ContentfulAsset {
+                contentful_id
+                __typename
+                title
+                description
+                gatsbyImageData
+              }
+            }
+          }
+          privatePost
+          featuredImage {
+            description
+            title
+            gatsbyImageData
+          }
+        }
+      }
+    }
+  `);
+
+  const postNodes = data?.privatePosts.nodes ?? [];
 
   // Find the post with the same slug as the current page
   const postToShow = postNodes.find((post: any) => post.slug === slug);
