@@ -3,58 +3,18 @@
 import * as React from 'react';
 import { Box } from '@chakra-ui/react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
-import Main from '../components/private-components/main';
+
+import InfoPage from '../components/private-components/informasjon';
 import PrivateInfoArticle from '../components/private-components/privateInfoArticle';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
+
 import LoadingSpinner from '../components/loading-spinner';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
 
 const Informasjon = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      privatePosts: allContentfulBlogPost(
-        filter: { privatePost: { eq: true } }
-      ) {
-        nodes {
-          author {
-            firstName
-            lastName
-          }
-          contentful_id
-          createdAt(formatString: "DD.MM.YYYY")
-          updatedAt(formatString: "DD.MM.YYYY")
-          title
-          slug
-          excerpt {
-            excerpt
-          }
-          bodyText {
-            raw
-            references {
-              ... on ContentfulAsset {
-                contentful_id
-                __typename
-                title
-                description
-                gatsbyImageData
-              }
-            }
-          }
-          privatePost
-          featuredImage {
-            description
-            title
-            gatsbyImageData
-          }
-        }
-      }
-    }
-  `);
-
   const { isLoading, isAuthenticated } = useAuth0();
 
   if (isLoading) {
@@ -71,11 +31,10 @@ const Informasjon = () => {
 
   return (
     <Router>
-      <PrivateRoute path='/informasjon' component={Main} />
+      <PrivateRoute path='/informasjon' component={InfoPage} />
       <PrivateRoute
         path='/informasjon/post/:slug'
         component={PrivateInfoArticle}
-        postData={data}
       />
       <PrivateRoute
         path='/informasjon/referater/'
