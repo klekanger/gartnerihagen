@@ -210,3 +210,7 @@ export default function Header() {
     </Flex>
   );
 }
+
+// TODO
+//
+// Behold markør/linje under valgt menyelement i navbar
