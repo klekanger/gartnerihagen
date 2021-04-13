@@ -18,7 +18,6 @@ function PrivateRoute({
   ...rest
 }: IPrivateroute) {
   const { user, isAuthenticated } = useAuth0();
-  console.log('Is authenticated: ', isAuthenticated);
 
   useEffect(() => {
     if (!isAuthenticated) {
