@@ -5,7 +5,7 @@ import InfoFraStyret from './infoFraStyret';
 import PrivateInfoList from './privateInfoList';
 import SEO from '../seo';
 
-function Main() {
+function InfoPage() {
   return (
     <>
       <SEO />
@@ -18,4 +18,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default InfoPage;
