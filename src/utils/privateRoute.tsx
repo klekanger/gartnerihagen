@@ -18,6 +18,4 @@ function PrivateRoute({
   return <Component {...rest} />;
 }
 
-export default withAuthenticationRequired(PrivateRoute, {
-  onRedirecting: () => <div>Sender deg videre til innloggingssiden...</div>,
-});
+export default withAuthenticationRequired(PrivateRoute);
