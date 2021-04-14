@@ -10,10 +10,14 @@ import LoadingSpinner from '../components/loading-spinner';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Informasjon = () => {
-  const { user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();
 
   if (isLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Det har oppstått en feil... {error.message}</div>;
   }
 
   // Prevent not logged in users from accessing private routes

@@ -7,10 +7,14 @@ import LoadingSpinner from '../components/loading-spinner';
 import UserAdminPage from '../components/private-components/userAdminPage';
 
 function UserAdmin() {
-  const { user, isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, error } = useAuth0();
 
   if (isLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Det har oppstått en feil... {error.message}</div>;
   }
 
   if (!isAuthenticated) {
