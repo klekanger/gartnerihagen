@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { useEffect, useContext } from 'react';
-import { navigate } from 'gatsby';
-import { useAuth0 } from '@auth0/auth0-react';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 interface IPrivateroute {
   component: any;
@@ -17,15 +15,9 @@ function PrivateRoute({
   location,
   ...rest
 }: IPrivateroute) {
-  const { user, isAuthenticated } = useAuth0();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate(`/`);
-    }
-  }, [user, isAuthenticated]);
-
-  return isAuthenticated ? <Component {...rest} /> : null;
+  return <Component {...rest} />;
 }
 
-export default PrivateRoute;
+export default withAuthenticationRequired(PrivateRoute, {
+  onRedirecting: () => <div>Sender deg videre til innloggingssiden...</div>,
+});
