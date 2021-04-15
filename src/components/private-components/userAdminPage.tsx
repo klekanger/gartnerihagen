@@ -16,8 +16,12 @@ import {
 } from '@chakra-ui/react';
 
 export default function UserAdminPage() {
-  const { user, isLoading, isAuthenticated, logout } = useAuth0();
-  console.log('user: ', user);
+  const { user, isLoading, isAuthenticated, error, logout } = useAuth0();
+
+  if (error) {
+    return <div>Det har oppstått en feil... {error.message}</div>;
+  }
+
   return (
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}

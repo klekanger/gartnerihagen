@@ -17,10 +17,14 @@ import {
 } from '@chakra-ui/react';
 
 export default function MinSide() {
-  const { user, isAuthenticated, logout } = useAuth0();
+  const { user, isAuthenticated, error, logout } = useAuth0();
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
+
+  if (error) {
+    return <div>Det har oppstått en feil... {error.message}</div>;
+  }
 
   if (!isAuthenticated) {
     return;

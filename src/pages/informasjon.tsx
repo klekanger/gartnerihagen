@@ -15,7 +15,7 @@ import LoadingSpinner from '../components/loading-spinner';
 import NotLoggedIn from '../components/private-components/notLoggedIn';
 
 const Informasjon = () => {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, error } = useAuth0();
 
   if (isLoading) {
     return (
@@ -23,6 +23,10 @@ const Informasjon = () => {
         <LoadingSpinner spinnerMessage='Autentiserer bruker' />
       </Box>
     );
+  }
+
+  if (error) {
+    return <div>Det har oppstått en feil... {error.message}</div>;
   }
 
   if (!isAuthenticated) {
