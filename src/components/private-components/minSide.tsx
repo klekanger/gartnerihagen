@@ -83,7 +83,7 @@ export default function MinSide() {
       <Box align='center' pb={8}>
         <Image src={user?.picture} alt={user?.nickname} />
       </Box>
-      <Text>
+      <Text as='div'>
         <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
           <b>E-post:</b> {user?.email}

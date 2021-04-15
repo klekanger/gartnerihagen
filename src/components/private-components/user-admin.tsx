@@ -28,10 +28,10 @@ function UserAdmin() {
   }
 
   const dummyUsers = [
-    { userName: 'Kurt', userEmail: 'kurt@lekanger.no' },
-    { userName: 'Kari', userEmail: 'kari@sdfsfd' },
-    { userName: 'Jan Erik', userEmail: 'janerik@sdfsdfsdf.sd' },
-    { userName: 'Ann Kristin', userEmail: 'annkristin@sdfsdf.no' },
+    { userName: 'Kurt', userEmail: 'kurt@lekanger.no', id: 1 },
+    { userName: 'Kari', userEmail: 'kari@sdfsfd', id: 2 },
+    { userName: 'Jan Erik', userEmail: 'janerik@sdfsdfsdf.sd', id: 3 },
+    { userName: 'Ann Kristin', userEmail: 'annkristin@sdfsdf.no', id: 4 },
   ];
 
   return (
@@ -49,9 +49,9 @@ function UserAdmin() {
         pb={[0, 0, 4, 4]}
         maxWidth='95vw'
       >
-        Brukeradministrasjon
+        Bruker&shy;administrasjon
       </Heading>
-      <Text>
+      <Text as='div'>
         <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
           <b>E-post:</b> {user?.email}
@@ -65,22 +65,24 @@ function UserAdmin() {
       >
         <Button
           minW={['40%', '40%', '20%', '20%']}
-          minH='3rem'
+          minH='4rem'
           variant='standard'
         >
           Opprett bruker
         </Button>
         <Button
           minW={['40%', '40%', '20%', '20%']}
-          minH='3rem'
+          minH='4rem'
           variant='standard'
           _hover={{ bg: '#555' }}
         >
           Tilbakestill passord
+          <br />
+          for bruker
         </Button>
         <Button
           minW={['40%', '40%', '20%', '20%']}
-          minH='3rem'
+          minH='4rem'
           variant='standard'
           _hover={{ bg: '#555' }}
         >
@@ -100,7 +102,7 @@ function UserAdmin() {
         </Thead>
         <Tbody textColor='black'>
           {dummyUsers.map((element) => (
-            <Tr borderBottom='1px solid #ddd' bg='gray.100' key={element}>
+            <Tr borderBottom='1px solid #ddd' bg='gray.100' key={element.id}>
               <Td>
                 <Link href='#' isExternal>
                   {element.userName}
@@ -108,7 +110,8 @@ function UserAdmin() {
               </Td>
               <Td>{element.userEmail}</Td>
               <Td>
-                <Button>Endre</Button> <Button>Slett</Button>
+                <Button variant='standard'>Endre</Button>{' '}
+                <Button variant='danger'>Slett</Button>
               </Td>
             </Tr>
           ))}
