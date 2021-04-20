@@ -4,3 +4,6 @@ public
 .env*
 TODO.md
 .bitmap
+
+.netlify
+src/pages/netlify-function-test.js
