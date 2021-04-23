@@ -7,3 +7,7 @@ TODO.md
 
 .netlify
 src/pages/netlify-function-test.js
+netlify-function-test.js
+
+# Local Netlify folder
+.netlify
