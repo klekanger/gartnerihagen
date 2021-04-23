@@ -14,6 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  useToast,
 } from '@chakra-ui/react';
 
 export default function MinSide() {
@@ -21,6 +22,7 @@ export default function MinSide() {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
+  const toast = useToast();
 
   if (error) {
     return <div>Det har oppstått en feil... {error.message}</div>;
@@ -29,6 +31,58 @@ export default function MinSide() {
   if (!isAuthenticated) {
     return;
   }
+
+  // Call Auth0s Change Password API endpoint
+  // The user will get a change password email
+  // API docs: https://auth0.com/docs/api/authentication#change-password
+  const requestChangePassword = async () => {
+    try {
+      const opts = {
+        client_id: `${process.env.GATSBY_AUTH0_CLIENT_ID}`,
+        email: user?.email,
+        connection: 'Username-Password-Authentication',
+      };
+
+      fetch(
+        `https://${process.env.GATSBY_AUTH0_DOMAIN}/dbconnections/change_password`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(opts),
+        }
+      ).then((response) => {
+        if (response?.status === 200) {
+          toast({
+            title: 'Sjekk eposten din',
+            description: 'Du vil få en epost som lar deg endre passord.',
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: 'Noe gikk muligens galt',
+            description: 'Prøv igjen, eller ta kontakt med support.',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      });
+    } catch (error) {
+      toast({
+        title: 'Noe gikk galt',
+        description:
+          'Det er antagelig vår feil, ikke din. Prøv igjen, eller ta kontakt med support.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
 
   // Define alert dialog. Are you sure you want to log out?
   const logOutAlert = (
@@ -81,10 +135,10 @@ export default function MinSide() {
         Min side
       </Heading>
       <Box align='center' pb={8}>
-        <Image src={user?.picture} alt={user?.nickname} />
+        <Image src={user?.picture} alt={user?.name} />
       </Box>
-      <Text>
-        <b>Du er innlogget som:</b> {user?.nickname}
+      <Text as='div'>
+        <b>Du er innlogget som:</b> {user?.name}
         <Text>
           <b>E-post:</b> {user?.email}
         </Text>
@@ -100,6 +154,7 @@ export default function MinSide() {
           minH='3rem'
           variant='standard'
           onClick={() => setIsOpen(true)}
+          _hover={{ bg: '#555' }}
         >
           Logg ut
         </Button>
@@ -107,19 +162,10 @@ export default function MinSide() {
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
           variant='standard'
-          disabled
+          onClick={() => requestChangePassword()}
           _hover={{ bg: '#555' }}
         >
           Bytt passord
-        </Button>
-        <Button
-          minW={['40%', '40%', '20%', '20%']}
-          minH='3rem'
-          variant='standard'
-          disabled
-          _hover={{ bg: '#555' }}
-        >
-          Endre kontoopplysninger
         </Button>
       </Stack>
       <Text>For å slette konto eller endre kontoopplysninger,</Text>
