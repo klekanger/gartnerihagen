@@ -1,15 +1,13 @@
 exports.handler = async (event, context) => {
   // Connect to Auth0 Management API
-
-  console.log('event: ', event);
-  console.log('context: ', context);
+  console.log('API request received');
 
   const ManagementClient = require('auth0').ManagementClient;
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'read:users update:users',
+    scope: 'read:users update:users delete:users create:users',
   });
 
   // Get all users from Auth0 Management API
