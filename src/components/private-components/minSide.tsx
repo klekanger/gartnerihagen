@@ -135,7 +135,7 @@ export default function MinSide() {
         Min side
       </Heading>
       <Box align='center' pb={8}>
-        <Image src={user?.picture} alt={user?.name} />
+        <Image src={user?.picture} alt={user?.name} rounded='50%' />
       </Box>
       <Text as='div'>
         <b>Du er innlogget som:</b> {user?.name}
@@ -170,6 +170,7 @@ export default function MinSide() {
       </Stack>
       <Text>For å slette konto eller endre kontoopplysninger,</Text>
       <Text>ta kontakt med styret. </Text>
+
       {logOutAlert}
     </Box>
   );
