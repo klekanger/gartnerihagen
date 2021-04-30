@@ -135,7 +135,7 @@ export default function MinSide() {
         Min side
       </Heading>
       <Box align='center' pb={8}>
-        <Image src={user?.picture} alt={user?.name} rounded='50%' />
+        <Image src={user?.picture} alt={user?.name} rounded='50%' width={32} />
       </Box>
       <Text as='div'>
         <b>Du er innlogget som:</b> {user?.name}
