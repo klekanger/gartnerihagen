@@ -43,8 +43,8 @@ const Informasjon = () => {
       <PrivateRoute
         path='/informasjon/referater/'
         component={Referater}
-        title='Referater fra årsmøter'
-        excerpt='På denne siden finner du referater fra alle tidligere årsmøter. Er det noe du savner, ta kontakt med styret.'
+        title='Dokumenter fra årsmøter'
+        excerpt='På denne siden finner du referater og andre dokumenter fra tidligere årsmøter. Er det noe du savner, ta kontakt med styret.'
       />
       <PrivateRoute
         path='/informasjon/dokumenter/'
