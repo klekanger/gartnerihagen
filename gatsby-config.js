@@ -10,6 +10,9 @@ module.exports = {
     siteLanguage: 'nb-no',
     banner: '/images/gartnerihagen_solnedgang.jpg',
   },
+  flags: {
+    PRESERVE_WEBPACK_CACHE: true,
+  },
 
   plugins: [
     {
