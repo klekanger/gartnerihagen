@@ -40,7 +40,9 @@ export default function SEO({
   } = site.siteMetadata;
 
   let seoImage: string | object;
-  !image ? (seoImage = `${siteUrl}${defaultImage}`) : (seoImage = image);
+  !image
+    ? (seoImage = `${siteUrl}${defaultImage}`)
+    : (seoImage = `https:${image}`);
 
   const seo = {
     title: title || defaultTitle,
