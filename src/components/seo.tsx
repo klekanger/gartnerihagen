@@ -102,3 +102,7 @@ const query: void = graphql`
     }
   }
 `;
+
+// TODO
+//
+// Fix smaller og:image file sizes for Facebook sharing
