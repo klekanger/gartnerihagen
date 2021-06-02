@@ -10,6 +10,16 @@ exports.handler = async (event, context) => {
     scope: 'read:users update:users delete:users create:users',
   });
 
+  // TODO
+  // Check access token received from frontend
+  // Check if user has the required permissions to perform CRUD operations on user database
+
+  /* 
+
+    
+
+  */
+
   // Get all users from Auth0 Management API
   let userList;
   try {
