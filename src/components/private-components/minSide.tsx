@@ -43,7 +43,7 @@ export default function MinSide() {
         connection: 'Username-Password-Authentication',
       };
 
-      fetch(
+      const response = await fetch(
         `https://${process.env.GATSBY_AUTH0_DOMAIN}/dbconnections/change_password`,
         {
           method: 'POST',
@@ -53,25 +53,24 @@ export default function MinSide() {
 
           body: JSON.stringify(opts),
         }
-      ).then((response) => {
-        if (response?.status === 200) {
-          toast({
-            title: 'Sjekk eposten din',
-            description: 'Du vil få en epost som lar deg endre passord.',
-            status: 'success',
-            duration: 9000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: 'Noe gikk muligens galt',
-            description: 'Prøv igjen, eller ta kontakt med support.',
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          });
-        }
-      });
+      );
+      if (response?.status === 200) {
+        toast({
+          title: 'Sjekk eposten din',
+          description: 'Du vil få en epost som lar deg endre passord.',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: 'Noe gikk muligens galt',
+          description: 'Prøv igjen, eller ta kontakt med support.',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     } catch (error) {
       toast({
         title: 'Noe gikk galt',
