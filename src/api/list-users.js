@@ -22,8 +22,8 @@ export default async function handler(req, res) {
 
   res.json({
     statusCode: 200,
-    body: JSON.stringify({
+    body: {
       data: userList,
-    }),
+    },
   });
 }
