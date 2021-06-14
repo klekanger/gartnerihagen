@@ -40,6 +40,10 @@ export default function UserAdminPage() {
     // Have a look at this and refactor
     // UseAPI hook for accessing protecting APIS with an access token
     // https://github.com/auth0/auth0-react/blob/master/EXAMPLES.md#4-create-a-useapi-hook-for-accessing-protected-apis-with-an-access-token
+    //
+    // Should add scopes to opts:
+    // https://auth0.com/docs/scopes/sample-use-cases-scopes-and-claims
+    // https://github.com/auth0/auth0-react/blob/master/EXAMPLES.md#4-create-a-useapi-hook-for-accessing-protected-apis-with-an-access-token
 
     // Fetch all users from user admin API
     async function getUserData() {
