@@ -24,6 +24,7 @@
     "@contentful/rich-text-types": "^14.1.2",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@sentry/gatsby": "^6.7.0",
     "auth0": "^2.34.2",
     "dotenv": "^9.0.2",
     "framer-motion": "^4.1.16",
