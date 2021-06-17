@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { wrapPageElement as wrap } from './src/chakra-wrapper';
+import { ApolloWrapper } from './src/apollo/apollo-wrapper';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 
