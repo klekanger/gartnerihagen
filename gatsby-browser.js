@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { wrapPageElement as wrap } from './src/chakra-wrapper';
 
 export { wrapRootElement } from './gatsby-ssr';
