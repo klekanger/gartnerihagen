@@ -11,18 +11,31 @@ const ResponsiveImage = ({
   alt,
   ...rest
 }: ICustomImageProps): JSX.Element => {
-  const small = `${src}?w=400`;
-  const medium = `${src}?w=800`;
-  const large = `${src}?w=1600`;
-  const xlarge = `${src}?w=4000`;
+  const small = `${src}?w=800&fm=webp 800w`;
+  const medium = `${src}?w=1600&fm=webp 1600w`;
+  const large = `${src}?w=1366&fm=webp 1366w`;
 
   return (
-    <img
-      src={small}
-      srcSet={`${small} 300w, ${medium} 768w, ${large} 1280w`}
-      alt={alt}
-      {...rest}
-    />
+    <div>
+      <picture>
+        <source
+          type='image/webp'
+          sizes='(max-width: 1200px) 1200px, 100vw'
+          src='//images.ctfassets.net/wxoemgzywng5/5r6WILLMKXX0qtACaRRVTm/ed394bffcfcc58531c8114b755de7d17/20210530_144100.jpg?w=1008&h=630&fl=progressive&q=50&fm=jpg'
+          srcSet=`` 
+        />
+        <img
+          src='//images.ctfassets.net/wxoemgzywng5/5r6WILLMKXX0qtACaRRVTm/ed394bffcfcc58531c8114b755de7d17/20210530_144100.jpg?w=1008&h=630&fl=progressive&q=50&fm=jpg'
+          alt=''
+          srcSet='
+        //images.ctfassets.net/wxoemgzywng5/5r6WILLMKXX0qtACaRRVTm/ed394bffcfcc58531c8114b755de7d17/20210530_144100.jpg?w=1008&h=630&fl=progressive&q=50&fm=jpg  1008w,
+        //images.ctfassets.net/wxoemgzywng5/5r6WILLMKXX0qtACaRRVTm/ed394bffcfcc58531c8114b755de7d17/20210530_144100.jpg?w=2016&h=1260&fl=progressive&q=50&fm=jpg 2016w,
+        //images.ctfassets.net/wxoemgzywng5/5r6WILLMKXX0qtACaRRVTm/ed394bffcfcc58531c8114b755de7d17/20210530_144100.jpg?w=4000&h=2500&fl=progressive&q=50&fm=jpg 4000w
+      '
+          {...rest}
+        />
+      </picture>
+    </div>
   );
 };
 
