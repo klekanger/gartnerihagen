@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
+import ResponsiveImage from '../../utils/reponsiveImage';
+
 import {
   ChevronRightIcon,
   ArrowForwardIcon,
@@ -139,9 +141,10 @@ const GetDocs = () => {
           w={['100%', '100%', '60%', '60%']}
         >
           <Image
+            as={ResponsiveImage}
             src={post.featuredImage.url}
-            w='auto'
             alt={post.featuredImage.description}
+            w='auto'
             rounded='md'
             shadow='lg'
           />
