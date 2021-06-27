@@ -9,7 +9,7 @@ import {
   ArrowForwardIcon,
   ArrowBackIcon,
 } from '@chakra-ui/icons';
-import { GatsbyImage } from 'gatsby-plugin-image';
+
 import {
   Flex,
   Box,
@@ -41,9 +41,9 @@ const QUERY = gql`
         }
         excerpt
         featuredImage {
+          url
           title
           description
-          url
         }
       }
     }
@@ -142,9 +142,8 @@ const GetDocs = () => {
         >
           <Image
             as={ResponsiveImage}
-            src={post.featuredImage.url}
+            url={post.featuredImage.url}
             alt={post.featuredImage.description}
-            w='auto'
             rounded='md'
             shadow='lg'
           />
