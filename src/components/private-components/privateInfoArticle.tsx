@@ -38,7 +38,7 @@ interface IPrivateInfoProps {
 }
 
 export default function PrivateInfoArticle({ slug }: IPrivateInfoProps) {
-  const data = useStaticQuery(graphql`
+  /*   const data = useStaticQuery(graphql`
     query {
       privatePosts: allContentfulBlogPost(
         filter: { privatePost: { eq: true } }
@@ -77,7 +77,9 @@ export default function PrivateInfoArticle({ slug }: IPrivateInfoProps) {
         }
       }
     }
-  `);
+  `); */
+
+  const data = [];
 
   const postNodes = data?.privatePosts.nodes ?? [];
 
@@ -93,14 +95,8 @@ export default function PrivateInfoArticle({ slug }: IPrivateInfoProps) {
     );
   }
 
-  const {
-    title,
-    author,
-    bodyText,
-    featuredImage,
-    createdAt,
-    updatedAt,
-  } = postToShow;
+  const { title, author, bodyText, featuredImage, createdAt, updatedAt } =
+    postToShow;
 
   return (
     <Article
