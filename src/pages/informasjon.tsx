@@ -7,7 +7,7 @@ import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 
 import InfoPage from '../components/private-components/informasjon';
-import PrivateInfoArticle from '../components/private-components/privateInfoArticle';
+import PrivateInfoItem from '../components/private-components/privateInfoItem';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
 
@@ -37,8 +37,8 @@ const Informasjon = () => {
     <Router>
       <PrivateRoute path='/informasjon' component={InfoPage} />
       <PrivateRoute
-        path='/informasjon/post/:slug'
-        component={PrivateInfoArticle}
+        path='/informasjon/post/:slug/:id'
+        component={PrivateInfoItem}
       />
       <PrivateRoute
         path='/informasjon/referater/'

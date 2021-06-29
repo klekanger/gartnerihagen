@@ -20,7 +20,7 @@ interface IArticleGrid {
   author: {
     firstName: string;
     lastName: string;
-  };
+  }[];
   featuredImage: {
     gatsbyImageData: IGatsbyImageData;
     description: string;

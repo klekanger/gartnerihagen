@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
-import { renderRichText } from 'gatsby-source-contentful/rich-text';
+//import { renderRichText } from 'gatsby-source-contentful/rich-text';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
-import { format, parseISO } from 'date-fns';
-import norwegian from 'date-fns/locale/nb';
 
 interface IArticleProps {
   mainImage: {
@@ -85,7 +84,7 @@ function Article({
         </>
       )}
       <Text as='div' my={[5, 10, 10, 10]} textAlign='left'>
-        {renderRichText(bodyText, renderRichTextOptions)}
+        {documentToReactComponents(bodyText, renderRichTextOptions)}
       </Text>
 
       <Text

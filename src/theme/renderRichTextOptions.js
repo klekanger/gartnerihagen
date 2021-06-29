@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import ResponsiveImage from '../components/reponsiveImage';
 import {
   Heading,
   Text,
@@ -69,18 +70,34 @@ const renderRichTextOptions = {
     ),
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      // TODO!!
+      // REFACTOR: use custom renderer. If gatsby Image does not exist,
+      // we should get the ID of the asset and fetch the URL from Contentful
+      // Use /src/utils/responsiveImage.tsx for rendering
+
+      console.log(node);
+
       const { gatsbyImageData, description, title } = node.data.target;
+
+      const ImageToRender = node.data.target?.gatsbyImageData ? (
+        <Image
+          as={GatsbyImage}
+          image={gatsbyImageData}
+          size='100%'
+          shadow='lg'
+          rounded='md'
+          alt={title}
+        />
+      ) : (
+        <>
+          <ResponsiveImage url={'#'} alt={title} />
+          <h1>IMAGE FETCHED DYNAMICALLY FROM CONTENTFUL</h1>
+        </>
+      );
 
       return (
         <Box>
-          <Image
-            as={GatsbyImage}
-            image={gatsbyImageData}
-            size='100%'
-            shadow='lg'
-            rounded='md'
-            alt={title}
-          />
+          {ImageToRender}
           <Text
             as='p'
             textAlign='left'
@@ -99,3 +116,11 @@ const renderRichTextOptions = {
 };
 
 export default renderRichTextOptions;
+
+// TODO
+//
+// Make two custom renderers, one for Gatsby Images and one for images fetched dynamically
+// via Apollo Client (using /src/util/responsiveImage.tsx)
+//    renderNode: {
+//         [BLOCKS.EMBEDDED_ENTRY]: (node) => `<custom-component>${customComponentRenderer(node)}</custom-component>`
+//    }

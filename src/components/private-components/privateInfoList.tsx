@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useState } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
-import ResponsiveImage from '../../utils/reponsiveImage';
+import ResponsiveImage from '../reponsiveImage';
 import LoadingSpinner from '../loading-spinner';
 
 import {
@@ -116,7 +116,7 @@ const PrivateInfoList = () => {
         >
           <Link
             as={GatsbyLink}
-            to={`/informasjon/post/${post.slug}`}
+            to={`/informasjon/post/${post.slug}/${post.sys.id}`}
             color='black'
             _hover={{ textDecor: 'none' }}
           >
@@ -147,7 +147,7 @@ const PrivateInfoList = () => {
             {post.slug && (
               <Link
                 as={GatsbyLink}
-                to={`/informasjon/post/${post.slug}`}
+                to={`/informasjon/post/${post.slug}/${post.sys.id}`}
                 color='black'
                 _hover={{ textDecor: 'none', color: 'blue.700' }}
               >
@@ -159,7 +159,7 @@ const PrivateInfoList = () => {
 
         <Link
           as={GatsbyLink}
-          to={`/informasjon/post/${post.slug}`}
+          to={`/informasjon/post/${post.slug}/${post.sys.id}`}
           w={['100%', '100%', '60%', '60%']}
         >
           <Image

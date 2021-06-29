@@ -40,14 +40,8 @@ export default function BlogPostTemplate({
     return <ErrorPage />;
   }
 
-  const {
-    pageTitle,
-    createdAt,
-    updatedAt,
-    pageText,
-    pageImage,
-    excerpt,
-  } = contentfulSide;
+  const { pageTitle, createdAt, updatedAt, pageText, pageImage, excerpt } =
+    contentfulSide;
 
   return (
     <>
@@ -58,7 +52,7 @@ export default function BlogPostTemplate({
       />
       <Article
         title={pageTitle}
-        bodyText={pageText}
+        bodyText={JSON.parse(pageText.raw)}
         createdAt={createdAt}
         updatedAt={updatedAt}
         mainImage={pageImage}
