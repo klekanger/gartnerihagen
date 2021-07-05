@@ -116,7 +116,7 @@ const PrivateInfoList = () => {
         >
           <Link
             as={GatsbyLink}
-            to={`/informasjon/post/${post.slug}/${post.sys.id}`}
+            to={`/informasjon/post/${post?.slug}/${post?.sys?.id}`}
             color='black'
             _hover={{ textDecor: 'none' }}
           >
@@ -147,7 +147,7 @@ const PrivateInfoList = () => {
             {post.slug && (
               <Link
                 as={GatsbyLink}
-                to={`/informasjon/post/${post.slug}/${post.sys.id}`}
+                to={`/informasjon/post/${post?.slug}/${post?.sys?.id}`}
                 color='black'
                 _hover={{ textDecor: 'none', color: 'blue.700' }}
               >
@@ -156,10 +156,9 @@ const PrivateInfoList = () => {
             )}
           </Text>
         </Box>
-
         <Link
           as={GatsbyLink}
-          to={`/informasjon/post/${post.slug}/${post.sys.id}`}
+          to={`/informasjon/post/${post?.slug}/${post?.sys?.id}`}
           w={['100%', '100%', '60%', '60%']}
         >
           <Image
