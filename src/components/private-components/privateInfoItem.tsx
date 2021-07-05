@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { IGatsbyImageData } from 'gatsby-plugin-image';
 import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
 import LoadingSpinner from '../loading-spinner';
@@ -25,7 +24,11 @@ export default function PrivateInfoArticle({ slug, id }) {
           links {
             assets {
               block {
+                sys {
+                  id
+                }
                 title
+                description
                 url
               }
             }
@@ -66,14 +69,12 @@ export default function PrivateInfoArticle({ slug, id }) {
     authorCollection,
   } = data?.post;
 
-  console.log(bodyText.links);
-
   const authors = authorCollection?.items ?? [];
 
   return (
     <PrivateArticle
       title={title}
-      bodyText={bodyText.json}
+      bodyText={bodyText}
       createdAt={createdAt}
       updatedAt={updatedAt}
       mainImage={featuredImage}

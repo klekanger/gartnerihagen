@@ -14,10 +14,22 @@ function PrivateArticle({
   updatedAt,
   buttonLink,
 }) {
+  // Format the dates shown at the bottom of every article page
+  const formattedCreateDate = new Date(createdAt).toLocaleDateString('nb-no', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+  const formattedUpdatedDate = new Date(updatedAt).toLocaleDateString('nb-no', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+
   const publishDate: string =
     createdAt !== updatedAt
-      ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
-      : `Publisert: ${createdAt}`;
+      ? `Publisert: ${formattedCreateDate} (oppdatert: ${formattedUpdatedDate})`
+      : `Publisert: ${formattedCreateDate}`;
 
   // Make string that will be used to show
   // a list of authors (with comma separators if there are more than one)
@@ -33,6 +45,11 @@ function PrivateArticle({
       }
     });
   }
+
+  // Put the rich text JSON and the linked entries into separate constants
+  // that should be passed into documentToReactComponents
+  const { json: richTextJson = {} } = bodyText;
+  const { links = {} } = bodyText;
 
   return (
     <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
@@ -68,7 +85,7 @@ function PrivateArticle({
         </>
       )}
       <Text as='div' my={[5, 10, 10, 10]} textAlign='left'>
-        {documentToReactComponents(bodyText, renderRichTextOptions)}
+        {documentToReactComponents(richTextJson, renderRichTextOptions(links))}
       </Text>
 
       <Text
@@ -97,3 +114,6 @@ function PrivateArticle({
 }
 
 export default PrivateArticle;
+
+// TODO
+// Typing

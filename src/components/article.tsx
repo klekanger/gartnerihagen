@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
-//import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
@@ -31,6 +30,7 @@ function Article({
   updatedAt,
   buttonLink,
 }: IArticleProps) {
+  // Format the dates shown at the bottom of every article page
   const publishDate: string =
     createdAt !== updatedAt
       ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
@@ -84,7 +84,7 @@ function Article({
         </>
       )}
       <Text as='div' my={[5, 10, 10, 10]} textAlign='left'>
-        {documentToReactComponents(bodyText, renderRichTextOptions)}
+        {renderRichText(bodyText, renderRichTextOptions())}
       </Text>
 
       <Text
