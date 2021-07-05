@@ -61,7 +61,7 @@ export default function BlogPostTemplate({
       />
       <Article
         title={title}
-        bodyText={JSON.parse(bodyText.raw)}
+        bodyText={bodyText}
         createdAt={createdAt}
         updatedAt={updatedAt}
         mainImage={featuredImage}
