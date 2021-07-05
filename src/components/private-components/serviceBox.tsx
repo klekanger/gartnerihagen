@@ -2,7 +2,7 @@
 // Providing the user with useful links to documents etc.
 
 import * as React from 'react';
-import { useStaticQuery, graphql, Link as GatsbyLink } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import { Box, Stack, Text } from '@chakra-ui/react';
 import MenuButton from '../menubutton'; // Custom button component
 
