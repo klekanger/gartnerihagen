@@ -212,3 +212,8 @@ const PrivateInfoList = () => {
 };
 
 export default PrivateInfoList;
+
+// TODO
+// Strange bug in production on Netlify:
+// Cannot read property 'id' of null
+// at privateInfoList.tsx:119
