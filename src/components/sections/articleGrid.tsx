@@ -1,6 +1,7 @@
-//
-// 2 x 2 grid showing the last 4 blog articles
-//
+/**
+ * 2 x 2 grid showing the last 4 blog articles
+ *
+ */
 
 import * as React from 'react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
