@@ -9,17 +9,18 @@ import {
   Td,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { formatDate } from '../utils/formatDate';
 
 interface IDocumentLibrary {
   content: {
-    contentful_id: string;
-    title?: string;
-    file: {
-      url: string;
-      fileName: string;
+    fileName: string;
+    title: string;
+    url: string;
+    sys: {
+      id: string;
+      firstPublishedAt: string;
+      publishedAt: string;
     };
-    createdAt: string;
-    updatedAt: string;
   }[];
 }
 
@@ -40,18 +41,14 @@ export default function DocumentLibrary({ content }: IDocumentLibrary) {
       </Thead>
       <Tbody textColor='black'>
         {content.map((element) => (
-          <Tr
-            borderBottom='1px solid #ddd'
-            bg='gray.100'
-            key={element.contentful_id}
-          >
+          <Tr borderBottom='1px solid #ddd' bg='gray.100' key={element.sys.id}>
             <Td>
-              <Link href={element.file.url} isExternal>
+              <Link href={element.url} isExternal>
                 {element.title}
               </Link>
             </Td>
-            <Td>{element.createdAt}</Td>
-            <Td hidden={smallScreen}>{element.updatedAt}</Td>
+            <Td>{formatDate(element.sys.firstPublishedAt)}</Td>
+            <Td hidden={smallScreen}>{formatDate(element.sys.publishedAt)}</Td>
           </Tr>
         ))}
       </Tbody>

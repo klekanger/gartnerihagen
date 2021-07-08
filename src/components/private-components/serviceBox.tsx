@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import { useQuery, gql } from '@apollo/client';
 import { Box, Stack, Text } from '@chakra-ui/react';
 import MenuButton from '../menubutton'; // Custom button component
 
@@ -131,3 +132,6 @@ export default function ServiceBox() {
     </Box>
   );
 }
+
+// TODO
+// Rewrite to use Apollo Client instead of useStaticQuery
