@@ -4,7 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
 import LoadingSpinner from '../loading-spinner';
 
-export default function PrivateInfoArticle({ slug, id }) {
+export default function PrivateInfoItem({ slug, id }) {
   const QUERY = gql`
     query PrivatePosts($id: String!) {
       post: blogPost(id: $id) {

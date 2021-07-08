@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useQuery, gql } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import DocumentLibrary from '../documentLibrary';
+import LoadingSpinner from '../loading-spinner';
 
 interface IDokumenter {
   title: string;
@@ -9,45 +10,47 @@ interface IDokumenter {
   props: {
     path: string;
     uri: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     navigate?: any;
-  };
-}
-
-interface IMenu {
-  menu: {
-    files: {
-      contentful_id: string;
-      title: string;
-      file: {
-        url: string;
-        fileName: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    }[];
+    location?: any;
   };
 }
 
 export default function Dokumenter({ title, excerpt, ...props }: IDokumenter) {
-  const { menu }: IMenu = useStaticQuery(graphql`
+  const QUERY = gql`
     {
-      menu: contentfulServiceMenu {
-        files: menu6Files {
-          contentful_id
-          title
-          file {
+      menu: serviceMenu(id: "3ZMDi88bv5KLPFanE7JxPa") {
+        menuItems: menu6FilesCollection {
+          files: items {
+            sys {
+              id
+              firstPublishedAt
+              publishedAt
+            }
+            title
             url
             fileName
           }
-          createdAt(formatString: "DD.MM.YYYY")
-          updatedAt(formatString: "DD.MM.YYYY")
         }
       }
     }
-  `);
+  `;
 
-  const content = menu?.files || [];
+  const { data, error, loading } = useQuery(QUERY);
+
+  if (error) {
+    return (
+      <Box maxWidth={['97%', '95%', '95%', '70%']} py={[8, 12, 16, 24]}>
+        <Heading as='h1'>Noe gikk galt</Heading>
+      </Box>
+    );
+  }
+
+  if (loading) {
+    return <LoadingSpinner spinnerMessage='Laster inn artikkel...' />;
+  }
+
+  const content = data?.menu?.menuItems?.files || [];
 
   return (
     <Box

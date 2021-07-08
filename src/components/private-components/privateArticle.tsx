@@ -4,6 +4,7 @@ import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import ResponsiveImage from '../reponsiveImage';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { formatDate } from '../../utils/formatDate';
 
 function PrivateArticle({
   mainImage,
@@ -15,16 +16,8 @@ function PrivateArticle({
   buttonLink,
 }) {
   // Format the dates shown at the bottom of every article page
-  const formattedCreateDate = new Date(createdAt).toLocaleDateString('nb-no', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  });
-  const formattedUpdatedDate = new Date(updatedAt).toLocaleDateString('nb-no', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  });
+  const formattedCreateDate = formatDate(createdAt);
+  const formattedUpdatedDate = formatDate(updatedAt);
 
   const publishDate: string =
     createdAt !== updatedAt
