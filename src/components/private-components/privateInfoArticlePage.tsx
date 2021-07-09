@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
+import SEO from '../../components/seo';
 import LoadingSpinner from '../loading-spinner';
 
 export default function PrivateInfoArticlePage({ slug, id }) {
@@ -9,6 +10,7 @@ export default function PrivateInfoArticlePage({ slug, id }) {
     query PrivatePosts($id: String!) {
       post: blogPost(id: $id) {
         title
+        excerpt
         sys {
           createdAt: firstPublishedAt
           updatedAt: publishedAt
@@ -64,6 +66,7 @@ export default function PrivateInfoArticlePage({ slug, id }) {
   const {
     title,
     bodyText,
+    excerpt,
     featuredImage,
     sys: { createdAt, updatedAt },
     authorCollection,
@@ -73,6 +76,11 @@ export default function PrivateInfoArticlePage({ slug, id }) {
 
   return (
     <>
+      <SEO
+        title={title || null}
+        image={featuredImage.url || null}
+        description={excerpt || null}
+      />
       <PrivateArticle
         title={title}
         bodyText={bodyText}
