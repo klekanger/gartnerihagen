@@ -10,17 +10,12 @@ module.exports = {
     siteLanguage: 'nb-no',
     banner: '/images/gartnerihagen_solnedgang.jpg',
   },
-  flags: {
-    PRESERVE_WEBPACK_CACHE: true,
-  },
-
   plugins: [
     {
       resolve: 'gatsby-source-contentful',
       options: {
         accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
-        /* host: process.env.CONTENTFUL_HOST, */
         downloadLocal: true,
       },
     },
