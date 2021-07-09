@@ -20,6 +20,9 @@ export default function Referater({ title, excerpt, ...props }) {
   const QUERY = gql`
     {
       menu: serviceMenu(id: "3ZMDi88bv5KLPFanE7JxPa") {
+        id: sys {
+          id
+        }
         menuItems: menu5FilesCollection {
           files: items {
             sys {

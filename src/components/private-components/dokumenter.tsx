@@ -20,6 +20,9 @@ export default function Dokumenter({ title, excerpt, ...props }: IDokumenter) {
   const QUERY = gql`
     {
       menu: serviceMenu(id: "3ZMDi88bv5KLPFanE7JxPa") {
+        id: sys {
+          id
+        }
         menuItems: menu6FilesCollection {
           files: items {
             sys {
