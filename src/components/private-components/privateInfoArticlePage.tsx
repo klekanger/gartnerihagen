@@ -4,7 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
 import LoadingSpinner from '../loading-spinner';
 
-export default function PrivateInfoItem({ slug, id }) {
+export default function PrivateInfoArticlePage({ slug, id }) {
   const QUERY = gql`
     query PrivatePosts($id: String!) {
       post: blogPost(id: $id) {
@@ -72,14 +72,16 @@ export default function PrivateInfoItem({ slug, id }) {
   const authors = authorCollection?.items ?? [];
 
   return (
-    <PrivateArticle
-      title={title}
-      bodyText={bodyText}
-      createdAt={createdAt}
-      updatedAt={updatedAt}
-      mainImage={featuredImage}
-      author={authors}
-      buttonLink='/informasjon'
-    />
+    <>
+      <PrivateArticle
+        title={title}
+        bodyText={bodyText}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        mainImage={featuredImage}
+        author={authors}
+        buttonLink='/informasjon'
+      />
+    </>
   );
 }
