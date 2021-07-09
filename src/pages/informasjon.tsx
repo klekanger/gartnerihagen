@@ -7,7 +7,7 @@ import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 
 import InfoPage from '../components/private-components/informasjon';
-import PrivateInfoArticlePage from '../components/private-components/PrivateInfoArticlePage';
+import PrivateInfoArticlePage from '../components/private-components/privateInfoArticlePage';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
 
