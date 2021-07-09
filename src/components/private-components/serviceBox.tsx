@@ -132,6 +132,3 @@ export default function ServiceBox() {
     </Box>
   );
 }
-
-// TODO
-// Rewrite to use Apollo Client instead of useStaticQuery
