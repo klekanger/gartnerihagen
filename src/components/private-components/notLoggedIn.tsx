@@ -14,59 +14,53 @@ export default function NotLoggedIn() {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <>
-      {/* SEO component is necessary to avoid non-existing og:image when sharing 
-      content from protected routes on social media  */}
-      <SEO />
-
-      <Box
-        maxWidth={['97%', '95%', '95%', '70%']}
-        h='100vh'
-        d='flex'
+    <Box
+      maxWidth={['97%', '95%', '95%', '70%']}
+      h='100vh'
+      d='flex'
+      justifyContent='center'
+    >
+      <Alert
+        status='info'
+        variant='subtle'
+        flexDirection='column'
+        alignItems='center'
         justifyContent='center'
+        h={['55vh', '55vh', '65vh', '65vh']}
+        w={['95vw', '80vw', '60vw', '50vw']}
+        mt={16}
+        rounded='md'
+        shadow='lg'
       >
-        <Alert
-          status='info'
-          variant='subtle'
-          flexDirection='column'
-          alignItems='center'
-          justifyContent='center'
-          h={['50vh', '50vh', '60vh', '60vh']}
-          w={['95vw', '80vw', '60vw', '50vw']}
-          mt={16}
+        <AlertIcon boxSize='40px' mr={0} />
+        <AlertTitle mt={4} mb={1} fontSize='lg'>
+          Logg inn for å se denne siden
+        </AlertTitle>
+        <AlertDescription maxWidth='sm'>
+          Du må logge inn for å se informasjon beregnet på beboere i
+          Boligsameiet Gartnerihagen. Her finner du artikler, vedtekter,
+          dokumentasjon, referater fra årsmøter og annen nytt informasjon.{' '}
+          <br />
+          <br />
+          Hvis du ikke har brukerkonto, ta kontakt med styret.
+        </AlertDescription>
+        <Button
+          variant='outline'
+          colorScheme='blue'
+          size='lg'
           rounded='md'
-          shadow='lg'
+          ml={{ base: '0px', md: '20px', lg: '30px' }}
+          mt={10}
+          onClick={() =>
+            loginWithRedirect({
+              ui_locales: 'nb',
+            })
+          }
+          _hover={{ color: 'logoDarkGreen' }}
         >
-          <AlertIcon boxSize='40px' mr={0} />
-          <AlertTitle mt={4} mb={1} fontSize='lg'>
-            Logg inn for å se denne siden
-          </AlertTitle>
-          <AlertDescription maxWidth='sm'>
-            Du må logge inn for å se informasjon beregnet på beboere i
-            Boligsameiet Gartnerihagen. Her finner du artikler, vedtekter,
-            dokumentasjon, referater fra årsmøter og annen nytt informasjon.{' '}
-            <br />
-            <br />
-            Hvis du ikke har brukerkonto, ta kontakt med styret.
-          </AlertDescription>
-          <Button
-            variant='outline'
-            colorScheme='blue'
-            size='lg'
-            rounded='md'
-            ml={{ base: '0px', md: '20px', lg: '30px' }}
-            mt={10}
-            onClick={() =>
-              loginWithRedirect({
-                ui_locales: 'nb',
-              })
-            }
-            _hover={{ color: 'logoDarkGreen' }}
-          >
-            Gå til innlogging
-          </Button>
-        </Alert>
-      </Box>
-    </>
+          Klikk for å logge inn
+        </Button>
+      </Alert>
+    </Box>
   );
 }

@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
-
+import SEO from '../components/seo';
 import InfoPage from '../components/private-components/informasjon';
 import PrivateInfoArticlePage from '../components/private-components/privateInfoArticlePage';
 import Referater from '../components/private-components/referater';
@@ -30,7 +30,14 @@ const Informasjon = () => {
   }
 
   if (!isAuthenticated) {
-    return <NotLoggedIn />;
+    return (
+      <>
+        {/* SEO component is necessary to avoid non-existing og:image when sharing 
+      content from protected routes on social media  */}
+        <SEO />
+        <NotLoggedIn />
+      </>
+    );
   }
 
   return (
