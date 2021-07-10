@@ -12,7 +12,7 @@ import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
 
 import LoadingSpinner from '../components/loading-spinner';
-import NotLoggedIn from '../components/private-components/notLoggedIn';
+import NotLoggedIn from '../components/notLoggedIn';
 
 const Informasjon = () => {
   const { isLoading, isAuthenticated, error } = useAuth0();

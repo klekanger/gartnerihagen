@@ -7,7 +7,7 @@ import {
   AlertDescription,
   AlertIcon,
 } from '@chakra-ui/react';
-import SEO from '../../components/seo';
+import SEO from './seo';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function NotLoggedIn() {
@@ -39,7 +39,7 @@ export default function NotLoggedIn() {
         <AlertDescription maxWidth='sm'>
           Du må logge inn for å se informasjon beregnet på beboere i
           Boligsameiet Gartnerihagen. Her finner du artikler, vedtekter,
-          dokumentasjon, referater fra årsmøter og annen nytt informasjon.{' '}
+          dokumentasjon, referater fra årsmøter og annen nyttig informasjon.{' '}
           <br />
           <br />
           Hvis du ikke har brukerkonto, ta kontakt med styret.

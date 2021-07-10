@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
-import NotLoggedIn from '../components/private-components/notLoggedIn';
+import NotLoggedIn from '../components/notLoggedIn';
 import LoadingSpinner from '../components/loading-spinner';
 import UserAdminPage from '../components/private-components/userAdminPage';
 
