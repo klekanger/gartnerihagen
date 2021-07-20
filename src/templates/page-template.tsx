@@ -40,14 +40,8 @@ export default function BlogPostTemplate({
     return <ErrorPage />;
   }
 
-  const {
-    pageTitle,
-    createdAt,
-    updatedAt,
-    pageText,
-    pageImage,
-    excerpt,
-  } = contentfulSide;
+  const { pageTitle, createdAt, updatedAt, pageText, pageImage, excerpt } =
+    contentfulSide;
 
   return (
     <>

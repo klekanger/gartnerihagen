@@ -40,7 +40,7 @@ export default function UserAdminPage() {
       >
         Brukeradministrasjon
       </Heading>
-      <Text>
+      <Text as='div'>
         <b>Du er innlogget som:</b> {user?.nickname}
         <Text>
           <b>E-post:</b> {user?.email}

@@ -1,27 +1,12 @@
 import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
-import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import renderRichTextOptions from '../theme/renderRichTextOptions';
+import ResponsiveImage from '../reponsiveImage';
+import renderRichTextOptions from '../../theme/renderRichTextOptions';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { formatDate } from '../../utils/formatDate';
 
-interface IArticleProps {
-  mainImage: {
-    gatsbyImageData: IGatsbyImageData;
-    description: string;
-  };
-  title: string;
-  author?: {
-    firstName: string;
-    lastName: string;
-  }[];
-  bodyText: any;
-  createdAt: string;
-  updatedAt: string;
-  buttonLink: string;
-}
-
-function Article({
+function PrivateArticle({
   mainImage,
   title,
   author,
@@ -29,12 +14,15 @@ function Article({
   createdAt,
   updatedAt,
   buttonLink,
-}: IArticleProps) {
+}) {
   // Format the dates shown at the bottom of every article page
+  const formattedCreateDate = formatDate(createdAt);
+  const formattedUpdatedDate = formatDate(updatedAt);
+
   const publishDate: string =
     createdAt !== updatedAt
-      ? `Publisert: ${createdAt} (oppdatert: ${updatedAt})`
-      : `Publisert: ${createdAt}`;
+      ? `Publisert: ${formattedCreateDate} (oppdatert: ${formattedUpdatedDate})`
+      : `Publisert: ${formattedCreateDate}`;
 
   // Make string that will be used to show
   // a list of authors (with comma separators if there are more than one)
@@ -51,6 +39,11 @@ function Article({
     });
   }
 
+  // Put the rich text JSON and the linked entries into separate constants
+  // that should be passed into documentToReactComponents
+  const { json: richTextJson = {} } = bodyText;
+  const { links = {} } = bodyText;
+
   return (
     <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
       <Heading
@@ -64,12 +57,13 @@ function Article({
       {mainImage && (
         <>
           <Image
-            as={GatsbyImage}
-            image={mainImage.gatsbyImageData}
+            as={ResponsiveImage}
+            url={mainImage.url}
+            alt={mainImage.description}
             rounded='md'
             shadow='lg'
-            alt={mainImage.description}
           />
+
           <Text
             as='p'
             textAlign='left'
@@ -84,7 +78,7 @@ function Article({
         </>
       )}
       <Text as='div' my={[5, 10, 10, 10]} textAlign='left'>
-        {renderRichText(bodyText, renderRichTextOptions())}
+        {documentToReactComponents(richTextJson, renderRichTextOptions(links))}
       </Text>
 
       <Text
@@ -112,4 +106,7 @@ function Article({
   );
 }
 
-export default Article;
+export default PrivateArticle;
+
+// TODO
+// Typing

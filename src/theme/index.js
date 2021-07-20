@@ -9,7 +9,7 @@ import styles from './styles';
 import colors from './colors';
 
 // Typography
-import textStyles from './textStyles';
+// import textStyles from './textStyles';
 
 // Component style overrides
 import Button from './components/button';

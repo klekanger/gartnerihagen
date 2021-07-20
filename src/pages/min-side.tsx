@@ -5,8 +5,7 @@ import * as React from 'react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
 import MinSide from '../components/private-components/minSide';
-import UserAdmin from '../components/private-components/user-admin';
-import NotLoggedIn from '../components/private-components/notLoggedIn';
+import NotLoggedIn from '../components/notLoggedIn';
 import LoadingSpinner from '../components/loading-spinner';
 import { useAuth0 } from '@auth0/auth0-react';
 

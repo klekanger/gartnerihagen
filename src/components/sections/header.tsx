@@ -1,9 +1,9 @@
-//
-// Main header and navbar component
-//
+/**
+ * Main header and navbar component
+ */
 
 import * as React from 'react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link as GatsbyLink } from 'gatsby';
 import {

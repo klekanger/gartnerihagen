@@ -1,6 +1,6 @@
-//
-// Footer component
-//
+/**
+ * Footer component
+ */
 
 import * as React from 'react';
 import { Flex, Text, Link, Box } from '@chakra-ui/react';
@@ -76,7 +76,8 @@ export default function Footer() {
               href='https://www.gatsbyjs.com/'
               _hover={{ textDecor: 'none', color: 'light' }}
             >
-              Gatsby <SiGatsby style={{ display: 'inline' }} />
+              Gatsby{' '}
+              <SiGatsby aria-hidden='true' style={{ display: 'inline' }} />
             </Link>
           </Text>
         </Box>
