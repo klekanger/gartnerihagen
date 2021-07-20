@@ -1,6 +1,6 @@
-//
-// Footer component
-//
+/**
+ * Footer component
+ */
 
 import * as React from 'react';
 import { Flex, Text, Link, Box } from '@chakra-ui/react';

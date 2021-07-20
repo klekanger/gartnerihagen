@@ -2,7 +2,8 @@
 // Providing the user with useful links to documents etc.
 
 import * as React from 'react';
-import { useStaticQuery, graphql, Link as GatsbyLink } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
+import { useQuery, gql } from '@apollo/client';
 import { Box, Stack, Text } from '@chakra-ui/react';
 import MenuButton from '../menubutton'; // Custom button component
 
@@ -131,3 +132,7 @@ export default function ServiceBox() {
     </Box>
   );
 }
+
+// TODO
+// Replace useStaticQuery with Apollo Client query and fetch content on client only
+// to avoid menu items being accessible via the browser dev tools

@@ -5,14 +5,14 @@ import { Box } from '@chakra-ui/react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Router } from '@reach/router';
 import PrivateRoute from '../utils/privateRoute';
-
+import SEO from '../components/seo';
 import InfoPage from '../components/private-components/informasjon';
-import PrivateInfoArticle from '../components/private-components/privateInfoArticle';
+import PrivateInfoArticlePage from '../components/private-components/privateInfoArticlePage';
 import Referater from '../components/private-components/referater';
 import Dokumenter from '../components/private-components/dokumenter';
 
 import LoadingSpinner from '../components/loading-spinner';
-import NotLoggedIn from '../components/private-components/notLoggedIn';
+import NotLoggedIn from '../components/notLoggedIn';
 
 const Informasjon = () => {
   const { isLoading, isAuthenticated, error } = useAuth0();
@@ -30,15 +30,22 @@ const Informasjon = () => {
   }
 
   if (!isAuthenticated) {
-    return <NotLoggedIn />;
+    return (
+      <>
+        {/* SEO component is necessary to avoid non-existing og:image when sharing 
+      content from protected routes on social media  */}
+        <SEO />
+        <NotLoggedIn />
+      </>
+    );
   }
 
   return (
     <Router>
       <PrivateRoute path='/informasjon' component={InfoPage} />
       <PrivateRoute
-        path='/informasjon/post/:slug'
-        component={PrivateInfoArticle}
+        path='/informasjon/post/:slug/:id'
+        component={PrivateInfoArticlePage}
       />
       <PrivateRoute
         path='/informasjon/referater/'

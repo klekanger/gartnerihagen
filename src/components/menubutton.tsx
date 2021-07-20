@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
-import { Box, Stack, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 interface IMenuButton {
   multiLink?: boolean;

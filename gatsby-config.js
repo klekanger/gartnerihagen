@@ -8,19 +8,15 @@ module.exports = {
     description: 'Askims hyggeligste nabolag.',
     siteUrl: 'https://www.gartnerihagen-askim.no',
     siteLanguage: 'nb-no',
-    banner: '/images/gartnerihagen_solnedgang.jpg',
+    banner:
+      'https://images.ctfassets.net/wxoemgzywng5/48qgvJRlnlJcR6SibfnEt0/3934c143437413911ad162fc49ac1056/kveldssteming.jpg?w=1080',
   },
-  flags: {
-    PRESERVE_WEBPACK_CACHE: true,
-  },
-
   plugins: [
     {
       resolve: 'gatsby-source-contentful',
       options: {
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        /* host: process.env.CONTENTFUL_HOST, */
+        accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
+        spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
         downloadLocal: true,
       },
     },
@@ -61,6 +57,14 @@ module.exports = {
         rule: {
           include: /images/,
         },
+      },
+    },
+
+    {
+      resolve: '@sentry/gatsby',
+      options: {
+        dsn: 'https://d9c8f736d473490dbe0f40656ff8a26b@o849093.ingest.sentry.io/5815978',
+        sampleRate: 0.7,
       },
     },
   ],
