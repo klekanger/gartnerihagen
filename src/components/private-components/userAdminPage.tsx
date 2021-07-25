@@ -6,7 +6,7 @@ import NotLoggedInGiveConsent from '../notLoggedInGiveConsent';
 import ErrorPage from '../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../hooks/useApi';
-
+import { formatDate } from '../../utils/formatDate';
 import {
   Badge,
   Box,
@@ -21,35 +21,10 @@ import {
 } from '@chakra-ui/react';
 
 const UserAdminPage = () => {
-  const { user, logout, getAccessTokenWithPopup } = useAuth0();
+  const { user, logout } = useAuth0();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const createUser = () => {
-    console.log('Create user');
-    // TODO
-    // Add functionality for creating a user
-  };
-
-  const opts = {
-    audience: 'https://useradmin.gartnerihagen-askim.no',
-    scope: 'read:users',
-  };
-
-  const { loading, error, refresh, data } = useApi(
-    '/api/admin-users/list-users',
-    opts
-  );
-
-  const getTokenAndTryAgain = async (opts) => {
-    try {
-      await getAccessTokenWithPopup(opts);
-      refresh();
-    } catch (err) {
-      console.error('Noe gikk galt:  ', err);
-    }
-  };
-
-  // -----------------------
+  const { data, loading, error, getToken } = getAllUsers();
 
   if (loading) {
     return (
@@ -63,13 +38,13 @@ const UserAdminPage = () => {
         <NotLoggedIn
           title='Logg inn for brukeradministrasjon'
           description='Du må logge inn for å administrere brukerkontoer for Boligsameiet Gartnerihagen. 
-          Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
-          Ta kontakt med styret.'
+        Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
+        Ta kontakt med styret.'
         />
       );
     }
     if (error?.error === 'consent_required') {
-      return <NotLoggedInGiveConsent buttonLink={getTokenAndTryAgain} />;
+      return <NotLoggedInGiveConsent buttonLink={getToken} />;
     }
     return <ErrorPage errorMsg={error?.message} />;
   }
@@ -143,19 +118,29 @@ const UserAdminPage = () => {
               alt={userToShow?.name}
               rounded='50%'
               width={32}
-              mt={4}
+              my={4}
               mx={8}
             />
-            <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
-              {userToShow?.name}
-              {userToShow?.app_metadata?.Role ? (
-                <Badge colorScheme='red'>ADMIN</Badge>
-              ) : (
-                ''
-              )}
-            </Text>
-          </Flex>
 
+            <Box flexDirection='column'>
+              <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
+                {userToShow?.name}{' '}
+                {userToShow?.app_metadata?.Role ? (
+                  <Badge colorScheme='red'>ADMIN</Badge>
+                ) : (
+                  ''
+                )}
+              </Text>
+              <Text as='div' fontSize='sm' align='left'>
+                Konto opprettet: {formatDate(userToShow?.created_at)}
+              </Text>
+              <Text as='div' fontSize='sm' align='left'>
+                {userToShow?.last_login && (
+                  <>Sist innlogget: {formatDate(userToShow?.last_login)}</>
+                )}
+              </Text>
+            </Box>
+          </Flex>
           <Box mx={8} mb={8}>
             <Stack
               direction={['column', 'column', 'row', 'row']}
@@ -284,3 +269,36 @@ const UserAdminPage = () => {
 };
 
 export default UserAdminPage;
+
+// Gets a list of all the users
+// data.body contains name, email, picture, etc.
+// data.body.app_metadata contains the roles, if the user has an admin or editor role
+const getAllUsers = () => {
+  const { getAccessTokenWithPopup } = useAuth0();
+  const opts = {
+    audience: 'https://useradmin.gartnerihagen-askim.no',
+    scope: 'read:users',
+  };
+
+  const { loading, error, refresh, data } = useApi(
+    '/api/admin-users/list-users',
+    opts
+  );
+
+  async function getTokenAndTryAgain(opts) {
+    try {
+      await getAccessTokenWithPopup(opts);
+      refresh();
+    } catch (err) {
+      console.error('Noe gikk galt:  ', err);
+    }
+  }
+  console.log(data);
+  return { data, loading, error, getToken: () => getTokenAndTryAgain(opts) };
+};
+
+const createUser = () => {
+  console.log('Create user');
+  // TODO
+  // Add functionality for creating a user
+};
