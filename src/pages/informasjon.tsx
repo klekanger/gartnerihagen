@@ -35,7 +35,13 @@ const Informasjon = () => {
         {/* SEO component is necessary to avoid non-existing og:image when sharing 
       content from protected routes on social media  */}
         <SEO />
-        <NotLoggedIn />
+        <NotLoggedIn
+          description={`
+            Du må være logget inn for å se informasjon beregnet på beboere i Boligsameiet Gartnerihagen. 
+            Her finner du artikler, vedtekter, dokumentasjon, referater fra årsmøter og annen nyttig informasjon. 
+            
+            Hvis du ikke har brukerkonto, ta kontakt med styret.`}
+        />
       </>
     );
   }

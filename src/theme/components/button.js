@@ -7,7 +7,7 @@ const Button = {
       textColor: '#eee',
     },
     standard: {
-      bg: '#0a0a0a',
+      bg: 'dark',
       textColor: '#fff',
       shadow: 'md',
     },

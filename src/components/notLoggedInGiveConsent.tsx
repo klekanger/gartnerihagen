@@ -7,19 +7,9 @@ import {
   AlertDescription,
   AlertIcon,
 } from '@chakra-ui/react';
-import SEO from './seo';
-import { useAuth0 } from '@auth0/auth0-react';
 
-interface INotLoggedIn {
-  title?: string;
-  description?: string;
-}
-
-const NotLoggedIn = ({
-  title = 'Logg inn for å se denne siden',
-  description = 'Du må logge inn for å se informasjon beregnet på beboere i Boligsameiet Gartnerihagen.',
-}: INotLoggedIn) => {
-  const { loginWithRedirect } = useAuth0();
+const NotLoggedInGiveConsent = (buttonLink) => {
+  const { buttonLink: getTokenAndTryAgain } = buttonLink;
 
   return (
     <Box
@@ -42,9 +32,12 @@ const NotLoggedIn = ({
       >
         <AlertIcon boxSize='40px' mr={0} />
         <AlertTitle mt={4} mb={1} fontSize='lg'>
-          {title}
+          Godkjenn tilgang til brukeradministrasjon
         </AlertTitle>
-        <AlertDescription maxWidth='sm'>{description}</AlertDescription>
+        <AlertDescription maxWidth='sm'>
+          For å kunne administrere brukere, må du gi vår innloggingstjeneste
+          Auth0 tillatelse til å aksessere din brukerkonto og epost-adresse.
+        </AlertDescription>
         <Button
           variant='outline'
           colorScheme='blue'
@@ -52,18 +45,14 @@ const NotLoggedIn = ({
           rounded='md'
           ml={{ base: '0px', md: '20px', lg: '30px' }}
           mt={10}
-          onClick={() =>
-            loginWithRedirect({
-              ui_locales: 'nb',
-            })
-          }
+          onClick={getTokenAndTryAgain}
           _hover={{ color: 'logoDarkGreen' }}
         >
-          Klikk for å logge inn
+          Klikk for å gi tillatelse
         </Button>
       </Alert>
     </Box>
   );
 };
 
-export default NotLoggedIn;
+export default NotLoggedInGiveConsent;

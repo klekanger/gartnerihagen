@@ -2,7 +2,6 @@ const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
   JwtVerifierError,
-  claimToArray,
   getTokenFromHeader,
 } = require('@serverless-jwt/jwt-verifier');
 
@@ -13,12 +12,8 @@ const jwt = new JwtVerifier({
 
 export default async function handler(req, res) {
   // Verifiser token mottatt fra frontend
-  const mustHavePermissions = [
-    'read:users',
-    'update:users',
-    'delete:users',
-    'create:users',
-  ];
+  // const mustHavePermissions = ['read:users'];
+
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
@@ -44,9 +39,10 @@ export default async function handler(req, res) {
   }
 
   // Check the permissions
-  if (!claims?.permissions.includes('update:users')) {
+  if (!permissions.includes('read:users')) {
     return res.status(403).json({
       error: 'no update access',
+      error_code: res.statusCode,
       error_description:
         'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
       body: {
