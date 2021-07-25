@@ -123,7 +123,7 @@ const UserAdminPage = () => {
             />
 
             <Box flexDirection='column'>
-              <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
+              <Text as='div' fontSize='xl' fontWeight='semibold' align='left'>
                 {userToShow?.name}{' '}
                 {userToShow?.app_metadata?.Role ? (
                   <Badge colorScheme='red'>ADMIN</Badge>
@@ -132,11 +132,15 @@ const UserAdminPage = () => {
                 )}
               </Text>
               <Text as='div' fontSize='sm' align='left'>
-                Konto opprettet: {formatDate(userToShow?.created_at)}
+                <strong>Konto opprettet:</strong>{' '}
+                {formatDate(userToShow?.created_at)}
               </Text>
               <Text as='div' fontSize='sm' align='left'>
                 {userToShow?.last_login && (
-                  <>Sist innlogget: {formatDate(userToShow?.last_login)}</>
+                  <>
+                    <strong>Sist innlogget:</strong>{' '}
+                    {formatDate(userToShow?.last_login)}
+                  </>
                 )}
               </Text>
             </Box>
@@ -270,9 +274,11 @@ const UserAdminPage = () => {
 
 export default UserAdminPage;
 
+//
 // Gets a list of all the users
 // data.body contains name, email, picture, etc.
 // data.body.app_metadata contains the roles, if the user has an admin or editor role
+//
 const getAllUsers = () => {
   const { getAccessTokenWithPopup } = useAuth0();
   const opts = {
@@ -297,6 +303,9 @@ const getAllUsers = () => {
   return { data, loading, error, getToken: () => getTokenAndTryAgain(opts) };
 };
 
+//
+// Creates a new user
+//
 const createUser = () => {
   console.log('Create user');
   // TODO
