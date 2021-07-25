@@ -24,6 +24,12 @@ const UserAdminPage = () => {
   const { user, logout, getAccessTokenWithPopup } = useAuth0();
   const [searchTerm, setSearchTerm] = useState('');
 
+  const createUser = () => {
+    console.log('Create user');
+    // TODO
+    // Add functionality for creating a user
+  };
+
   const opts = {
     audience: 'https://useradmin.gartnerihagen-askim.no',
     scope: 'read:users',
@@ -41,12 +47,6 @@ const UserAdminPage = () => {
     } catch (err) {
       console.error('Noe gikk galt:  ', err);
     }
-  };
-
-  const createUser = () => {
-    console.log('Create user');
-    // TODO
-    // Add functionality for creating a user
   };
 
   // -----------------------
