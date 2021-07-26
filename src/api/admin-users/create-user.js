@@ -59,6 +59,7 @@ export default async function handler(req, res) {
     scope: 'read:users update:users delete:users create:users',
   });
 
+  /*
   let userList;
   try {
     userList = await auth0.getUsers();
@@ -71,10 +72,12 @@ export default async function handler(req, res) {
     };
   }
 
+  */
   // Success! Return a list of all users to client
   return res.status(200).json({
     body: {
-      data: userList,
+      statusCode: 200,
+      data: 'created user',
     },
   });
 }

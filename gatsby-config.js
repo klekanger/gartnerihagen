@@ -22,7 +22,14 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/informasjon/*`, `/min-side/*`, `/preview/*`] },
+      options: {
+        prefixes: [
+          `/informasjon/*`,
+          `/min-side/*`,
+          `/preview/*`,
+          `/user-admin/*`,
+        ],
+      },
     },
     'gatsby-plugin-emotion',
     'gatsby-plugin-image',

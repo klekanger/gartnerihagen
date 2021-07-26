@@ -5,6 +5,7 @@ import PrivateRoute from '../utils/privateRoute';
 import NotLoggedIn from '../components/notLoggedIn';
 import LoadingSpinner from '../components/loading-spinner';
 import UserAdminPage from '../components/private-components/userAdminPage';
+import UserAdminCreateUser from '../components/private-components/userAdminCreateUser';
 
 function UserAdmin() {
   const { isLoading, isAuthenticated, error } = useAuth0();
@@ -30,6 +31,10 @@ function UserAdmin() {
 
   return (
     <Router>
+      <PrivateRoute
+        path='/user-admin/create-user'
+        component={UserAdminCreateUser}
+      />
       <PrivateRoute path='/user-admin' component={UserAdminPage} />
     </Router>
   );

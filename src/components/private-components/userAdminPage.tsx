@@ -7,6 +7,7 @@ import ErrorPage from '../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../hooks/useApi';
 import { formatDate } from '../../utils/formatDate';
+
 import {
   Badge,
   Box,
@@ -19,6 +20,7 @@ import {
   Grid,
   Input,
 } from '@chakra-ui/react';
+import { navigate } from 'gatsby';
 
 const UserAdminPage = () => {
   const { user, logout } = useAuth0();
@@ -261,7 +263,8 @@ const UserAdminPage = () => {
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
             variant='standard'
-            onClick={() => createUser()}
+            role='link'
+            onClick={() => navigate('/user-admin/create-user')}
           >
             Opprett bruker
           </Button>
@@ -279,16 +282,15 @@ export default UserAdminPage;
 // data.body contains name, email, picture, etc.
 // data.body.app_metadata contains the roles, if the user has an admin or editor role
 //
-const getAllUsers = () => {
+function getAllUsers() {
   const { getAccessTokenWithPopup } = useAuth0();
-  const opts = {
-    audience: 'https://useradmin.gartnerihagen-askim.no',
-    scope: 'read:users',
-  };
 
   const { loading, error, refresh, data } = useApi(
     '/api/admin-users/list-users',
-    opts
+    {
+      audience: 'https://useradmin.gartnerihagen-askim.no',
+      scope: 'read:users',
+    }
   );
 
   async function getTokenAndTryAgain(opts) {
@@ -299,15 +301,6 @@ const getAllUsers = () => {
       console.error('Noe gikk galt:  ', err);
     }
   }
-  console.log(data);
-  return { data, loading, error, getToken: () => getTokenAndTryAgain(opts) };
-};
 
-//
-// Creates a new user
-//
-const createUser = () => {
-  console.log('Create user');
-  // TODO
-  // Add functionality for creating a user
-};
+  return { data, loading, error, getToken: () => getTokenAndTryAgain(opts) };
+}
