@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
-  // Verify access token received from frontend
+  // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
     permissions = claims?.permissions ?? [];
@@ -41,8 +41,8 @@ export default async function handler(req, res) {
   // Check the permissions
   if (!permissions.includes('read:users')) {
     return res.status(403).json({
-      error: 'no update access',
-      error_code: res.statusCode,
+      error: 'no read access',
+      status_code: res.statusCode,
       error_description:
         'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
       body: {
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'read:users update:users delete:users create:users',
+    scope: 'read:users',
   });
 
   let userList;

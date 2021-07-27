@@ -12,12 +12,12 @@ const jwt = new JwtVerifier({
 
 export default async function handler(req, res) {
   // Verifiser token mottatt fra frontend
-  // const mustHavePermissions = ['create:users'];
+  // const mustHavePermissions = ['read:users'];
 
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
-  // Verify access token received from frontend
+  // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
     permissions = claims?.permissions ?? [];
@@ -29,6 +29,8 @@ export default async function handler(req, res) {
       });
     }
   }
+
+  console.log(req.body);
 
   // check if user should have access at all
   if (!claims || !claims?.scope) {
@@ -42,47 +44,28 @@ export default async function handler(req, res) {
   if (!permissions.includes('create:users')) {
     return res.status(403).json({
       error: 'no create access',
-      error_code: res.statusCode,
+      status_code: res.statusCode,
       error_description:
-        'Du må ha admin-tilgang for å opprette brukere. Ta kontakt med styret.',
+        'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
       body: {
         data: [],
       },
     });
   }
 
-  // Get list of all users from Auth0 management API
+  // Create a new user through the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'read:users update:users delete:users create:users',
+    scope: 'create:users',
   });
 
-  /*
-  let userList;
-  try {
-    userList = await auth0.getUsers();
-  } catch (error) {
-    return {
-      statusCode: error.statusCode || 500,
-      body: JSON.stringify({
-        error: error.message,
-      }),
-    };
-  }
-
-  */
-  // Success! Return a list of all users to client
+  // Success! Return a confirmation to the client
   return res.status(200).json({
     body: {
-      statusCode: 200,
-      data: 'created user',
+      status_code: 200,
+      status_description: 'Ny bruker er opprettet',
     },
   });
 }
-
-// TODO
-// Separate user admin into several serverless functions:
-// create-user.js, delete-user.js, update-user.js, change-admin-status.js
-// Check for the appropriete permissions in each of these serverless functions.

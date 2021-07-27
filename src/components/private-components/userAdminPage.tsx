@@ -56,7 +56,7 @@ const UserAdminPage = () => {
   if (data.error) {
     return (
       <ErrorPage
-        errorTitle={`Noe gikk galt: ${data.error} (${data.error_code})`}
+        errorTitle={`Noe gikk galt: ${data.error} (${data.status_code})`}
         errorMsg={data.error_description}
       />
     );
@@ -284,16 +284,17 @@ export default UserAdminPage;
 //
 function getAllUsers() {
   const { getAccessTokenWithPopup } = useAuth0();
+  const opts = {
+    audience: 'https://useradmin.gartnerihagen-askim.no',
+    scope: 'read:users',
+  };
 
   const { loading, error, refresh, data } = useApi(
     '/api/admin-users/list-users',
-    {
-      audience: 'https://useradmin.gartnerihagen-askim.no',
-      scope: 'read:users',
-    }
+    opts
   );
 
-  async function getTokenAndTryAgain(opts) {
+  async function getTokenAndTryAgain() {
     try {
       await getAccessTokenWithPopup(opts);
       refresh();
@@ -302,5 +303,5 @@ function getAllUsers() {
     }
   }
 
-  return { data, loading, error, getToken: () => getTokenAndTryAgain(opts) };
+  return { data, loading, error, getToken: () => getTokenAndTryAgain() };
 }
