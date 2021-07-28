@@ -32,7 +32,7 @@ const rolesToNorwegian = {
 const UserAdminPage = () => {
   const { user, logout } = useAuth0();
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [selectedRole, setSelectedRole] = useState('all');
   const { data, loading, error, getToken } = getAllUsers();
 
   if (loading) {
@@ -72,12 +72,19 @@ const UserAdminPage = () => {
   const myUsers = data.body.data;
 
   // Set searchTerm equal to search term entered in search box
-  const handleChangeInSearchBox = (event) => setSearchTerm(event.target.value);
+  const handleChangeInSearchBox = (e) => setSearchTerm(e.target.value);
 
   // Filter out selected users
   const filteredResults = myUsers.filter((currentUser) => {
     const userToUppercase = currentUser.name.toUpperCase();
-    return userToUppercase.includes(searchTerm.toUpperCase());
+
+    if (selectedRole === 'all') {
+      return userToUppercase.includes(searchTerm.toUpperCase());
+    } else
+      return (
+        userToUppercase.includes(searchTerm.toUpperCase()) &&
+        currentUser?.app_metadata?.Role === selectedRole
+      );
   });
 
   // Sort users by name (case insensitive)
@@ -237,12 +244,12 @@ const UserAdminPage = () => {
               maxW='20rem'
             />
             <Select
-              placeholder='Filtrer på rolle'
+              value={selectedRole}
+              onChange={(e) => setSelectedRole(e.target.value)}
               borderColor='black'
               maxW='20rem'
             >
               <option value='all'>Vis alle</option>
-              <option value='user'>Brukere</option>
               <option value='editor'>Redaktører</option>
               <option value='admin'>Administratorer</option>
             </Select>
