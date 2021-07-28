@@ -30,7 +30,7 @@ const rolesToNorwegian = {
 };
 
 const UserAdminPage = () => {
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
   const { data, loading, error, getToken } = getAllUsers();
@@ -70,9 +70,6 @@ const UserAdminPage = () => {
   }
 
   const myUsers = data.body.data;
-
-  // Set searchTerm equal to search term entered in search box
-  const handleChangeInSearchBox = (e) => setSearchTerm(e.target.value);
 
   // Filter out selected users
   const filteredResults = myUsers.filter((currentUser) => {
@@ -238,7 +235,7 @@ const UserAdminPage = () => {
             <Input
               borderColor='black'
               value={searchTerm}
-              onChange={handleChangeInSearchBox}
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder='Filtrer på bruker (tast inn navn)'
               size='md'
               maxW='20rem'
@@ -300,6 +297,3 @@ function getAllUsers() {
 
   return { data, loading, error, getToken: () => getTokenAndTryAgain() };
 }
-
-// TODO
-// Implementer filtrer på rolle-funksjonalitet
