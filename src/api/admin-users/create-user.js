@@ -14,6 +14,8 @@ export default async function handler(req, res) {
   // Verifiser token mottatt fra frontend
   // const mustHavePermissions = ['read:users'];
 
+  console.log('[create-user.js]');
+
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
@@ -30,8 +32,6 @@ export default async function handler(req, res) {
     }
   }
 
-  console.log(req.body);
-
   // check if user should have access at all
   if (!claims || !claims?.scope) {
     return res.status(403).json({
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       error: 'no create access',
       status_code: res.statusCode,
       error_description:
-        'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
+        'Du må ha admin-tilgang for å opprette brukere. Ta kontakt med styret.',
       body: {
         data: [],
       },
@@ -60,6 +60,30 @@ export default async function handler(req, res) {
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
     scope: 'create:users',
   });
+
+  const userData = {
+    connection: 'Username-Password-Authentication',
+    email: req.body.email,
+    name: req.body.name,
+    password: req.body.password,
+    app_metadata: {
+      Role: req.body.role,
+    },
+    verify_email: false,
+    email_verified: false,
+  };
+
+  try {
+    await auth0.createUser(userData);
+  } catch (error) {
+    console.log('(catch) error : ', error.message);
+    return {
+      statusCode: error.statusCode || 500,
+      body: JSON.stringify({
+        error: error.message,
+      }),
+    };
+  }
 
   // Success! Return a confirmation to the client
   return res.status(200).json({

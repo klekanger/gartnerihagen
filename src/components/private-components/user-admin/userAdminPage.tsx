@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
-import LoadingSpinner from '../../components/loading-spinner';
-import NotLoggedIn from '../../components/notLoggedIn';
-import NotLoggedInGiveConsent from '../notLoggedInGiveConsent';
-import ErrorPage from '../errorPage';
+import LoadingSpinner from '../../loading-spinner';
+import NotLoggedIn from '../../notLoggedIn';
+import NotLoggedInGiveConsent from '../../notLoggedInGiveConsent';
+import ErrorPage from '../../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useApi } from '../hooks/useApi';
-import { formatDate } from '../../utils/formatDate';
+import { useApi } from '../../hooks/useApi';
+import { formatDate } from '../../../utils/formatDate';
 
 import {
   Badge,
@@ -19,8 +19,15 @@ import {
   Stack,
   Grid,
   Input,
+  Select,
 } from '@chakra-ui/react';
 import { navigate } from 'gatsby';
+
+const rolesToNorwegian = {
+  user: 'Bruker',
+  editor: 'Redaktør',
+  admin: 'Administrator',
+};
 
 const UserAdminPage = () => {
   const { user, logout } = useAuth0();
@@ -128,7 +135,9 @@ const UserAdminPage = () => {
               <Text as='div' fontSize='xl' fontWeight='semibold' align='left'>
                 {userToShow?.name}{' '}
                 {userToShow?.app_metadata?.Role ? (
-                  <Badge colorScheme='red'>ADMIN</Badge>
+                  <Badge colorScheme='red'>
+                    {rolesToNorwegian[userToShow?.app_metadata?.Role]}
+                  </Badge>
                 ) : (
                   ''
                 )}
@@ -189,76 +198,60 @@ const UserAdminPage = () => {
         pb={[8, 8, 8, 16]}
         textAlign='center'
       >
-        <Heading
-          as='h1'
-          size='2xl'
-          pt={[0, 0, 8, 8]}
-          pb={[0, 0, 4, 4]}
-          maxWidth='95vw'
-        >
-          Bruker&shy;administrasjon
-        </Heading>
-
-        <Box>
-          <Box>
-            <b>Du er innlogget som:</b> {user?.name}{' '}
-          </Box>
-          <Box>
-            <b>E-post:</b> {user?.email}
-          </Box>
-        </Box>
-
-        <Stack
-          direction={['column', 'column', 'row', 'row']}
+        <Box
           my={[4, 4, 8, 8]}
-          align='center'
-          justify='center'
+          py={8}
+          borderWidth='1px'
+          rounded='md'
+          shadow='lg'
+          bgColor='#eee'
         >
-          <Button
-            minW={['40%', '40%', '20%', '20%']}
-            minH='3rem'
-            variant='standard'
-            onClick={() => logout()}
+          <Heading
+            as='h1'
+            size='2xl'
+            pt={[0, 0, 8, 8]}
+            pb={[0, 0, 4, 4]}
+            maxWidth='95vw'
           >
-            Logg ut
-          </Button>
-          <Button
-            minW={['40%', '40%', '20%', '20%']}
-            minH='3rem'
-            variant='standard'
-            disabled
-            _hover={{ bg: '#555' }}
-          >
-            Bytt passord
-          </Button>
-          <Button
-            minW={['40%', '40%', '20%', '20%']}
-            minH='3rem'
-            variant='standard'
-            disabled
-            _hover={{ bg: '#555' }}
-          >
-            Endre kontoopplysninger
-          </Button>
-        </Stack>
+            Bruker&shy;administrasjon
+          </Heading>
 
-        <Heading as='h2' size='xl' pt={8} mb={0} maxWidth='95vw'>
-          Registrerte brukere
-        </Heading>
+          <Box>
+            <Box>
+              <b>Du er innlogget som:</b> {user?.name}{' '}
+              <Badge colorScheme='red'>ADMIN</Badge>
+            </Box>
+            <Box>
+              <b>E-post:</b> {user?.email}
+            </Box>
+          </Box>
 
-        <Stack
-          direction={['column', 'column', 'row', 'row']}
-          my={[4, 4, 8, 8]}
-          align='center'
-          justify='center'
-        >
-          <Input
-            value={searchTerm}
-            onChange={handleChangeInSearchBox}
-            placeholder='Tast inn navn eller deler av navn'
-            size='md'
-            width='xs'
-          />
+          <Stack
+            direction={['column', 'column', 'row', 'row']}
+            my={[4, 4, 8, 8]}
+            mx={8}
+            align='center'
+            justify='center'
+          >
+            <Input
+              borderColor='black'
+              value={searchTerm}
+              onChange={handleChangeInSearchBox}
+              placeholder='Filtrer på bruker (tast inn navn)'
+              size='md'
+              maxW='20rem'
+            />
+            <Select
+              placeholder='Filtrer på rolle'
+              borderColor='black'
+              maxW='20rem'
+            >
+              <option value='all'>Vis alle</option>
+              <option value='user'>Brukere</option>
+              <option value='editor'>Redaktører</option>
+              <option value='admin'>Administratorer</option>
+            </Select>
+          </Stack>
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
@@ -266,9 +259,9 @@ const UserAdminPage = () => {
             role='link'
             onClick={() => navigate('/user-admin/create-user')}
           >
-            Opprett bruker
+            Opprett ny bruker
           </Button>
-        </Stack>
+        </Box>
         {userList}
       </Box>
     </>

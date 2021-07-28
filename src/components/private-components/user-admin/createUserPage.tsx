@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useApi } from '../hooks/useApi';
 import { navigate } from 'gatsby';
-import LoadingSpinner from '../../components/loading-spinner';
-import NotLoggedIn from '../../components/notLoggedIn';
-import NotLoggedInGiveConsent from '../notLoggedInGiveConsent';
-import ErrorPage from '../errorPage';
+import NotLoggedIn from '../../notLoggedIn';
+import ErrorPage from '../../errorPage';
 import {
   Box,
   Heading,
@@ -21,7 +18,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-const UserAdminCreateUser = () => {
+const CreateUserPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -51,6 +48,7 @@ const UserAdminCreateUser = () => {
 
   const createUser = async (payload) => {
     try {
+      console.log('[userAdminCreateUser] createUser called');
       const accessToken = await getAccessTokenSilently(opts);
       const response = await fetch(`/api/admin-users/create-user`, {
         method: 'POST',
@@ -80,6 +78,7 @@ const UserAdminCreateUser = () => {
         getToken();
         return;
       }
+
       return <ErrorPage errorMsg={error?.message} />;
     }
   };
@@ -237,7 +236,7 @@ const UserAdminCreateUser = () => {
   );
 };
 
-export default UserAdminCreateUser;
+export default CreateUserPage;
 
 // TODO
 // Se på mulighet for å bruke React Hook Form: https://react-hook-form.com/get-started#Applyvalidation
