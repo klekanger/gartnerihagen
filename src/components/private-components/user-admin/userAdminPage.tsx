@@ -126,22 +126,23 @@ const UserAdminPage = () => {
               src={userToShow?.picture}
               alt={userToShow?.name}
               rounded='50%'
-              width={32}
+              width={16}
               my={4}
               mx={8}
             />
 
             <Box flexDirection='column'>
-              <Text as='div' fontSize='xl' fontWeight='semibold' align='left'>
+              <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
                 {userToShow?.name}{' '}
                 {userToShow?.app_metadata?.Role ? (
                   <Badge colorScheme='red'>
                     {rolesToNorwegian[userToShow?.app_metadata?.Role]}
                   </Badge>
                 ) : (
-                  ''
+                  <Badge colorScheme='green'>{rolesToNorwegian['user']}</Badge>
                 )}
               </Text>
+
               <Text as='div' fontSize='sm' align='left'>
                 <strong>Konto opprettet:</strong>{' '}
                 {formatDate(userToShow?.created_at)}
@@ -206,13 +207,7 @@ const UserAdminPage = () => {
           shadow='lg'
           bgColor='#eee'
         >
-          <Heading
-            as='h1'
-            size='2xl'
-            pt={[0, 0, 8, 8]}
-            pb={[0, 0, 4, 4]}
-            maxWidth='95vw'
-          >
+          <Heading as='h1' size='2xl' pt={[0, 0, 8, 8]} maxWidth='95vw'>
             Bruker&shy;administrasjon
           </Heading>
 
@@ -298,3 +293,6 @@ function getAllUsers() {
 
   return { data, loading, error, getToken: () => getTokenAndTryAgain() };
 }
+
+// TODO
+// Implementer filtrer på rolle-funksjonalitet
