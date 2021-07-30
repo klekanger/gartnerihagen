@@ -74,22 +74,23 @@ export default async function handler(req, res) {
   };
 
   try {
-    await auth0.createUser(userData);
+    const newUser = await auth0.createUser(userData);
+    // Success! Return a confirmation to the client
+    console.log('[SUCCESS]');
+    return res.status(200).json({
+      body: {
+        status_code: 200,
+        status_description: 'Ny bruker er opprettet',
+        user: newUser,
+      },
+    });
   } catch (error) {
     console.log('(catch) error : ', error.message);
     return {
-      statusCode: error.statusCode || 500,
+      status_code: error.statusCode || 500,
       body: JSON.stringify({
         error: error.message,
       }),
     };
   }
-
-  // Success! Return a confirmation to the client
-  return res.status(200).json({
-    body: {
-      status_code: 200,
-      status_description: 'Ny bruker er opprettet',
-    },
-  });
 }

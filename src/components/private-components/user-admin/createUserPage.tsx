@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 import NotLoggedIn from '../../notLoggedIn';
 import ErrorPage from '../../errorPage';
+
 import {
   Box,
   Heading,
@@ -17,6 +18,7 @@ import {
   Tooltip,
   useToast,
 } from '@chakra-ui/react';
+import { responsePathAsArray } from 'graphql-compose/lib/graphql';
 
 const CreateUserPage = () => {
   const [formData, setFormData] = useState({
@@ -26,14 +28,16 @@ const CreateUserPage = () => {
     repeatPassword: '',
     role: 'user',
   });
-
-  const toast = useToast();
+  const [callApiToCreateUser, setCallApiToCreateUser] = useState(false);
 
   const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
+
   const opts = {
     audience: 'https://useradmin.gartnerihagen-askim.no',
     scope: 'create:users',
   };
+
+  const toast = useToast();
 
   async function getToken() {
     try {
@@ -46,42 +50,55 @@ const CreateUserPage = () => {
     }
   }
 
-  const createUser = async (payload) => {
-    try {
-      console.log('[userAdminCreateUser] createUser called');
-      const accessToken = await getAccessTokenSilently(opts);
-      const response = await fetch(`/api/admin-users/create-user`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
+  useEffect(() => {
+    if (callApiToCreateUser) {
+      setCallApiToCreateUser(false);
 
-        body: JSON.stringify(payload),
-      });
+      (async function createUser() {
+        try {
+          const accessToken = await getAccessTokenSilently(opts);
+          const response = await fetch(`/api/admin-users/create-user`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
 
-      if (response?.status !== 200) {
-        console.error('Noe gikk galt:  ', response.status);
-      }
-    } catch (error) {
-      if (error?.error === 'login_required') {
-        return (
-          <NotLoggedIn
-            title='Logg inn for brukeradministrasjon'
-            description='Du må logge inn for å administrere brukerkontoer for Boligsameiet Gartnerihagen. 
-          Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
-          Ta kontakt med styret.'
-          />
-        );
-      }
-      if (error?.error === 'consent_required') {
-        getToken();
-        return;
-      }
+            body: JSON.stringify(formData),
+          });
 
-      return <ErrorPage errorMsg={error?.message} />;
+          if (response?.status !== 200) {
+            console.error('Noe gikk galt:  ', response.status);
+          }
+
+          toast({
+            title: 'Bruker er opprettet',
+            description: ' .',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+        } catch (error) {
+          if (error?.error === 'login_required') {
+            return (
+              <NotLoggedIn
+                title='Logg inn for brukeradministrasjon'
+                description='Du må logge inn for å administrere brukerkontoer for Boligsameiet Gartnerihagen. 
+                  Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
+                  Ta kontakt med styret.'
+              />
+            );
+          }
+          if (error?.error === 'consent_required') {
+            getToken();
+            return;
+          }
+
+          return <ErrorPage errorMsg={error?.message} />;
+        }
+      })();
     }
-  };
+  }, [callApiToCreateUser]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -114,7 +131,7 @@ const CreateUserPage = () => {
     }
 
     // Call create-user API with the formdata
-    createUser(formData);
+    setCallApiToCreateUser(true);
   };
 
   return (
@@ -239,4 +256,4 @@ const CreateUserPage = () => {
 export default CreateUserPage;
 
 // TODO
-// Se på mulighet for å bruke React Hook Form: https://react-hook-form.com/get-started#Applyvalidation
+// Email and password should work with ÆØÅ
