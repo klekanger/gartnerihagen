@@ -40,25 +40,27 @@ const UpdateUserPage = (props) => {
   const userToModify = props.location.state;
   const toast = useToast();
 
-  console.log('[UpdateUserPage] userToModify: ', userToModify);
-
   useEffect(() => {
-    setUserDataForm(userToModify);
+    // defaults to "user" if role was not set when the user was created
+    setUserDataForm({
+      ...userToModify,
+      app_metadata: {
+        Role: userToModify?.app_metadata?.Role || 'user',
+      },
+    });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log('[handleSubmit] userDataForm: ', userDataForm);
     console.log('[handleSubmit] event: ', event);
 
+    // Ask if you are sure you want to update the user
+
     // Send userDataForm to Auth0 Management API to update user
-    // add code here
   };
 
-  // Call Auth0s Change Password API endpoint
-  // The user will get a change password email
-  // API docs: https://auth0.com/docs/api/authentication#change-password
   // TODO ! DUPLICATED CODE - REFACTOR (also used in MinSide)
-
   const requestChangePassword = async () => {
     try {
       const opts = {
@@ -165,7 +167,7 @@ const UpdateUserPage = (props) => {
             <FormLabel>Epost-adresse</FormLabel>
             <Input
               type='email'
-              value={userToModify?.email}
+              value={userDataForm?.email}
               onChange={(e) =>
                 setUserDataForm({
                   ...userDataForm,
@@ -177,7 +179,7 @@ const UpdateUserPage = (props) => {
           <FormControl id='name' isRequired>
             <FormLabel>Fornavn og etternavn</FormLabel>
             <Input
-              value={userToModify.name}
+              value={userDataForm?.name}
               placeholder='Fornavn Etternavn'
               onChange={(e) => {
                 setUserDataForm({
@@ -194,12 +196,12 @@ const UpdateUserPage = (props) => {
           >
             <FormControl as='fieldset'>
               <RadioGroup
-                defaultValue={userToModify?.app_metadata?.Role}
+                value={userDataForm?.app_metadata?.Role}
                 mt={8}
                 onChange={(role) => {
                   setUserDataForm({
                     ...userDataForm,
-                    role,
+                    app_metadata: { Role: role },
                   });
                 }}
               >
@@ -214,7 +216,7 @@ const UpdateUserPage = (props) => {
 
           <br />
           <Text align='left' fontSize='x-small'>
-            ( Intern ID: {userToModify?.user_id} )
+            ( Auth0 user_id: {userToModify?.user_id} )
           </Text>
 
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>
@@ -226,7 +228,6 @@ const UpdateUserPage = (props) => {
               minH='3rem'
               variant='standard'
               onClick={() => requestChangePassword()}
-              _hover={{ bg: '#555' }}
             >
               Bytt passord
             </Button>
@@ -234,7 +235,6 @@ const UpdateUserPage = (props) => {
               minW='33%'
               minH='3rem'
               variant='danger'
-              _hover={{ bg: '#555' }}
               onClick={() => navigate('/user-admin')}
             >
               Avbryt
@@ -247,3 +247,7 @@ const UpdateUserPage = (props) => {
 };
 
 export default UpdateUserPage;
+
+// TODO
+// Make it possible to change user Image
+// https://auth0.com/docs/users/change-user-picture

@@ -38,7 +38,7 @@ const CreateUserPage = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    role: 'user',
+    app_metadata: { Role: 'user' },
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -297,7 +297,9 @@ const CreateUserPage = () => {
                 onChange={(role) => {
                   setFormData({
                     ...formData,
-                    role,
+                    app_metadata: {
+                      Role: role,
+                    },
                   });
                 }}
               >
