@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
-import NotLoggedIn from '../../notLoggedIn';
-import ErrorPage from '../../errorPage';
 
 import {
   Box,
@@ -26,10 +24,15 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  ButtonGroup,
 } from '@chakra-ui/react';
 
 const CreateUserPage = () => {
+  const rolesToNorwegian = {
+    user: 'Bruker',
+    editor: 'Redaktør',
+    admin: 'Administrator',
+  };
+
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -37,23 +40,17 @@ const CreateUserPage = () => {
     repeatPassword: '',
     role: 'user',
   });
-  const rolesToNorwegian = {
-    user: 'Bruker',
-    editor: 'Redaktør',
-    admin: 'Administrator',
-  };
-  const [callApiToCreateUser, setCallApiToCreateUser] = useState(false);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [response, setResponse] = useState(null);
-
+  const [showLoadingButton, setShowLoadingButton] = useState(false);
+  const toast = useToast();
   const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
 
   const opts = {
     audience: 'https://useradmin.gartnerihagen-askim.no',
     scope: 'create:users',
   };
-
-  const toast = useToast();
 
   async function getToken() {
     try {
@@ -66,78 +63,17 @@ const CreateUserPage = () => {
     }
   }
 
-  useEffect(() => {
-    if (callApiToCreateUser) {
-      setCallApiToCreateUser(false);
-
-      (async function createUser() {
-        try {
-          const accessToken = await getAccessTokenSilently(opts);
-          const api = await fetch(`/api/admin-users/create-user`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${accessToken}`,
-            },
-
-            body: JSON.stringify(formData),
-          });
-
-          if (api?.status !== 200) {
-            throw new Error(`${api.statusText} (${api.status})`);
-          }
-
-          const isJson = api.headers
-            .get('content-type')
-            ?.includes('application/json');
-
-          const data = isJson && (await api.json());
-
-          if (!data) {
-            throw new Error('no_data');
-          }
-
-          // Store the API response (e.g. the user data for the newly created user)
-          setResponse(data?.body?.user);
-        } catch (error) {
-          if (error.message === 'consent_required') {
-            getToken();
-            return;
-          }
-
-          if (error.message === 'Conflict (409)') {
-            toast({
-              title: 'Brukeren eksistererer allerede',
-              description:
-                'Hver bruker må ha en unik epost-adresse og et unikt navn.',
-              status: 'error',
-              duration: 3000,
-              isClosable: true,
-            });
-          } else {
-            toast({
-              title: 'Noe gikk galt',
-              description: `${error.message}`,
-              status: 'error',
-              duration: 3000,
-              isClosable: true,
-            });
-          }
-          setResponse(null);
-        }
-      })();
-    }
-  }, [callApiToCreateUser]);
-
+  // Open modal when new user has been created
   useEffect(() => {
     if (response?.email) {
       onOpen();
     }
   }, [response]);
 
-  const handleSubmit = (event) => {
+  // Handle creating a new user
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setShowLoadingButton(true);
     if (formData.password !== formData.repeatPassword) {
       toast({
         title: 'Passordene er ikke like',
@@ -163,7 +99,62 @@ const CreateUserPage = () => {
     }
 
     // Call create-user API with the formdata
-    setCallApiToCreateUser(true);
+    try {
+      const accessToken = await getAccessTokenSilently(opts);
+      const api = await fetch(`/api/admin-users/create-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+
+        body: JSON.stringify(formData),
+      });
+
+      if (api?.status !== 200) {
+        throw new Error(`${api.statusText} (${api.status})`);
+      }
+
+      const isJson = api.headers
+        .get('content-type')
+        ?.includes('application/json');
+
+      const data = isJson && (await api.json());
+
+      if (!data) {
+        throw new Error('no_data');
+      }
+
+      // Store the API response (e.g. the user data for the newly created user)
+      setResponse(data?.body?.user);
+      setShowLoadingButton(false);
+    } catch (error) {
+      if (error.message === 'consent_required') {
+        getToken();
+        return;
+      }
+
+      if (error.message === 'Conflict (409)') {
+        toast({
+          title: 'Brukeren eksistererer allerede',
+          description:
+            'Hver bruker må ha en unik epost-adresse og et unikt navn.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: 'Noe gikk galt',
+          description: `${error.message}`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+      setResponse(null);
+      setShowLoadingButton(false);
+    }
   };
 
   return (
@@ -319,7 +310,17 @@ const CreateUserPage = () => {
             </FormControl>
           </Tooltip>
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>
-            <Button minW='50%' minH='3rem' variant='standard' type='submit'>
+            <Button
+              minW='50%'
+              minH='3rem'
+              variant='menu-button'
+              type='submit'
+              isLoading={showLoadingButton}
+              loadingText='Oppretter bruker'
+              _loading={{
+                color: 'black',
+              }}
+            >
               Opprett
             </Button>
             <Button
