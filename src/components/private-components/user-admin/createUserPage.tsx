@@ -17,8 +17,17 @@ import {
   RadioGroup,
   Tooltip,
   useToast,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  ButtonGroup,
 } from '@chakra-ui/react';
-import { responsePathAsArray } from 'graphql-compose/lib/graphql';
 
 const CreateUserPage = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +37,14 @@ const CreateUserPage = () => {
     repeatPassword: '',
     role: 'user',
   });
+  const rolesToNorwegian = {
+    user: 'Bruker',
+    editor: 'Redaktør',
+    admin: 'Administrator',
+  };
   const [callApiToCreateUser, setCallApiToCreateUser] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [response, setResponse] = useState(null);
 
   const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
 
@@ -57,7 +73,7 @@ const CreateUserPage = () => {
       (async function createUser() {
         try {
           const accessToken = await getAccessTokenSilently(opts);
-          const response = await fetch(`/api/admin-users/create-user`, {
+          const api = await fetch(`/api/admin-users/create-user`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -67,38 +83,57 @@ const CreateUserPage = () => {
             body: JSON.stringify(formData),
           });
 
-          if (response?.status !== 200) {
-            console.error('Noe gikk galt:  ', response.status);
+          if (api?.status !== 200) {
+            throw new Error(`${api.statusText} (${api.status})`);
           }
 
-          toast({
-            title: 'Bruker er opprettet',
-            description: ' .',
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-          });
-        } catch (error) {
-          if (error?.error === 'login_required') {
-            return (
-              <NotLoggedIn
-                title='Logg inn for brukeradministrasjon'
-                description='Du må logge inn for å administrere brukerkontoer for Boligsameiet Gartnerihagen. 
-                  Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
-                  Ta kontakt med styret.'
-              />
-            );
+          const isJson = api.headers
+            .get('content-type')
+            ?.includes('application/json');
+
+          const data = isJson && (await api.json());
+
+          if (!data) {
+            throw new Error('no_data');
           }
-          if (error?.error === 'consent_required') {
+
+          // Store the API response (e.g. the user data for the newly created user)
+          setResponse(data?.body?.user);
+        } catch (error) {
+          if (error.message === 'consent_required') {
             getToken();
             return;
           }
 
-          return <ErrorPage errorMsg={error?.message} />;
+          if (error.message === 'Conflict (409)') {
+            toast({
+              title: 'Brukeren eksistererer allerede',
+              description:
+                'Hver bruker må ha en unik epost-adresse og et unikt navn.',
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: 'Noe gikk galt',
+              description: `${error.message}`,
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+            });
+          }
+          setResponse(null);
         }
       })();
     }
   }, [callApiToCreateUser]);
+
+  useEffect(() => {
+    if (response?.email) {
+      onOpen();
+    }
+  }, [response]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -136,6 +171,60 @@ const CreateUserPage = () => {
 
   return (
     <>
+      <Button onClick={onOpen} />
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        size='2xl'
+        colorScheme='cyan'
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Ny bruker er opprettet</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>
+              <strong>Epost: </strong>
+              {response?.email}
+            </Text>
+            <Text>
+              <strong>Navn: </strong>
+              {response?.name}
+            </Text>
+            <Text>
+              <strong>Rolle: </strong>
+              {rolesToNorwegian[response?.app_metadata?.Role]}
+            </Text>
+            <br />
+            <Text>
+              Gi brukeren beskjed om å logge seg på med passordet du valgte.
+              Passordet bør byttes ved at brukeren går inn på "Min Side" og
+              trykker "Bytt passord". Du kan også gjøre dette for brukeren ved å
+              søke opp brukeren på siden for brukeradministrasjon og trykke
+              "Bytt passord"-knappen. Brukeren vil da få en epost.
+            </Text>
+            <br />
+          </ModalBody>
+
+          <ModalFooter
+            flexDirection={['column', 'row', 'row', 'row']}
+            alignContent='flex-start'
+          >
+            <Button variant='menu-button' onClick={onClose} my={2} mx={2}>
+              Legg til flere brukere
+            </Button>
+            <Button
+              variant='standard'
+              my={2}
+              role='link'
+              onClick={() => navigate('/user-admin')}
+            >
+              Tilbake til bruker&shy;administrasjon
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Box
         maxWidth={['97%', '90%', '70%', '32rem']}
         px={[2, 4, 8, 8]}
