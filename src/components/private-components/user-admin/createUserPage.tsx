@@ -138,7 +138,6 @@ const CreateUserPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if both passwords are identical
     if (formData.password !== formData.repeatPassword) {
       toast({
         title: 'Passordene er ikke like',
@@ -150,8 +149,6 @@ const CreateUserPage = () => {
       });
       return;
     }
-
-    // Check if password matches pattern
 
     if (!formData.password.match(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/)) {
       toast({
@@ -171,7 +168,6 @@ const CreateUserPage = () => {
 
   return (
     <>
-      <Button onClick={onOpen} />
       <Modal
         isOpen={isOpen}
         onClose={onClose}

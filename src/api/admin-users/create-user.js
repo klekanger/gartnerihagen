@@ -11,11 +11,6 @@ const jwt = new JwtVerifier({
 });
 
 export default async function handler(req, res) {
-  // Verifiser token mottatt fra frontend
-  // const mustHavePermissions = ['read:users'];
-
-  console.log('[create-user.js]');
-
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
@@ -75,8 +70,7 @@ export default async function handler(req, res) {
 
   try {
     const newUser = await auth0.createUser(userData);
-    // Success! Return a confirmation to the client
-    console.log('[SUCCESS]');
+
     return res.status(200).json({
       body: {
         status_code: 200,
@@ -85,12 +79,11 @@ export default async function handler(req, res) {
       },
     });
   } catch (error) {
-    console.log('(catch) error : ', error.message);
-    return {
+    return res.status(error.statusCode).json({
       status_code: error.statusCode || 500,
       body: JSON.stringify({
         error: error.message,
       }),
-    };
+    });
   }
 }
