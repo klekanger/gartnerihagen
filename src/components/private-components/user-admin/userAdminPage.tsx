@@ -192,9 +192,6 @@ const UserAdminPage = () => {
               <Button variant='standard' w='100%' p={8}>
                 Bytt passord
               </Button>
-              <Button variant='standard' w='100%' p={8}>
-                Endre rolle
-              </Button>
             </Stack>
           </Box>
         </Box>
