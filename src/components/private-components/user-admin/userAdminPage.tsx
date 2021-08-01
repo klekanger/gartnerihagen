@@ -184,8 +184,7 @@ const UserAdminPage = () => {
                 Bytt passord
               </Button>
               <Button variant='standard' w='100%' p={8}>
-                Endre
-                <wbr /> adminstatus
+                Endre rolle
               </Button>
             </Stack>
           </Box>
