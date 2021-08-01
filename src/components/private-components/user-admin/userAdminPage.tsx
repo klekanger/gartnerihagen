@@ -7,21 +7,21 @@ import ErrorPage from '../../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../../hooks/useApi';
 import { formatDate } from '../../../utils/formatDate';
+import { navigate } from 'gatsby';
 
 import {
   Badge,
   Box,
   Flex,
-  Heading,
   Image,
   Text,
   Button,
   Stack,
   Grid,
+  Heading,
   Input,
   Select,
 } from '@chakra-ui/react';
-import { navigate } from 'gatsby';
 
 const rolesToNorwegian = {
   user: 'Bruker',
@@ -167,7 +167,16 @@ const UserAdminPage = () => {
               align='center'
               justify='space-between'
             >
-              <Button variant='standard' w='100%' p={8}>
+              <Button
+                variant='standard'
+                w='100%'
+                p={8}
+                onClick={() =>
+                  navigate('/user-admin/update-user', {
+                    state: userToShow,
+                  })
+                }
+              >
                 Endre bruker
               </Button>
               <Button variant='danger' w='100%' p={8}>
