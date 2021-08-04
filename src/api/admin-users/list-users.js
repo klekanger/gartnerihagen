@@ -59,9 +59,15 @@ export default async function handler(req, res) {
     scope: 'read:users',
   });
 
-  let userList;
   try {
-    userList = await auth0.getUsers();
+    const userList = await auth0.getUsers();
+
+    // Success! Return a list of all users to client
+    return res.status(200).json({
+      body: {
+        data: userList,
+      },
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       body: {
@@ -71,11 +77,4 @@ export default async function handler(req, res) {
       },
     });
   }
-
-  // Success! Return a list of all users to client
-  return res.status(200).json({
-    body: {
-      data: userList,
-    },
-  });
 }
