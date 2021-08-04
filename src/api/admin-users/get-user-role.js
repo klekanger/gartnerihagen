@@ -11,6 +11,9 @@ const jwt = new JwtVerifier({
 });
 
 export default async function handler(req, res) {
+  // Verifiser token mottatt fra frontend
+  // const mustHavePermissions = ['read:users'];
+
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
@@ -36,51 +39,42 @@ export default async function handler(req, res) {
   }
 
   // Check the permissions
-  if (!permissions.includes('create:users')) {
+  if (!permissions.includes('read:roles')) {
     return res.status(403).json({
-      error: 'no create access',
+      error: 'no read access',
       status_code: res.statusCode,
       error_description:
-        'Du må ha admin-tilgang for å opprette brukere. Ta kontakt med styret.',
+        'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
       body: {
         data: [],
       },
     });
   }
 
-  // Create a new user through the Auth0 management API
+  // Get list of all users from Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'create:users read:roles create:role_members',
+    scope: 'read:roles',
   });
 
-  const userData = {
-    connection: 'Username-Password-Authentication',
-    email: req.body.email,
-    name: req.body.name,
-    password: req.body.password,
-    verify_email: false,
-    email_verified: false,
-  };
-
   try {
-    const newUser = await auth0.createUser(userData);
-
+    const userRoles = await auth0.getUserRoles({
+      id: 'auth0|607834e8b16bc40069b7d86a',
+    });
     return res.status(200).json({
       body: {
-        status_code: 200,
-        status_description: 'Ny bruker er opprettet',
-        user: newUser,
+        data: userRoles,
       },
     });
   } catch (error) {
-    console.log('[catch] error: ', error);
-    return res.status(error.statusCode).json({
-      error: error.name,
-      status_code: error.statusCode || 500,
-      error_description: error.message,
+    return res.status(error.statusCode || 500).json({
+      body: {
+        error: error.name,
+        status_code: error.statusCode || 500,
+        error_description: error.message,
+      },
     });
   }
 }

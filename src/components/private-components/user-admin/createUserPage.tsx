@@ -38,7 +38,7 @@ const CreateUserPage = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    app_metadata: { Role: 'user' },
+    role: 'user',
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,17 +49,20 @@ const CreateUserPage = () => {
 
   const opts = {
     audience: 'https://useradmin.gartnerihagen-askim.no',
-    scope: 'create:users',
+    scope: 'create:users read:roles create:role_members',
   };
 
   async function getToken() {
     try {
       await getAccessTokenWithPopup(opts);
     } catch (error) {
-      console.error(
-        'Noe gikk galt, eller brukeren lukket popupen:  ',
-        `${error.error_description} - ${error.error}`
-      );
+      toast({
+        title: 'Noe gikk galt, eller du lukket popupen  ',
+        description: `${error.error_description} - ${error.error}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     }
   }
 
@@ -73,6 +76,7 @@ const CreateUserPage = () => {
   // Handle creating a new user
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setShowLoadingButton(true);
     if (formData.password !== formData.repeatPassword) {
       toast({
@@ -125,13 +129,21 @@ const CreateUserPage = () => {
         throw new Error('no_data');
       }
 
+      if (data.error) {
+        const { error_description } = JSON.parse(data?.error_description);
+        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+      }
+
       // Store the API response (e.g. the user data for the newly created user)
       setResponse(data?.body?.user);
       setShowLoadingButton(false);
     } catch (error) {
-      if (error.message === 'consent_required') {
+      if (
+        error.message.includes(
+          'Consent required' || 'Forbidden (403)' || 'access_denied'
+        )
+      ) {
         getToken();
-        return;
       }
 
       if (error.message === 'Conflict (409)') {
@@ -292,14 +304,13 @@ const CreateUserPage = () => {
           >
             <FormControl as='fieldset'>
               <RadioGroup
-                defaultValue='user'
+                value={formData?.role}
                 mt={8}
                 onChange={(role) => {
                   setFormData({
                     ...formData,
-                    app_metadata: {
-                      Role: role,
-                    },
+
+                    role: role,
                   });
                 }}
               >
@@ -345,3 +356,6 @@ export default CreateUserPage;
 
 // TODO
 // Email and password should work with ÆØÅ
+
+// TODO
+// Assign roles to users using Auth0 RBAC. https://auth0.com/docs/api/management/v2?_gl=1*ofdxch*rollup_ga*OTI5MTM3MDkxLjE2MjIxMTUyNDY.*rollup_ga_F1G3E656YZ*MTYyNzgzMzAxMy4zOC4xLjE2Mjc4MzMxMzIuMQ..&_ga=2.17873081.1215343063.1627803041-2001283108.1620039566#!/Users/post_user_roles

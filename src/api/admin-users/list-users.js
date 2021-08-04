@@ -63,12 +63,13 @@ export default async function handler(req, res) {
   try {
     userList = await auth0.getUsers();
   } catch (error) {
-    return {
-      statusCode: error.statusCode || 500,
-      body: JSON.stringify({
-        error: error.message,
-      }),
-    };
+    return res.status(error.statusCode || 500).json({
+      body: {
+        error: error.name,
+        status_code: error.statusCode || 500,
+        error_description: error.message,
+      },
+    });
   }
 
   // Success! Return a list of all users to client
