@@ -17,7 +17,7 @@ const colors = {
   light2: '#d9edff',
   accent: '#007D57',
   primaryButton: '#43A889',
-  secondaryButton: '#00785c',
+  secondaryButton: '#C8DD80',
   tertiaryButton: '#BECBD7',
   danger: '#ff3333',
 };

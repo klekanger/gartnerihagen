@@ -22,18 +22,22 @@ import {
   Input,
   Select,
 } from '@chakra-ui/react';
-
+/* 
 const rolesToNorwegian = {
   user: 'Bruker',
   editor: 'Redaktør',
   admin: 'Administrator',
 };
-
+ */
 const UserAdminPage = () => {
   const { user } = useAuth0();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
   const { data, loading, error, getToken } = getAllUsers();
+
+  const userRoles = user['https:/gartnerihagen-askim.no/roles'];
+  const isAdmin = userRoles.includes('admin');
+  const isEditor = userRoles.includes('editor');
 
   if (loading) {
     return (
@@ -97,6 +101,8 @@ const UserAdminPage = () => {
     return 0;
   });
 
+  console.log('Sorted users: ', sortedUsers);
+
   const userList = (
     <Grid
       templateColumns={{
@@ -138,13 +144,13 @@ const UserAdminPage = () => {
             <Box flexDirection='column'>
               <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
                 {userToShow?.name}{' '}
-                {userToShow?.app_metadata?.Role ? (
+                {/*    {userToShow?.app_metadata?.Role ? (
                   <Badge colorScheme='red'>
                     {rolesToNorwegian[userToShow?.app_metadata?.Role]}
                   </Badge>
                 ) : (
                   <Badge colorScheme='green'>{rolesToNorwegian['user']}</Badge>
-                )}
+                )} */}
               </Text>
 
               <Text as='div' fontSize='sm' align='left'>
@@ -223,11 +229,12 @@ const UserAdminPage = () => {
           <Box>
             <Box>
               <b>Du er innlogget som:</b> {user?.name}{' '}
-              <Badge colorScheme='red'>ADMIN</Badge>
             </Box>
             <Box>
               <b>E-post:</b> {user?.email}
             </Box>
+            {isAdmin && <Badge colorScheme='red'>Administrator</Badge>}{' '}
+            {isEditor && <Badge colorScheme='green'>Redaktør</Badge>}
           </Box>
 
           <Stack
@@ -302,3 +309,8 @@ function getAllUsers() {
 
   return { data, loading, error, getToken: () => getTokenAndTryAgain() };
 }
+
+// TODO
+// User roles: Make radio buttons for selecting only admins or editors
+// Example: If admin is selected, call getUsersInRole with the ID of the admin role
+// https://auth0.github.io/node-auth0/module-management.ManagementClient.html#getUsersInRole
