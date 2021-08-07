@@ -60,48 +60,21 @@ export default async function handler(req, res) {
   });
 
   try {
-    let allUsersAndRoles = [];
-
-    const allRoles = auth0.getRoles().then((roles) => console.log(roles));
-
-    /* allRoles.forEach((role) => {
-      const userRoles = auth0.getUsersInRole({ id: role.id });
-      console.log(userRoles);
-    }); */
-
-    // auth0.getUsersInRole({ id: roleId });
-    /* 
-    allRoles.forEach((role) => {
-      console.log(getUsersInRole(role.id));
-    }); */
-    /* 
-    const rolesToShow = allRoles.map((role) => {
-      auth0.getUsersInRole({ id: role.id }).then((result) => {
-        return result;
-      });
+    const roles = await auth0.getRoles();
+    const allUsersInRoles = await roles.map(async (role) => {
+      const usersInRole = await auth0.getUsersInRole({ id: role.id });
+      return { role: role.name, usersInRole };
     });
 
-    console.log('rolesToShow: ', rolesToShow); */
-    /*     const usersInRoles = allRoles.map((role) => {
-      console.log(role);
-      auth0.getUsersInRole({ id: role.id });
-    });
- */
-    /* 
-    allRoles.map((role) => {
-      const userRole = auth0.getUserRoles({
-        id: user.role,
-      });
-      allUsersAndRoles.push({
-        userName: user.name,
-        userRole: userRole,
-      })
-    );
- */
+    const finalResults = await Promise.all(allUsersInRoles);
+
+    if (!roles || !finalResults) {
+      throw new Error(error);
+    }
 
     return res.status(200).json({
       body: {
-        data: allRoles,
+        data: finalResults,
       },
     });
   } catch (error) {
