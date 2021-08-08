@@ -69,7 +69,7 @@ export default async function handler(req, res) {
     const finalResults = await Promise.all(allUsersInRoles);
 
     if (!roles || !finalResults) {
-      throw new Error(error);
+      throw new Error('Error reading users or roles');
     }
 
     return res.status(200).json({
