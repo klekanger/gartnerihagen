@@ -25,6 +25,7 @@ export const useApi = (url, options = {}) => {
         const { audience, scope, ...fetchOptions } = options;
 
         const accessToken = await getAccessTokenSilently({ audience, scope });
+        console.log(accessToken);
         const res = await fetch(url, {
           ...fetchOptions,
           headers: {
