@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // Get list of all users from Auth0 management API
+  // Get list of all roles and users in each role from Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
