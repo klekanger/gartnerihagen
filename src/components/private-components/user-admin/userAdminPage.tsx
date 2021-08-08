@@ -75,6 +75,17 @@ const UserAdminPage = () => {
 
   const myUsers = data.body.data;
 
+  if (typeof myUsers !== 'object') {
+    return (
+      <ErrorPage
+        errorTitle={'Uspesifisert feil'}
+        errorMsg={
+          'Noe gikk galt. Prøv å laste siden på nytt. Ta kontakt med styret hvis feilen vedvarer.'
+        }
+      />
+    );
+  }
+
   // Filter out selected users
   const filteredResults = myUsers.filter((currentUser) => {
     const userToUppercase = currentUser.name.toUpperCase();
@@ -100,8 +111,6 @@ const UserAdminPage = () => {
     }
     return 0;
   });
-
-  console.log('Sorted users: ', sortedUsers);
 
   const userList = (
     <Grid
