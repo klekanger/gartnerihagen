@@ -63,18 +63,60 @@ export default async function handler(req, res) {
     const roles = await auth0.getRoles();
     const allUsersInRoles = await roles.map(async (role) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
-      return { role: role.name, usersInRole };
+      return { role: role.name, users: usersInRole };
     });
 
-    const finalResults = await Promise.all(allUsersInRoles);
+    // Get a list of all the roles and the users within each of them,
+    // and a list of every registered user
+    const userRoles = await Promise.all(allUsersInRoles);
+    const userList = await auth0.getUsers();
 
-    if (!roles || !finalResults) {
+    if (!userRoles || !userList) {
       throw new Error('Error reading users or roles');
     }
 
+    // As Auth0 getUsers does not give us the user roles (they really should!), we have to build a new array
+    // with all the users, and a new role field (which is an array with all roles)
+    let userListWithRoles = [];
+    userList.forEach((user) => {
+      for (let i = 0; i < userRoles.length; i++) {
+        // Check if current user exists in list of users with role [i]
+        if (
+          userRoles[i].users.some((element) => {
+            return element.user_id === user.user_id;
+          })
+        ) {
+          // If user exists in list of user role [i] (e.g. the user is "admin" or "editor")
+          // push this user to the new userListWithRoles array, with the role appended
+          if (
+            userListWithRoles.some((element) => {
+              return element.user_id === user.user_id;
+            })
+          ) {
+            // If the user has already been pushed to the new userListWithRoles array,
+            // just update the role array.
+            const existingUserToModify = userListWithRoles.find(
+              (element) => element.user_id === user.user_id
+            );
+            existingUserToModify.role = [
+              ...existingUserToModify.role,
+              userRoles[i].role,
+            ];
+          } else {
+            // The user has not previously been pushed to the userListWithRoles array.
+            // Push the user we have found to the userListWithRoles array and append the user role we have found.
+            userListWithRoles.push({
+              ...user,
+              role: [userRoles[i].role],
+            });
+          }
+        }
+      }
+    });
+
     return res.status(200).json({
       body: {
-        data: finalResults,
+        users: userListWithRoles,
       },
     });
   } catch (error) {
