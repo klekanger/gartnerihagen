@@ -20,17 +20,21 @@ import {
   Grid,
   Heading,
   Input,
+  FormControl,
+  Radio,
+  RadioGroup,
   Select,
 } from '@chakra-ui/react';
-/* 
+
 const rolesToNorwegian = {
   user: 'Bruker',
   editor: 'Redaktør',
   admin: 'Administrator',
 };
- */
+
 const UserAdminPage = () => {
   const { user } = useAuth0();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
   const { data, loading, error, getToken } = getAllUsers();
@@ -73,18 +77,7 @@ const UserAdminPage = () => {
     );
   }
 
-  const myUsers = data.body.data;
-
-  if (typeof myUsers !== 'object') {
-    return (
-      <ErrorPage
-        errorTitle={'Uspesifisert feil'}
-        errorMsg={
-          'Noe gikk galt. Prøv å laste siden på nytt. Ta kontakt med styret hvis feilen vedvarer.'
-        }
-      />
-    );
-  }
+  const myUsers = data.body.users;
 
   // Filter out selected users
   const filteredResults = myUsers.filter((currentUser) => {
@@ -92,11 +85,12 @@ const UserAdminPage = () => {
 
     if (selectedRole === 'all') {
       return userToUppercase.includes(searchTerm.toUpperCase());
-    } else
+    } else {
       return (
         userToUppercase.includes(searchTerm.toUpperCase()) &&
-        currentUser?.app_metadata?.Role === selectedRole
+        currentUser?.role.includes(selectedRole)
       );
+    }
   });
 
   // Sort users by name (case insensitive)
@@ -149,33 +143,23 @@ const UserAdminPage = () => {
               my={4}
               mx={8}
             />
-
             <Box flexDirection='column'>
               <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
-                {userToShow?.name}{' '}
-                {/*    {userToShow?.app_metadata?.Role ? (
-                  <Badge colorScheme='red'>
-                    {rolesToNorwegian[userToShow?.app_metadata?.Role]}
-                  </Badge>
-                ) : (
-                  <Badge colorScheme='green'>{rolesToNorwegian['user']}</Badge>
-                )} */}
-              </Text>
-
-              <Text as='div' fontSize='sm' align='left'>
-                <strong>Konto opprettet:</strong>{' '}
-                {formatDate(userToShow?.created_at)}
-              </Text>
-              <Text as='div' fontSize='sm' align='left'>
-                {userToShow?.last_login && (
-                  <>
-                    <strong>Sist innlogget:</strong>{' '}
-                    {formatDate(userToShow?.last_login)}
-                  </>
-                )}
+                {userToShow?.name}
+                <br />
+                {userToShow?.role.map((role) => (
+                  <div key={`${userToShow?.user_id}-${role}`}>
+                    {role !== 'user' && (
+                      <Badge colorScheme={role === 'admin' ? 'red' : 'green'}>
+                        {rolesToNorwegian[role]}
+                      </Badge>
+                    )}{' '}
+                  </div>
+                ))}
               </Text>
             </Box>
           </Flex>
+
           <Box mx={8} mb={8}>
             <Stack
               direction={['column', 'column', 'row', 'row']}
@@ -268,6 +252,7 @@ const UserAdminPage = () => {
               maxW='20rem'
             >
               <option value='all'>Vis alle</option>
+              <option value='user'>Brukere</option>
               <option value='editor'>Redaktører</option>
               <option value='admin'>Administratorer</option>
             </Select>
@@ -292,18 +277,16 @@ export default UserAdminPage;
 
 //
 // Gets a list of all the users
-// data.body contains name, email, picture, etc.
-// data.body.app_metadata contains the roles, if the user has an admin or editor role
-//
+
 function getAllUsers() {
   const { getAccessTokenWithPopup } = useAuth0();
   const opts = {
     audience: 'https://useradmin.gartnerihagen-askim.no',
-    scope: 'read:users',
+    scope: 'read:users read:roles read:role_members',
   };
 
   const { loading, error, refresh, data } = useApi(
-    '/api/admin-users/list-users',
+    '/api/admin-users/get-users-in-role',
     opts
   );
 
@@ -318,8 +301,3 @@ function getAllUsers() {
 
   return { data, loading, error, getToken: () => getTokenAndTryAgain() };
 }
-
-// TODO
-// User roles: Make radio buttons for selecting only admins or editors
-// Example: If admin is selected, call getUsersInRole with the ID of the admin role
-// https://auth0.github.io/node-auth0/module-management.ManagementClient.html#getUsersInRole

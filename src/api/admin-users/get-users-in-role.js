@@ -66,14 +66,8 @@ export default async function handler(req, res) {
       return { role: role.name, users: usersInRole };
     });
 
-    // Get a list of all the roles and the users within each of them,
-    // and a list of every registered user
-    const userRoles = await Promise.all(allUsersInRoles);
-    const userList = await auth0.getUsers();
-
-    if (!userRoles || !userList) {
-      throw new Error('Error reading users or roles');
-    }
+    const userRoles = await Promise.all(allUsersInRoles); // Get a list of all the roles and the users within each of them,
+    const userList = await auth0.getUsers(); // and a list of every registered user
 
     // As Auth0 getUsers does not give us the user roles (they really should!), we have to build a new array
     // with all the users, and a new role field (which is an array with all roles)
@@ -82,25 +76,26 @@ export default async function handler(req, res) {
       for (let i = 0; i < userRoles.length; i++) {
         // Check if current user exists in list of users with role [i]
         if (
-          userRoles[i].users.some((element) => {
+          userRoles[i].users.find((element) => {
             return element.user_id === user.user_id;
           })
         ) {
           // If user exists in list of user role [i] (e.g. the user is "admin" or "editor")
           // push this user to the new userListWithRoles array, with the role appended
+          // If the user has already been pushed to the new userListWithRoles array,
+          // just update the roles.
           if (
             userListWithRoles.some((element) => {
+              // true if user is already pushed to userListWithRoles
               return element.user_id === user.user_id;
             })
           ) {
-            // If the user has already been pushed to the new userListWithRoles array,
-            // just update the role array.
             const existingUserToModify = userListWithRoles.find(
               (element) => element.user_id === user.user_id
             );
             existingUserToModify.role = [
-              ...existingUserToModify.role,
-              userRoles[i].role,
+              ...existingUserToModify.role, // Include all previously added roles
+              userRoles[i].role, // ...and the new role
             ];
           } else {
             // The user has not previously been pushed to the userListWithRoles array.
