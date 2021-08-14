@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 import { formatDate } from '../../../utils/formatDate';
-
+import ErrorPage from '../../errorPage';
 import {
   Box,
   Heading,
@@ -28,6 +28,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  CheckboxGroup,
+  Checkbox,
 } from '@chakra-ui/react';
 
 const UpdateUserPage = (props) => {
@@ -36,24 +38,61 @@ const UpdateUserPage = (props) => {
     editor: 'Redaktør',
     admin: 'Administrator',
   };
-  const [userDataForm, setUserDataForm] = useState(null);
   const userToModify = props.location.state;
+
+  if (!userToModify) {
+    return (
+      <ErrorPage
+        errorTitle='Det har oppstått en feil'
+        errorMsg='Brukerdata ble ikke funnet da brukeren skulle oppdateres.'
+        backButton={true}
+        backButtonLabel='Tilbake til bruker&shy;administrasjon'
+        backButtonLink='/user-admin'
+      />
+    );
+  }
+
+  const [userDataForm, setUserDataForm] = useState(null);
+  const [isAdminChecked, setIsAdminChecked] = useState(
+    userToModify?.role.includes('admin') || false
+  );
+  const [isEditorChecked, setIsEditorChecked] = useState(
+    userToModify?.role.includes('editor') || false
+  );
+
   const toast = useToast();
 
+  // Populate the form with the current user data
   useEffect(() => {
-    // defaults to "user" if role was not set when the user was created
     setUserDataForm({
       ...userToModify,
-      app_metadata: {
-        Role: userToModify?.app_metadata?.Role || 'user',
-      },
+      role: [...userToModify.role],
     });
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // Add or remove roles to the userDataForm when checkboxes are clicked
+  useEffect(() => {
+    const newRoles = ['user']; // Should always have user as a role
+    if (isAdminChecked) {
+      newRoles.push('admin');
+    }
+    if (isEditorChecked) {
+      newRoles.push('editor');
+    }
+    setUserDataForm({
+      ...userToModify,
+      role: newRoles,
+    });
+  }, [isAdminChecked, isEditorChecked]);
+
+  // Submits the form when the user clicks the "oppdater" button
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     console.log('[handleSubmit] userDataForm: ', userDataForm);
-    console.log('[handleSubmit] event: ', event);
+    console.log('[handleSubmit] roles: ', userDataForm.role);
+
+    console.log('[handleSubmit] event: ', e);
 
     // Ask if you are sure you want to update the user
 
@@ -194,24 +233,25 @@ const UpdateUserPage = (props) => {
             label='Bruker: Vanlig bruker || Redaktør: Kan publisere innhold || Administrator: Alle rettigheter'
             bgColor='primaryButton'
           >
-            <FormControl as='fieldset'>
-              <RadioGroup
-                value={userDataForm?.app_metadata?.Role}
-                mt={8}
-                onChange={(role) => {
-                  setUserDataForm({
-                    ...userDataForm,
-                    app_metadata: { Role: role },
-                  });
-                }}
-              >
-                <Stack direction='row'>
-                  <Radio value='user'>Bruker</Radio>
-                  <Radio value='editor'>Redaktør</Radio>
-                  <Radio value='admin'>Administrator</Radio>
-                </Stack>
-              </RadioGroup>
-            </FormControl>
+            <CheckboxGroup>
+              <Stack direction='row' mt={8}>
+                <Checkbox isDisabled isChecked>
+                  Bruker
+                </Checkbox>
+                <Checkbox
+                  isChecked={isEditorChecked}
+                  onChange={() => setIsEditorChecked(!isEditorChecked)}
+                >
+                  Redaktør
+                </Checkbox>
+                <Checkbox
+                  isChecked={isAdminChecked}
+                  onChange={() => setIsAdminChecked(!isAdminChecked)}
+                >
+                  Administrator
+                </Checkbox>
+              </Stack>
+            </CheckboxGroup>
           </Tooltip>
 
           <br />

@@ -102,7 +102,7 @@ export default async function handler(req, res) {
             // Push the user we have found to the userListWithRoles array and append the user role we have found.
             userListWithRoles.push({
               ...user,
-              role: [userRoles[i].role],
+              roles: [userRoles[i].role],
             });
           }
         }
