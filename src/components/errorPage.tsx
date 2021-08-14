@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { navigate } from 'gatsby';
 import {
   Box,
   Button,
@@ -9,10 +9,21 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 
+interface iErrorPageProps {
+  errorTitle?: string;
+  errorMsg?: string;
+  backButton?: boolean;
+  backButtonLabel?: string;
+  backButtonLink?: string;
+}
+
 function ErrorPage({
   errorTitle = 'Noe gikk galt',
   errorMsg = 'Prøv igjen - eller ta kontakt med styret',
-}) {
+  backButton = false,
+  backButtonLabel = 'Tilbake',
+  backButtonLink = '/',
+}: iErrorPageProps) {
   return (
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
@@ -37,6 +48,15 @@ function ErrorPage({
           {errorTitle}
         </AlertTitle>
         <AlertDescription maxWidth='sm'>{errorMsg}</AlertDescription>
+        {backButton && (
+          <Button
+            variant='standard'
+            mt={8}
+            onClick={() => navigate(`${backButtonLink}`)}
+          >
+            {backButtonLabel}
+          </Button>
+        )}
       </Alert>
     </Box>
   );
