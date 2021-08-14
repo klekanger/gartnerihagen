@@ -38,7 +38,7 @@ const UpdateUserPage = (props) => {
     editor: 'Redaktør',
     admin: 'Administrator',
   };
-  const userToModify = props.location.state;
+  const userToModify = props?.location?.state;
 
   if (!userToModify) {
     return (
@@ -228,12 +228,11 @@ const UpdateUserPage = (props) => {
               }}
             />
           </FormControl>
-
-          <Tooltip
-            label='Bruker: Vanlig bruker || Redaktør: Kan publisere innhold || Administrator: Alle rettigheter'
-            bgColor='primaryButton'
-          >
-            <CheckboxGroup>
+          <CheckboxGroup>
+            <Tooltip
+              label='Bruker: Vanlig bruker || Redaktør: Kan publisere innhold || Administrator: Alle rettigheter'
+              bgColor='primaryButton'
+            >
               <Stack direction='row' mt={8}>
                 <Checkbox isDisabled isChecked>
                   Bruker
@@ -251,8 +250,8 @@ const UpdateUserPage = (props) => {
                   Administrator
                 </Checkbox>
               </Stack>
-            </CheckboxGroup>
-          </Tooltip>
+            </Tooltip>
+          </CheckboxGroup>
 
           <br />
           <Text align='left' fontSize='x-small'>
