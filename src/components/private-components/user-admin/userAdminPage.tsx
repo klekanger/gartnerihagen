@@ -43,6 +43,8 @@ const UserAdminPage = () => {
   const isAdmin = userRoles.includes('admin');
   const isEditor = userRoles.includes('editor');
 
+  console.log('data ', data);
+
   if (loading) {
     return (
       <LoadingSpinner spinnerMessage='Kobler til brukerkonto-administrasjon' />
@@ -68,7 +70,7 @@ const UserAdminPage = () => {
 
   // Handle errors from the list-users API
   // For example if the user does not have access to user admin
-  if (data.error) {
+  if (data.error || !data) {
     return (
       <ErrorPage
         errorTitle={`Noe gikk galt: ${data.error} (${data.status_code})`}
@@ -88,7 +90,7 @@ const UserAdminPage = () => {
     } else {
       return (
         userToUppercase.includes(searchTerm.toUpperCase()) &&
-        currentUser?.role.includes(selectedRole)
+        currentUser?.roles.includes(selectedRole)
       );
     }
   });
@@ -147,7 +149,7 @@ const UserAdminPage = () => {
               <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
                 {userToShow?.name}
                 <br />
-                {userToShow?.role.map((role) => (
+                {userToShow?.roles.map((role) => (
                   <div key={`${userToShow?.user_id}-${role}`}>
                     {role !== 'user' && (
                       <Badge colorScheme={role === 'admin' ? 'red' : 'green'}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { PageProps } from 'gatsby';
 import { navigate } from 'gatsby';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
@@ -32,13 +33,24 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 
-const UpdateUserPage = (props) => {
-  const rolesToNorwegian = {
-    user: 'Bruker',
-    editor: 'Redaktør',
-    admin: 'Administrator',
-  };
-  const userToModify = props?.location?.state;
+/* interface UserDataForm {
+  created_at: string;
+  email: string;  
+  name: string;
+ */
+
+interface UserData {
+  created_at?: string;
+  last_login?: string;
+  email: string;
+  name: string;
+  picture?: string;
+  roles: string[];
+  user_id: string;
+}
+
+const UpdateUserPage = (props: PageProps) => {
+  const userToModify = props?.location?.state as UserData;
 
   if (!userToModify) {
     return (
@@ -52,12 +64,20 @@ const UpdateUserPage = (props) => {
     );
   }
 
-  const [userDataForm, setUserDataForm] = useState(null);
+  const [userDataForm, setUserDataForm] = useState({
+    created_at: '',
+    last_login: '',
+    email: '',
+    name: 'xxxxxxxxxxxxxxx',
+    picture: '',
+    roles: [],
+    user_id: '',
+  });
   const [isAdminChecked, setIsAdminChecked] = useState(
-    userToModify?.role.includes('admin') || false
+    userToModify?.roles.includes('admin') || false
   );
   const [isEditorChecked, setIsEditorChecked] = useState(
-    userToModify?.role.includes('editor') || false
+    userToModify?.roles.includes('editor') || false
   );
 
   const toast = useToast();
@@ -66,7 +86,7 @@ const UpdateUserPage = (props) => {
   useEffect(() => {
     setUserDataForm({
       ...userToModify,
-      role: [...userToModify.role],
+      roles: [...userToModify.roles],
     });
   }, []);
 
@@ -90,13 +110,13 @@ const UpdateUserPage = (props) => {
     e.preventDefault();
 
     console.log('[handleSubmit] userDataForm: ', userDataForm);
-    console.log('[handleSubmit] roles: ', userDataForm.role);
-
+    console.log('[handleSubmit] roles: ', userDataForm.roles);
     console.log('[handleSubmit] event: ', e);
 
     // Ask if you are sure you want to update the user
 
     // Send userDataForm to Auth0 Management API to update user
+    // On the backend we will also set the new or updated user roles
   };
 
   // TODO ! DUPLICATED CODE - REFACTOR (also used in MinSide)
@@ -175,27 +195,16 @@ const UpdateUserPage = (props) => {
           />
 
           <Box flexDirection='column'>
-            <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
-              {userToModify?.name}{' '}
-              {userToModify?.app_metadata?.Role ? (
-                <Badge colorScheme='red'>
-                  {rolesToNorwegian[userToModify?.app_metadata?.Role]}
-                </Badge>
-              ) : (
-                <Badge colorScheme='green'>{rolesToNorwegian['user']}</Badge>
-              )}
-            </Text>
-
             <Text as='div' fontSize='sm' align='left'>
               <strong>Konto opprettet:</strong>{' '}
               {formatDate(userToModify?.created_at)}
             </Text>
             <Text as='div' fontSize='sm' align='left'>
-              {userToModify?.last_login && (
-                <>
-                  <strong>Sist innlogget:</strong>{' '}
-                  {formatDate(userToModify?.last_login)}
-                </>
+              <strong>Sist innlogget:</strong>
+              {userToModify?.last_login ? (
+                <>{userToModify?.last_login}</>
+              ) : (
+                ' Aldri'
               )}
             </Text>
           </Box>

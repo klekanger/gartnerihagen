@@ -93,8 +93,9 @@ export default async function handler(req, res) {
             const existingUserToModify = userListWithRoles.find(
               (element) => element.user_id === user.user_id
             );
-            existingUserToModify.role = [
-              ...existingUserToModify.role, // Include all previously added roles
+
+            existingUserToModify.roles = [
+              ...existingUserToModify.roles, // Include all previously added roles
               userRoles[i].role, // ...and the new role
             ];
           } else {
