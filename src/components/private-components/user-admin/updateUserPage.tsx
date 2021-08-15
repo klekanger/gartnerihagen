@@ -33,14 +33,8 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 
-/* interface UserDataForm {
-  created_at: string;
-  email: string;  
-  name: string;
- */
-
 interface UserData {
-  created_at?: string;
+  created_at: string;
   last_login?: string;
   email: string;
   name: string;
@@ -68,11 +62,12 @@ const UpdateUserPage = (props: PageProps) => {
     created_at: '',
     last_login: '',
     email: '',
-    name: 'xxxxxxxxxxxxxxx',
+    name: '',
     picture: '',
     roles: [],
     user_id: '',
-  });
+  } as UserData);
+
   const [isAdminChecked, setIsAdminChecked] = useState(
     userToModify?.roles.includes('admin') || false
   );
@@ -101,7 +96,7 @@ const UpdateUserPage = (props: PageProps) => {
     }
     setUserDataForm({
       ...userToModify,
-      role: newRoles,
+      roles: newRoles,
     });
   }, [isAdminChecked, isEditorChecked]);
 
@@ -116,6 +111,7 @@ const UpdateUserPage = (props: PageProps) => {
     // Ask if you are sure you want to update the user
 
     // Send userDataForm to Auth0 Management API to update user
+
     // On the backend we will also set the new or updated user roles
   };
 
@@ -200,9 +196,9 @@ const UpdateUserPage = (props: PageProps) => {
               {formatDate(userToModify?.created_at)}
             </Text>
             <Text as='div' fontSize='sm' align='left'>
-              <strong>Sist innlogget:</strong>
+              <strong>Sist innlogget: </strong>
               {userToModify?.last_login ? (
-                <>{userToModify?.last_login}</>
+                <>{formatDate(userToModify?.last_login)}</>
               ) : (
                 ' Aldri'
               )}
