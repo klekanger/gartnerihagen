@@ -13,6 +13,7 @@ const jwt = new JwtVerifier({
 export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
+  const userRoles = req.body.roles;
 
   // Verify access token
   try {
@@ -31,17 +32,17 @@ export default async function handler(req, res) {
   if (!claims || !claims?.scope) {
     return res.status(403).json({
       error: 'access denied',
-      error_description: 'You do not have access to this',
+      error_description: 'Du har ikke tilgang til dette',
     });
   }
 
   // Check the permissions
-  if (!permissions.includes('create:users')) {
+  if (!permissions.includes('update:users')) {
     return res.status(403).json({
-      error: 'no create access',
+      error: 'no update access',
       status_code: res.statusCode,
       error_description:
-        'Du må ha admin-tilgang for å opprette brukere. Ta kontakt med styret.',
+        'Du må ha admin-tilgang for å oppdatere brukere. Ta kontakt med styret.',
       body: {
         data: [],
       },
@@ -53,30 +54,65 @@ export default async function handler(req, res) {
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'create:users read:roles create:role_members',
+    scope: 'update:users read:roles create:role_members',
   });
 
   const userData = {
     connection: 'Username-Password-Authentication',
     email: req.body.email,
     name: req.body.name,
-    password: req.body.password,
-    verify_email: false,
-    email_verified: false,
   };
 
   try {
-    const newUser = await auth0.createUser(userData);
+    // Update user
+    const updatedUser = await auth0.updateUser(
+      { id: req.body.client_id },
+      userData
+    );
+
+    const allRoles = await auth0.getRoles();
+
+    let rolesToRemove = [];
+    allRoles.forEach((role) => {
+      if (!userRoles.includes(role.name)) {
+        rolesToRemove.push(role.id);
+      }
+    });
+
+    let rolesToAdd = [];
+    allRoles.forEach((role) => {
+      if (userRoles.includes(role.name)) {
+        rolesToAdd.push(role.id);
+      }
+    });
+
+    await auth0.assignRolestoUser(
+      {
+        id: req.body.client_id,
+      },
+      {
+        roles: rolesToAdd,
+      }
+    );
+
+    await auth0.removeRolesFromUser(
+      {
+        id: req.body.client_id,
+      },
+      {
+        roles: rolesToRemove,
+      }
+    );
 
     return res.status(200).json({
       body: {
         status_code: 200,
-        status_description: 'Ny bruker er opprettet',
-        user: newUser,
+        status_description: 'Bruker er oppdatert',
+        user: updatedUser,
       },
     });
   } catch (error) {
-    console.log('[create-user.js - catch] error: ', error);
+    console.error(error);
     return res.status(error.statusCode).json({
       error: error.name,
       status_code: error.statusCode || 500,

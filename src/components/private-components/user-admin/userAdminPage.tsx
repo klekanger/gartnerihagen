@@ -43,15 +43,13 @@ const UserAdminPage = () => {
   const isAdmin = userRoles.includes('admin');
   const isEditor = userRoles.includes('editor');
 
-  console.log('data ', data);
-
   if (loading) {
     return (
       <LoadingSpinner spinnerMessage='Kobler til brukerkonto-administrasjon' />
     );
   }
 
-  if (error) {
+  if (error || data?.body?.error) {
     if (error?.error === 'login_required') {
       return (
         <NotLoggedIn
@@ -59,13 +57,14 @@ const UserAdminPage = () => {
           description='Du må logge inn for å administrere brukerkontoer for Boligsameiet Gartnerihagen. 
         Du vil da kunne legge til, slette eller endre brukere, samt gi brukere admin-tilgang.
         Ta kontakt med styret.'
+          redirectUser='/user-admin'
         />
       );
     }
     if (error?.error === 'consent_required') {
       return <NotLoggedInGiveConsent buttonLink={getToken} />;
     }
-    return <ErrorPage errorMsg={error?.message} />;
+    return <ErrorPage errorMsg={error?.message || data?.body?.error} />;
   }
 
   // Handle errors from the list-users API

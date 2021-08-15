@@ -7,18 +7,20 @@ import {
   AlertDescription,
   AlertIcon,
 } from '@chakra-ui/react';
-import SEO from './seo';
+
 import { useAuth0 } from '@auth0/auth0-react';
 
-interface INotLoggedIn {
+interface NotLoggedIn {
   title?: string;
   description?: string;
+  redirectUser?: string;
 }
 
 const NotLoggedIn = ({
   title = 'Logg inn for å se denne siden',
   description = 'Du må logge inn for å se informasjon beregnet på beboere i Boligsameiet Gartnerihagen.',
-}: INotLoggedIn) => {
+  redirectUser = '/informasjon',
+}: NotLoggedIn) => {
   const { loginWithRedirect } = useAuth0();
 
   return (
@@ -55,6 +57,7 @@ const NotLoggedIn = ({
           onClick={() =>
             loginWithRedirect({
               ui_locales: 'nb',
+              appState: { returnTo: redirectUser },
             })
           }
           _hover={{ color: 'logoDarkGreen' }}

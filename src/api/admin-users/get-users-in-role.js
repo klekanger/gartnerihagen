@@ -1,3 +1,7 @@
+/**
+ * Returns a list of users and roles for each user.
+ */
+
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
