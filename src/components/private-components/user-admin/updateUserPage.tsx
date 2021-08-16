@@ -44,8 +44,9 @@ interface UserData {
 }
 
 const UpdateUserPage = (props: PageProps) => {
-  const userToModify = props?.location?.state as UserData;
+  const [showLoadingButton, setShowLoadingButton] = useState(false);
 
+  const userToModify = props?.location?.state as UserData;
   if (!userToModify) {
     return (
       <ErrorPage
@@ -103,6 +104,7 @@ const UpdateUserPage = (props: PageProps) => {
   // Submits the form when the user clicks the "oppdater" button
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowLoadingButton(true);
 
     console.log('[handleSubmit] userDataForm: ', userDataForm);
     console.log('[handleSubmit] roles: ', userDataForm.roles);
@@ -264,7 +266,17 @@ const UpdateUserPage = (props: PageProps) => {
           </Text>
 
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>
-            <Button minW='33%' minH='3rem' variant='menu-button' type='submit'>
+            <Button
+              minW='33%'
+              minH='3rem'
+              variant='menu-button'
+              type='submit'
+              isLoading={showLoadingButton}
+              loadingText='Oppdaterer'
+              _loading={{
+                color: 'black',
+              }}
+            >
               Oppdater
             </Button>
             <Button

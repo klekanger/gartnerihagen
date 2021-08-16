@@ -1,9 +1,14 @@
+// This serverless function both updates the email and name of the user
+// and adds or removes one or more of the ALLOWED_ROLES
+
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
   JwtVerifierError,
   getTokenFromHeader,
 } = require('@serverless-jwt/jwt-verifier');
+
+const ALLOWED_ROLES = ['user', 'admin', 'editor'];
 
 const jwt = new JwtVerifier({
   issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
@@ -13,7 +18,15 @@ const jwt = new JwtVerifier({
 export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
+
   const userRoles = req.body.roles;
+
+  userRoles.forEach((role) => {
+    if (!ALLOWED_ROLES.includes(role)) {
+      console.log('role not allowed');
+      return res.status(400).json({ body: 'midlertidig stopp' });
+    }
+  });
 
   // Verify access token
   try {
@@ -37,6 +50,9 @@ export default async function handler(req, res) {
   }
 
   // Check the permissions
+  // We'll just check for update:users, as a user that has this access level also
+  // should be able to update the roles of users (create:role_members and read:roles scope).
+  // No need to check that at this point.
   if (!permissions.includes('update:users')) {
     return res.status(403).json({
       error: 'no update access',
@@ -49,7 +65,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // Create a new user through the Auth0 management API
+  // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
@@ -64,12 +80,10 @@ export default async function handler(req, res) {
   };
 
   try {
-    // Update user
     const updatedUser = await auth0.updateUser(
       { id: req.body.client_id },
       userData
     );
-
     const allRoles = await auth0.getRoles();
 
     let rolesToRemove = [];
@@ -86,23 +100,27 @@ export default async function handler(req, res) {
       }
     });
 
-    await auth0.assignRolestoUser(
-      {
-        id: req.body.client_id,
-      },
-      {
-        roles: rolesToAdd,
-      }
-    );
+    if (rolesToAdd.length > 0) {
+      await auth0.assignRolestoUser(
+        {
+          id: req.body.client_id,
+        },
+        {
+          roles: rolesToAdd,
+        }
+      );
+    }
 
-    await auth0.removeRolesFromUser(
-      {
-        id: req.body.client_id,
-      },
-      {
-        roles: rolesToRemove,
-      }
-    );
+    if (rolesToRemove.length > 0) {
+      await auth0.removeRolesFromUser(
+        {
+          id: req.body.client_id,
+        },
+        {
+          roles: rolesToRemove,
+        }
+      );
+    }
 
     return res.status(200).json({
       body: {
