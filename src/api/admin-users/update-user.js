@@ -81,7 +81,7 @@ export default async function handler(req, res) {
 
   try {
     const updatedUser = await auth0.updateUser(
-      { id: req.body.client_id },
+      { id: req.body.user_id },
       userData
     );
     const allRoles = await auth0.getRoles();
@@ -103,7 +103,7 @@ export default async function handler(req, res) {
     if (rolesToAdd.length > 0) {
       await auth0.assignRolestoUser(
         {
-          id: req.body.client_id,
+          id: req.body.user_id,
         },
         {
           roles: rolesToAdd,
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
     if (rolesToRemove.length > 0) {
       await auth0.removeRolesFromUser(
         {
-          id: req.body.client_id,
+          id: req.body.user_id,
         },
         {
           roles: rolesToRemove,
@@ -127,6 +127,8 @@ export default async function handler(req, res) {
         status_code: 200,
         status_description: 'Bruker er oppdatert',
         user: updatedUser,
+        roles_removed: rolesToRemove,
+        roles_added: rolesToAdd,
       },
     });
   } catch (error) {

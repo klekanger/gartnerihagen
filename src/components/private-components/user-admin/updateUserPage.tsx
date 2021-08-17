@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { PageProps } from 'gatsby';
 import { navigate } from 'gatsby';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
   Box,
   Heading,
   Badge,
@@ -44,7 +50,11 @@ interface UserData {
 }
 
 const UpdateUserPage = (props: PageProps) => {
+  const { getAccessTokenSilently } = useAuth0();
   const [showLoadingButton, setShowLoadingButton] = useState(false);
+  const [isUpdateAlertOpen, setIsUpdateAlertOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   const userToModify = props?.location?.state as UserData;
   if (!userToModify) {
@@ -75,8 +85,11 @@ const UpdateUserPage = (props: PageProps) => {
   const [isEditorChecked, setIsEditorChecked] = useState(
     userToModify?.roles.includes('editor') || false
   );
-
   const toast = useToast();
+  const opts = {
+    audience: 'https://useradmin.gartnerihagen-askim.no',
+    scope: 'update:users read:roles create:role_members',
+  };
 
   // Populate the form with the current user data
   useEffect(() => {
@@ -102,17 +115,58 @@ const UpdateUserPage = (props: PageProps) => {
   }, [isAdminChecked, isEditorChecked]);
 
   // Submits the form when the user clicks the "oppdater" button
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setShowLoadingButton(true);
-
-    console.log('[handleSubmit] userDataForm: ', userDataForm);
-    console.log('[handleSubmit] roles: ', userDataForm.roles);
-    console.log('[handleSubmit] event: ', e);
 
     // Ask if you are sure you want to update the user
 
     // Send userDataForm to Auth0 Management API to update user
+    try {
+      const accessToken = await getAccessTokenSilently(opts);
+      const api = await fetch(`/api/admin-users/update-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+
+        body: JSON.stringify(userDataForm),
+      });
+
+      if (api?.status !== 200) {
+        throw new Error(`${api.statusText} (${api.status})`);
+      }
+
+      const isJson = api.headers
+        .get('content-type')
+        ?.includes('application/json');
+
+      const data = isJson && (await api.json());
+
+      if (!data) {
+        throw new Error('no_data');
+      }
+
+      if (data.error) {
+        const { error_description } = JSON.parse(data?.error_description);
+        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+      }
+
+      console.log('Brukeren er oppdatert: ', data.body);
+    } catch (error) {
+      console.error(error);
+
+      toast({
+        title: 'Noe gikk galt',
+        description: `${error.message}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setShowLoadingButton(false);
+    }
 
     // On the backend we will also set the new or updated user roles
   };
@@ -165,6 +219,37 @@ const UpdateUserPage = (props: PageProps) => {
       });
     }
   };
+
+  const updateUserAlert = (
+    <AlertDialog
+      isOpen={isUpdateAlertOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent bg='white'>
+          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            Logg ut
+          </AlertDialogHeader>
+          <AlertDialogBody>Er du sikker på at du vil logge ut?</AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+              Avbryt
+            </Button>
+            <Button
+              variant='danger'
+              textColor='white'
+              onClick={() => logout()}
+              ml={3}
+            >
+              Logg ut
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
+  );
 
   return (
     <>
@@ -297,6 +382,7 @@ const UpdateUserPage = (props: PageProps) => {
             </Button>
           </Stack>
         </form>
+        {updateUserAlert}
       </Box>
     </>
   );

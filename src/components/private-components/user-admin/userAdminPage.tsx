@@ -50,6 +50,14 @@ const UserAdminPage = () => {
   }
 
   if (error || data?.body?.error) {
+    if (error?.name === 'SyntaxError') {
+      return (
+        <ErrorPage
+          errorTitle='Noe gikk galt'
+          errorMsg='Trykk oppdater/refresh for å prøve på nytt. Ta kontakt med styret ved vedvarende problemer.'
+        />
+      );
+    }
     if (error?.error === 'login_required') {
       return (
         <NotLoggedIn
