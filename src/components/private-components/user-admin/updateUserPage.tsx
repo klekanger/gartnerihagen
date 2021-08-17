@@ -13,8 +13,6 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Box,
-  Heading,
-  Badge,
   Flex,
   Button,
   Stack,
@@ -22,19 +20,9 @@ import {
   Image,
   FormControl,
   FormLabel,
-  Radio,
-  RadioGroup,
   Tooltip,
   useToast,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   CheckboxGroup,
   Checkbox,
 } from '@chakra-ui/react';
@@ -53,7 +41,7 @@ const UpdateUserPage = (props: PageProps) => {
   const { getAccessTokenSilently } = useAuth0();
   const [showLoadingButton, setShowLoadingButton] = useState(false);
   const [isUpdateAlertOpen, setIsUpdateAlertOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
+  const onClose = () => setIsUpdateAlertOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   const userToModify = props?.location?.state as UserData;
@@ -115,11 +103,10 @@ const UpdateUserPage = (props: PageProps) => {
   }, [isAdminChecked, isEditorChecked]);
 
   // Submits the form when the user clicks the "oppdater" button
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
     setShowLoadingButton(true);
-
-    // Ask if you are sure you want to update the user
+    setIsUpdateAlertOpen(false);
 
     // Send userDataForm to Auth0 Management API to update user
     try {
@@ -153,7 +140,15 @@ const UpdateUserPage = (props: PageProps) => {
         throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
       }
 
-      console.log('Brukeren er oppdatert: ', data.body);
+      toast({
+        title: `Bruker ${data?.body?.user?.name} er oppdatert`,
+        description: 'Returnerer til brukeradministrasjon.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+
+      navigate(`/user-admin`);
     } catch (error) {
       console.error(error);
 
@@ -167,8 +162,6 @@ const UpdateUserPage = (props: PageProps) => {
     } finally {
       setShowLoadingButton(false);
     }
-
-    // On the backend we will also set the new or updated user roles
   };
 
   // TODO ! DUPLICATED CODE - REFACTOR (also used in MinSide)
@@ -229,9 +222,11 @@ const UpdateUserPage = (props: PageProps) => {
       <AlertDialogOverlay>
         <AlertDialogContent bg='white'>
           <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-            Logg ut
+            Oppdater bruker {userToModify?.name}
           </AlertDialogHeader>
-          <AlertDialogBody>Er du sikker på at du vil logge ut?</AlertDialogBody>
+          <AlertDialogBody>
+            Er du sikker på at du vil oppdatere brukeren?
+          </AlertDialogBody>
 
           <AlertDialogFooter>
             <Button variant='standard' ref={cancelRef} onClick={onClose}>
@@ -240,10 +235,10 @@ const UpdateUserPage = (props: PageProps) => {
             <Button
               variant='danger'
               textColor='white'
-              onClick={() => logout()}
+              onClick={() => handleSubmit()}
               ml={3}
             >
-              Logg ut
+              Ja - oppdater
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -355,7 +350,7 @@ const UpdateUserPage = (props: PageProps) => {
               minW='33%'
               minH='3rem'
               variant='menu-button'
-              type='submit'
+              onClick={() => setIsUpdateAlertOpen(true)}
               isLoading={showLoadingButton}
               loadingText='Oppdaterer'
               _loading={{
