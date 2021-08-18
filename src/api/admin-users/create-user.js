@@ -5,6 +5,8 @@ const {
   getTokenFromHeader,
 } = require('@serverless-jwt/jwt-verifier');
 
+const ALLOWED_ROLES = ['user', 'admin', 'editor'];
+
 const jwt = new JwtVerifier({
   issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
@@ -13,6 +15,17 @@ const jwt = new JwtVerifier({
 export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
+
+  const userRoles = req.body.roles;
+
+  userRoles.forEach((role) => {
+    if (!ALLOWED_ROLES.includes(role)) {
+      return res.status(403).json({
+        error: 'invalid user role',
+        error_description: 'Serveren mottok en ugyldig brukerrolle',
+      });
+    }
+  });
 
   // Verify access token
   try {
@@ -68,11 +81,27 @@ export default async function handler(req, res) {
   try {
     const newUser = await auth0.createUser(userData);
 
+    const allRoles = await auth0.getRoles();
+    let rolesToAdd = [];
+    allRoles.forEach((role) => {
+      if (userRoles.includes(role.name)) {
+        rolesToAdd.push(role.id);
+      }
+    });
+    await auth0.assignRolestoUser(
+      {
+        id: newUser.user_id,
+      },
+      {
+        roles: rolesToAdd,
+      }
+    );
+
     return res.status(200).json({
       body: {
         status_code: 200,
         status_description: 'Ny bruker er opprettet',
-        user: newUser,
+        user: { ...newUser, roles: userRoles },
       },
     });
   } catch (error) {

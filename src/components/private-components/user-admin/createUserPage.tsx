@@ -4,15 +4,16 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 
 import {
+  Badge,
   Box,
+  Checkbox,
+  CheckboxGroup,
   Heading,
   Button,
   Stack,
   Input,
   FormControl,
   FormLabel,
-  Radio,
-  RadioGroup,
   Tooltip,
   useToast,
   Text,
@@ -38,8 +39,11 @@ const CreateUserPage = () => {
     name: '',
     password: '',
     repeatPassword: '',
-    role: 'user',
+    roles: [],
   });
+
+  const [isAdminChecked, setIsAdminChecked] = useState(false);
+  const [isEditorChecked, setIsEditorChecked] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [response, setResponse] = useState(null);
@@ -68,6 +72,7 @@ const CreateUserPage = () => {
 
   // Open modal when new user has been created
   useEffect(() => {
+    console.log('response: ', response);
     if (response?.email) {
       onOpen();
     }
@@ -77,7 +82,6 @@ const CreateUserPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setShowLoadingButton(true);
     if (formData.password !== formData.repeatPassword) {
       toast({
         title: 'Passordene er ikke like',
@@ -100,6 +104,17 @@ const CreateUserPage = () => {
         isClosable: true,
       });
       return;
+    }
+
+    setShowLoadingButton(true);
+
+    // Add the checked roles to the formData
+    formData.roles = ['user'];
+    if (isAdminChecked) {
+      formData.roles.push('admin');
+    }
+    if (isEditorChecked) {
+      formData.roles.push('editor');
     }
 
     // Call create-user API with the formdata
@@ -136,6 +151,7 @@ const CreateUserPage = () => {
 
       // Store the API response (e.g. the user data for the newly created user)
       setResponse(data?.body?.user);
+
       setShowLoadingButton(false);
     } catch (error) {
       if (
@@ -192,8 +208,17 @@ const CreateUserPage = () => {
               {response?.name}
             </Text>
             <Text>
-              <strong>Rolle: </strong>
-              {rolesToNorwegian[response?.app_metadata?.Role]}
+              <strong>Roller: </strong>
+              {response?.roles.map((role) => (
+                <span key={`${role}-${response?.user_id}`}>
+                  <Badge
+                    colorScheme={role === 'admin' ? 'red' : 'green'}
+                    mr={2}
+                  >
+                    {rolesToNorwegian[role]}
+                  </Badge>
+                </span>
+              ))}
             </Text>
             <br />
             <Text>
@@ -298,30 +323,31 @@ const CreateUserPage = () => {
             />
           </FormControl>
 
-          <Tooltip
-            label='Bruker: Vanlig bruker || Redaktør: Kan publisere innhold || Administrator: Alle rettigheter'
-            bgColor='primaryButton'
-          >
-            <FormControl as='fieldset'>
-              <RadioGroup
-                value={formData?.role}
-                mt={8}
-                onChange={(role) => {
-                  setFormData({
-                    ...formData,
+          <CheckboxGroup>
+            <Tooltip
+              label='Bruker: Vanlig bruker || Redaktør: Kan publisere innhold || Administrator: Alle rettigheter'
+              bgColor='primaryButton'
+            >
+              <Stack direction='row' mt={8}>
+                <Checkbox isDisabled isChecked>
+                  Bruker
+                </Checkbox>
+                <Checkbox
+                  isChecked={isEditorChecked}
+                  onChange={() => setIsEditorChecked(!isEditorChecked)}
+                >
+                  Redaktør
+                </Checkbox>
+                <Checkbox
+                  isChecked={isAdminChecked}
+                  onChange={() => setIsAdminChecked(!isAdminChecked)}
+                >
+                  Administrator
+                </Checkbox>
+              </Stack>
+            </Tooltip>
+          </CheckboxGroup>
 
-                    role: role,
-                  });
-                }}
-              >
-                <Stack direction='row'>
-                  <Radio value='user'>Bruker</Radio>
-                  <Radio value='editor'>Redaktør</Radio>
-                  <Radio value='admin'>Administrator</Radio>
-                </Stack>
-              </RadioGroup>
-            </FormControl>
-          </Tooltip>
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>
             <Button
               minW='50%'

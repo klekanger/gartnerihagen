@@ -23,8 +23,10 @@ export default async function handler(req, res) {
 
   userRoles.forEach((role) => {
     if (!ALLOWED_ROLES.includes(role)) {
-      console.log('role not allowed');
-      return res.status(400).json({ body: 'midlertidig stopp' });
+      return res.status(403).json({
+        error: 'invalid user role',
+        error_description: 'Serveren mottok ugyldig brukerrolle',
+      });
     }
   });
 
