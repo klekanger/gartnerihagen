@@ -11,7 +11,7 @@ const jwt = new JwtVerifier({
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
 
