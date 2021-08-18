@@ -40,9 +40,19 @@ export default function SEO({
   } = site.siteMetadata;
 
   let seoImage: string | object;
-  !image
-    ? (seoImage = `${siteUrl}${defaultImage}`)
-    : (seoImage = `https:${image}`);
+
+  // Check if SEO image is passed in as props
+  // If not, use the default static image defined in gatsby-config.js
+  // Also check that the image URL has https:// or http://
+  if (image) {
+    if (image.indexOf('https://') == 0 || image.indexOf('http://') == 0) {
+      seoImage = `${image}?w=1080`;
+    } else {
+      seoImage = `https:${image}?w=1080`;
+    }
+  } else {
+    seoImage = defaultImage;
+  }
 
   const seo = {
     title: title || defaultTitle,
@@ -102,7 +112,3 @@ const query: void = graphql`
     }
   }
 `;
-
-// TODO
-//
-// Fix smaller og:image file sizes for Facebook sharing

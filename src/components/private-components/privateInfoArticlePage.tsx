@@ -2,13 +2,15 @@ import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
+import SEO from '../../components/seo';
 import LoadingSpinner from '../loading-spinner';
 
-export default function PrivateInfoItem({ slug, id }) {
+export default function PrivateInfoArticlePage({ slug, id }) {
   const QUERY = gql`
     query PrivatePosts($id: String!) {
       post: blogPost(id: $id) {
         title
+        excerpt
         sys {
           createdAt: firstPublishedAt
           updatedAt: publishedAt
@@ -64,6 +66,7 @@ export default function PrivateInfoItem({ slug, id }) {
   const {
     title,
     bodyText,
+    excerpt,
     featuredImage,
     sys: { createdAt, updatedAt },
     authorCollection,
@@ -72,14 +75,21 @@ export default function PrivateInfoItem({ slug, id }) {
   const authors = authorCollection?.items ?? [];
 
   return (
-    <PrivateArticle
-      title={title}
-      bodyText={bodyText}
-      createdAt={createdAt}
-      updatedAt={updatedAt}
-      mainImage={featuredImage}
-      author={authors}
-      buttonLink='/informasjon'
-    />
+    <>
+      <SEO
+        title={title || null}
+        image={featuredImage.url || null}
+        description={excerpt || null}
+      />
+      <PrivateArticle
+        title={title}
+        bodyText={bodyText}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        mainImage={featuredImage}
+        author={authors}
+        buttonLink='/informasjon'
+      />
+    </>
   );
 }

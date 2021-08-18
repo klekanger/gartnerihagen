@@ -134,4 +134,5 @@ export default function ServiceBox() {
 }
 
 // TODO
-// Rewrite to use Apollo Client instead of useStaticQuery
+// Replace useStaticQuery with Apollo Client query and fetch content on client only
+// to avoid menu items being accessible via the browser dev tools
