@@ -8,12 +8,12 @@
 
 export function formatDate(
   dateToFormat: string,
-  locale: string = 'nb-no'
+  locale: string = 'no-NO'
 ): string {
   // Format the dates shown at the bottom of every article page
   return new Date(dateToFormat).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: '2-digit',
     day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
   });
 }

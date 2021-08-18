@@ -19,7 +19,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
-import GartnerihagenLogo from '../../images/gartnerihagen.svg';
+const GartnerihagenLogo = require('../../images/gartnerihagen.svg') as any;
 
 interface MenuItemsProps {
   to: string;

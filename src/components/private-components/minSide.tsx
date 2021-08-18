@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { navigate } from 'gatsby';
 import {
+  Badge,
   Box,
   Image,
   Heading,
@@ -23,6 +25,10 @@ export default function MinSide() {
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const toast = useToast();
+
+  const userRoles = user['https:/gartnerihagen-askim.no/roles'];
+  const isAdmin = userRoles.includes('admin');
+  const isEditor = userRoles.includes('editor');
 
   if (error) {
     return <div>Det har oppstått en feil... {error.message}</div>;
@@ -141,6 +147,8 @@ export default function MinSide() {
         <Text>
           <b>E-post:</b> {user?.email}
         </Text>
+        {isAdmin && <Badge colorScheme='red'>Administrator</Badge>}{' '}
+        {isEditor && <Badge colorScheme='green'>Redaktør</Badge>}
       </Text>
       <Stack
         direction={['column', 'column', 'row', 'row']}
@@ -166,10 +174,39 @@ export default function MinSide() {
         >
           Bytt passord
         </Button>
-      </Stack>
-      <Text>For å slette konto eller endre kontoopplysninger,</Text>
-      <Text>ta kontakt med styret. </Text>
 
+        {isAdmin && (
+          <Button
+            minW={['40%', '40%', '20%', '20%']}
+            minH='3rem'
+            variant='standard'
+            onClick={() => navigate('/user-admin/')}
+            _hover={{ bg: '#555' }}
+          >
+            Bruker&shy;admin
+          </Button>
+        )}
+
+        {isEditor && (
+          <Button
+            minW={['40%', '40%', '20%', '20%']}
+            minH='3rem'
+            variant='standard'
+            onClick={() =>
+              navigate('https://app.contentful.com/spaces/wxoemgzywng5')
+            }
+            _hover={{ bg: '#555' }}
+          >
+            Rediger innhold
+          </Button>
+        )}
+      </Stack>
+      {!isAdmin && (
+        <>
+          <Text>For å slette konto eller endre kontoopplysninger,</Text>
+          <Text>ta kontakt med styret. </Text>
+        </>
+      )}
       {logOutAlert}
     </Box>
   );
