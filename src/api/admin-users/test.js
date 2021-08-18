@@ -12,8 +12,5 @@ const jwt = new JwtVerifier({
 });
 
 export default async function handler(req, res) {
-  let claims, permissions;
-  const token = getTokenFromHeader(req.get('authorization'));
-
-  res.status(200).json({ hello: `world` });
+  res.status(200).json({ data: req });
 }

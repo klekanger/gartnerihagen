@@ -15,6 +15,7 @@ const jwt = new JwtVerifier({
 
 export default async function handler(req, res) {
   let claims, permissions;
+  console.log('req: ', req.get);
   const token = getTokenFromHeader(req.get('authorization'));
 
   // Verify access token
