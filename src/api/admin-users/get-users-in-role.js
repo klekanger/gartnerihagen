@@ -18,8 +18,6 @@ export default async function handler(req, res) {
 
   const token = getTokenFromHeader(req.get('authorization'));
 
-  return res.status(200).json({ data: token });
-
   // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
