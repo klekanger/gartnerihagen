@@ -2,21 +2,18 @@
  * Returns a list of users and roles for each user.
  */
 
-const ManagementClient = require('auth0').ManagementClient;
-const {
-  JwtVerifier,
-  JwtVerifierError,
-  getTokenFromHeader,
-} = require('@serverless-jwt/jwt-verifier');
-
-const jwt = new JwtVerifier({
-  issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
-  audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
-});
-
 export default async function handler(req, res) {
-  // Verifiser token mottatt fra frontend
-  // const mustHavePermissions = ['read:users'];
+  const ManagementClient = require('auth0').ManagementClient;
+  const {
+    JwtVerifier,
+    JwtVerifierError,
+    getTokenFromHeader,
+  } = require('@serverless-jwt/jwt-verifier');
+
+  const jwt = new JwtVerifier({
+    issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
+    audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
+  });
 
   let claims, permissions;
   const token = getTokenFromHeader(req.get('authorization'));
