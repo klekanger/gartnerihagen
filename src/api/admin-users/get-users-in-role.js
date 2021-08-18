@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
-    permissions = claims?.permissions ?? [];
+    permissions = claims?.permissions || [];
   } catch (err) {
     if (err instanceof JwtVerifierError) {
       return res.status(403).json({
