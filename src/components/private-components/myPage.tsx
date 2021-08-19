@@ -19,7 +19,7 @@ import {
   AlertDialogOverlay,
 } from '@chakra-ui/react';
 
-export default function MinSide() {
+export default function MyPage() {
   const { user, isAuthenticated, error, logout } = useAuth0();
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
