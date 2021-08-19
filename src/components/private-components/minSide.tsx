@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
+import { requestChangePassword } from './requestChangePassword';
 import {
   Badge,
   Box,
@@ -16,7 +17,6 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  useToast,
 } from '@chakra-ui/react';
 
 export default function MinSide() {
@@ -24,8 +24,6 @@ export default function MinSide() {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
-  const toast = useToast();
-
   const userRoles = user['https:/gartnerihagen-askim.no/roles'];
   const isAdmin = userRoles.includes('admin');
   const isEditor = userRoles.includes('editor');
@@ -37,57 +35,6 @@ export default function MinSide() {
   if (!isAuthenticated) {
     return;
   }
-
-  // Call Auth0s Change Password API endpoint
-  // The user will get a change password email
-  // API docs: https://auth0.com/docs/api/authentication#change-password
-  const requestChangePassword = async () => {
-    try {
-      const opts = {
-        client_id: `${process.env.GATSBY_AUTH0_CLIENT_ID}`,
-        email: user?.email,
-        connection: 'Username-Password-Authentication',
-      };
-
-      const response = await fetch(
-        `https://${process.env.GATSBY_AUTH0_DOMAIN}/dbconnections/change_password`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-
-          body: JSON.stringify(opts),
-        }
-      );
-      if (response?.status === 200) {
-        toast({
-          title: 'Sjekk eposten din',
-          description: 'Du vil få en epost som lar deg endre passord.',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: 'Noe gikk muligens galt',
-          description: 'Prøv igjen, eller ta kontakt med support.',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
-      }
-    } catch (error) {
-      toast({
-        title: 'Noe gikk galt',
-        description:
-          'Det er antagelig vår feil, ikke din. Prøv igjen, eller ta kontakt med support.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    }
-  };
 
   // Define alert dialog. Are you sure you want to log out?
   const logOutAlert = (
@@ -169,7 +116,7 @@ export default function MinSide() {
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
           variant='standard'
-          onClick={() => requestChangePassword()}
+          onClick={() => requestChangePassword(user?.email)}
           _hover={{ bg: '#555' }}
         >
           Bytt passord

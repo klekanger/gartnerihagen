@@ -6,9 +6,8 @@ import NotLoggedInGiveConsent from '../../notLoggedInGiveConsent';
 import ErrorPage from '../../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useApi } from '../../hooks/useApi';
-import { formatDate } from '../../../utils/formatDate';
 import { navigate } from 'gatsby';
-
+import { requestChangePassword } from '../requestChangePassword';
 import {
   Badge,
   Box,
@@ -20,9 +19,6 @@ import {
   Grid,
   Heading,
   Input,
-  FormControl,
-  Radio,
-  RadioGroup,
   Select,
 } from '@chakra-ui/react';
 
@@ -197,7 +193,12 @@ const UserAdminPage = () => {
               align='center'
               justify='space-between'
             >
-              <Button variant='standard' w='100%' p={8}>
+              <Button
+                variant='standard'
+                w='100%'
+                p={8}
+                onClick={() => requestChangePassword(userToShow?.email)}
+              >
                 Bytt passord
               </Button>
             </Stack>

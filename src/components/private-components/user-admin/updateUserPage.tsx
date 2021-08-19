@@ -5,6 +5,7 @@ import { PageProps } from 'gatsby';
 import { navigate } from 'gatsby';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
+import { requestChangePassword } from '../requestChangePassword';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -164,55 +165,6 @@ const UpdateUserPage = (props: PageProps) => {
     }
   };
 
-  // TODO ! DUPLICATED CODE - REFACTOR (also used in MinSide)
-  const requestChangePassword = async () => {
-    try {
-      const opts = {
-        client_id: `${process.env.GATSBY_AUTH0_CLIENT_ID}`,
-        email: userToModify?.email,
-        connection: 'Username-Password-Authentication',
-      };
-
-      const response = await fetch(
-        `https://${process.env.GATSBY_AUTH0_DOMAIN}/dbconnections/change_password`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-
-          body: JSON.stringify(opts),
-        }
-      );
-      if (response?.status === 200) {
-        toast({
-          title: 'Be brukeren sjekke eposten sin',
-          description: 'Brukeren vil få en epost for å endre passord.',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: 'Noe gikk muligens galt',
-          description: 'Prøv igjen, eller ta kontakt med support.',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
-      }
-    } catch (error) {
-      toast({
-        title: 'Noe gikk galt',
-        description:
-          'Det er antagelig vår feil, ikke din. Prøv igjen, eller ta kontakt med support.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    }
-  };
-
   const updateUserAlert = (
     <AlertDialog
       isOpen={isUpdateAlertOpen}
@@ -363,7 +315,7 @@ const UpdateUserPage = (props: PageProps) => {
               minW='33%'
               minH='3rem'
               variant='standard'
-              onClick={() => requestChangePassword()}
+              onClick={() => requestChangePassword(userToModify?.email)}
             >
               Bytt passord
             </Button>
