@@ -172,7 +172,7 @@ const UserAdminPage = () => {
               justify='space-between'
             >
               <Button
-                variant='standard'
+                variant='standard-light'
                 w='100%'
                 p={8}
                 onClick={() =>
@@ -194,7 +194,7 @@ const UserAdminPage = () => {
               justify='space-between'
             >
               <Button
-                variant='standard'
+                variant='standard-light'
                 w='100%'
                 p={8}
                 onClick={() => requestChangePassword(userToShow?.email)}
@@ -270,7 +270,7 @@ const UserAdminPage = () => {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
-            variant='standard'
+            variant='standard-light'
             role='link'
             onClick={() => navigate('/user-admin/create-user')}
           >
