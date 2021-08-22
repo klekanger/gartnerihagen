@@ -28,8 +28,6 @@ export default async function handler(req, res) {
     }
   }
 
-  return res.status(200).json({ data: { token, claims, permissions } });
-
   // check if user should have access at all
   if (!claims || !claims.scope) {
     return res.status(403).json({
@@ -61,6 +59,9 @@ export default async function handler(req, res) {
 
   try {
     const roles = await auth0.getRoles();
+
+    return res.status(200).json({ roles });
+
     const allUsersInRoles = await roles.map(async (role) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
       return { role: role.name, users: usersInRole };
