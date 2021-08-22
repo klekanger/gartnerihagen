@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import LoadingSpinner from '../../loading-spinner';
 import NotLoggedIn from '../../notLoggedIn';
 import NotLoggedInGiveConsent from '../../notLoggedInGiveConsent';
 import ErrorPage from '../../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useApi } from '../../hooks/useApi';
+import { useGetAllUsers } from '../../hooks/useGetAllUsers';
 import { navigate } from 'gatsby';
 import { requestChangePassword } from '../requestChangePassword';
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
   Badge,
   Box,
   Flex,
@@ -20,6 +26,7 @@ import {
   Heading,
   Input,
   Select,
+  useToast,
 } from '@chakra-ui/react';
 
 const rolesToNorwegian = {
@@ -29,11 +36,21 @@ const rolesToNorwegian = {
 };
 
 const UserAdminPage = () => {
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
+
+  const [isDeleteUserAlertOpen, setIsDeleteUserAlertOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState({
+    id: '',
+    name: '',
+  });
+
+  const toast = useToast();
+  const onClose = () => setIsDeleteUserAlertOpen(false);
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
-  const { data, loading, error, getToken } = getAllUsers();
+  const { data, loading, error, getToken } = useGetAllUsers();
 
   const userRoles = user['https:/gartnerihagen-askim.no/roles'];
   const isAdmin = userRoles.includes('admin');
@@ -82,9 +99,8 @@ const UserAdminPage = () => {
     );
   }
 
-  const myUsers = data.body.users;
-
   // Filter out selected users
+  const myUsers = data.body.users;
   const filteredResults = myUsers.filter((currentUser) => {
     const userToUppercase = currentUser.name.toUpperCase();
 
@@ -110,6 +126,102 @@ const UserAdminPage = () => {
     }
     return 0;
   });
+
+  const handleDeleteUser = async () => {
+    const opts = {
+      audience: 'https://useradmin.gartnerihagen-askim.no',
+      scope: 'delete:users',
+    };
+
+    try {
+      if (!userToDelete.id.includes('auth0')) {
+        throw new Error('User ID is not valid');
+      }
+
+      const accessToken = await getAccessTokenSilently(opts);
+      const api = await fetch(`/api/admin-users/delete-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+
+        body: JSON.stringify({ idToDelete: userToDelete.id }),
+      });
+
+      if (api?.status !== 200) {
+        throw new Error(`${api.statusText} (${api.status})`);
+      }
+
+      const isJson = api.headers
+        .get('content-type')
+        ?.includes('application/json');
+
+      const data = isJson && (await api.json());
+
+      if (!data) {
+        throw new Error('no_data');
+      }
+
+      if (data.error) {
+        const { error_description } = JSON.parse(data?.error_description);
+        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+      }
+      toast({
+        title: `Bruker ${userToDelete.name} slettet`,
+        description: 'Brukeren har ikke lenger tilgang',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      window.location.reload(); // Reload to get updated list of users
+    } catch (error) {
+      toast({
+        title: 'Noe gikk galt',
+        description: `${error.message}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const deleteUserAlert = (
+    <AlertDialog
+      isOpen={isDeleteUserAlertOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent bg='white'>
+          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            Slett bruker
+          </AlertDialogHeader>
+          <AlertDialogBody>
+            Er du sikker på at du vil slette brukeren{' '}
+            <strong>{userToDelete.name}</strong>? Du kan ikke angre.
+          </AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+              Avbryt
+            </Button>
+            <Button
+              variant='danger'
+              textColor='white'
+              onClick={() => {
+                handleDeleteUser();
+                onClose();
+              }}
+              ml={3}
+            >
+              Slett bruker
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
+  );
 
   const userList = (
     <Grid
@@ -172,7 +284,7 @@ const UserAdminPage = () => {
               justify='space-between'
             >
               <Button
-                variant='standard'
+                variant='standard-light'
                 w='100%'
                 p={8}
                 onClick={() =>
@@ -183,7 +295,18 @@ const UserAdminPage = () => {
               >
                 Endre bruker
               </Button>
-              <Button variant='danger' w='100%' p={8}>
+              <Button
+                variant='danger'
+                w='100%'
+                p={8}
+                onClick={() => {
+                  setIsDeleteUserAlertOpen(true);
+                  setUserToDelete({
+                    id: userToShow?.user_id,
+                    name: userToShow?.name,
+                  });
+                }}
+              >
                 Slett bruker
               </Button>
             </Stack>
@@ -194,7 +317,7 @@ const UserAdminPage = () => {
               justify='space-between'
             >
               <Button
-                variant='standard'
+                variant='standard-light'
                 w='100%'
                 p={8}
                 onClick={() => requestChangePassword(userToShow?.email)}
@@ -270,7 +393,7 @@ const UserAdminPage = () => {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
-            variant='standard'
+            variant='standard-light'
             role='link'
             onClick={() => navigate('/user-admin/create-user')}
           >
@@ -278,36 +401,10 @@ const UserAdminPage = () => {
           </Button>
         </Box>
         {userList}
+        {deleteUserAlert}
       </Box>
     </>
   );
 };
 
 export default UserAdminPage;
-
-//
-// Gets a list of all the users
-
-function getAllUsers() {
-  const { getAccessTokenWithPopup } = useAuth0();
-  const opts = {
-    audience: 'https://useradmin.gartnerihagen-askim.no',
-    scope: 'read:users read:roles read:role_members',
-  };
-
-  const { loading, error, refresh, data } = useApi(
-    '/api/admin-users/get-users-in-role',
-    opts
-  );
-
-  async function getTokenAndTryAgain() {
-    try {
-      await getAccessTokenWithPopup(opts);
-      refresh();
-    } catch (err) {
-      console.error('Noe gikk galt:  ', err);
-    }
-  }
-
-  return { data, loading, error, getToken: () => getTokenAndTryAgain() };
-}

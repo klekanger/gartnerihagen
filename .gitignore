@@ -3,6 +3,7 @@ node_modules/
 public
 .env*
 TODO.md
+.vscode
 
 # Local Netlify folder
 .netlify

@@ -25,7 +25,12 @@ export const useApi = (url, options = {}) => {
         const { audience, scope, ...fetchOptions } = options;
 
         const accessToken = await getAccessTokenSilently({ audience, scope });
-        console.log(accessToken);
+
+        // For debugging, log access token when in development mode
+        if (window.location.hostname === 'localhost') {
+          console.log('accessToken', accessToken);
+        }
+
         const res = await fetch(url, {
           ...fetchOptions,
           headers: {

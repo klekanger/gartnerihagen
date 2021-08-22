@@ -3,12 +3,17 @@ const Button = {
   variants: {
     danger: {
       bg: 'red.600',
-      boxShadow: '0 0 2px 2px #efdfde',
       textColor: '#eee',
+      shadow: 'md',
     },
     standard: {
       bg: 'dark',
       textColor: '#fff',
+      shadow: 'md',
+    },
+    'standard-light': {
+      bg: 'tertiaryButton',
+      textColor: 'black',
       shadow: 'md',
     },
     'menu-button': {
