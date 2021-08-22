@@ -21,18 +21,18 @@ export default async function handler(req, res) {
   // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
-    permissions = claims?.permissions || [];
+    permissions = claims.permissions || [];
   } catch (err) {
     if (err instanceof JwtVerifierError) {
       return res.status(403).json({
-        error: `Something went wrong. ${err?.code}`,
+        error: `Something went wrong. ${err.code}`,
         error_description: `${err.message}`,
       });
     }
   }
 
   // check if user should have access at all
-  if (!claims || !claims?.scope) {
+  if (!claims || !claims.scope) {
     return res.status(403).json({
       error: 'access denied',
       error_description: 'You do not have access to this',
