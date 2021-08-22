@@ -72,7 +72,6 @@ const CreateUserPage = () => {
 
   // Open modal when new user has been created
   useEffect(() => {
-    console.log('response: ', response);
     if (response?.email) {
       onOpen();
     }
