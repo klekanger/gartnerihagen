@@ -49,8 +49,6 @@ export default async function handler(req, res) {
     });
   }
 
-  return res.status(200).json({ data: { permissions, token, claims } });
-
   // Get list of all roles and users in each role from Auth0 management API
 
   try {
@@ -62,6 +60,7 @@ export default async function handler(req, res) {
     });
 
     const roles = await auth0.getRoles();
+    return res.status(200).json({ data: { roles } });
 
     const allUsersInRoles = await roles.map(async (role) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
