@@ -124,7 +124,7 @@ export default async function handler(req, res) {
       );
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       body: {
         status_code: 200,
         status_description: 'Bruker er oppdatert',
@@ -134,8 +134,7 @@ export default async function handler(req, res) {
       },
     });
   } catch (error) {
-    console.error(error);
-    return res.status(error.statusCode).json({
+    res.status(error.statusCode).json({
       error: error.name,
       status_code: error.statusCode || 500,
       error_description: error.message,

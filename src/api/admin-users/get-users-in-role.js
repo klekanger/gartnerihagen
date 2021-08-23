@@ -111,13 +111,13 @@ export default async function handler(req, res) {
       }
     });
 
-    return res.status(200).json({
+    res.status(200).json({
       body: {
         users: userListWithRoles,
       },
     });
   } catch (error) {
-    return res.status(error.statusCode || 500).json({
+    res.status(error.statusCode || 500).json({
       body: {
         error: error.name,
         status_code: error.statusCode || 500,
@@ -126,3 +126,14 @@ export default async function handler(req, res) {
     });
   }
 }
+
+// TODO
+// Add Typescript
+// import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby"
+//
+// export default function handler(
+//   req: GatsbyFunctionRequest,
+//    res: GatsbyFunctionResponse
+//  ) {
+//    res.send(`I am TYPESCRIPT`)
+// }

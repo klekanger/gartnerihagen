@@ -88,7 +88,7 @@ const UserAdminPage = () => {
     return <ErrorPage errorMsg={error?.message || data?.body?.error} />;
   }
 
-  // Handle errors from the list-users API
+  // Handle errors from the API
   // For example if the user does not have access to user admin
   if (data.error || !data) {
     return (
