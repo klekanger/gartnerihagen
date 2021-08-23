@@ -1,3 +1,8 @@
+// Deletes a user using Auth0's management API
+
+import { Http2ServerResponse } from 'http2';
+import { nextTick } from 'process';
+
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
@@ -11,9 +16,6 @@ const jwt = new JwtVerifier({
 });
 
 export default async function handler(req, res) {
-  // Verifiser token mottatt fra frontend
-  // const mustHavePermissions = ['read:users'];
-
   let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
 
@@ -34,47 +36,59 @@ export default async function handler(req, res) {
   if (!claims || !claims.scope) {
     return res.status(403).json({
       error: 'access denied',
-      error_description: 'You do not have access to this',
+      error_description: 'Du har ikke tilgang til dette',
     });
   }
 
   // Check the permissions
-  if (!permissions.includes('read:users')) {
+  // We'll just check for update:users, as a user that has this access level also
+  // should be able to update the roles of users (create:role_members and read:roles scope).
+  // No need to check that at this point.
+  if (!permissions.includes('delete:users')) {
     return res.status(403).json({
-      error: 'no read access',
+      error: 'no delete access',
       status_code: res.statusCode,
       error_description:
-        'Du må ha admin-tilgang for å administrere brukere. Ta kontakt med styret.',
+        'Du må ha admin-tilgang for å slette brukere. Ta kontakt med styret.',
       body: {
         data: [],
       },
     });
   }
 
-  // Get list of all users from Auth0 management API
+  // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'read:users',
+    scope: 'delete:users',
   });
 
   try {
-    const userList = await auth0.getUsers();
+    const idToDelete = req.body.idToDelete;
 
-    // Success! Return a list of all users to client
+    if (!idToDelete || !idToDelete.includes('auth0')) {
+      const error = {
+        name: 'bad user id',
+        statusCode: 400,
+        message: 'Manglende bruker-id eller feil format',
+      };
+      throw error;
+    }
+
+    await auth0.deleteUser({ id: idToDelete });
+
     return res.status(200).json({
       body: {
-        data: userList,
+        status_code: 200,
+        status_description: 'Bruker er slettet',
       },
     });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
-      body: {
-        error: error.name,
-        status_code: error.statusCode || 500,
-        error_description: error.message,
-      },
+      error: error.name,
+      status_code: error.statusCode || 500,
+      error_description: error.message,
     });
   }
 }
