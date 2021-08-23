@@ -58,9 +58,9 @@ export default async function handler(req, res) {
       clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
       scope: 'read:users read:roles read:role_members',
     });
+    return res.status(200).json({ data: 'success' });
 
     const roles = await auth0.getRoles();
-    return res.status(200).json({ data: { roles } });
 
     const allUsersInRoles = await roles.map(async (role) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
