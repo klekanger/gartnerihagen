@@ -126,3 +126,14 @@ export default async function handler(req, res) {
     });
   }
 }
+
+// TODO
+// Add Typescript
+// import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby"
+//
+// export default function handler(
+//   req: GatsbyFunctionRequest,
+//    res: GatsbyFunctionResponse
+//  ) {
+//    res.send(`I am TYPESCRIPT`)
+// }

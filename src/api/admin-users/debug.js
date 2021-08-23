@@ -50,17 +50,16 @@ export default async function handler(req, res) {
   }
 
   // Get list of all roles and users in each role from Auth0 management API
-  const auth0 = new ManagementClient({
-    domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
-    clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
-    clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
-    scope: 'read:users read:roles read:role_members',
-  });
 
   try {
-    const roles = await auth0.getRoles();
+    const auth0 = new ManagementClient({
+      domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
+      clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
+      clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
+      scope: 'read:users read:roles read:role_members',
+    });
 
-    return res.status(200).json({ roles });
+    const roles = await auth0.getRoles();
 
     const allUsersInRoles = await roles.map(async (role) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
@@ -111,13 +110,13 @@ export default async function handler(req, res) {
       }
     });
 
-    return res.status(200).json({
+    res.status(200).json({
       body: {
         users: userListWithRoles,
       },
     });
   } catch (error) {
-    return res.status(error.statusCode || 500).json({
+    res.status(error.statusCode || 500).json({
       body: {
         error: error.name,
         status_code: error.statusCode || 500,
