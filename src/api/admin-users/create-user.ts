@@ -1,3 +1,8 @@
+/**
+ * Creates a new user and updates the user roles for that user
+ * 
+ */
+import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
@@ -12,7 +17,10 @@ const jwt = new JwtVerifier({
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: GatsbyFunctionRequest,
+  res: GatsbyFunctionResponse
+) {
   let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
   const userRoles = req.body.roles;

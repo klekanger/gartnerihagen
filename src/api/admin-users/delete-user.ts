@@ -1,8 +1,7 @@
-// Deletes a user using Auth0's management API
-
-import { Http2ServerResponse } from 'http2';
-import { nextTick } from 'process';
-
+/** 
+ * Deletes a user using Auth0's management API
+ */
+import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
@@ -15,7 +14,10 @@ const jwt = new JwtVerifier({
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: GatsbyFunctionRequest,
+  res: GatsbyFunctionResponse
+) {
   let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
 
