@@ -28,10 +28,6 @@ export default async function handler(
     });
   }
 
-
-  
-
-
   // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
