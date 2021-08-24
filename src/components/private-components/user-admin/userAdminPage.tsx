@@ -52,9 +52,9 @@ const UserAdminPage = () => {
   const [selectedRole, setSelectedRole] = useState('all');
   const { data, loading, error, getToken } = useGetAllUsers();
 
-  const userRoles = user['https:/gartnerihagen-askim.no/roles'];
-  const isAdmin = userRoles.includes('admin');
-  const isEditor = userRoles.includes('editor');
+  const userRoles: string[] = user['https:/gartnerihagen-askim.no/roles'];
+  const isAdmin: boolean = userRoles.includes('admin');
+  const isEditor: boolean = userRoles.includes('editor');
 
   if (loading) {
     return (
@@ -100,7 +100,7 @@ const UserAdminPage = () => {
   }
 
   // Filter out selected users
-  const myUsers = data.body.users;
+  const myUsers = data?.body?.users;
   const filteredResults = myUsers.filter((currentUser) => {
     const userToUppercase = currentUser.name.toUpperCase();
 
@@ -261,8 +261,18 @@ const UserAdminPage = () => {
               mx={8}
             />
             <Box flexDirection='column'>
-              <Text as='div' fontSize='lg' fontWeight='semibold' align='left'>
+              <Text
+                as='div'
+                fontSize='lg'
+                fontWeight='semibold'
+                align='left'
+                overflowWrap='anywhere'
+              >
                 {userToShow?.name}
+                <br />
+              </Text>
+              <Text as='div' fontSize='md' align='left' overflowWrap='anywhere'>
+                {userToShow?.email}
                 <br />
                 {userToShow?.roles.map((role) => (
                   <div key={`${userToShow?.user_id}-${role}`}>
