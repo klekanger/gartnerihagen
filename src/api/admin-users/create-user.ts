@@ -13,7 +13,7 @@ const {
 const ALLOWED_ROLES = ['user', 'admin', 'editor'];
 
 const jwt = new JwtVerifier({
-  issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
+  issuer: `https://${process.env.GATSBY_AUTH0_DOMAIN}/`,
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
@@ -77,7 +77,7 @@ export default async function handler(
 
   // Create a new user through the Auth0 management API
   const auth0 = new ManagementClient({
-    domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
+    domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
     scope: 'create:users read:roles create:role_members',

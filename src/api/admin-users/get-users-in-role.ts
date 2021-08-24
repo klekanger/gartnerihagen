@@ -10,7 +10,7 @@ const {
 } = require('@serverless-jwt/jwt-verifier');
 
 const jwt = new JwtVerifier({
-  issuer: `https://${process.env.AUTH0_BACKEND_DOMAIN}/`,
+  issuer: `https://${process.env.GATSBY_AUTH0_DOMAIN}/`,
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
@@ -64,7 +64,7 @@ export default async function handler(
 
   // Get list of all roles and users in each role from Auth0 management API
   const auth0 = new ManagementClient({
-    domain: `${process.env.AUTH0_BACKEND_DOMAIN}`,
+    domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
     clientId: `${process.env.AUTH0_BACKEND_CLIENT_ID}`,
     clientSecret: `${process.env.AUTH0_BACKEND_CLIENT_SECRET}`,
     scope: 'read:users read:roles read:role_members',
