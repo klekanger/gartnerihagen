@@ -113,7 +113,7 @@ const UpdateUserPage = (props: PageProps) => {
     try {
       const accessToken = await getAccessTokenSilently(opts);
       const api = await fetch(`/api/admin-users/update-user`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,

@@ -140,7 +140,7 @@ const UserAdminPage = () => {
 
       const accessToken = await getAccessTokenSilently(opts);
       const api = await fetch(`/api/admin-users/delete-user`, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,

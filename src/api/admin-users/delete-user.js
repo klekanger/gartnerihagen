@@ -19,6 +19,13 @@ export default async function handler(req, res) {
   let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
 
+  if (req.method !== `DELETE`) {
+    return res.status(405).json({
+      error: 'method not allowed',
+      error_description: 'You should do a DELETE request to access this',
+    });
+  }
+
   // Verify access token
   try {
     claims = await jwt.verifyAccessToken(token);
@@ -41,9 +48,6 @@ export default async function handler(req, res) {
   }
 
   // Check the permissions
-  // We'll just check for update:users, as a user that has this access level also
-  // should be able to update the roles of users (create:role_members and read:roles scope).
-  // No need to check that at this point.
   if (!permissions.includes('delete:users')) {
     return res.status(403).json({
       error: 'no delete access',
