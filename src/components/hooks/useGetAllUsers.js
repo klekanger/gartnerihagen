@@ -7,6 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const useGetAllUsers = () => {
   const { getAccessTokenWithPopup } = useAuth0();
   const opts = {
+    method: 'GET',
     audience: 'https://useradmin.gartnerihagen-askim.no',
     scope: 'read:users read:roles read:role_members',
   };

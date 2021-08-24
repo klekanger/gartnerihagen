@@ -20,10 +20,10 @@ export default async function handler(req, res) {
   const token = getTokenFromHeader(req.headers.authorization);
   const userRoles = req.body.roles;
 
-  if (req.method !== `POST`) {
+  if (req.method !== `PATCH`) {
     return res.status(405).json({
       error: 'method not allowed',
-      error_description: 'You should do a POST request to access this',
+      error_description: 'You should do a PATCH request to access this',
     });
   }
 
