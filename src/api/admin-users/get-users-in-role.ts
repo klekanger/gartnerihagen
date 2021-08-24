@@ -1,6 +1,7 @@
 /**
  * Returns a list of users and roles for each user.
  */
+import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
@@ -13,8 +14,11 @@ const jwt = new JwtVerifier({
   audience: `https://${process.env.AUTH0_USERADMIN_AUDIENCE}`,
 });
 
-export default async function handler(req, res) {
-  let claims, permissions;
+export default async function handler(
+  req: GatsbyFunctionRequest,
+  res: GatsbyFunctionResponse
+) {
+  let claims, permissions
   const token = getTokenFromHeader(req.headers.authorization);
 
   if (req.method !== `GET`) {
@@ -66,9 +70,10 @@ export default async function handler(req, res) {
     scope: 'read:users read:roles read:role_members',
   });
 
+ 
   try {
-    const roles = await auth0.getRoles();
-    const allUsersInRoles = await roles.map(async (role) => {
+    const roles: string[] | undefined = await auth0.getRoles();
+    const allUsersInRoles = await roles.map(async (role: any) => {
       const usersInRole = await auth0.getUsersInRole({ id: role.id });
       return { role: role.name, users: usersInRole };
     });
