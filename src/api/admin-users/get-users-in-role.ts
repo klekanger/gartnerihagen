@@ -93,15 +93,12 @@ export default async function handler(
           // push this user to the new userListWithRoles array, with the role appended
           // If the user has already been pushed to the new userListWithRoles array,
           // just update the roles.
-          if (
-            userListWithRoles.find(
-              (element) => element.user_id === user.user_id
-            )
-          ) {
-            const existingUserToModify = userListWithRoles.find(
-              (element) => element.user_id === user.user_id
-            );
 
+          const existingUserToModify = userListWithRoles.find(
+            (element) => element.user_id === user.user_id
+          );
+
+          if (existingUserToModify) {
             existingUserToModify.roles = [
               ...existingUserToModify.roles, // Include all previously added roles
               userRoles[i].role, // ...and the new role
