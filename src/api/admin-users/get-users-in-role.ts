@@ -18,7 +18,7 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  let claims, permissions
+  let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
 
   if (req.method !== `GET`) {
@@ -70,7 +70,6 @@ export default async function handler(
     scope: 'read:users read:roles read:role_members',
   });
 
- 
   try {
     const roles: string[] | undefined = await auth0.getRoles();
     const allUsersInRoles = await roles.map(async (role: any) => {
@@ -88,24 +87,18 @@ export default async function handler(
       for (let i = 0; i < userRoles.length; i++) {
         // Check if current user exists in list of users with role [i]
         if (
-          userRoles[i].users.find((element) => {
-            return element.user_id === user.user_id;
-          })
+          userRoles[i].users.find((element) => element.user_id === user.user_id)
         ) {
           // If user exists in list of user role [i] (e.g. the user is "admin" or "editor")
           // push this user to the new userListWithRoles array, with the role appended
           // If the user has already been pushed to the new userListWithRoles array,
           // just update the roles.
-          if (
-            userListWithRoles.some((element) => {
-              // true if user is already pushed to userListWithRoles
-              return element.user_id === user.user_id;
-            })
-          ) {
-            const existingUserToModify = userListWithRoles.find(
-              (element) => element.user_id === user.user_id
-            );
 
+          const existingUserToModify = userListWithRoles.find(
+            (element) => element.user_id === user.user_id
+          );
+
+          if (existingUserToModify) {
             existingUserToModify.roles = [
               ...existingUserToModify.roles, // Include all previously added roles
               userRoles[i].role, // ...and the new role
