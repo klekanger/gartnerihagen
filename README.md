@@ -8,6 +8,7 @@ Les mer om prosjektet på lekanger.no og kode24.no:
 - [Del 2: Slik bygget jeg sameiets nye nettsider. Grunnmuren er på plass](https://www.lekanger.no/project/del-2-slik-bygget-jeg-sameiets-nye-nettsider-grunnmuren-er-pa-plass)
 - [Del 3: Slik bygget jeg sameiets nye nettsider. Autentisering og private ruter i Gatsby](https://www.lekanger.no/project/del-3-slik-bygget-jeg-sameiets-nye-nettsider-autentisering-og-private-ruter-i-gatsby)
 - [Del 4: Slik bygget jeg sameiets nye nettsider. Kontinuerlig utrulling til Netlify](https://www.lekanger.no/project/del-4-slik-bygget-jeg-sameiets-nye-nettsider-kontinuerlig-utrulling-til-netlify)
+- [Slik bygde jeg brukeradmin-panel til sameiets nettsider med serverless functions og Auth0](https://www.lekanger.no/project/slik-bygde-jeg-brukeradmin-panel-til-sameiets-nettsider-med-serverless-functions-og-auth0)
 
 Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gartnerihagen-askim.no)
 
@@ -17,6 +18,7 @@ Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gar
 
 - Hostes på: **Netlify**
 - Innhold hostes i: **Contentful**
+- Gatsby Functions for å lage API-ene som brukes av brukeradmin-grensesnittet
 
 ## Frontend
 
