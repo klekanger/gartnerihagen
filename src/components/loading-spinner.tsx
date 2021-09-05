@@ -5,7 +5,7 @@ interface ILoadingSpinner {
   spinnerMessage?: string;
 }
 
-function LoadingSkeleton({ spinnerMessage }: ILoadingSpinner) {
+export default function LoadingSpinner({ spinnerMessage }: ILoadingSpinner) {
   return (
     <Box maxWidth={['97%', '95%', '95%', '70%']} h='100vh' pt={4}>
       <Spinner
@@ -21,5 +21,3 @@ function LoadingSkeleton({ spinnerMessage }: ILoadingSpinner) {
     </Box>
   );
 }
-
-export default LoadingSkeleton;
