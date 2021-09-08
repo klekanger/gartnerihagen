@@ -51,7 +51,7 @@ export default async function handler(
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: userEmails,
-      from: 'Boligsameiet Gartnerihagen <gartnerihagen@gmail.com>',
+      from: 'Boligsameiet Gartnerihagen <post@gartnerihagen-askim.no>',
       templateId: 'd-93e1c9f601084a3bb35fbd024fd3e62a',
       dynamic_template_data: {
         articleURL: 'https://gartnerihagen-askim.no/informasjon',

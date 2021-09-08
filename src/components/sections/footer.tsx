@@ -45,7 +45,7 @@ export default function Footer() {
           <Text variant='light' mb={[4, 4, 0, 0]}>
             Epost:{' '}
             <Link
-              href='mailto:gartnerihagen@gmail.com'
+              href='mailto:post@gartnerihagen-askim.no'
               _hover={{ textDecor: 'none', color: 'light' }}
             >
               gartnerihagen@gmail.com
