@@ -48,7 +48,7 @@ export default function Footer() {
               href='mailto:post@gartnerihagen-askim.no'
               _hover={{ textDecor: 'none', color: 'light' }}
             >
-              gartnerihagen@gmail.com
+              post@gartnerihagen-askim.no
             </Link>{' '}
             <br />
             Telefon: +47 - 4021 0140 <br />
