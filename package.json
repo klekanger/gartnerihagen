@@ -26,6 +26,7 @@
     "@contentful/rich-text-types": "^15.0.0rm",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@sendgrid/mail": "^7.4.6",
     "@sentry/gatsby": "^6.9.0",
     "@serverless-jwt/jwt-verifier": "^0.2.1",
     "auth0": "^2.34.2",
