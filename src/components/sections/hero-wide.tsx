@@ -28,7 +28,12 @@ function HeroWide() {
             excerpt
           }
           pageImage {
-            gatsbyImageData(layout: FULL_WIDTH, formats: WEBP, aspectRatio: 1.6)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              formats: WEBP
+              aspectRatio: 1.6
+              breakpoints: [750, 1080, 1366, 1920, 3840]
+            )
             title
             description
           }
