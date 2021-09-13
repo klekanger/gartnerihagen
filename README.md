@@ -24,7 +24,8 @@ Les mer om prosjektet på lekanger.no og kode24.no:
 - [Del 2: Slik bygget jeg sameiets nye nettsider. Grunnmuren er på plass](https://www.lekanger.no/project/del-2-slik-bygget-jeg-sameiets-nye-nettsider-grunnmuren-er-pa-plass)
 - [Del 3: Slik bygget jeg sameiets nye nettsider. Autentisering og private ruter i Gatsby](https://www.lekanger.no/project/del-3-slik-bygget-jeg-sameiets-nye-nettsider-autentisering-og-private-ruter-i-gatsby)
 - [Del 4: Slik bygget jeg sameiets nye nettsider. Kontinuerlig utrulling til Netlify](https://www.lekanger.no/project/del-4-slik-bygget-jeg-sameiets-nye-nettsider-kontinuerlig-utrulling-til-netlify)
-- [Slik bygde jeg brukeradmin-panel til sameiets nettsider med serverless functions og Auth0](https://www.lekanger.no/project/slik-bygde-jeg-brukeradmin-panel-til-sameiets-nettsider-med-serverless-functions-og-auth0)
+- [Del 5: Slik lagde jeg et brukeradmin-panel med Gatsby Functions og Auth0](https://www.lekanger.no/project/slik-bygde-jeg-brukeradmin-panel-til-sameiets-nettsider-med-serverless-functions-og-auth0)
+- [Del 6: Brukeradmin-dashbord med Gatsby Functions: Oppdatere, opprette eller slette brukere](https://www.lekanger.no/project/brukeradmin-dashbord-med-gatsby-functions-oppdatere-opprette-eller-slette-brukere)
 
 Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gartnerihagen-askim.no)
 
@@ -52,4 +53,13 @@ Du finner de ferdige nettsidene på [https://gartnerihagen-askim.no](https://gar
 - Auth0 for autentisering
   - [https://auth0.com/](https://auth0.com/)
 - Apollo Client for å hente data når man er på "protected routes" (client only routes)
+
   - [https://www.apollographql.com/docs/react/](https://www.apollographql.com/docs/react/)
+
+  <br />
+
+De endelige nettsidene ser slik ut:
+
+<p><img src="https://cdn.sanity.io/images/ajget05d/production/29266dc61307f5bec95920f50992972b268bb69e-2348x1646.png?w=800"  align="left"/></p>
+
+<p><img src="https://cdn.sanity.io/images/ajget05d/production/b642125dad606f0e695ad8892d376cea733f3d11-1600x900.webp?w=800"  align="left"/></p>
