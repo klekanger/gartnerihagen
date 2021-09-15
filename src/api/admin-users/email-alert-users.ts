@@ -4,6 +4,7 @@
  */
 
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
+import { isError } from 'util';
 const ManagementClient = require('auth0').ManagementClient;
 const sgMail = require('@sendgrid/mail');
 
@@ -20,7 +21,7 @@ export default async function handler(
 
   // Check if secret key received from Contentful web hook matches the one in the .env file
   if (
-    req.headers?.contentful_webhook_secret !==
+    req.headers.contentful_webhook_secret !==
     process.env.CONTENTFUL_WEBHOOK_SECRET
   ) {
     return res.status(401).json({
@@ -43,8 +44,16 @@ export default async function handler(
     // Filter out only those users that have subscribed to email alerts
     // This is defined in the user_metadata field on Auth0
     const userEmails = users
-      .filter((user) => user?.user_metadata?.subscribeToEmails === true)
-      .map((user) => user?.email);
+      .filter((user) => {
+        if (
+          user &&
+          user.user_metadata &&
+          user.user_metadata.subscribeToEmails
+        ) {
+          return user.user_metadata.subscribeToEmails == true;
+        } else return false;
+      })
+      .map((user) => user.email);
 
     // using Twilio SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
