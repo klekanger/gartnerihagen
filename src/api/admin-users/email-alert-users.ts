@@ -29,12 +29,6 @@ export default async function handler(
     });
   }
 
-  return res.status(200).json({
-    body: {
-      message: 'success',
-    },
-  });
-
   // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
@@ -57,6 +51,12 @@ export default async function handler(
         );
       })
       .map((user) => user.email);
+
+    return res.status(200).json({
+      body: {
+        message: 'success',
+      },
+    });
 
     // using Twilio SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
