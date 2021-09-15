@@ -4,7 +4,6 @@
  */
 
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
-import { isError } from 'util';
 const ManagementClient = require('auth0').ManagementClient;
 const sgMail = require('@sendgrid/mail');
 
@@ -12,13 +11,13 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  if (req.method !== `POST`) {
+  /*   if (req.method !== `POST`) {
     return res.status(405).json({
       error: 'method not allowed',
       error_description: 'You should do a POST request to access this',
     });
   }
-
+ */
   // Check if secret key received from Contentful web hook matches the one in the .env file
   if (
     req.headers.contentful_webhook_secret !==
@@ -45,13 +44,11 @@ export default async function handler(
     // This is defined in the user_metadata field on Auth0
     const userEmails = users
       .filter((user) => {
-        if (
+        return (
           user &&
           user.user_metadata &&
-          user.user_metadata.subscribeToEmails
-        ) {
-          return user.user_metadata.subscribeToEmails == true;
-        } else return false;
+          user.user_metadata.subscribeToEmails === true
+        );
       })
       .map((user) => user.email);
 
