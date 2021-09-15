@@ -52,12 +52,6 @@ export default async function handler(
       })
       .map((user) => user.email);
 
-    return res.status(200).json({
-      body: {
-        message: 'success',
-      },
-    });
-
     // using Twilio SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -70,7 +64,7 @@ export default async function handler(
       },
     };
 
-    // await sgMail.sendMultiple(msg);
+    await sgMail.sendMultiple(msg);
 
     res.status(200).json({
       body: {
