@@ -11,13 +11,13 @@ export default async function handler(
   req: GatsbyFunctionRequest,
   res: GatsbyFunctionResponse
 ) {
-  /*   if (req.method !== `POST`) {
+  if (req.method !== `POST`) {
     return res.status(405).json({
       error: 'method not allowed',
       error_description: 'You should do a POST request to access this',
     });
   }
- */
+
   // Check if secret key received from Contentful web hook matches the one in the .env file
   if (
     req.headers.contentful_webhook_secret !==
@@ -28,6 +28,12 @@ export default async function handler(
       error_description: 'The Contentful web hook secret key is not correct',
     });
   }
+
+  return res.status(200).json({
+    body: {
+      message: 'success',
+    },
+  });
 
   // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
@@ -64,7 +70,7 @@ export default async function handler(
       },
     };
 
-    await sgMail.sendMultiple(msg);
+    // await sgMail.sendMultiple(msg);
 
     res.status(200).json({
       body: {
