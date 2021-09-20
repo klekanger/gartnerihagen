@@ -51,7 +51,7 @@ export default function MyPage() {
           <AlertDialogBody>Er du sikker på at du vil logge ut?</AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+            <Button variant='standard-light' ref={cancelRef} onClick={onClose}>
               Avbryt
             </Button>
             <Button
@@ -106,18 +106,18 @@ export default function MyPage() {
         <Button
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
-          variant='standard'
+          variant='standard-light'
           onClick={() => setIsOpen(true)}
-          _hover={{ bg: '#555' }}
+          _hover={{ bg: 'hoverButtonColor' }}
         >
           Logg ut
         </Button>
         <Button
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
-          variant='standard'
+          variant='standard-light'
           onClick={() => requestChangePassword(user?.email)}
-          _hover={{ bg: '#555' }}
+          _hover={{ bg: 'hoverButtonColor' }}
         >
           Bytt passord
         </Button>
@@ -126,9 +126,9 @@ export default function MyPage() {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
-            variant='standard'
+            variant='standard-light'
             onClick={() => navigate('/user-admin/')}
-            _hover={{ bg: '#555' }}
+            _hover={{ bg: 'hoverButtonColor' }}
           >
             Bruker&shy;admin
           </Button>
@@ -138,11 +138,11 @@ export default function MyPage() {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
-            variant='standard'
+            variant='standard-light'
             onClick={() =>
               navigate('https://app.contentful.com/spaces/wxoemgzywng5')
             }
-            _hover={{ bg: '#555' }}
+            _hover={{ bg: 'hoverButtonColor' }}
           >
             Rediger innhold
           </Button>

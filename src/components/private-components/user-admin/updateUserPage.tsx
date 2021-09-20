@@ -6,6 +6,7 @@ import { navigate } from 'gatsby';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
 import { requestChangePassword } from '../requestChangePassword';
+
 import {
   AlertDialog,
   AlertDialogBody,
@@ -36,6 +37,9 @@ interface UserData {
   picture?: string;
   roles: string[];
   user_id: string;
+  user_metadata: {
+    subscribeToEmails: boolean;
+  };
 }
 
 const UpdateUserPage = (props: PageProps) => {
@@ -46,6 +50,7 @@ const UpdateUserPage = (props: PageProps) => {
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   const userToModify = props?.location?.state as UserData;
+
   if (!userToModify) {
     return (
       <ErrorPage
@@ -58,6 +63,10 @@ const UpdateUserPage = (props: PageProps) => {
     );
   }
 
+  const [hasSubscribedToEmail, setHasSubscribedToEmail] = useState(
+    userToModify?.user_metadata?.subscribeToEmails || false
+  );
+
   const [userDataForm, setUserDataForm] = useState({
     created_at: '',
     last_login: '',
@@ -65,6 +74,9 @@ const UpdateUserPage = (props: PageProps) => {
     name: '',
     picture: '',
     roles: [],
+    user_metadata: {
+      subscribeToEmails: hasSubscribedToEmail,
+    },
     user_id: '',
   } as UserData);
 
@@ -85,6 +97,10 @@ const UpdateUserPage = (props: PageProps) => {
     setUserDataForm({
       ...userToModify,
       roles: [...userToModify.roles],
+      user_metadata: {
+        ...userToModify.user_metadata,
+        subscribeToEmails: hasSubscribedToEmail,
+      },
     });
   }, []);
 
@@ -102,6 +118,16 @@ const UpdateUserPage = (props: PageProps) => {
       roles: newRoles,
     });
   }, [isAdminChecked, isEditorChecked]);
+
+  // Update the user data form when the subscribe to email checkbox is clicked
+  useEffect(() => {
+    setUserDataForm({
+      ...userToModify,
+      user_metadata: {
+        subscribeToEmails: hasSubscribedToEmail,
+      },
+    });
+  }, [hasSubscribedToEmail]);
 
   // Submits the form when the user clicks the "oppdater" button
   const handleSubmit = async () => {
@@ -181,7 +207,7 @@ const UpdateUserPage = (props: PageProps) => {
           </AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+            <Button variant='standard-light' ref={cancelRef} onClick={onClose}>
               Avbryt
             </Button>
             <Button
@@ -223,7 +249,6 @@ const UpdateUserPage = (props: PageProps) => {
             my={4}
             mr={[0, 0, 8, 8]}
           />
-
           <Box flexDirection='column'>
             <Text as='div' fontSize='sm' align='left'>
               <strong>Konto opprettet:</strong>{' '}
@@ -290,32 +315,41 @@ const UpdateUserPage = (props: PageProps) => {
                 </Checkbox>
               </Stack>
             </Tooltip>
+            <Box align='left' mt={2}>
+              <Checkbox
+                isChecked={hasSubscribedToEmail}
+                onChange={() => setHasSubscribedToEmail(!hasSubscribedToEmail)}
+              >
+                Abonnerer på epost-varslinger om nytt innhold
+              </Checkbox>
+            </Box>
           </CheckboxGroup>
 
           <br />
           <Text align='left' fontSize='x-small'>
             ( Auth0 user_id: {userToModify?.user_id} )
           </Text>
-
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>
             <Button
               minW='33%'
               minH='3rem'
-              variant='menu-button'
+              variant='standard-light'
               onClick={() => setIsUpdateAlertOpen(true)}
               isLoading={showLoadingButton}
               loadingText='Oppdaterer'
               _loading={{
                 color: 'black',
               }}
+              _hover={{ bg: 'hoverButtonColor' }}
             >
               Oppdater
             </Button>
             <Button
               minW='33%'
               minH='3rem'
-              variant='standard'
+              variant='standard-light'
               onClick={() => requestChangePassword(userToModify?.email)}
+              _hover={{ bg: 'hoverButtonColor' }}
             >
               Bytt passord
             </Button>
@@ -324,6 +358,7 @@ const UpdateUserPage = (props: PageProps) => {
               minH='3rem'
               variant='danger'
               onClick={() => navigate('/user-admin')}
+              _hover={{ bg: 'hoverButtonDangerColor' }}
             >
               Avbryt
             </Button>

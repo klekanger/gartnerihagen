@@ -234,14 +234,21 @@ const CreateUserPage = () => {
             flexDirection={['column', 'row', 'row', 'row']}
             alignContent='flex-start'
           >
-            <Button variant='menu-button' onClick={onClose} my={2} mx={2}>
+            <Button
+              variant='standard-light'
+              onClick={onClose}
+              my={2}
+              mx={2}
+              _hover={{ bg: 'hoverButtonColor' }}
+            >
               Legg til flere brukere
             </Button>
             <Button
-              variant='standard'
+              variant='standard-light'
               my={2}
               role='link'
               onClick={() => navigate('/user-admin')}
+              _hover={{ bg: 'hoverButtonColor' }}
             >
               Tilbake til bruker&shy;administrasjon
             </Button>
@@ -351,13 +358,14 @@ const CreateUserPage = () => {
             <Button
               minW='50%'
               minH='3rem'
-              variant='menu-button'
+              variant='standard-light'
               type='submit'
               isLoading={showLoadingButton}
               loadingText='Oppretter bruker'
               _loading={{
                 color: 'black',
               }}
+              _hover={{ bg: 'hoverButtonColor' }}
             >
               Opprett
             </Button>
@@ -365,7 +373,7 @@ const CreateUserPage = () => {
               minW='50%'
               minH='3rem'
               variant='danger'
-              _hover={{ bg: '#555' }}
+              _hover={{ bg: 'hoverButtonDangerColor' }}
               onClick={() => navigate('/user-admin')}
             >
               Avbryt

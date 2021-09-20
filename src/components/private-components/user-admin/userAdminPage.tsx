@@ -203,7 +203,7 @@ const UserAdminPage = () => {
           </AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button variant='standard' ref={cancelRef} onClick={onClose}>
+            <Button variant='standard-light' ref={cancelRef} onClick={onClose}>
               Avbryt
             </Button>
             <Button
@@ -256,10 +256,11 @@ const UserAdminPage = () => {
               src={userToShow?.picture}
               alt={userToShow?.name}
               rounded='50%'
-              width={16}
+              width={24}
               my={4}
               mx={8}
             />
+
             <Box flexDirection='column'>
               <Text
                 as='div'
@@ -283,6 +284,9 @@ const UserAdminPage = () => {
                     )}{' '}
                   </div>
                 ))}
+                {userToShow?.user_metadata?.subscribeToEmails && (
+                  <Badge colorScheme='yellow'>Får epost-varsling</Badge>
+                )}
               </Text>
             </Box>
           </Flex>
@@ -302,6 +306,7 @@ const UserAdminPage = () => {
                     state: userToShow,
                   })
                 }
+                _hover={{ bg: 'hoverButtonColor' }}
               >
                 Endre bruker
               </Button>
@@ -316,6 +321,7 @@ const UserAdminPage = () => {
                     name: userToShow?.name,
                   });
                 }}
+                _hover={{ bg: 'hoverButtonDangerColor' }}
               >
                 Slett bruker
               </Button>
@@ -331,6 +337,7 @@ const UserAdminPage = () => {
                 w='100%'
                 p={8}
                 onClick={() => requestChangePassword(userToShow?.email)}
+                _hover={{ bg: 'hoverButtonColor' }}
               >
                 Bytt passord
               </Button>
