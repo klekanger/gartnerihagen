@@ -114,7 +114,7 @@ const UpdateUserPage = (props: PageProps) => {
       newRoles.push('editor');
     }
     setUserDataForm({
-      ...userToModify,
+      ...userDataForm,
       roles: newRoles,
     });
   }, [isAdminChecked, isEditorChecked]);
@@ -122,7 +122,7 @@ const UpdateUserPage = (props: PageProps) => {
   // Update the user data form when the subscribe to email checkbox is clicked
   useEffect(() => {
     setUserDataForm({
-      ...userToModify,
+      ...userDataForm,
       user_metadata: {
         subscribeToEmails: hasSubscribedToEmail,
       },
