@@ -19,6 +19,8 @@ const colors = {
   primaryButton: '#43A889',
   secondaryButton: '#C8DD80',
   tertiaryButton: '#c7c7c7',
+  hoverButtonColor: '#ddd',
+  hoverButtonDangerColor: '#FF6666',
   danger: '#ff3333',
 };
 
