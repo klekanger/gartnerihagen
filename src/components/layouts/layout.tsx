@@ -10,7 +10,14 @@ interface LayoutProps {
 
 function Layout(props: LayoutProps) {
   return (
-    <Box direction='column' align='center' m='0 auto' {...props}>
+    <Box
+      direction='column'
+      align='center'
+      m='0 auto'
+      {...props}
+      position='relative'
+      minHeight='100vh'
+    >
       <Header />
       <Box pb={20} />
       {props.children}
