@@ -2,7 +2,7 @@
  * This serverless function both updates the email and name of the user
  * and adds or removes one or more of the ALLOWED_ROLES
  */
- import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
+import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
@@ -87,6 +87,9 @@ export default async function handler(
     connection: 'Username-Password-Authentication',
     email: req.body.email,
     name: req.body.name,
+    user_metadata: {
+      subscribeToEmails: req.body.user_metadata.subscribeToEmails,
+    },
   };
 
   try {
