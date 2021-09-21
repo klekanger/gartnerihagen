@@ -277,9 +277,11 @@ const CreateUserPage = () => {
               placeholder='navn@domene.no'
               value={formData.email}
               onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  email: e.target.value,
+                setFormData((prevState) => {
+                  return {
+                    ...prevState,
+                    email: e.target.value,
+                  };
                 })
               }
             />
@@ -290,12 +292,14 @@ const CreateUserPage = () => {
             <Input
               value={formData.name}
               placeholder='Fornavn Etternavn'
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                setFormData((prevState) => {
+                  return {
+                    ...prevState,
+                    name: e.target.value,
+                  };
+                })
+              }
             />
           </FormControl>
 
@@ -305,12 +309,11 @@ const CreateUserPage = () => {
               type='password'
               placeholder='*****'
               value={formData.password}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  password: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                setFormData((prevState) => {
+                  return { ...prevState, password: e.target.value };
+                })
+              }
             />
           </FormControl>
 
@@ -320,12 +323,11 @@ const CreateUserPage = () => {
               type='password'
               placeholder='*****'
               value={formData.repeatPassword}
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  repeatPassword: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                setFormData((prevState) => {
+                  return { ...prevState, repeatPassword: e.target.value };
+                })
+              }
             />
           </FormControl>
 
