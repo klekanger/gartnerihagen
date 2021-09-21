@@ -40,10 +40,12 @@ const CreateUserPage = () => {
     password: '',
     repeatPassword: '',
     roles: [],
+    user_metadata: {},
   });
 
   const [isAdminChecked, setIsAdminChecked] = useState(false);
   const [isEditorChecked, setIsEditorChecked] = useState(false);
+  const [hasSubscribedToEmail, setHasSubscribedToEmail] = useState(true);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [response, setResponse] = useState(null);
@@ -116,6 +118,11 @@ const CreateUserPage = () => {
       formData.roles.push('editor');
     }
 
+    // Add user email alerts to the formData
+    formData.user_metadata = {
+      subscribeToEmails: hasSubscribedToEmail,
+    };
+
     // Call create-user API with the formdata
     try {
       const accessToken = await getAccessTokenSilently(opts);
@@ -129,10 +136,6 @@ const CreateUserPage = () => {
         body: JSON.stringify(formData),
       });
 
-      if (api?.status !== 200) {
-        throw new Error(`${api.statusText} (${api.status})`);
-      }
-
       const isJson = api.headers
         .get('content-type')
         ?.includes('application/json');
@@ -144,8 +147,9 @@ const CreateUserPage = () => {
       }
 
       if (data.error) {
-        const { error_description } = JSON.parse(data?.error_description);
-        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+        throw new Error(
+          `${data.error} : ${JSON.stringify(data?.error_description)}`
+        );
       }
 
       // Store the API response (e.g. the user data for the newly created user)
@@ -173,7 +177,7 @@ const CreateUserPage = () => {
       } else {
         toast({
           title: 'Noe gikk galt',
-          description: `${error.message}`,
+          description: `${error.name} - ${error.message}`,
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -354,6 +358,14 @@ const CreateUserPage = () => {
                 </Checkbox>
               </Stack>
             </Tooltip>
+            <Box align='left' mt={2}>
+              <Checkbox
+                isChecked={hasSubscribedToEmail}
+                onChange={() => setHasSubscribedToEmail(!hasSubscribedToEmail)}
+              >
+                Abonnerer på epost-varslinger om nytt innhold
+              </Checkbox>
+            </Box>
           </CheckboxGroup>
 
           <Stack direction={['column', 'column', 'row', 'row']} py={8}>

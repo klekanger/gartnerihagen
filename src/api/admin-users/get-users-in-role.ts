@@ -121,12 +121,11 @@ export default async function handler(
       },
     });
   } catch (error) {
-    res.status(error.statusCode || 500).json({
-      body: {
-        error: error.name,
-        status_code: error.statusCode || 500,
-        error_description: error.message,
-      },
+    res.status(error.statusCode).json({
+      error: error.name,
+      message: error.message,
+      status_code: error.statusCode || 500,
+      error_description: error.message,
     });
   }
 }

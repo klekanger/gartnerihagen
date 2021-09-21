@@ -1,4 +1,4 @@
-/** 
+/**
  * Deletes a user using Auth0's management API
  */
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
@@ -93,6 +93,7 @@ export default async function handler(
   } catch (error) {
     res.status(error.statusCode || 500).json({
       error: error.name,
+      message: error.message,
       status_code: error.statusCode || 500,
       error_description: error.message,
     });

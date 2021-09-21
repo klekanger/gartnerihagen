@@ -1,6 +1,6 @@
 /**
  * Creates a new user and updates the user roles for that user
- * 
+ *
  */
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
 const ManagementClient = require('auth0').ManagementClient;
@@ -119,8 +119,17 @@ export default async function handler(
       },
     });
   } catch (error) {
+    if (error.statusCode === 400) {
+      return res.status(400).json({
+        error: error.name,
+        message: error.message,
+        status_code: error.statusCode || 500,
+        error_description: 'Skjemadata er ikke gyldige. Sjekk epost-adressen!',
+      });
+    }
     res.status(error.statusCode).json({
       error: error.name,
+      message: error.message,
       status_code: error.statusCode || 500,
       error_description: error.message,
     });

@@ -150,10 +150,6 @@ const UpdateUserPage = (props: PageProps) => {
         body: JSON.stringify(userDataForm),
       });
 
-      if (api?.status !== 200) {
-        throw new Error(`${api.statusText} (${api.status})`);
-      }
-
       const isJson = api.headers
         .get('content-type')
         ?.includes('application/json');
@@ -165,7 +161,9 @@ const UpdateUserPage = (props: PageProps) => {
       }
 
       if (data.error) {
-        throw new Error(data.error);
+        throw new Error(
+          `${data.error} : ${JSON.stringify(data?.error_description)}`
+        );
       }
 
       toast({

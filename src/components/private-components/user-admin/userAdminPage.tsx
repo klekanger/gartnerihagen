@@ -149,10 +149,6 @@ const UserAdminPage = () => {
         body: JSON.stringify({ idToDelete: userToDelete.id }),
       });
 
-      if (api?.status !== 200) {
-        throw new Error(`${api.statusText} (${api.status})`);
-      }
-
       const isJson = api.headers
         .get('content-type')
         ?.includes('application/json');
@@ -164,9 +160,11 @@ const UserAdminPage = () => {
       }
 
       if (data.error) {
-        const { error_description } = JSON.parse(data?.error_description);
-        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+        throw new Error(
+          `${data.error} : ${JSON.stringify(data?.error_description)}`
+        );
       }
+
       toast({
         title: `Bruker ${userToDelete.name} slettet`,
         description: 'Brukeren har ikke lenger tilgang',
@@ -178,7 +176,7 @@ const UserAdminPage = () => {
     } catch (error) {
       toast({
         title: 'Noe gikk galt',
-        description: `${error.message}`,
+        description: `${error.name} - ${error.message}`,
         status: 'error',
         duration: 3000,
         isClosable: true,
