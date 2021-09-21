@@ -28,6 +28,7 @@ import {
   CheckboxGroup,
   Checkbox,
 } from '@chakra-ui/react';
+import { API } from '@sentry/core';
 
 interface UserData {
   created_at: string;
@@ -113,25 +114,26 @@ const UpdateUserPage = (props: PageProps) => {
     if (isEditorChecked) {
       newRoles.push('editor');
     }
-    setUserDataForm({
-      ...userDataForm,
-      roles: newRoles,
+
+    setUserDataForm((prevState) => {
+      return { ...prevState, roles: newRoles };
     });
   }, [isAdminChecked, isEditorChecked]);
 
   // Update the user data form when the subscribe to email checkbox is clicked
   useEffect(() => {
-    setUserDataForm({
-      ...userDataForm,
-      user_metadata: {
-        subscribeToEmails: hasSubscribedToEmail,
-      },
+    setUserDataForm((prevState) => {
+      return {
+        ...prevState,
+        user_metadata: {
+          subscribeToEmails: hasSubscribedToEmail,
+        },
+      };
     });
   }, [hasSubscribedToEmail]);
 
   // Submits the form when the user clicks the "oppdater" button
   const handleSubmit = async () => {
-    // e.preventDefault();
     setShowLoadingButton(true);
     setIsUpdateAlertOpen(false);
 
@@ -163,8 +165,7 @@ const UpdateUserPage = (props: PageProps) => {
       }
 
       if (data.error) {
-        const { error_description } = JSON.parse(data?.error_description);
-        throw new Error(`${data.error} : ${JSON.stringify(error_description)}`);
+        throw new Error(data.error);
       }
 
       toast({
@@ -177,11 +178,9 @@ const UpdateUserPage = (props: PageProps) => {
 
       navigate(`/user-admin`);
     } catch (error) {
-      console.error(error);
-
       toast({
         title: 'Noe gikk galt',
-        description: `${error.message}`,
+        description: `${error.name} - ${error.message}`,
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -272,9 +271,11 @@ const UpdateUserPage = (props: PageProps) => {
               type='email'
               value={userDataForm?.email}
               onChange={(e) =>
-                setUserDataForm({
-                  ...userDataForm,
-                  email: e.target.value,
+                setUserDataForm((prevState) => {
+                  return {
+                    ...prevState,
+                    email: e.target.value,
+                  };
                 })
               }
             />
@@ -284,12 +285,14 @@ const UpdateUserPage = (props: PageProps) => {
             <Input
               value={userDataForm?.name}
               placeholder='Fornavn Etternavn'
-              onChange={(e) => {
-                setUserDataForm({
-                  ...userDataForm,
-                  name: e.target.value,
-                });
-              }}
+              onChange={(e) =>
+                setUserDataForm((prevState) => {
+                  return {
+                    ...prevState,
+                    name: e.target.value,
+                  };
+                })
+              }
             />
           </FormControl>
           <CheckboxGroup>
