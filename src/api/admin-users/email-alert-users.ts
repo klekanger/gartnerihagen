@@ -29,6 +29,17 @@ export default async function handler(
     });
   }
 
+  // Get info from Contentful about published content
+  let articleURL;
+  if (req.body.fields.privatePost.nb === true) {
+    articleURL = `https://gartnerihagen-askim.no/informasjon/post/${req.body.fields.slug.nb}/${req.body.sys.id}`;
+  } else {
+    articleURL = `https://gartnerihagen-askim.no/blog/${req.body.fields.slug}/${req.body.sys.id}`;
+  }
+
+  const articleTitle = req.body.fields.title.nb;
+  const articleExcerpt = req.body.fields.excerpt.nb;
+
   // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
@@ -55,12 +66,15 @@ export default async function handler(
     // using Twilio SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
     const msg = {
       to: userEmails,
       from: 'Boligsameiet Gartnerihagen <post@gartnerihagen-askim.no>',
       templateId: 'd-93e1c9f601084a3bb35fbd024fd3e62a',
       dynamic_template_data: {
-        articleURL: 'https://gartnerihagen-askim.no/informasjon',
+        articleURL,
+        articleTitle,
+        articleExcerpt,
       },
     };
 
