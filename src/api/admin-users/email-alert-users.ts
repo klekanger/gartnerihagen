@@ -29,6 +29,14 @@ export default async function handler(
     });
   }
 
+  // TEST CODE - REMOVE BEFORE DEPLOYMENT
+  return res.status(200).json({
+    body: {
+      requestBody: req.body,
+      requestHeaders: req.headers,
+    },
+  });
+
   // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
