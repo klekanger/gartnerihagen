@@ -29,14 +29,6 @@ export default async function handler(
     });
   }
 
-  // TEST CODE - REMOVE BEFORE DEPLOYMENT
-  return res.status(200).json({
-    body: {
-      requestBody: req.body,
-      requestHeaders: req.headers,
-    },
-  });
-
   // Connect to the Auth0 management API
   const auth0 = new ManagementClient({
     domain: `${process.env.GATSBY_AUTH0_DOMAIN}`,
@@ -63,6 +55,23 @@ export default async function handler(
     // using Twilio SendGrid's v3 Node.js Library
     // https://github.com/sendgrid/sendgrid-nodejs
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    // DEBUG CODE - REMOVE BEFORE DEPLOYMENT
+    sgMail.send({
+      to: 'kurt.lekanger@gmail.com',
+      from: 'post@gartnerihagen-askim.no',
+      subject: 'Test email',
+      text: JSON.stringify(req.body),
+    });
+
+    return res.status(200).json({
+      body: {
+        message: 'Email sent',
+      },
+    });
+
+    // DEBUG CODE END
+
     const msg = {
       to: userEmails,
       from: 'Boligsameiet Gartnerihagen <post@gartnerihagen-askim.no>',
