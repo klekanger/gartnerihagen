@@ -25,6 +25,10 @@ export default function MyPage() {
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const userRoles = user['https:/gartnerihagen-askim.no/roles'];
+  const { subscribeToEmails } =
+    user['https:/gartnerihagen-askim.no/user_metadata'] || false;
+  const [hasSubscribedToEmail, setHasSubscribedToEmail] =
+    useState(subscribeToEmails);
   const isAdmin = userRoles.includes('admin');
   const isEditor = userRoles.includes('editor');
 
@@ -97,6 +101,10 @@ export default function MyPage() {
         {isAdmin && <Badge colorScheme='red'>Administrator</Badge>}{' '}
         {isEditor && <Badge colorScheme='green'>Redaktør</Badge>}
       </Text>
+      {hasSubscribedToEmail && (
+        <Badge colorScheme='yellow'>Får epost-varsling</Badge>
+      )}
+
       <Stack
         direction={['column', 'column', 'row', 'row']}
         my={[4, 4, 8, 8]}
