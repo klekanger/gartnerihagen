@@ -11,7 +11,7 @@ import {
   Heading,
   Text,
   Button,
-  Stack,
+  Grid,
   useToast,
   AlertDialog,
   AlertDialogBody,
@@ -142,9 +142,7 @@ export default function MyPage() {
   return (
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
-      h='80vh'
-      ml='0'
-      mb={[16, 16, 64, 64]}
+      my={8}
       pt={[8, 16, 8, 16]}
       pb={[8, 8, 8, 16]}
       textAlign='center'
@@ -173,15 +171,20 @@ export default function MyPage() {
         )}
       </Text>
 
-      <Stack
-        direction={['column', 'column', 'row', 'row']}
-        my={[4, 4, 8, 8]}
-        align='center'
-        justify='center'
+      <Grid
+        templateColumns={[
+          'repeat(1, 1fr)',
+          'repeat(2, 1fr)',
+          'repeat(3, 1fr)',
+          'repeat(3, 1fr)',
+        ]}
+        mt={4}
+        border='1px solid #ddd'
       >
         <Button
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
+          margin={4}
           variant='standard-light'
           onClick={() => setIsOpen(true)}
           _hover={{ bg: 'hoverButtonColor' }}
@@ -191,6 +194,7 @@ export default function MyPage() {
         <Button
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
+          margin={4}
           variant='standard-light'
           onClick={() => requestChangePassword(user?.email)}
           _hover={{ bg: 'hoverButtonColor' }}
@@ -202,6 +206,7 @@ export default function MyPage() {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
+            margin={4}
             variant='standard-light'
             onClick={() => navigate('/user-admin/')}
             _hover={{ bg: 'hoverButtonColor' }}
@@ -214,6 +219,7 @@ export default function MyPage() {
           <Button
             minW={['40%', '40%', '20%', '20%']}
             minH='3rem'
+            margin={4}
             variant='standard-light'
             onClick={() =>
               navigate('https://app.contentful.com/spaces/wxoemgzywng5')
@@ -227,12 +233,13 @@ export default function MyPage() {
         <Button
           minW={['40%', '40%', '20%', '20%']}
           minH='3rem'
+          margin={4}
           variant='standard-light'
           onClick={() => handleEmailAlertChange()}
         >
           Slå {hasSubscribedToEmail ? 'av' : 'på'} epost-varsling
         </Button>
-      </Stack>
+      </Grid>
       {!isAdmin && (
         <>
           <Text>For å slette konto eller endre kontoopplysninger,</Text>
