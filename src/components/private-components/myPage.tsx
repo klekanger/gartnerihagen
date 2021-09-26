@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigate } from 'gatsby';
 import { requestChangePassword } from './requestChangePassword';
+
 import {
   Badge,
   Box,
@@ -11,6 +12,7 @@ import {
   Text,
   Button,
   Stack,
+  useToast,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -20,7 +22,15 @@ import {
 } from '@chakra-ui/react';
 
 export default function MyPage() {
-  const { user, isAuthenticated, error, logout } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    error,
+    logout,
+    getAccessTokenSilently,
+    getAccessTokenWithPopup,
+  } = useAuth0();
+  const toast = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -39,6 +49,63 @@ export default function MyPage() {
   if (!isAuthenticated) {
     return;
   }
+
+  const handleEmailAlertChange = async () => {
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience: 'https://useradmin.gartnerihagen-askim.no',
+        scope: 'update:users_app_metadata',
+      });
+
+      const api = await fetch(`/api/admin-users/subscribe-to-emails`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+
+        body: JSON.stringify({
+          user_id: user.sub,
+          user_metadata: {
+            subscribeToEmails: !hasSubscribedToEmail,
+          },
+        }),
+      });
+
+      const isJson = api.headers
+        .get('content-type')
+        ?.includes('application/json');
+
+      const data = isJson && (await api.json());
+
+      if (!data) {
+        throw new Error('no_data');
+      }
+
+      if (data.error) {
+        throw new Error(
+          `${data.error} : ${JSON.stringify(data?.error_description)}`
+        );
+      }
+
+      toast({
+        title: `${data?.body?.status_description}`,
+        description: `${hasSubscribedToEmail ? 'Avsluttet' : 'Aktivert'}`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+
+      setHasSubscribedToEmail(!hasSubscribedToEmail);
+    } catch (error) {
+      if (error?.error === 'consent_required') {
+        await getAccessTokenWithPopup({
+          audience: 'https://useradmin.gartnerihagen-askim.no',
+          scope: 'update:users_app_metadata',
+        });
+      }
+    }
+  };
 
   // Define alert dialog. Are you sure you want to log out?
   const logOutAlert = (
@@ -101,10 +168,10 @@ export default function MyPage() {
         </Text>
         {isAdmin && <Badge colorScheme='red'>Administrator</Badge>}{' '}
         {isEditor && <Badge colorScheme='green'>Redaktør</Badge>}
+        {hasSubscribedToEmail && (
+          <Badge colorScheme='yellow'>Epost-varsling</Badge>
+        )}
       </Text>
-      {hasSubscribedToEmail && (
-        <Badge colorScheme='yellow'>Får epost-varsling</Badge>
-      )}
 
       <Stack
         direction={['column', 'column', 'row', 'row']}
@@ -156,6 +223,15 @@ export default function MyPage() {
             Rediger innhold
           </Button>
         )}
+
+        <Button
+          minW={['40%', '40%', '20%', '20%']}
+          minH='3rem'
+          variant='standard-light'
+          onClick={() => handleEmailAlertChange()}
+        >
+          Slå {hasSubscribedToEmail ? 'av' : 'på'} epost-varsling
+        </Button>
       </Stack>
       {!isAdmin && (
         <>
