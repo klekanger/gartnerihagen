@@ -77,6 +77,7 @@ export default function MyPage() {
       maxWidth={['97%', '95%', '95%', '70%']}
       h='80vh'
       ml='0'
+      mb={[16, 16, 64, 64]}
       pt={[8, 16, 8, 16]}
       pb={[8, 8, 8, 16]}
       textAlign='center'

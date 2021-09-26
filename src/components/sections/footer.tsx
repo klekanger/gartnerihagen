@@ -18,7 +18,6 @@ export default function Footer() {
         justify='space-between'
         wrap='wrap'
         w='100%'
-        mt='auto'
         mb={0}
         pt={16}
         pb={16}
@@ -28,8 +27,6 @@ export default function Footer() {
         opacity='90%'
         fontSize='sm'
         direction={['column', 'column', 'row', 'row']}
-        position='absolute'
-        bottom={-64}
       >
         <Box>
           <Text variant='light' mb={[4, 4, 0, 0]}>
