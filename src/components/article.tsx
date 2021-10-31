@@ -5,7 +5,7 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
 
-interface IArticleProps {
+interface ArticleProps {
   mainImage: {
     gatsbyImageData: IGatsbyImageData;
     description: string;
@@ -29,7 +29,7 @@ function Article({
   createdAt,
   updatedAt,
   buttonLink,
-}: IArticleProps) {
+}: ArticleProps) {
   // Format the dates shown at the bottom of every article page
   const publishDate: string =
     createdAt !== updatedAt
