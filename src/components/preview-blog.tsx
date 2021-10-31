@@ -10,7 +10,7 @@ import PrivateArticle from './private-components/privateArticle';
 import fetch from 'cross-fetch';
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
-const previewPageClient = new ApolloClient({
+const previewClient = new ApolloClient({
   link: new HttpLink({
     uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.GATSBY_CONTENTFUL_SPACE_ID}`,
     fetch,
@@ -21,22 +21,28 @@ const previewPageClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-interface PreviewPageProps extends RouteComponentProps {
+interface PreviewBlogProps extends RouteComponentProps {
   id?: string;
   path: string;
 }
 
-function PreviewPage({ id }: PreviewPageProps) {
+function PreviewBlog({ id }: PreviewBlogProps) {
   const QUERY = gql`
-    query PageQuery($id: String!) {
-      page(preview: true, id: $id) {
-        pageTitle
+    query Post($id: String!) {
+      post: blogPost(preview: true, id: $id) {
+        title
         excerpt
         sys {
           createdAt: firstPublishedAt
           updatedAt: publishedAt
         }
-        pageText {
+        authorCollection {
+          items {
+            firstName
+            lastName
+          }
+        }
+        bodyText {
           json
           links {
             assets {
@@ -51,7 +57,7 @@ function PreviewPage({ id }: PreviewPageProps) {
             }
           }
         }
-        pageImage {
+        featuredImage {
           title
           description
           url
@@ -64,7 +70,7 @@ function PreviewPage({ id }: PreviewPageProps) {
   // to retrieve the correct post
   const { data, error, loading } = useQuery(QUERY, {
     variables: { id },
-    client: previewPageClient,
+    client: previewClient,
   });
 
   if (loading) {
@@ -80,21 +86,24 @@ function PreviewPage({ id }: PreviewPageProps) {
     );
   }
 
-  if (!data?.page) {
+  if (!data?.post) {
     return (
       <Box maxWidth={['97%', '95%', '95%', '70%']} py={[8, 12, 16, 24]}>
-        <Heading as='h1'>Side med ID ${id} eksisterer ikke</Heading>
+        <Heading as='h1'>Artikkel med ID ${id} eksisterer ikke</Heading>
       </Box>
     );
   }
 
   const {
-    pageTitle,
-    pageText,
+    title,
+    bodyText,
     excerpt,
-    pageImage,
+    featuredImage,
     sys: { createdAt, updatedAt },
-  } = data?.page;
+    authorCollection,
+  } = data?.post;
+
+  const authors = authorCollection?.items ?? [];
 
   // Format the dates shown at the bottom of every article page
   const publishDate: string =
@@ -104,14 +113,15 @@ function PreviewPage({ id }: PreviewPageProps) {
 
   return (
     <PrivateArticle
-      title={pageTitle}
-      bodyText={pageText}
+      title={title}
+      bodyText={bodyText}
       createdAt={createdAt}
       updatedAt={updatedAt}
-      mainImage={pageImage}
+      mainImage={featuredImage}
+      author={authors}
       buttonLink='/informasjon'
     />
   );
 }
 
-export default PreviewPage;
+export default PreviewBlog;
