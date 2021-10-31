@@ -11,9 +11,6 @@ module.exports = {
     banner:
       'https://images.ctfassets.net/wxoemgzywng5/48qgvJRlnlJcR6SibfnEt0/3934c143437413911ad162fc49ac1056/kveldssteming.jpg?w=1080',
   },
-  flags: {
-    DEV_WEBPACK_CACHE: true,
-  },
   plugins: [
     {
       resolve: 'gatsby-source-contentful',
