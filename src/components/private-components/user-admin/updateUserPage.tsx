@@ -28,7 +28,6 @@ import {
   CheckboxGroup,
   Checkbox,
 } from '@chakra-ui/react';
-import { API } from '@sentry/core';
 
 interface UserData {
   created_at: string;

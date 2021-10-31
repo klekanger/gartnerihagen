@@ -11,9 +11,6 @@ module.exports = {
     banner:
       'https://images.ctfassets.net/wxoemgzywng5/48qgvJRlnlJcR6SibfnEt0/3934c143437413911ad162fc49ac1056/kveldssteming.jpg?w=1080',
   },
-  flags: {
-    DEV_WEBPACK_CACHE: true,
-  },
   plugins: [
     {
       resolve: 'gatsby-source-contentful',
@@ -40,7 +37,6 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-netlify',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -67,13 +63,6 @@ module.exports = {
         rule: {
           include: /images/,
         },
-      },
-    },
-    {
-      resolve: '@sentry/gatsby',
-      options: {
-        dsn: 'https://d9c8f736d473490dbe0f40656ff8a26b@o849093.ingest.sentry.io/5815978',
-        sampleRate: 0.7,
       },
     },
     {
