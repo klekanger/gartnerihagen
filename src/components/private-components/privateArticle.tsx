@@ -6,6 +6,23 @@ import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { formatDate } from '../../utils/formatDate';
 
+interface PrivateArticleProps {
+  mainImage: {
+    title: string;
+    description: string;
+    url: string;
+  };
+  title: string;
+  author?: {
+    firstName: string;
+    lastName: string;
+  }[];
+  bodyText: any;
+  createdAt: string;
+  updatedAt: string;
+  buttonLink: string;
+}
+
 function PrivateArticle({
   mainImage,
   title,
@@ -14,7 +31,7 @@ function PrivateArticle({
   createdAt,
   updatedAt,
   buttonLink,
-}) {
+}: PrivateArticleProps) {
   // Format the dates shown at the bottom of every article page
   const formattedCreateDate = formatDate(createdAt);
   const formattedUpdatedDate = formatDate(updatedAt);
@@ -107,6 +124,3 @@ function PrivateArticle({
 }
 
 export default PrivateArticle;
-
-// TODO
-// Typing
