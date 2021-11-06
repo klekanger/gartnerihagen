@@ -58,6 +58,13 @@ module.exports = {
       },
     },
     {
+      resolve: '@sentry/gatsby',
+      options: {
+        dsn: 'https://d9c8f736d473490dbe0f40656ff8a26b@o849093.ingest.sentry.io/5815978',
+        sampleRate: 0.7,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
