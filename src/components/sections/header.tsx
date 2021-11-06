@@ -157,7 +157,6 @@ export default function Header() {
       pb={5}
       px={[4, 4, 10, 10]}
       bgColor='dark'
-      opacity={showMenuItems ? '100%' : '90%'}
       position='fixed'
       zIndex='banner'
       shadow='md'
