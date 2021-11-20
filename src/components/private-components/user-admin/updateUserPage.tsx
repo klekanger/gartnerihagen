@@ -132,7 +132,9 @@ const UpdateUserPage = (props: PageProps) => {
   }, [hasSubscribedToEmail]);
 
   // Submits the form when the user clicks the "oppdater" button
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     setShowLoadingButton(true);
     setIsUpdateAlertOpen(false);
 
