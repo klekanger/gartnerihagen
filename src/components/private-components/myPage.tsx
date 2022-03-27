@@ -1,25 +1,24 @@
-import * as React from 'react';
-import { useRef, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { navigate } from 'gatsby';
-import { requestChangePassword } from './requestChangePassword';
-
 import {
-  Badge,
-  Box,
-  Image,
-  Heading,
-  Text,
-  Button,
-  Grid,
-  useToast,
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
+  Badge,
+  Box,
+  Button,
+  Grid,
+  Heading,
+  Image,
+  Text,
+  useToast,
 } from '@chakra-ui/react';
+import { navigate } from 'gatsby';
+import * as React from 'react';
+import { useRef, useState } from 'react';
+import { requestChangePassword } from './requestChangePassword';
 
 export default function MyPage() {
   const {

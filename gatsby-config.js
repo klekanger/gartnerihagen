@@ -28,6 +28,7 @@ module.exports = {
           `/min-side/*`,
           `/preview/*`,
           `/user-admin/*`,
+          `/edit-documents/*`,
         ],
       },
     },
