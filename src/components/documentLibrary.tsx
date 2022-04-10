@@ -1,14 +1,14 @@
-import * as React from 'react';
 import {
   Link,
   Table,
-  Thead,
   Tbody,
-  Tr,
-  Th,
   Td,
+  Th,
+  Thead,
+  Tr,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import * as React from 'react';
 import { formatDate } from '../utils/formatDate';
 
 interface IDocumentLibrary {
@@ -22,16 +22,20 @@ interface IDocumentLibrary {
       publishedAt: string;
     };
   }[];
+  size?: 'lg' | 'md' | 'sm';
 }
 
-export default function DocumentLibrary({ content }: IDocumentLibrary) {
+export default function DocumentLibrary({
+  content,
+  size = 'lg',
+}: IDocumentLibrary) {
   const smallScreen = useBreakpointValue({
     base: true,
     sm: false,
   });
 
   return (
-    <Table variant='unstyled' mt={8} mb={16} size='lg'>
+    <Table variant='unstyled' mt={8} mb={16} size={size}>
       <Thead bg='#ddd' textColor='black'>
         <Tr>
           <Th>Filnavn</Th>
