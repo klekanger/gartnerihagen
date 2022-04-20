@@ -9,6 +9,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
+import { HiTrash } from 'react-icons/hi';
 import { formatDate } from '../utils/formatDate';
 
 interface IDocumentLibrary {
@@ -23,11 +24,13 @@ interface IDocumentLibrary {
     };
   }[];
   size?: 'lg' | 'md' | 'sm';
+  hasDeleteAccess?: boolean;
 }
 
 export default function DocumentLibrary({
   content,
   size = 'lg',
+  hasDeleteAccess = false,
 }: IDocumentLibrary) {
   const smallScreen = useBreakpointValue({
     base: true,
@@ -35,12 +38,13 @@ export default function DocumentLibrary({
   });
 
   return (
-    <Table variant='unstyled' mt={8} mb={16} size={size}>
+    <Table variant='unstyled' mt={8} mb={8} size={size}>
       <Thead bg='#ddd' textColor='black'>
         <Tr>
           <Th>Filnavn</Th>
           <Th>Opprettet</Th>
           <Th hidden={smallScreen}>Oppdatert</Th>
+          <Th hidden={!hasDeleteAccess}>Slett</Th>
         </Tr>
       </Thead>
       <Tbody textColor='black'>
@@ -53,6 +57,15 @@ export default function DocumentLibrary({
             </Td>
             <Td>{formatDate(element.sys.firstPublishedAt)}</Td>
             <Td hidden={smallScreen}>{formatDate(element.sys.publishedAt)}</Td>
+            <Td
+              hidden={!hasDeleteAccess}
+              textColor={'red.600'}
+              _hover={{
+                textColor: 'primaryLight',
+              }}
+            >
+              <HiTrash size={20} title='Slett dokument' />
+            </Td>
           </Tr>
         ))}
       </Tbody>
