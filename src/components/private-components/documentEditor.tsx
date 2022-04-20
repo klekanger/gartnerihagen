@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading } from '@chakra-ui/react';
 import * as React from 'react';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
@@ -121,22 +121,27 @@ export default function DocumentEditor() {
 
   return (
     <Box
-      maxWidth={['97%', '95%', '95%', '70%']}
+      maxW={['97%', '95%', '95%', '70%', '50%']}
       my={8}
       pt={[8, 16, 8, 16]}
       pb={[8, 8, 8, 16]}
       textAlign='center'
     >
-      <Heading
-        as='h1'
-        size='2xl'
-        pt={[0, 0, 8, 8]}
-        pb={[0, 0, 4, 4]}
-        maxWidth='95vw'
+      <Box
+        bg='primaryLight'
+        px={4}
+        py={8}
+        mb={8}
+        rounded='md'
+        shadow='lg'
+        align='left'
       >
-        Rediger dokumenter
-      </Heading>
+        <Heading as='h1' size='xl' textColor='black' mb={0} textAlign='center'>
+          Rediger dokumenter
+        </Heading>
+      </Box>
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -150,6 +155,7 @@ export default function DocumentEditor() {
         size={TABLESIZE}
       />
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -163,6 +169,7 @@ export default function DocumentEditor() {
         size={TABLESIZE}
       />
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -176,6 +183,7 @@ export default function DocumentEditor() {
         size={TABLESIZE}
       />
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -189,6 +197,7 @@ export default function DocumentEditor() {
         size={TABLESIZE}
       />
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -200,8 +209,22 @@ export default function DocumentEditor() {
       <DocumentLibrary
         content={menu?.menu5FilesCollection?.items}
         size={TABLESIZE}
+        hasDeleteAccess={isAdmin || isEditor}
       />
+
+      <Box textAlign={['center', 'center', 'left', 'left']} pb={[12, 12, 4, 4]}>
+        <Button
+          minW={['40%', '40%', '20%', '20%']}
+          minH='3rem'
+          variant='standard-light'
+          onClick={() => console.log('clicked')}
+          _hover={{ bg: 'hoverButtonColor' }}
+        >
+          Last opp fil
+        </Button>
+      </Box>
       <Heading
+        textAlign={['center', 'center', 'left', 'left']}
         as='h2'
         size='xl'
         pt={[0, 0, 8, 8]}
@@ -213,7 +236,28 @@ export default function DocumentEditor() {
       <DocumentLibrary
         content={menu?.menu6FilesCollection?.items}
         size={TABLESIZE}
+        hasDeleteAccess={isAdmin || isEditor}
       />
+
+      <Box
+        textAlign={['center', 'center', 'left', 'left']}
+        pb={[12, 12, 4, 4]}
+        className='file-input'
+      >
+        <input
+          type='file'
+          id='file'
+          className='file'
+          multiple
+          accept='.doc,.docx,.xls,.xlsx, .xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, .txt, '
+          name='file'
+          onChange={(e) => console.log(e.target.files[0].name)}
+        />
+
+        <label htmlFor='file'>Velg filer</label>
+      </Box>
     </Box>
   );
 }
+
+// File upload component, some ideas: https://gist.github.com/brenopolanski/5efe54b46cad0882b3ce41dc8db64608
