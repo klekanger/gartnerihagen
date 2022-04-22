@@ -2,22 +2,22 @@
  * Main header and navbar component
  */
 
-import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Link as GatsbyLink } from 'gatsby';
 import {
   Box,
-  Flex,
-  Text,
   Button,
+  Flex,
+  Icon,
   Link,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  Icon,
+  MenuList,
+  Text,
 } from '@chakra-ui/react';
+import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
 const GartnerihagenLogo = require('../../images/gartnerihagen.svg') as any;
 
@@ -153,8 +153,7 @@ export default function Header() {
       wrap='wrap'
       w='100%'
       mt={hideMenu ? '-150' : '0'}
-      pt={4}
-      pb={5}
+      py={[5, 5, 2, 2]}
       px={[4, 4, 10, 10]}
       bgColor='dark'
       position='fixed'
@@ -165,7 +164,8 @@ export default function Header() {
       <Link as={GatsbyLink} to='/' _focus={{ outline: 'none' }}>
         <Icon
           as={GartnerihagenLogo}
-          w={['60vw', '55vw', '35vw', '25vw']}
+          w={['60vw', '55vw', '35vw', '25vw', '20vw']}
+          maxW='20rem'
           h='auto'
           aria-label='Gartnerihagen logo'
           alt='Gartnerihagen logo'
