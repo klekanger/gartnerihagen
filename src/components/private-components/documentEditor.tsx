@@ -1,12 +1,15 @@
 import { gql, useQuery } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading, useToast } from '@chakra-ui/react';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
 import ShowSingleFileFromDocumentLibrary from '../showSingleFileFromDocumentLibrary';
 
 const TABLESIZE = 'sm'; // Font size of the table (sm, md, lg)
+const MAX_FILE_SIZE = 5000000; // Max allowed upload size for a single file
+const MAX_FILE_COUNT = 5; // Max allowed number of files on each upload
 
 export default function DocumentEditor() {
   const QUERY = gql`
@@ -91,6 +94,60 @@ export default function DocumentEditor() {
   `;
 
   const { data, error, loading } = useQuery(QUERY);
+  const { menu } = data || {};
+  const toast = useToast();
+  const { user, isAuthenticated, error: authError } = useAuth0();
+  const userRoles = user['https:/gartnerihagen-askim.no/roles'];
+  const isAdmin = userRoles.includes('admin');
+  const isEditor = userRoles.includes('editor');
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  useEffect(() => {
+    console.log('selectedFiles changed : ', selectedFiles); // FOR DEBUGGING - REMOVE
+  }, [selectedFiles]);
+
+  // Submit files to Contentful
+  // after verifying filesize and max number of files
+  const handleSubmitFiles = (files: any) => {
+    const fileNamesArray = [...files].map((file) => {
+      return file?.name;
+    });
+
+    // Validate max number of files
+    if (fileNamesArray.length > MAX_FILE_COUNT) {
+      toast({
+        title: 'For mange filer.',
+        description: ` Du kan maksimalt laste opp ${MAX_FILE_COUNT} filer av gangen.`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      setSelectedFiles([]);
+      return;
+    }
+
+    // Check that no files are larger than 5 MB
+    const filesTooLarge = [...files].filter((file) => {
+      return file?.size > MAX_FILE_SIZE;
+    });
+
+    if (filesTooLarge.length > 0) {
+      toast({
+        title: 'En av filene er for store.',
+        description: ` Maks filstørrelse er ${Math.floor(
+          MAX_FILE_SIZE / 1000000
+        )} MB`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      setSelectedFiles([]);
+      return;
+    }
+
+    // Update the state with the selected files
+    setSelectedFiles(fileNamesArray);
+  };
 
   if (loading) {
     return (
@@ -99,13 +156,6 @@ export default function DocumentEditor() {
       </Box>
     );
   }
-
-  const { menu } = data || {};
-
-  const { user, isAuthenticated, error: authError } = useAuth0();
-  const userRoles = user['https:/gartnerihagen-askim.no/roles'];
-  const isAdmin = userRoles.includes('admin');
-  const isEditor = userRoles.includes('editor');
 
   if (error) {
     return <div>Det har oppstått en feil... {error.message}</div>;
@@ -246,15 +296,11 @@ export default function DocumentEditor() {
       >
         <input
           type='file'
-          id='file'
-          className='file'
+          name='file-button'
           multiple
           accept='.doc,.docx,.xls,.xlsx, .xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, .txt, '
-          name='file'
-          onChange={(e) => console.log(e.target.files[0].name)}
+          onChange={(e) => handleSubmitFiles(e.target.files)}
         />
-
-        <label htmlFor='file'>Velg filer</label>
       </Box>
     </Box>
   );

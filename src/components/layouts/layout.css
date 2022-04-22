@@ -20,14 +20,7 @@
 p {
   white-space: pre-line;
 }
-
-.file {
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  position: absolute;
-}
-
+/* 
 .file-input label {
   display: block;
   position: relative;
@@ -43,3 +36,4 @@ p {
   cursor: pointer;
   font-weight: 600;
 }
+ */
