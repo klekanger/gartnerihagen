@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import * as React from 'react';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
 
@@ -43,7 +43,11 @@ export default function Referater({ title, excerpt, ...props }) {
 
   if (error) {
     return (
-      <Box maxWidth={['97%', '95%', '95%', '70%']} py={[8, 12, 16, 24]}>
+      <Box
+        maxWidth={['97%', '95%', '95%', '70%']}
+        py={[8, 12, 16, 24]}
+        m='auto'
+      >
         <Heading as='h1'>Noe gikk galt</Heading>
       </Box>
     );
@@ -57,8 +61,10 @@ export default function Referater({ title, excerpt, ...props }) {
 
   return (
     <Box
-      maxWidth={['97%', '95%', '95%', '60%']}
-      pt={[8, 8, 8, 16]}
+      maxWidth={['97%', '95%', '95%', '70%']}
+      w='100vw'
+      m='auto'
+      py={[8, 8, 8, 16]}
       textAlign={['center', 'center', 'left', 'left']}
     >
       <Heading

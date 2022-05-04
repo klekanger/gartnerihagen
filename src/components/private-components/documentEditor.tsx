@@ -23,6 +23,7 @@ export default function DocumentEditor() {
       px={4}
       rounded='md'
       shadow='lg'
+      m='auto'
       maxW={['97%', '95%', '95%', '70%', '50%']}
       my={8}
       pt={[8, 16, 8, 16]}
