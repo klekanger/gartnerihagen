@@ -6,10 +6,10 @@ import { Router } from '@reach/router';
 import * as React from 'react';
 import LoadingSpinner from '../components/loading-spinner';
 import NotLoggedIn from '../components/notLoggedIn';
-import MyPage from '../components/private-components/myPage';
+import DocumentEditor from '../components/private-components/documentEditor';
 import PrivateRoute from '../utils/privateRoute';
 
-const Informasjon = () => {
+const EditDocuments = () => {
   const { isLoading, isAuthenticated, error, loginWithRedirect } = useAuth0();
 
   if (isLoading) {
@@ -22,15 +22,16 @@ const Informasjon = () => {
 
   // Prevent not logged in users from accessing private routes
   if (!isAuthenticated) {
+    console.log(isLoading, isAuthenticated, error);
     loginWithRedirect();
     return <NotLoggedIn />;
   }
 
   return (
     <Router>
-      <PrivateRoute path='/min-side' component={MyPage} />
+      <PrivateRoute path='/edit-documents' component={DocumentEditor} />
     </Router>
   );
 };
 
-export default Informasjon;
+export default EditDocuments;

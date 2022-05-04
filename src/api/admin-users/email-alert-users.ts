@@ -31,6 +31,14 @@ export default async function handler(
 
   // Get info from Contentful about published content
   let articleURL;
+
+  if (req.body.sys.contentType.sys.id !== 'blogPost') {
+    return res.status(400).json({
+      error: 'bad request',
+      error_description: `Only blogPost content type will trigger an email alert. You sent: ${req.body.sys.contentType.sys.id}`,
+    });
+  }
+
   if (req.body.fields.privatePost.nb === true) {
     articleURL = `https://gartnerihagen-askim.no/informasjon/post/${req.body.fields.slug.nb}/${req.body.sys.id}`;
   } else {

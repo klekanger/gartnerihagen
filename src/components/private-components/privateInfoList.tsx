@@ -1,25 +1,23 @@
-import * as React from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { useState } from 'react';
-import { Link as GatsbyLink } from 'gatsby';
-import ResponsiveImage from '../reponsiveImage';
-import LoadingSpinner from '../loading-spinner';
-
+import { gql, useQuery } from '@apollo/client';
 import {
-  ChevronRightIcon,
-  ArrowForwardIcon,
   ArrowBackIcon,
+  ArrowForwardIcon,
+  ChevronRightIcon,
 } from '@chakra-ui/icons';
-
 import {
-  Flex,
   Box,
   Button,
+  Flex,
+  Heading,
   Image,
   Link,
-  Heading,
   Text,
 } from '@chakra-ui/react';
+import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
+import { useState } from 'react';
+import LoadingSpinner from '../loading-spinner';
+import ResponsiveImage from '../reponsiveImage';
 
 interface IAllPrivatePosts {
   posts: {

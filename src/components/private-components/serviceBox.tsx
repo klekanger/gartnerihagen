@@ -1,10 +1,11 @@
 // ServiceBox
 // Providing the user with useful links to documents etc.
 
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Stack, Text, Tooltip } from '@chakra-ui/react';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import * as React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { useQuery, gql } from '@apollo/client';
-import { Box, Stack, Text } from '@chakra-ui/react';
+import { HiOutlinePencilAlt } from 'react-icons/hi';
 import MenuButton from '../menubutton'; // Custom button component
 
 // Define custom servicebox buttons as clickable links
@@ -84,55 +85,93 @@ export default function ServiceBox() {
 
   const { menuItems }: IServiceBoxQuery = data || [];
 
+  const { user } = useAuth0();
+  const userRoles: string[] = user['https:/gartnerihagen-askim.no/roles'];
+  const isAdmin: boolean = userRoles.includes('admin');
+  const isEditor: boolean = userRoles.includes('editor');
+
   return (
     <Box pt={[4, 8, 8, 16]} pb={[8, 8, 16, 16]} textAlign='left'>
-      <Stack
-        direction={['column', 'column', 'row', 'row']}
-        justify='space-between'
-        py={['2', '2', '8', '8']}
+      <Box
+        borderColor='gray.400'
+        borderStyle={'dashed'}
+        rounded='md'
+        borderWidth={isAdmin || isEditor ? '1px' : '0px'}
+        p={2}
       >
-        <MenuButton linkTo={menuItems?.menu1File.file.url}>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu1}
-          </Text>
-        </MenuButton>
+        {isAdmin || isEditor ? (
+          <Box ml={2}>
+            <Link to='/edit-documents'>
+              <Tooltip
+                label='Rediger'
+                placement='right'
+                py={1}
+                px={4}
+                bg='primaryLight'
+                textColor='black'
+                rounded='md'
+              >
+                <Box
+                  w='min-content'
+                  my={2}
+                  _hover={{
+                    textColor: 'primaryLight',
+                  }}
+                >
+                  <HiOutlinePencilAlt size={30} />
+                </Box>
+              </Tooltip>
+            </Link>
+            {`${
+              isAdmin ? 'Du har admintilgang' : 'Du har redaktørtilgang'
+            }. Klikk blyanten for å legge til eller fjerne dokumenter`}
+          </Box>
+        ) : null}
 
-        <MenuButton linkTo={menuItems?.menu2File.file.url}>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu2}
-          </Text>
-        </MenuButton>
-        <MenuButton linkTo={menuItems?.menu3File.file.url}>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu3}
-          </Text>
-        </MenuButton>
-      </Stack>
-      <Stack
-        direction={['column', 'column', 'row', 'row']}
-        justify='space-between'
-        pt={0}
-      >
-        <MenuButton linkTo={menuItems?.menu4File.file.url}>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu4}
-          </Text>
-        </MenuButton>
-        <MenuButton multiLink to='/informasjon/referater'>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu5}
-          </Text>
-        </MenuButton>
-        <MenuButton multiLink to='/informasjon/dokumenter'>
-          <Text variant='dark' textAlign='center'>
-            {menuItems?.menu6}
-          </Text>
-        </MenuButton>
-      </Stack>
+        <Stack
+          direction={['column', 'column', 'row', 'row']}
+          justify='space-between'
+          py={['2', '2', '8', '8']}
+        >
+          <MenuButton linkTo={menuItems?.menu1File.file.url}>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu1}
+            </Text>
+          </MenuButton>
+
+          <MenuButton linkTo={menuItems?.menu2File.file.url}>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu2}
+            </Text>
+          </MenuButton>
+          <MenuButton linkTo={menuItems?.menu3File.file.url}>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu3}
+            </Text>
+          </MenuButton>
+        </Stack>
+        <Stack
+          direction={['column', 'column', 'row', 'row']}
+          justify='space-between'
+          pt={0}
+        >
+          <MenuButton linkTo={menuItems?.menu4File.file.url}>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu4}
+            </Text>
+          </MenuButton>
+          <MenuButton multiLink to='/informasjon/referater'>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu5}
+            </Text>
+          </MenuButton>
+          <MenuButton multiLink to='/informasjon/dokumenter'>
+            <Text variant='dark' textAlign='center'>
+              {menuItems?.menu6}
+            </Text>
+          </MenuButton>
+        </Stack>
+      </Box>
     </Box>
   );
 }
-
-// TODO
-// Replace useStaticQuery with Apollo Client query and fetch content on client only
-// to avoid menu items being accessible via the browser dev tools

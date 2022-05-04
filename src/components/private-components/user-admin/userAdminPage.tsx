@@ -1,33 +1,33 @@
-import * as React from 'react';
-import { useState, useRef } from 'react';
-import LoadingSpinner from '../../loading-spinner';
-import NotLoggedIn from '../../notLoggedIn';
-import NotLoggedInGiveConsent from '../../notLoggedInGiveConsent';
-import ErrorPage from '../../errorPage';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useGetAllUsers } from '../../hooks/useGetAllUsers';
-import { navigate } from 'gatsby';
-import { requestChangePassword } from '../requestChangePassword';
 import {
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
   Badge,
   Box,
-  Flex,
-  Image,
-  Text,
   Button,
-  Stack,
+  Flex,
   Grid,
   Heading,
+  Image,
   Input,
   Select,
+  Stack,
+  Text,
   useToast,
 } from '@chakra-ui/react';
+import { navigate } from 'gatsby';
+import * as React from 'react';
+import { useRef, useState } from 'react';
+import ErrorPage from '../../errorPage';
+import { useGetAllUsers } from '../../hooks/useGetAllUsers';
+import LoadingSpinner from '../../loading-spinner';
+import NotLoggedIn from '../../notLoggedIn';
+import NotLoggedInGiveConsent from '../../notLoggedInGiveConsent';
+import { requestChangePassword } from '../requestChangePassword';
 
 const rolesToNorwegian = {
   user: 'Bruker',
@@ -139,6 +139,7 @@ const UserAdminPage = () => {
       }
 
       const accessToken = await getAccessTokenSilently(opts);
+
       const api = await fetch(`/api/admin-users/delete-user`, {
         method: 'DELETE',
         headers: {
