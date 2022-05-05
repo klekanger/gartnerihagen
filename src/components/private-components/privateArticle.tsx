@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Link as GatsbyLink } from 'gatsby';
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
-import ResponsiveImage from '../reponsiveImage';
-import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
+import renderRichTextOptions from '../../theme/renderRichTextOptions';
 import { formatDate } from '../../utils/formatDate';
+import ResponsiveImage from '../reponsiveImage';
 
 interface PrivateArticleProps {
   mainImage: {
@@ -62,7 +62,7 @@ function PrivateArticle({
   const { links = {} } = bodyText;
 
   return (
-    <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
+    <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]} m='auto'>
       <Heading
         as='h1'
         fontSize={['4xl', '6xl', '6xl', '7xl']}

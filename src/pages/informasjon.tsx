@@ -1,18 +1,17 @@
 // Client only route (static page is not generated on the server)
 // Configured in gatsby-config.js, under the plugin "gatsby-plugin-create-client-paths"
-import * as React from 'react';
-import { Box } from '@chakra-ui/react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Box } from '@chakra-ui/react';
 import { Router } from '@reach/router';
-import PrivateRoute from '../utils/privateRoute';
-import SEO from '../components/seo';
+import * as React from 'react';
+import LoadingSpinner from '../components/loading-spinner';
+import NotLoggedIn from '../components/notLoggedIn';
+import Dokumenter from '../components/private-components/dokumenter';
 import InfoPage from '../components/private-components/informasjon';
 import PrivateInfoArticlePage from '../components/private-components/privateInfoArticlePage';
 import Referater from '../components/private-components/referater';
-import Dokumenter from '../components/private-components/dokumenter';
-
-import LoadingSpinner from '../components/loading-spinner';
-import NotLoggedIn from '../components/notLoggedIn';
+import SEO from '../components/seo';
+import PrivateRoute from '../utils/privateRoute';
 
 const Informasjon = () => {
   const { isLoading, isAuthenticated, error } = useAuth0();

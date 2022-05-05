@@ -355,6 +355,7 @@ const UserAdminPage = () => {
         pt={[8, 16, 8, 16]}
         pb={[8, 8, 8, 16]}
         textAlign='center'
+        mx='auto'
       >
         <Box
           my={[4, 4, 8, 8]}

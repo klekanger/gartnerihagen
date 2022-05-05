@@ -140,8 +140,9 @@ export default function MyPage() {
 
   return (
     <Box
-      maxWidth={['97%', '95%', '95%', '70%']}
+      w='100%'
       my={8}
+      mx='auto'
       pt={[8, 16, 8, 16]}
       pb={[8, 8, 8, 16]}
       textAlign='center'

@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
+import * as React from 'react';
 
 interface IPrivateroute {
   component: any;

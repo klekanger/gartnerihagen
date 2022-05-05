@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import * as React from 'react';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
 
@@ -57,8 +57,10 @@ export default function Dokumenter({ title, excerpt, ...props }: IDokumenter) {
 
   return (
     <Box
-      maxWidth={['97%', '95%', '95%', '60%']}
-      pt={[8, 8, 8, 16]}
+      maxWidth={['97%', '95%', '95%', '70%']}
+      w='100vw'
+      m='auto'
+      py={[8, 8, 8, 16]}
       textAlign={['center', 'center', 'left', 'left']}
     >
       <Heading

@@ -1,8 +1,8 @@
+import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
-import { Box } from '@chakra-ui/react';
-import './layout.css';
-import Header from '../sections/header';
 import Footer from '../sections/footer';
+import Header from '../sections/header';
+import './layout.css';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,12 +10,15 @@ interface LayoutProps {
 
 function Layout(props: LayoutProps) {
   return (
-    <Box direction='column' align='center' m='0 auto' {...props}>
+    <Flex direction='column' m='auto' align='center' minH='100vh' {...props}>
       <Header />
       <Box pb={20} />
       {props.children}
+      <Box flexGrow={1}>
+        {/*  Needed to push footer to bottom if there's little content */}
+      </Box>
       <Footer />
-    </Box>
+    </Flex>
   );
 }
 

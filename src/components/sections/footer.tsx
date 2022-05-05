@@ -2,9 +2,9 @@
  * Footer component
  */
 
-import * as React from 'react';
-import { Flex, Text, Link, Box } from '@chakra-ui/react';
+import { Box, Flex, Link, Text } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
 import { SiGatsby } from 'react-icons/si';
 
 export default function Footer() {
@@ -27,6 +27,7 @@ export default function Footer() {
         opacity='90%'
         fontSize='sm'
         direction={['column', 'column', 'row', 'row']}
+        mt='auto'
       >
         <Box>
           <Text variant='light' mb={[4, 4, 0, 0]}>

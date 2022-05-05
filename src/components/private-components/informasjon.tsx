@@ -1,15 +1,15 @@
-import * as React from 'react';
 import { Box } from '@chakra-ui/react';
-import ServiceBox from './serviceBox';
+import * as React from 'react';
+import SEO from '../seo';
 import InfoFraStyret from './infoFraStyret';
 import PrivateInfoList from './privateInfoList';
-import SEO from '../seo';
+import ServiceBox from './serviceBox';
 
 function InfoPage() {
   return (
     <>
       <SEO />
-      <Box maxWidth={['97%', '95%', '95%', '60%']} pt={4}>
+      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={4} m='auto'>
         <ServiceBox />
         <InfoFraStyret />
         <PrivateInfoList />
