@@ -211,7 +211,7 @@ const UpdateUserPage = (props: PageProps) => {
             <Button
               variant='danger'
               textColor='white'
-              onClick={() => handleSubmit()}
+              onClick={handleSubmit}
               ml={3}
             >
               Ja - oppdater

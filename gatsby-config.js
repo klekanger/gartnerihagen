@@ -7,7 +7,7 @@ module.exports = {
     title: 'Boligsameiet Gartnerihagen',
     description: 'Askims hyggeligste nabolag.',
     siteUrl: 'https://www.gartnerihagen-askim.no',
-    siteLanguage: 'nb-no',
+    siteLanguage: 'no',
     banner:
       'https://images.ctfassets.net/wxoemgzywng5/48qgvJRlnlJcR6SibfnEt0/3934c143437413911ad162fc49ac1056/kveldssteming.jpg?w=1080',
   },
