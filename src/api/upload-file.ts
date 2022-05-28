@@ -55,7 +55,7 @@ export default async function handler(
   }
 
   // check if user should have access at all
-  console.log('claims', claims);
+
   if (!claims || !claims.scope) {
     return res.status(403).json({
       error: 'access denied',
