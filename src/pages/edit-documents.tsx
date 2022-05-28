@@ -22,7 +22,6 @@ const EditDocuments = () => {
 
   // Prevent not logged in users from accessing private routes
   if (!isAuthenticated) {
-    console.log(isLoading, isAuthenticated, error);
     loginWithRedirect();
     return <NotLoggedIn />;
   }
