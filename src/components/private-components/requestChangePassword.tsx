@@ -5,7 +5,7 @@
 import { createStandaloneToast } from '@chakra-ui/react';
 
 export async function requestChangePassword(userEmail: string) {
-  const toast = createStandaloneToast();
+  const { toast } = createStandaloneToast();
 
   try {
     const opts = {
