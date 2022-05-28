@@ -1,3 +1,5 @@
+// NOT IMPLEMENTED YET
+
 import { gql, useQuery } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Box, Button, Heading, useToast } from '@chakra-ui/react';
@@ -102,9 +104,7 @@ export default function DocumentEditor() {
   const isEditor = userRoles.includes('editor');
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  useEffect(() => {
-    console.log('selectedFiles changed : ', selectedFiles); // FOR DEBUGGING - REMOVE
-  }, [selectedFiles]);
+  useEffect(() => {}, [selectedFiles]);
 
   // Submit files to Contentful
   // after verifying filesize and max number of files
