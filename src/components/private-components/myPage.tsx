@@ -242,7 +242,9 @@ export default function MyPage() {
       </Grid>
       {!isAdmin && (
         <>
-          <Text>For å slette konto eller endre kontoopplysninger,</Text>
+          <Text paddingTop={4}>
+            For å slette konto eller endre kontoopplysninger,
+          </Text>
           <Text>ta kontakt med styret. </Text>
         </>
       )}

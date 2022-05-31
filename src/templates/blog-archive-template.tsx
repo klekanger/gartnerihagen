@@ -1,16 +1,11 @@
 // Blog archive page
 // Number of blog posts per page are set in gatsby-node.js (postsPerPage)
 
-import * as React from 'react';
-import { graphql, Link as GatsbyLink } from 'gatsby';
 import {
-  ChevronRightIcon,
-  ArrowForwardIcon,
   ArrowBackIcon,
+  ArrowForwardIcon,
+  ChevronRightIcon,
 } from '@chakra-ui/icons';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import SEO from '../components/seo';
-import ErrorPage from '../components/errorPage';
 import {
   Box,
   Button,
@@ -20,6 +15,12 @@ import {
   Link,
   Text,
 } from '@chakra-ui/react';
+import { graphql, Link as GatsbyLink } from 'gatsby';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import * as React from 'react';
+import ErrorPage from '../components/errorPage';
+import Container from '../components/layouts/container';
+import SEO from '../components/seo';
 
 interface IBlogArchive {
   pageContext: {
@@ -70,7 +71,7 @@ export default function BlogArchive({
   return (
     <>
       <SEO />
-      <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]}>
+      <Container pt={[12, 16, 16, 24]}>
         <Box textAlign='left'>
           <Heading as='h1' size='3xl' textColor='black' pb={[8, 8, 16, 16]}>
             Siste blogg&shy;innlegg
@@ -174,7 +175,7 @@ export default function BlogArchive({
             </Button>
           )}
         </Text>
-      </Box>
+      </Container>
     </>
   );
 }

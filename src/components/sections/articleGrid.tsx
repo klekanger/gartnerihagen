@@ -3,11 +3,11 @@
  *
  */
 
-import * as React from 'react';
-import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Box, Image, Heading, Text, Grid, Link } from '@chakra-ui/react';
+import { Box, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
+import { graphql, Link as GatsbyLink, useStaticQuery } from 'gatsby';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import * as React from 'react';
 
 interface IArticleGrid {
   contentful_id: string;

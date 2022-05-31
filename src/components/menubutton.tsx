@@ -23,10 +23,10 @@ export default function MenuButton(props: IMenuButton) {
         bg='tertiaryButton'
         rounded='md'
         shadow='lg'
-        d='flex'
+        display='flex'
         alignItems='center'
         justifyContent='center'
-        fontSize={['md', '2xl', '2xl', '2xl']}
+        fontSize={['md', 'xl', 'xl', 'xl']}
         fontWeight='600'
         _hover={{
           transform: 'scale(1.02)',
@@ -51,10 +51,10 @@ export default function MenuButton(props: IMenuButton) {
         bg='tertiaryButton'
         rounded='md'
         shadow='lg'
-        d='flex'
+        display='flex'
         alignItems='center'
         justifyContent='center'
-        fontSize={['md', '2xl', '2xl', '2xl']}
+        fontSize={['md', 'xl', 'xl', 'xl']}
         fontWeight='600'
         target='_blank'
         rel='noopener noreferrer'

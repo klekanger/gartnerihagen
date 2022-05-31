@@ -4,6 +4,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image';
 import SEO from '../components/seo';
 import ErrorPage from '../components/errorPage';
 import Article from '../components/article';
+import Container from '../components/layouts/container';
 
 interface IContentfulBlogPost {
   data: {
@@ -59,15 +60,17 @@ export default function BlogPostTemplate({
         image={featuredImage?.file?.url || null}
         description={excerpt?.excerpt || null}
       />
-      <Article
-        title={title}
-        bodyText={bodyText}
-        createdAt={createdAt}
-        updatedAt={updatedAt}
-        mainImage={featuredImage}
-        author={author}
-        buttonLink='/blog'
-      />
+      <Container>
+        <Article
+          title={title}
+          bodyText={bodyText}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          mainImage={featuredImage}
+          author={author}
+          buttonLink='/blog'
+        />
+      </Container>
     </>
   );
 }

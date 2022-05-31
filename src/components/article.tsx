@@ -52,7 +52,7 @@ function Article({
   }
 
   return (
-    <Box maxWidth={['97%', '95%', '95%', '60%']} pt={[12, 16, 16, 24]} m='auto'>
+    <Box pt={[12, 16, 16, 24]}>
       <Heading
         as='h1'
         fontSize={['4xl', '6xl', '6xl', '7xl']}

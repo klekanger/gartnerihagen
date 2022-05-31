@@ -4,6 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import PrivateArticle from './privateArticle';
 import SEO from '../../components/seo';
 import LoadingSpinner from '../loading-spinner';
+import Container from '../../components/layouts/container';
 
 export default function PrivateInfoArticlePage({ slug, id }) {
   const QUERY = gql`
@@ -81,15 +82,17 @@ export default function PrivateInfoArticlePage({ slug, id }) {
         image={featuredImage.url || null}
         description={excerpt || null}
       />
-      <PrivateArticle
-        title={title}
-        bodyText={bodyText}
-        createdAt={createdAt}
-        updatedAt={updatedAt}
-        mainImage={featuredImage}
-        author={authors}
-        buttonLink='/informasjon'
-      />
+      <Container>
+        <PrivateArticle
+          title={title}
+          bodyText={bodyText}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+          mainImage={featuredImage}
+          author={authors}
+          buttonLink='/informasjon'
+        />
+      </Container>
     </>
   );
 }

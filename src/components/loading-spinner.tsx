@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Spinner, Text } from '@chakra-ui/react';
+import Container from './layouts/container';
 
 interface ILoadingSpinner {
   spinnerMessage?: string;
@@ -7,7 +8,7 @@ interface ILoadingSpinner {
 
 export default function LoadingSpinner({ spinnerMessage }: ILoadingSpinner) {
   return (
-    <Box maxWidth={['97%', '95%', '95%', '70%']} h='100vh' pt={4}>
+    <Container h='100vh' pt={4} textAlign='center'>
       <Spinner
         mt='30vh'
         thickness='8px'
@@ -18,6 +19,6 @@ export default function LoadingSpinner({ spinnerMessage }: ILoadingSpinner) {
         label={spinnerMessage || 'Laster side'}
       />
       {spinnerMessage && <Text>{spinnerMessage}</Text>}
-    </Box>
+    </Container>
   );
 }
