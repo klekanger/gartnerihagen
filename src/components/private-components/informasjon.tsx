@@ -4,16 +4,17 @@ import SEO from '../seo';
 import InfoFraStyret from './infoFraStyret';
 import PrivateInfoList from './privateInfoList';
 import ServiceBox from './serviceBox';
+import Container from '../../components/layouts/container';
 
 function InfoPage() {
   return (
     <>
       <SEO />
-      <Box maxWidth={['97%', '95%', '95%', '70%']} pt={4} m='auto'>
+      <Container>
         <ServiceBox />
         <InfoFraStyret />
         <PrivateInfoList />
-      </Box>
+      </Container>
     </>
   );
 }

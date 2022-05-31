@@ -150,11 +150,7 @@ export default function DocumentEditor() {
   };
 
   if (loading) {
-    return (
-      <Box>
-        <LoadingSpinner spinnerMessage='Autentiserer bruker' />
-      </Box>
-    );
+    return <LoadingSpinner spinnerMessage='Autentiserer bruker' />;
   }
 
   if (error) {

@@ -1,17 +1,9 @@
-import * as React from 'react';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import * as React from 'react';
 
 function InfoFraStyret() {
   return (
-    <Box
-      bg='primaryLight'
-      px={4}
-      pt={8}
-      pb={12}
-      rounded='md'
-      shadow='lg'
-      align='left'
-    >
+    <Box bg='primaryLight' px={4} pt={8} pb={12} rounded='md' shadow='lg'>
       <Heading as='h1' size='2xl' textColor='black'>
         Informasjon fra styret
       </Heading>

@@ -3,6 +3,7 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
+import Container from '../../components/layouts/container';
 
 interface IReferater {
   title: string;
