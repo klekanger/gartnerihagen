@@ -29,7 +29,7 @@ export default function Footer() {
         direction={['column', 'column', 'row', 'row']}
         mt='auto'
       >
-        <Box>
+        <Box textAlign={['center', 'center', 'left', 'left']}>
           <Text variant='light' mb={[4, 4, 0, 0]}>
             &copy; {currentYear} Boligsameiet Gartnerihagen <br />
             <Link
@@ -41,7 +41,7 @@ export default function Footer() {
             </Link>
           </Text>
         </Box>
-        <Box>
+        <Box textAlign='center'>
           {' '}
           <Text variant='light' mb={[4, 4, 0, 0]}>
             Epost:{' '}
