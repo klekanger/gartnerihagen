@@ -1,20 +1,14 @@
-import * as React from 'react';
-import { Link as GatsbyLink } from 'gatsby';
 import { Box } from '@chakra-ui/react';
-
-interface IMenuButton {
-  multiLink?: boolean;
-  children: React.ReactNode;
-  linkTo?: string;
-  to?: string;
-}
+import { Link as GatsbyLink } from 'gatsby';
+import * as React from 'react';
+import { IMenuButton } from '../types/interfaces';
 
 export default function MenuButton(props: IMenuButton) {
   if (!props.multiLink) {
     return (
       <Box
         as='a'
-        href={props.linkTo || null}
+        href={props.linkTo || '#'}
         target='_blank'
         rel='noopener noreferrer'
         w={['auto', 'auto', '30%', '30%']}

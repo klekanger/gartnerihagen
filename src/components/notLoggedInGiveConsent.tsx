@@ -1,12 +1,12 @@
-import * as React from 'react';
 import {
-  Box,
-  Button,
   Alert,
-  AlertTitle,
   AlertDescription,
   AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
 } from '@chakra-ui/react';
+import * as React from 'react';
 
 const NotLoggedInGiveConsent = (buttonLink) => {
   const { buttonLink: getTokenAndTryAgain } = buttonLink;
@@ -15,7 +15,7 @@ const NotLoggedInGiveConsent = (buttonLink) => {
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
       h='100vh'
-      d='flex'
+      display='flex'
       justifyContent='center'
     >
       <Alert

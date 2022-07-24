@@ -16,40 +16,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { graphql, Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
 import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
-
-interface IBlogArchive {
-  pageContext: {
-    currentPage: number;
-    limit: number;
-    numPages: number;
-    skip: number;
-  };
-  data: {
-    posts: {
-      nodes: {
-        contentful_id: string;
-        createdAt: string;
-        updatedAt: string;
-        title: string;
-        slug: string;
-        excerpt?: {
-          excerpt: string;
-        };
-        featuredImage: {
-          description: string;
-          title: string;
-          gatsbyImageData: IGatsbyImageData;
-        };
-      }[];
-    };
-  };
-  errors: any;
-}
+import { IBlogArchive } from '../types/interfaces';
 
 export default function BlogArchive({
   pageContext,

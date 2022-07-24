@@ -1,39 +1,10 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
-import { IGatsbyImageData } from 'gatsby-plugin-image';
-import SEO from '../components/seo';
-import ErrorPage from '../components/errorPage';
+import * as React from 'react';
 import Article from '../components/article';
+import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
-
-interface IContentfulBlogPost {
-  data: {
-    contentfulBlogPost: {
-      title: string;
-      createdAt: string;
-      updatedAt: string;
-      author: {
-        firstName: string;
-        lastName: string;
-      }[];
-      bodyText: {
-        raw: string;
-      };
-      excerpt: {
-        excerpt: string;
-      };
-      featuredImage: {
-        description: string;
-        title: string;
-        file: {
-          url: string;
-        };
-        gatsbyImageData: IGatsbyImageData;
-      };
-    };
-  };
-  errors: any;
-}
+import SEO from '../components/seo';
+import { IContentfulBlogPost } from '../types/interfaces';
 
 export default function BlogPostTemplate({
   data: { contentfulBlogPost },
@@ -58,7 +29,7 @@ export default function BlogPostTemplate({
       <SEO
         title={title}
         image={featuredImage?.file?.url || null}
-        description={excerpt?.excerpt || null}
+        description={excerpt?.excerpt}
       />
       <Container>
         <Article

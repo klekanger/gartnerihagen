@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { PageProps } from 'gatsby';
-import { navigate } from 'gatsby';
+import { navigate, PageProps } from 'gatsby';
+import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { UserData } from '../../../types/interfaces';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
 import { requestChangePassword } from '../requestChangePassword';
@@ -10,37 +10,24 @@ import { requestChangePassword } from '../requestChangePassword';
 import {
   AlertDialog,
   AlertDialogBody,
+  AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogContent,
   AlertDialogOverlay,
   Box,
-  Flex,
   Button,
-  Stack,
-  Input,
-  Image,
+  Checkbox,
+  CheckboxGroup,
+  Flex,
   FormControl,
   FormLabel,
+  Image,
+  Input,
+  Stack,
+  Text,
   Tooltip,
   useToast,
-  Text,
-  CheckboxGroup,
-  Checkbox,
 } from '@chakra-ui/react';
-
-interface UserData {
-  created_at: string;
-  last_login?: string;
-  email: string;
-  name: string;
-  picture?: string;
-  roles: string[];
-  user_id: string;
-  user_metadata: {
-    subscribeToEmails: boolean;
-  };
-}
 
 const UpdateUserPage = (props: PageProps) => {
   const { getAccessTokenSilently } = useAuth0();
@@ -317,7 +304,7 @@ const UpdateUserPage = (props: PageProps) => {
                 </Checkbox>
               </Stack>
             </Tooltip>
-            <Box align='left' mt={2}>
+            <Box mt={2}>
               <Checkbox
                 isChecked={hasSubscribedToEmail}
                 onChange={() => setHasSubscribedToEmail(!hasSubscribedToEmail)}

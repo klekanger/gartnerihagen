@@ -18,27 +18,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import LoadingSpinner from '../loading-spinner';
 import ResponsiveImage from '../reponsiveImage';
-
-interface IAllPrivatePosts {
-  posts: {
-    items: {
-      sys: {
-        id: string;
-        createdAt: string;
-        updatedAt: string;
-      };
-
-      title: string;
-      slug: string;
-      excerpt: string;
-      featuredImage: {
-        url: string;
-        title?: string;
-        description?: string;
-      };
-    }[];
-  };
-}
+import { IAllPrivatePosts } from '../../types/interfaces';
 
 const QUERY = gql`
   query AllPrivatePosts {

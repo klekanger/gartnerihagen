@@ -6,28 +6,9 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { graphql, Link as GatsbyLink, useStaticQuery } from 'gatsby';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-
-interface IArticleGrid {
-  contentful_id: string;
-  createdAt: string;
-  updatedAt: string;
-  title: string;
-  slug: string;
-  excerpt: {
-    excerpt: string;
-  };
-  author: {
-    firstName: string;
-    lastName: string;
-  }[];
-  featuredImage: {
-    gatsbyImageData: IGatsbyImageData;
-    description: string;
-    title: string;
-  };
-}
+import { IArticleGrid } from '../../types/interfaces';
 
 export default function ArticleGrid() {
   const data = useStaticQuery(graphql`

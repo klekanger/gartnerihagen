@@ -1,17 +1,11 @@
-import * as React from 'react';
 import {
   Alert,
+  AlertDescription,
   AlertIcon,
   AlertTitle,
-  AlertDescription,
-  Box,
-  Heading,
 } from '@chakra-ui/react';
-
-interface INoAccess {
-  errorTitle?: string;
-  errorMsg?: string;
-}
+import * as React from 'react';
+import { INoAccess } from '../types/interfaces';
 
 function NoAccess({
   errorTitle = 'Du har ikke tilgang til dette',

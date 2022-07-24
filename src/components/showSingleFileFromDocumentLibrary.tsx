@@ -11,22 +11,8 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { ShowSingleFileFromDocumentLibraryProps } from '../types/interfaces';
 import { formatDate } from '../utils/formatDate';
-
-interface ShowSingleFileFromDocumentLibraryProps {
-  file: {
-    fileName: string;
-    title: string;
-    url: string;
-    description: string;
-    sys: {
-      id: string;
-      firstPublishedAt: string;
-      publishedAt: string;
-    };
-  };
-  size?: 'lg' | 'md' | 'sm';
-}
 
 export default function showSingleFileFromDocumentLibrary({
   file,

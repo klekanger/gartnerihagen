@@ -141,6 +141,3 @@ const renderRichTextOptions = (links?: any) => {
 };
 
 export default renderRichTextOptions;
-
-// TODO
-// Add Typescript interface for the props received

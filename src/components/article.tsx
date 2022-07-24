@@ -1,25 +1,10 @@
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import * as React from 'react';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
-
-interface ArticleProps {
-  mainImage: {
-    gatsbyImageData: IGatsbyImageData;
-    description: string;
-  };
-  title: string;
-  author?: {
-    firstName: string;
-    lastName: string;
-  }[];
-  bodyText: any;
-  createdAt: string;
-  updatedAt: string;
-  buttonLink: string;
-}
+import { ArticleProps } from '../types/interfaces';
 
 function Article({
   mainImage,
@@ -38,7 +23,7 @@ function Article({
 
   // Make string that will be used to show
   // a list of authors (with comma separators if there are more than one)
-  let authorsToShow: string;
+  let authorsToShow: string = '';
   author ? (authorsToShow = 'Av: ') : '';
   // Skip if author is not passed as props to this component
   if (author) {
@@ -97,7 +82,7 @@ function Article({
         <br />
         {authorsToShow}
       </Text>
-      <Box align='left'>
+      <Box>
         <Button
           as={GatsbyLink}
           to={buttonLink}

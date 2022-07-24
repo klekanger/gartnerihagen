@@ -1,33 +1,28 @@
-import * as React from 'react';
 import {
-  Box,
-  Button,
   Alert,
-  AlertTitle,
   AlertDescription,
   AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
 } from '@chakra-ui/react';
+import * as React from 'react';
 
 import { useAuth0 } from '@auth0/auth0-react';
-
-interface NotLoggedIn {
-  title?: string;
-  description?: string;
-  redirectUser?: string;
-}
+import { INotLoggedIn } from '../types/interfaces';
 
 const NotLoggedIn = ({
   title = 'Logg inn for å se denne siden',
   description = 'Du må logge inn for å se informasjon beregnet på beboere i Boligsameiet Gartnerihagen.',
   redirectUser = '/informasjon',
-}: NotLoggedIn) => {
+}: INotLoggedIn) => {
   const { loginWithRedirect } = useAuth0();
 
   return (
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
       h='100vh'
-      d='flex'
+      display='flex'
       justifyContent='center'
     >
       <Alert

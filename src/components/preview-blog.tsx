@@ -1,14 +1,13 @@
-import * as React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
-import { useQuery, gql } from '@apollo/client';
-
+import * as React from 'react';
 import LoadingSpinner from './loading-spinner';
-
 import PrivateArticle from './private-components/privateArticle';
 
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import fetch from 'cross-fetch';
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+
+import { PreviewBlogProps } from '../types/interfaces';
 
 const previewClient = new ApolloClient({
   link: new HttpLink({
@@ -20,11 +19,6 @@ const previewClient = new ApolloClient({
   }),
   cache: new InMemoryCache(),
 });
-
-interface PreviewBlogProps extends RouteComponentProps {
-  id?: string;
-  path: string;
-}
 
 function PreviewBlog({ id }: PreviewBlogProps) {
   const QUERY = gql`

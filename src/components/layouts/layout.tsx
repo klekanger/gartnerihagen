@@ -1,12 +1,9 @@
 import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
+import { LayoutProps } from '../../types/interfaces';
 import Footer from '../sections/footer';
 import Header from '../sections/header';
 import './layout.css';
-
-interface LayoutProps {
-  children: React.ReactNode;
-}
 
 function Layout(props: LayoutProps) {
   return (

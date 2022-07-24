@@ -6,6 +6,7 @@ import { Box, Stack, Text, Tooltip } from '@chakra-ui/react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
+import { IServiceBoxQuery } from '../../types/interfaces';
 import MenuButton from '../menubutton'; // Custom button component
 
 // Define custom servicebox buttons as clickable links
@@ -13,38 +14,6 @@ import MenuButton from '../menubutton'; // Custom button component
 // The first four buttons link to one document per button
 // The two last buttons (5 and 6) are multi document buttons and should go to a component
 // fetching all documents for menu5files and menu6files
-
-interface IServiceBoxQuery {
-  menuItems: {
-    id: string;
-    menu1: string;
-    menu1File: {
-      file: {
-        url: string;
-      };
-    };
-    menu2: string;
-    menu2File: {
-      file: {
-        url: string;
-      };
-    };
-    menu3: string;
-    menu3File: {
-      file: {
-        url: string;
-      };
-    };
-    menu4: string;
-    menu4File: {
-      file: {
-        url: string;
-      };
-    };
-    menu5: string;
-    menu6: string;
-  };
-}
 
 export default function ServiceBox() {
   // Get text and links for menu items from Contentful
@@ -85,7 +54,7 @@ export default function ServiceBox() {
 
   const { menuItems }: IServiceBoxQuery = data || [];
 
-  const { user } = useAuth0();
+  const { user = [] } = useAuth0();
   const userRoles: string[] = user['https:/gartnerihagen-askim.no/roles'];
   const isAdmin: boolean = userRoles.includes('admin');
   const isEditor: boolean = userRoles.includes('editor');
