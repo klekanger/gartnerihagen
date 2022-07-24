@@ -21,7 +21,7 @@ import * as React from 'react';
 import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
-import { IBlogArchive } from '../types/interfaces';
+import type { IBlogArchive } from '../types/interfaces';
 
 export default function BlogArchive({
   pageContext,

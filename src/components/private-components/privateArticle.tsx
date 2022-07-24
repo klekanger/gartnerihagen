@@ -3,7 +3,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
-import { PrivateArticleProps } from '../../types/interfaces';
+import type { PrivateArticleProps } from '../../types/interfaces';
 import { formatDate } from '../../utils/formatDate';
 import ResponsiveImage from '../reponsiveImage';
 

@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   Alert,
   AlertDescription,
@@ -7,9 +8,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import * as React from 'react';
-
-import { useAuth0 } from '@auth0/auth0-react';
-import { INotLoggedIn } from '../types/interfaces';
+import type { INotLoggedIn } from '../types/interfaces';
 
 const NotLoggedIn = ({
   title = 'Logg inn for å se denne siden',

@@ -4,7 +4,7 @@ import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
-import { IContentfulSide } from '../types/interfaces';
+import type { IContentfulSide } from '../types/interfaces';
 
 export default function BlogPostTemplate({
   data: { contentfulSide },

@@ -13,7 +13,7 @@
  */
 
 import * as React from 'react';
-import { ICustomImageProps } from '../types/interfaces';
+import type { ICustomImageProps } from '../types/interfaces';
 
 // These are the default breakpoints used by gatsby-plugin-image. I guess they know what they're doing, and use the same...
 // Breakpoints: 750, 1080, 1366, 1920

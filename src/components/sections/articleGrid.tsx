@@ -8,7 +8,7 @@ import { Box, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { graphql, Link as GatsbyLink, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-import { IArticleGrid } from '../../types/interfaces';
+import type { IArticleGrid } from '../../types/interfaces';
 
 export default function ArticleGrid() {
   const data = useStaticQuery(graphql`

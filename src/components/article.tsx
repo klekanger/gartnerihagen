@@ -4,7 +4,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import * as React from 'react';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
-import { ArticleProps } from '../types/interfaces';
+import type { ArticleProps } from '../types/interfaces';
 
 function Article({
   mainImage,

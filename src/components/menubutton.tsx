@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
-import { IMenuButton } from '../types/interfaces';
+import type { IMenuButton } from '../types/interfaces';
 
 export default function MenuButton(props: IMenuButton) {
   if (!props.multiLink) {
