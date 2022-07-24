@@ -32,7 +32,7 @@
     "auth0": "^2.37.0",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
-    "gatsby": "^4.12.1",
+    "gatsby": "^4.19.2",
     "gatsby-plugin-create-client-paths": "^4.9.0",
     "gatsby-plugin-emotion": "^7.12.1",
     "gatsby-plugin-google-gtag": "^4.12.1",
