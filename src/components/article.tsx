@@ -54,6 +54,7 @@ function Article({
             rounded='md'
             shadow='lg'
             alt={mainImage.description}
+            width='100%'
           />
           <Text
             as='p'

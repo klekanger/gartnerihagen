@@ -56,12 +56,12 @@ export const query = graphql`
             __typename
             title
             description
-            gatsbyImageData(layout: CONSTRAINED)
+            gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
           }
         }
       }
       pageImage {
-        gatsbyImageData(layout: CONSTRAINED)
+        gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
         file {
           url
         }
