@@ -1,27 +1,8 @@
+import { useLocation } from '@reach/router';
+import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-import { useLocation } from '@reach/router';
-
-interface ISEOProps {
-  title?: string | null;
-  description?: string;
-  lang?: string;
-  meta?: Array<{ name: string; content: string }>;
-  image?: string | null;
-}
-
-interface IQueryDataTypes {
-  site: {
-    siteMetadata: {
-      defaultDescription: string;
-      defaultTitle: string;
-      siteLanguage: string;
-      defaultImage: string;
-      siteUrl: string;
-    };
-  };
-}
+import { IQueryDataTypes, ISEOProps } from '../types/interfaces';
 
 export default function SEO({
   title = 'Boligsameiet Gartnerihagen',

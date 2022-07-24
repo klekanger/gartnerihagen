@@ -1,21 +1,14 @@
-import * as React from 'react';
-import { navigate } from 'gatsby';
 import {
-  Box,
-  Button,
   Alert,
-  AlertTitle,
   AlertDescription,
   AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
 } from '@chakra-ui/react';
-
-interface iErrorPageProps {
-  errorTitle?: string;
-  errorMsg?: string;
-  backButton?: boolean;
-  backButtonLabel?: string;
-  backButtonLink?: string;
-}
+import { navigate } from 'gatsby';
+import * as React from 'react';
+import { iErrorPageProps } from '../types/interfaces';
 
 function ErrorPage({
   errorTitle = 'Noe gikk galt',
@@ -28,7 +21,7 @@ function ErrorPage({
     <Box
       maxWidth={['97%', '95%', '95%', '70%']}
       h='100vh'
-      d='flex'
+      display='flex'
       justifyContent='center'
     >
       <Alert

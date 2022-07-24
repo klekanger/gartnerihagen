@@ -1,21 +1,9 @@
-import * as React from 'react';
-import { Link, graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import { Box, Button, Image, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-
-interface IHeroWide {
-  contentful_id: string;
-  pageTitle: string;
-  excerpt: {
-    excerpt: string;
-  };
-  pageImage: {
-    gatsbyImageData: IGatsbyImageData;
-    title: string;
-    description: string;
-  };
-}
+import { graphql, Link, useStaticQuery } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import * as React from 'react';
+import { IHeroWide } from '../../types/interfaces';
 
 function HeroWide() {
   const data = useStaticQuery(
@@ -28,6 +16,7 @@ function HeroWide() {
             excerpt
           }
           pageImage {
+            url
             gatsbyImageData(
               layout: FULL_WIDTH
               formats: WEBP
@@ -65,6 +54,7 @@ function HeroWide() {
           <Image
             as={GatsbyImage}
             image={pageImage.gatsbyImageData}
+            src={`${pageImage.url}?w=1080`}
             alt={pageImage.description}
             h={['70vh', '100vh']}
           />

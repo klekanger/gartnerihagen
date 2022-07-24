@@ -1,14 +1,6 @@
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import * as React from 'react';
-
-interface IPrivateroute {
-  component: any;
-  location?: string;
-  path: string;
-  postData?: any;
-  title?: string;
-  excerpt?: string;
-}
+import { IPrivateroute } from '../types/interfaces';
 
 function PrivateRoute({ component: Component, ...rest }: IPrivateroute) {
   return <Component {...rest} />;

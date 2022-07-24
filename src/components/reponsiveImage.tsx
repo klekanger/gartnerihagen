@@ -13,6 +13,7 @@
  */
 
 import * as React from 'react';
+import { ICustomImageProps } from '../types/interfaces';
 
 // These are the default breakpoints used by gatsby-plugin-image. I guess they know what they're doing, and use the same...
 // Breakpoints: 750, 1080, 1366, 1920
@@ -20,12 +21,6 @@ const IMG_SIZE_SMALL = 750;
 const IMG_SIZE_MEDIUM = 1080;
 const IMG_SIZE_LARGE = 1366;
 const IMG_SIZE_XLARGE = 1920;
-
-interface ICustomImageProps {
-  url: string;
-  alt: string;
-  aspectRatio?: number | undefined;
-}
 
 const ResponsiveImage = ({
   url,

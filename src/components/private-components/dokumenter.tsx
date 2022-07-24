@@ -1,20 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { IDokumenter } from '../../types/interfaces';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
-
-interface IDokumenter {
-  title: string;
-  excerpt: string;
-  props: {
-    path: string;
-    uri: string;
-    children?: React.ReactNode;
-    navigate?: any;
-    location?: any;
-  };
-}
 
 export default function Dokumenter({ title, excerpt, ...props }: IDokumenter) {
   const QUERY = gql`

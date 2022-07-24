@@ -3,25 +3,9 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
 import renderRichTextOptions from '../../theme/renderRichTextOptions';
+import { PrivateArticleProps } from '../../types/interfaces';
 import { formatDate } from '../../utils/formatDate';
 import ResponsiveImage from '../reponsiveImage';
-
-interface PrivateArticleProps {
-  mainImage: {
-    title: string;
-    description: string;
-    url: string;
-  };
-  title: string;
-  author?: {
-    firstName: string;
-    lastName: string;
-  }[];
-  bodyText: any;
-  createdAt: string;
-  updatedAt: string;
-  buttonLink: string;
-}
 
 function PrivateArticle({
   mainImage,
@@ -43,7 +27,7 @@ function PrivateArticle({
 
   // Make string that will be used to show
   // a list of authors (with comma separators if there are more than one)
-  let authorsToShow: string;
+  let authorsToShow: string = '';
   author ? (authorsToShow = 'Av: ') : '';
   // Skip if author is not passed as props to this component
   if (author) {
@@ -108,7 +92,7 @@ function PrivateArticle({
         <br />
         {authorsToShow}
       </Text>
-      <Box align='left'>
+      <Box>
         <Button
           as={GatsbyLink}
           to={buttonLink}

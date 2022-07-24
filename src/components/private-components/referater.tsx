@@ -1,23 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { IReferater } from '../../types/interfaces';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
-import Container from '../../components/layouts/container';
 
-interface IReferater {
-  title: string;
-  excerpt: string;
-  props: {
-    path: string;
-    uri: string;
-    children?: React.ReactNode;
-    navigate?: any;
-    location?: any;
-  };
-}
-
-export default function Referater({ title, excerpt, ...props }) {
+export default function Referater({ title, excerpt, ...props }: IReferater) {
   const QUERY = gql`
     {
       menu: serviceMenu(id: "3ZMDi88bv5KLPFanE7JxPa") {

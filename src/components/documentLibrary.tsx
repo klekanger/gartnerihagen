@@ -10,22 +10,8 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { HiTrash } from 'react-icons/hi';
+import { IDocumentLibrary } from '../types/interfaces';
 import { formatDate } from '../utils/formatDate';
-
-interface IDocumentLibrary {
-  content: {
-    fileName: string;
-    title: string;
-    url: string;
-    sys: {
-      id: string;
-      firstPublishedAt: string;
-      publishedAt: string;
-    };
-  }[];
-  size?: 'lg' | 'md' | 'sm';
-  hasDeleteAccess?: boolean;
-}
 
 export default function DocumentLibrary({
   content,

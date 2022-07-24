@@ -1,37 +1,10 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
-import { IGatsbyImageData } from 'gatsby-plugin-image';
-import SEO from '../components/seo';
+import * as React from 'react';
 import Article from '../components/article';
 import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
-
-interface IContentfulSide {
-  data: {
-    contentfulSide: {
-      pageTitle: string;
-      createdAt: string;
-      updatedAt: string;
-      pageText: {
-        raw: string;
-      };
-      excerpt: any;
-      title: string;
-      bodyText: {
-        raw: string;
-      };
-      pageImage: {
-        description: string;
-        title: string;
-        file: {
-          url: string;
-        };
-        gatsbyImageData: IGatsbyImageData;
-      };
-    };
-  };
-  errors: any;
-}
+import SEO from '../components/seo';
+import { IContentfulSide } from '../types/interfaces';
 
 export default function BlogPostTemplate({
   data: { contentfulSide },
