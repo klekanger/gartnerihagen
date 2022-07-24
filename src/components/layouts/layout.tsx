@@ -11,9 +11,6 @@ function Layout(props: LayoutProps) {
       <Header />
       <Box pb={20} />
       {props.children}
-      <Box flexGrow={1}>
-        {/*  Needed to push footer to bottom if there's little content */}
-      </Box>
       <Footer />
     </Flex>
   );
