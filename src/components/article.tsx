@@ -1,10 +1,12 @@
 import { Box, Button, Heading, Image, Text } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import * as React from 'react';
 import renderRichTextOptions from '../theme/renderRichTextOptions';
-import type { ArticleProps } from '../types/interfaces';
+import type { IArticleProps } from '../types/interfaces';
+
+import { getImage } from 'gatsby-plugin-image';
 
 function Article({
   mainImage,
@@ -14,7 +16,10 @@ function Article({
   createdAt,
   updatedAt,
   buttonLink,
-}: ArticleProps) {
+}: IArticleProps) {
+  const mainImageData: unknown = mainImage;
+  const topImage = getImage(mainImageData as IGatsbyImageData);
+
   // Format the dates shown at the bottom of every article page
   const publishDate: string =
     createdAt !== updatedAt
@@ -29,9 +34,10 @@ function Article({
   if (author) {
     author.forEach((el, index) => {
       if (index < author.length - 1 && author.length !== 1) {
-        authorsToShow = authorsToShow + el.firstName + ' ' + el.lastName + ', ';
+        authorsToShow =
+          authorsToShow + el?.firstName + ' ' + el?.lastName + ', ';
       } else {
-        authorsToShow = authorsToShow + el.firstName + ' ' + el.lastName;
+        authorsToShow = authorsToShow + el?.firstName + ' ' + el?.lastName;
       }
     });
   }
@@ -48,14 +54,16 @@ function Article({
       </Heading>
       {mainImage && (
         <>
-          <Image
-            as={GatsbyImage}
-            image={mainImage.gatsbyImageData}
-            rounded='md'
-            shadow='lg'
-            alt={mainImage.description}
-            width='100%'
-          />
+          {topImage ? (
+            <Image
+              as={GatsbyImage}
+              image={topImage}
+              rounded='md'
+              shadow='lg'
+              alt={mainImage.description || ''}
+              width='100%'
+            />
+          ) : null}
           <Text
             as='p'
             textAlign='left'

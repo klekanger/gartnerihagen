@@ -15,22 +15,17 @@ import {
   Link,
   Text,
 } from '@chakra-ui/react';
-import { graphql, Link as GatsbyLink } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { graphql, Link as GatsbyLink, PageProps } from 'gatsby';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import * as React from 'react';
-import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
 import type { IBlogArchive } from '../types/interfaces';
 
-export default function BlogArchive({
-  pageContext,
-  data,
-  errors,
-}: IBlogArchive) {
-  if (errors) {
-    return <ErrorPage />;
-  }
+export default function BlogArchive(
+  props: PageProps<Queries.blogListQueryQuery, IBlogArchive>
+) {
+  const { data, pageContext } = props;
 
   const { nodes } = data.posts;
   const { currentPage, numPages } = pageContext;
@@ -105,14 +100,19 @@ export default function BlogArchive({
                 to={`/blog/${post.slug}`}
                 w={['100%', '100%', '60%', '60%']}
               >
-                <Image
-                  as={GatsbyImage}
-                  image={post.featuredImage.gatsbyImageData}
-                  w='auto'
-                  alt={post.featuredImage?.description}
-                  rounded='md'
-                  shadow='lg'
-                />
+                {post.featuredImage ? (
+                  <Image
+                    as={GatsbyImage}
+                    image={
+                      post.featuredImage
+                        .gatsbyImageData as unknown as IGatsbyImageData
+                    }
+                    w='auto'
+                    alt={post.featuredImage?.description || ''}
+                    rounded='md'
+                    shadow='lg'
+                  />
+                ) : null}
               </Link>
             </Flex>
           ))}

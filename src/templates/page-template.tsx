@@ -1,21 +1,15 @@
+import type { PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import Article from '../components/article';
-import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
-import type { IContentfulSide } from '../types/interfaces';
 
-export default function BlogPostTemplate({
-  data: { contentfulSide },
-  errors,
-}: IContentfulSide) {
-  if (errors) {
-    return <ErrorPage />;
-  }
-
+export default function PageTemplate({
+  data,
+}: PageProps<Queries.PageTemplateQuery>) {
   const { pageTitle, createdAt, updatedAt, pageText, pageImage, excerpt } =
-    contentfulSide;
+    data.contentfulSide || {};
 
   return (
     <>
@@ -40,7 +34,7 @@ export default function BlogPostTemplate({
 }
 
 export const query = graphql`
-  query PageQuery($id: String!) {
+  query PageTemplate($id: String!) {
     contentfulSide(contentful_id: { eq: $id }) {
       pageTitle
       createdAt(formatString: "DD.MM.YYYY")

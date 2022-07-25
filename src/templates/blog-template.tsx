@@ -1,19 +1,13 @@
+import type { PageProps } from 'gatsby';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 import Article from '../components/article';
-import ErrorPage from '../components/errorPage';
 import Container from '../components/layouts/container';
 import SEO from '../components/seo';
-import type { IContentfulBlogPost } from '../types/interfaces';
 
 export default function BlogPostTemplate({
-  data: { contentfulBlogPost },
-  errors,
-}: IContentfulBlogPost) {
-  if (errors) {
-    return <ErrorPage />;
-  }
-
+  data,
+}: PageProps<Queries.BlogPostTemplateQuery>) {
   const {
     title,
     author,
@@ -22,7 +16,7 @@ export default function BlogPostTemplate({
     bodyText,
     excerpt,
     featuredImage,
-  } = contentfulBlogPost;
+  } = data.contentfulBlogPost || {};
 
   return (
     <>
@@ -32,22 +26,24 @@ export default function BlogPostTemplate({
         description={excerpt?.excerpt}
       />
       <Container>
-        <Article
-          title={title}
-          bodyText={bodyText}
-          createdAt={createdAt}
-          updatedAt={updatedAt}
-          mainImage={featuredImage}
-          author={author}
-          buttonLink='/blog'
-        />
+        {featuredImage ? (
+          <Article
+            title={title}
+            bodyText={bodyText}
+            createdAt={createdAt}
+            updatedAt={updatedAt}
+            mainImage={featuredImage}
+            author={author}
+            buttonLink='/blog'
+          />
+        ) : null}
       </Container>
     </>
   );
 }
 
 export const query = graphql`
-  query BlogPostQuery($id: String!) {
+  query BlogPostTemplate($id: String!) {
     contentfulBlogPost(contentful_id: { eq: $id }) {
       title
       createdAt(formatString: "DD.MM.YYYY")
