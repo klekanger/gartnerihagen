@@ -1,19 +1,27 @@
 import { RouteComponentProps } from '@reach/router';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
-export interface ArticleProps {
-  mainImage: {
-    gatsbyImageData: IGatsbyImageData;
-    description: string;
-  };
-  title: string;
-  author?: {
-    firstName: string;
-    lastName: string;
-  }[];
+export interface IArticleProps {
+  mainImage:
+    | {
+        readonly gatsbyImageData: Record<string, unknown> | null;
+        readonly title: string | null;
+        readonly description: string | null;
+        readonly file: { readonly url: string | null } | null;
+      }
+    | null
+    | undefined;
+  title: string | null | undefined;
+  author?:
+    | readonly ({
+        readonly firstName: string | null;
+        readonly lastName: string | null;
+      } | null)[]
+    | null
+    | undefined;
   bodyText: any;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: string | null | undefined;
+  updatedAt: string | null | undefined;
   buttonLink: string;
 }
 
@@ -58,32 +66,10 @@ export interface IArticleGrid {
 }
 
 export interface IBlogArchive {
-  pageContext: {
-    currentPage: number;
-    limit: number;
-    numPages: number;
-    skip: number;
-  };
-  data: {
-    posts: {
-      nodes: {
-        contentful_id: string;
-        createdAt: string;
-        updatedAt: string;
-        title: string;
-        slug: string;
-        excerpt?: {
-          excerpt: string;
-        };
-        featuredImage: {
-          description: string;
-          title: string;
-          gatsbyImageData: IGatsbyImageData;
-        };
-      }[];
-    };
-  };
-  errors: any;
+  currentPage: number;
+  limit: number;
+  numPages: number;
+  skip: number;
 }
 
 export interface IContentfulBlogPost {
@@ -257,7 +243,7 @@ export interface IReferater {
 
 export interface ISEOProps {
   title?: string | null;
-  description?: string;
+  description?: string | null;
   lang?: string;
   meta?: Array<{ name: string; content: string }>;
   image?: string | null;
