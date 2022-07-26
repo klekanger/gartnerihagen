@@ -80,7 +80,7 @@ export default function SEO({
   );
 }
 
-const query: void = graphql`
+const query = graphql`
   query SEO {
     site {
       siteMetadata {

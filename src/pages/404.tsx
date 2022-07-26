@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Link } from 'gatsby';
+import * as React from 'react';
 
 // styles
 const pageStyles = {
@@ -17,7 +17,7 @@ const paragraphStyles = {
   marginBottom: 48,
 };
 
-declare var window;
+declare var window: Window;
 
 // markup
 const NotFoundPage = () => {

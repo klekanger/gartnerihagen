@@ -1,6 +1,53 @@
 import { RouteComponentProps } from '@reach/router';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
+export interface Auth0Roles {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface ApiResponse {
+  created_at: string;
+  email: string;
+  email_verified: boolean;
+  identities: {
+    provider: string;
+    user_id: string;
+    isSocial: boolean;
+    connection: string;
+  }[];
+  name: string;
+  nickname?: string;
+  picture?: string;
+  updated_at?: string;
+  user_id: string;
+  roles: string[];
+  user_metadata?: {
+    subscribeToEmails: boolean;
+  };
+}
+
+export interface ApiResponseAllData {
+  error?: string;
+  body: {
+    user: ApiResponse;
+    status_code: number;
+    status_description: string;
+  };
+}
+
+export interface FormData {
+  email: string;
+  name: string;
+  password: string;
+  repeatPassword: string;
+  roles: string[];
+  user_metadata: {
+    subscribeToEmails?: boolean;
+  };
+}
+
 export interface IArticleProps {
   mainImage:
     | {
