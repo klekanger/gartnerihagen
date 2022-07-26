@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { HiTrash } from 'react-icons/hi';
-import { IDocumentLibrary } from '../types/interfaces';
+import type { IDocumentLibrary } from '../types/interfaces';
 import { formatDate } from '../utils/formatDate';
 
 export default function DocumentLibrary({

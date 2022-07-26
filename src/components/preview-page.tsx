@@ -1,13 +1,16 @@
-import { gql, useQuery } from '@apollo/client';
+import {
+  ApolloClient,
+  gql,
+  HttpLink,
+  InMemoryCache,
+  useQuery,
+} from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import fetch from 'cross-fetch';
 import * as React from 'react';
-
-import { PreviewPageProps } from '../types/interfaces';
+import type { PreviewPageProps } from '../types/interfaces';
 import LoadingSpinner from './loading-spinner';
 import PrivateArticle from './private-components/privateArticle';
-
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import fetch from 'cross-fetch';
 
 const previewPageClient = new ApolloClient({
   link: new HttpLink({

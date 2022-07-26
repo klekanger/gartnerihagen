@@ -1,6 +1,6 @@
 import { Spinner, Text } from '@chakra-ui/react';
 import React from 'react';
-import { ILoadingSpinner } from '../types/interfaces';
+import type { ILoadingSpinner } from '../types/interfaces';
 import Container from './layouts/container';
 
 export default function LoadingSpinner({ spinnerMessage }: ILoadingSpinner) {

@@ -16,9 +16,9 @@ import {
 import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
 import { useState } from 'react';
+import type { IAllPrivatePosts } from '../../types/interfaces';
 import LoadingSpinner from '../loading-spinner';
 import ResponsiveImage from '../reponsiveImage';
-import { IAllPrivatePosts } from '../../types/interfaces';
 
 const QUERY = gql`
   query AllPrivatePosts {

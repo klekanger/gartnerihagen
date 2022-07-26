@@ -1,8 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { navigate, PageProps } from 'gatsby';
+import type { PageProps } from 'gatsby';
+import { navigate } from 'gatsby';
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { UserData } from '../../../types/interfaces';
+import type { UserData } from '../../../types/interfaces';
 import { formatDate } from '../../../utils/formatDate';
 import ErrorPage from '../../errorPage';
 import { requestChangePassword } from '../requestChangePassword';

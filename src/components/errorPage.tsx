@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { navigate } from 'gatsby';
 import * as React from 'react';
-import { iErrorPageProps } from '../types/interfaces';
+import type { iErrorPageProps } from '../types/interfaces';
 
 function ErrorPage({
   errorTitle = 'Noe gikk galt',

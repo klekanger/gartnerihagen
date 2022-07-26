@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-import { IHeroWide } from '../../types/interfaces';
+import type { IHeroWide } from '../../types/interfaces';
 
-function HeroWide() {
+export default function HeroWide() {
   const data = useStaticQuery(
     graphql`
       query {
@@ -112,5 +112,3 @@ function HeroWide() {
     </Box>
   );
 }
-
-export default HeroWide;

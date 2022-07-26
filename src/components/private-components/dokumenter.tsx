@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import * as React from 'react';
-import { IDokumenter } from '../../types/interfaces';
+import type { IDokumenter } from '../../types/interfaces';
 import DocumentLibrary from '../documentLibrary';
 import LoadingSpinner from '../loading-spinner';
 

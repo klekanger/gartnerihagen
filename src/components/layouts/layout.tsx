@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
-import { LayoutProps } from '../../types/interfaces';
+import type { LayoutProps } from '../../types/interfaces';
 import Footer from '../sections/footer';
 import Header from '../sections/header';
 import './layout.css';
@@ -11,9 +11,6 @@ function Layout(props: LayoutProps) {
       <Header />
       <Box pb={20} />
       {props.children}
-      <Box flexGrow={1}>
-        {/*  Needed to push footer to bottom if there's little content */}
-      </Box>
       <Footer />
     </Flex>
   );

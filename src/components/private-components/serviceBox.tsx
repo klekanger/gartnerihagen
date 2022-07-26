@@ -6,7 +6,7 @@ import { Box, Stack, Text, Tooltip } from '@chakra-ui/react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { HiOutlinePencilAlt } from 'react-icons/hi';
-import { IServiceBoxQuery } from '../../types/interfaces';
+import type { IServiceBoxQuery } from '../../types/interfaces';
 import MenuButton from '../menubutton'; // Custom button component
 
 // Define custom servicebox buttons as clickable links

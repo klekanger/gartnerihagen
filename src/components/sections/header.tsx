@@ -19,7 +19,8 @@ import { Link as GatsbyLink } from 'gatsby';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { AiOutlineMenu, AiOutlineUp } from 'react-icons/ai';
-import { MenuItemsProps } from '../../types/interfaces';
+import type { MenuItemsProps } from '../../types/interfaces';
+
 const GartnerihagenLogo = require('../../images/gartnerihagen.svg') as any;
 
 export default function Header() {

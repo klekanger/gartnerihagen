@@ -1,8 +1,8 @@
 //
 // Gets a list of all the users
 
-import { useApi } from './useApi';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useApi } from './useApi';
 
 export const useGetAllUsers = () => {
   const { getAccessTokenWithPopup } = useAuth0();

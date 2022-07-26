@@ -1,40 +1,44 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { navigate } from 'gatsby';
-
 import {
   Badge,
   Box,
+  Button,
   Checkbox,
   CheckboxGroup,
-  Heading,
-  Button,
-  Stack,
-  Input,
   FormControl,
   FormLabel,
-  Tooltip,
-  useToast,
-  Text,
+  Heading,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
+  Tooltip,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
+import { navigate } from 'gatsby';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import type {
+  FormData,
+  ApiResponse,
+  ApiResponseAllData,
+} from '../../../types/interfaces';
 
 const CreateUserPage = () => {
-  const rolesToNorwegian = {
+  const rolesToNorwegian: { [key: string]: string } = {
     user: 'Bruker',
     editor: 'Redaktør',
     admin: 'Administrator',
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     email: '',
     name: '',
     password: '',
@@ -48,7 +52,7 @@ const CreateUserPage = () => {
   const [hasSubscribedToEmail, setHasSubscribedToEmail] = useState(true);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState<ApiResponse | null>(null);
   const [showLoadingButton, setShowLoadingButton] = useState(false);
   const toast = useToast();
   const { getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
@@ -61,10 +65,10 @@ const CreateUserPage = () => {
   async function getToken() {
     try {
       await getAccessTokenWithPopup(opts);
-    } catch (error) {
+    } catch (error: any) {
       toast({
-        title: 'Noe gikk galt, eller du lukket popupen  ',
-        description: `${error.error_description} - ${error.error}`,
+        title: 'Noe gikk galt, eller du lukket popupen',
+        description: `${error.name} - ${error.message}`,
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -80,7 +84,7 @@ const CreateUserPage = () => {
   }, [response]);
 
   // Handle creating a new user
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (formData.password !== formData.repeatPassword) {
@@ -140,7 +144,7 @@ const CreateUserPage = () => {
         .get('content-type')
         ?.includes('application/json');
 
-      const data = isJson && (await api.json());
+      const data: ApiResponseAllData = isJson && (await api.json());
 
       if (!data) {
         throw new Error('no_data');
@@ -156,7 +160,7 @@ const CreateUserPage = () => {
       setResponse(data?.body?.user);
 
       setShowLoadingButton(false);
-    } catch (error) {
+    } catch (error: any) {
       if (
         error.message.includes(
           'Consent required' || 'Forbidden (403)' || 'access_denied'
@@ -165,7 +169,7 @@ const CreateUserPage = () => {
         getToken();
       }
 
-      if (error.message === 'Conflict (409)') {
+      if (error.error === 'Conflict') {
         toast({
           title: 'Brukeren eksistererer allerede',
           description:
@@ -358,7 +362,7 @@ const CreateUserPage = () => {
                 </Checkbox>
               </Stack>
             </Tooltip>
-            <Box align='left' mt={2}>
+            <Box mt={2}>
               <Checkbox
                 isChecked={hasSubscribedToEmail}
                 onChange={() => setHasSubscribedToEmail(!hasSubscribedToEmail)}

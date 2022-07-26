@@ -3,10 +3,10 @@
  *
  */
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby';
+import type { Auth0Roles } from '../../types/interfaces';
 const ManagementClient = require('auth0').ManagementClient;
 const {
   JwtVerifier,
-  JwtVerifierError,
   getTokenFromHeader,
 } = require('@serverless-jwt/jwt-verifier');
 
@@ -23,7 +23,9 @@ export default async function handler(
 ) {
   let claims, permissions;
   const token = getTokenFromHeader(req.headers.authorization);
-  const userRoles = req.body.roles;
+  const userRoles: string[] = req.body.roles;
+
+  console.log('userRoles', userRoles);
 
   if (req.method !== `POST`) {
     return res.status(405).json({
@@ -46,9 +48,9 @@ export default async function handler(
     claims = await jwt.verifyAccessToken(token);
     permissions = claims.permissions || [];
   } catch (err) {
-    if (err instanceof JwtVerifierError) {
+    if (err instanceof Error) {
       return res.status(403).json({
-        error: `Something went wrong. ${err.code}`,
+        error: `Something went wrong. ${err.name}`,
         error_description: `${err.message}`,
       });
     }
@@ -95,8 +97,9 @@ export default async function handler(
   try {
     const newUser = await auth0.createUser(userData);
 
-    const allRoles = await auth0.getRoles();
-    let rolesToAdd = [];
+    const allRoles: Auth0Roles[] = await auth0.getRoles();
+
+    let rolesToAdd: string[] = [];
     allRoles.forEach((role) => {
       if (userRoles.includes(role.name)) {
         rolesToAdd.push(role.id);
@@ -118,20 +121,13 @@ export default async function handler(
         user: { ...newUser, roles: userRoles },
       },
     });
-  } catch (error) {
-    if (error.statusCode === 400) {
-      return res.status(400).json({
-        error: error.name,
-        message: error.message,
-        status_code: error.statusCode || 500,
-        error_description: 'Skjemadata er ikke gyldige. Sjekk epost-adressen!',
-      });
-    }
-    res.status(error.statusCode).json({
+  } catch (error: any) {
+    return res.status(400).json({
       error: error.name,
       message: error.message,
       status_code: error.statusCode || 500,
-      error_description: error.message,
+      error_description:
+        'Skjemadata er ikke gyldige, eller noe gikk galt på serveren.',
     });
   }
 }

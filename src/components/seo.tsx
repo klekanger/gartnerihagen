@@ -2,7 +2,7 @@ import { useLocation } from '@reach/router';
 import { graphql, useStaticQuery } from 'gatsby';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { IQueryDataTypes, ISEOProps } from '../types/interfaces';
+import type { IQueryDataTypes, ISEOProps } from '../types/interfaces';
 
 export default function SEO({
   title = 'Boligsameiet Gartnerihagen',
@@ -80,7 +80,7 @@ export default function SEO({
   );
 }
 
-const query: void = graphql`
+const query = graphql`
   query SEO {
     site {
       siteMetadata {
