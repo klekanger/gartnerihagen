@@ -11,35 +11,33 @@ import * as React from 'react';
 import type { IArticleGrid } from '../../types/interfaces';
 
 export default function ArticleGrid() {
-  const data = useStaticQuery(graphql`
-    query {
-      posts: allContentfulBlogPost(
-        filter: { privatePost: { eq: false } }
-        limit: 4
-        sort: { fields: [updatedAt], order: DESC }
-      ) {
-        nodes {
-          contentful_id
-          createdAt
-          updatedAt
-          title
-          slug
-          excerpt {
-            excerpt
-          }
-          author {
-            firstName
-            lastName
-          }
-          featuredImage {
-            gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
-            description
-            title
-          }
-        }
+  const data = useStaticQuery(graphql`{
+  posts: allContentfulBlogPost(
+    filter: {privatePost: {eq: false}}
+    limit: 4
+    sort: {updatedAt: DESC}
+  ) {
+    nodes {
+      contentful_id
+      createdAt
+      updatedAt
+      title
+      slug
+      excerpt {
+        excerpt
+      }
+      author {
+        firstName
+        lastName
+      }
+      featuredImage {
+        gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
+        description
+        title
       }
     }
-  `);
+  }
+}`);
 
   const postNodes: IArticleGrid[] = data.posts.nodes || [];
 

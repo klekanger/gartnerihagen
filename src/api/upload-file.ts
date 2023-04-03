@@ -105,19 +105,3 @@ export default async function handler(
     });
   }
 }
-
-/*
-
-const contentful = require('contentful-management')
-
-const client = contentful.createClient({
-  accessToken: '<content_management_api_key>'
-})
-
-client.getSpace('<space_id>')
-.then((space) => space.getEnvironment('<environment_id>'))
-.then((environment) => environment.getEntry('<entry_id>'))
-.then((entry) => console.log(entry))
-.catch(console.error)
-
-*/

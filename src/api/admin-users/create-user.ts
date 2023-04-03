@@ -25,8 +25,6 @@ export default async function handler(
   const token = getTokenFromHeader(req.headers.authorization);
   const userRoles: string[] = req.body.roles;
 
-  console.log('userRoles', userRoles);
-
   if (req.method !== `POST`) {
     return res.status(405).json({
       error: 'method not allowed',

@@ -152,33 +152,31 @@ export default function BlogArchive(
   );
 }
 
-export const query = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
-    posts: allContentfulBlogPost(
-      filter: { privatePost: { eq: false } }
-      limit: $limit
-      skip: $skip
-      sort: { fields: [createdAt], order: DESC }
-    ) {
-      nodes {
-        contentful_id
-        createdAt
-        updatedAt
+export const query = graphql`query blogListQuery($skip: Int!, $limit: Int!) {
+  posts: allContentfulBlogPost(
+    filter: {privatePost: {eq: false}}
+    limit: $limit
+    skip: $skip
+    sort: {createdAt: DESC}
+  ) {
+    nodes {
+      contentful_id
+      createdAt
+      updatedAt
+      title
+      slug
+      excerpt {
+        excerpt
+      }
+      author {
+        firstName
+        lastName
+      }
+      featuredImage {
+        gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
+        description
         title
-        slug
-        excerpt {
-          excerpt
-        }
-        author {
-          firstName
-          lastName
-        }
-        featuredImage {
-          gatsbyImageData(layout: CONSTRAINED, aspectRatio: 1.6)
-          description
-          title
-        }
       }
     }
   }
-`;
+}`;
