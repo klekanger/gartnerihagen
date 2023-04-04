@@ -19,7 +19,7 @@
   "license": "0BSD",
   "dependencies": {
     "@apollo/client": "^3.7.11",
-    "@auth0/auth0-react": "^1.12.1",
+    "@auth0/auth0-react": "^1.6.0",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@chakra-ui/theme-tools": "^2.0.16",
@@ -30,7 +30,7 @@
     "@sendgrid/mail": "^7.4.6",
     "@sentry/gatsby": "^7.46.0",
     "@serverless-jwt/jwt-verifier": "^0.2.1",
-    "auth0": "^3.3.0",
+    "auth0": "^2.37.0",
     "dotenv": "^16.0.3",
     "framer-motion": "^10.10.0",
     "gatsby": "^5.8.1",
